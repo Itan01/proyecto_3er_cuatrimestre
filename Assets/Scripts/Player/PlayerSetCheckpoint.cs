@@ -12,7 +12,7 @@ public class PlayerSetCheckpoint : MonoBehaviour
         {
             Player = GameObject.Find("Player");
         }
-            _checkpointPosition = new Vector3(-8, 1, -4);
+            _checkpointPosition = new Vector3(4, 1, -4);
     }
 
     public void ChangeCheckPoint(Vector3 PositionCheckpoint)

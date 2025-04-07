@@ -7,12 +7,12 @@ public class CollisionVision : MonoBehaviour
     private PlayerSetCheckpoint _scriptCheckpoint;
     private void Start()
     {
-        _scriptCheckpoint = GetComponent<PlayerSetCheckpoint>();
     }
-    void OnTriggerEnter(Collider vision)
+    void OnTriggerEnter(Collider player)
     {
-        if (vision.gameObject.CompareTag("Vision"))
+        if (player.gameObject.CompareTag("Player"))
         {
+            _scriptCheckpoint = player.GetComponent<PlayerSetCheckpoint>();
             _scriptCheckpoint.MoveToCheckPoint();
         }
     }

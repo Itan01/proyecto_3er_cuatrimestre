@@ -1,16 +1,18 @@
 using System.Collections;
 using System.Collections.Generic;
-using System.Linq.Expressions;
-using UnityEditor;
 using UnityEngine;
-using UnityEngine.PlayerLoop;
 
 public class grab_and_shoot : MonoBehaviour
 {
-    private bool _hasASound;
-    private GameObject _soundShooot;
-    [SerializeField] private GameObject _AreaToCatch;
-    private string _useMegaphone="x";
+    [SerializeField] private bool _hasASound = false;
+    [SerializeField] public bool _catchingSound = false;
+    private float _sizeBullet = 1.0f;
+    [SerializeField] private GameObject _soundShooot;
+    private SoundMov _scriptSound;
+    [SerializeField] private GameObject _AreaReference;
+    [SerializeField] private GameObject _spawnArea;
+    [SerializeField] private Transform _spawnProyectil, _orientationProyectil;
+
     void Start()
     {
 
@@ -19,18 +21,38 @@ public class grab_and_shoot : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (!_hasASound && Input.GetKeyDown(_useMegaphone))
+        if (_hasASound && Input.GetMouseButtonDown(0))
         {
-            CatchASound();
+            ThrowSound();
+        }
+        if (!_catchingSound && Input.GetMouseButtonDown(1))
+        {
+            StartToCatchSound();
+        }
+        if (_catchingSound && Input.GetMouseButtonUp(1))
+        {
+            _catchingSound = false;
         }
     }
 
-    public void ChangeTypeOfSound()
+    private void ThrowSound()
     {
+        var ThrowingSound = Instantiate(_soundShooot, _spawnProyectil.position, Quaternion.identity);
+        _scriptSound = ThrowingSound.GetComponent<SoundMov>();
+        _scriptSound.SetVector(_orientationProyectil.position, _sizeBullet, "sonido1");
+        _hasASound = false;
 
     }
-    private void CatchASound()
+
+    private void StartToCatchSound()
     {
-        var CatchingSound = Instantiate(_AreaToCatch,transform.position,Quaternion.identity);
+        _catchingSound = true;
+        var _Area = Instantiate(_AreaReference, _spawnProyectil.position, Quaternion.identity, _spawnProyectil);
+        _Area.transform.LookAt(_orientationProyectil);
+    }
+    public void CatchSound(float Charge)
+    {
+        _hasASound = true;
+        _sizeBullet = Charge;
     }
 }
