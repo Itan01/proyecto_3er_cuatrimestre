@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class EnemyMovementTypeTwo : MonoBehaviour
 {
-    [SerializeField] private bool _enable;
-    private float _movSpeed;
+    [SerializeField] private bool _enable = false;
+    [SerializeField] private float _movSpeed=3.5f;
     private Vector3 _dir;
     private Vector3 _moveToPosition;
     private Rigidbody _rb;
@@ -30,10 +30,9 @@ public class EnemyMovementTypeTwo : MonoBehaviour
         _rb.MovePosition(transform.position + _dir.normalized * _movSpeed * Time.fixedDeltaTime);
     }
 
-    public void SetActivate(bool setting, float speed)
+    public void SetActivate(bool setting)
     {
         _enable = setting;
-        _movSpeed = speed;
     }
     public void SetPostionToFollow(Vector3 _position)
     {

@@ -9,7 +9,7 @@ public class EnemyMovementTypeOne : MonoBehaviour
     [SerializeField] private Transform[] _positionSequence;
     [SerializeField] private int _sequenceIndex = 0;
     [SerializeField] private bool _hasArrive = false;
-    [SerializeField] private bool _enable= true;
+    [SerializeField] private bool _enable;
     void Start()
     {
         //Si el enemigo no tiene un camino para hacer, se autodestruye 
@@ -19,6 +19,7 @@ public class EnemyMovementTypeOne : MonoBehaviour
         }
         _rb = GetComponent<Rigidbody>();
         transform.position=_positionSequence[0].position;
+        _enable = true;
     }
 
     // Update is called once per frame
@@ -33,6 +34,7 @@ public class EnemyMovementTypeOne : MonoBehaviour
     {
         if (_enable)
         {
+            transform.LookAt(_positionSequence[_sequenceIndex].position);
             _rb.MovePosition(transform.position + _dir.normalized * _movSpeed * Time.fixedDeltaTime);
         }
     }
@@ -57,7 +59,8 @@ public class EnemyMovementTypeOne : MonoBehaviour
 
     private void CheckIfHasArrive()
     {
-        if (_hasArrive = DistanceToNextPosition(_positionSequence[_sequenceIndex]))
+        _hasArrive = DistanceToNextPosition(_positionSequence[_sequenceIndex]);
+        if (_hasArrive)
         {
             _sequenceIndex++;
             if (_sequenceIndex >= _positionSequence.Length)
@@ -68,11 +71,9 @@ public class EnemyMovementTypeOne : MonoBehaviour
 
         }
     }
-    public void SetActivate(bool setting, float speed)
+    public void SetActivate(bool setting)
     {
-        Debug.Log("Llego a la posicion");
         _enable = setting;
-        _movSpeed = speed;
     }
 
 }

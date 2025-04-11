@@ -4,38 +4,38 @@ using UnityEngine;
 
 public class EnemySettings : MonoBehaviour
 {
-    [SerializeField] private float _movSpeed = 5.0f;
-    //[SerializeField] private float _maxResistance =2.0f;
     private EnemyMovementTypeOne _setOne;
     private EnemyMovementTypeTwo _setTwo;
+    private int _index = 1;
     private SoundMov _script;
     private Rigidbody _rb;
     void Start()
     {
         _rb = GetComponent<Rigidbody>();
-        //_rb.freezeRotation = true;
+        _rb.freezeRotation = true;
         _setOne = GetComponent<EnemyMovementTypeOne>();
         _setTwo = GetComponent<EnemyMovementTypeTwo>();
-        SetTypeOfMovement(1);
+        SetTypeOfMovement(_index);
     }
 
     public void SetTypeOfMovement( int IndexMovement)
     {
+        _index = IndexMovement;
 
-
-        if (IndexMovement == 1) 
+        if (_index == 1) 
         {
-            _setOne.SetActivate(true, _movSpeed);
-            _setTwo.SetActivate(false, 3.5f);
+            _setOne.SetActivate(true);
+            _setTwo.SetActivate(false);
         }
-        if (IndexMovement == 2)
+        else if (_index == 2)
         {
-            _setOne.SetActivate(false, 3.5f);
-            _setTwo.SetActivate(true, Mathf.Clamp(_movSpeed, 0.0f,5.0f));
+            _setOne.SetActivate(false);
+            _setTwo.SetActivate(true);
         }
         else
         {
-            _setOne.SetActivate(true, _movSpeed);
+            _setOne.SetActivate(true);
+            _setTwo.SetActivate(false);
         }
     }
 

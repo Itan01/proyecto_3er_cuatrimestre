@@ -33,6 +33,10 @@ public class grab_and_shoot : MonoBehaviour
         {
             _catchingSound = false;
         }
+        if (Input.GetKeyDown(KeyCode.T))
+        {
+            _hasASound = true;
+        }
     }
 
     private void ThrowSound()
