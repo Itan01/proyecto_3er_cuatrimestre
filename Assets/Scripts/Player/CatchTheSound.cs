@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class CatchTheSound : MonoBehaviour
 {
-    private SoundMov _scriptSound;
+    /*private SoundMovement _scriptSound;
 
      void Update()
     {
@@ -17,16 +17,16 @@ public class CatchTheSound : MonoBehaviour
     {
         if (sound.gameObject.CompareTag("sound"))
         {
-            _scriptSound = sound.GetComponent<SoundMov>();
-            _scriptSound.PlayerTarget(gameObject);
+            _scriptSound = sound.GetComponent<SoundMovement>();
+            _scriptSound.NewTarget(gameObject);
         }
     }
     void OnTriggerExit(Collider sound)
     {
         if (sound.gameObject.CompareTag("sound"))
         {
-            _scriptSound = sound.GetComponent<SoundMov>();
-            _scriptSound.PlayerTarget(null);
+            _scriptSound = sound.GetComponent<SoundMovement>();
+            _scriptSound.NewTarget(null);
         }
-    }
+    }*/
 }

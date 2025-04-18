@@ -6,7 +6,7 @@ public class SummonObjectSound : MonoBehaviour
 {
     private Vector3 _postionToSpawnSound;
     [SerializeField] private GameObject _soundToSummon;
-    private SoundMov _settings;
+    //private SoundMovement _settings;
     void Start()
     {
         
@@ -18,8 +18,8 @@ public class SummonObjectSound : MonoBehaviour
 
             var _sound = Instantiate(_soundToSummon, transform.position+ new Vector3(0,1,0), Quaternion.identity);
             _postionToSpawnSound = (transform.position - player.transform.position).normalized + transform.position + new Vector3(0, 1, 0);
-            _settings = _sound.GetComponent<SoundMov>();
-            _settings.SetVector(_postionToSpawnSound,1.5f,"sonido1");
+            //_settings = _sound.GetComponent<SoundMovement>();
+            //_settings.SetVector(_postionToSpawnSound,1.5f,"sonido1");
             Debug.Log(_postionToSpawnSound);
             Destroy(gameObject);
         }

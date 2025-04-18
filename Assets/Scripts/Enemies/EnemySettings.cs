@@ -7,7 +7,7 @@ public class EnemySettings : MonoBehaviour
     private EnemyMovementTypeOne _setOne;
     private EnemyMovementTypeTwo _setTwo;
     private int _index = 1;
-    private SoundMov _script;
+    //private SoundMovement _script;
     private Rigidbody _rb;
     void Start()
     {
@@ -43,9 +43,9 @@ public class EnemySettings : MonoBehaviour
     {
         if (sound.gameObject.CompareTag("sound"))
         {
-            _script = sound.GetComponent<SoundMov>();
+        //    _script = sound.GetComponent<SoundMovement>();
             SetTypeOfMovement(2);
-            _setTwo.SetPostionToFollow(new Vector3(_script._startPoint.x,transform.position.y,_script._startPoint.z));
+            //_setTwo.SetPostionToFollow(new Vector3(_script._startPoint.x,transform.position.y,_script._startPoint.z));
             Destroy(sound.gameObject);
         }
     }
