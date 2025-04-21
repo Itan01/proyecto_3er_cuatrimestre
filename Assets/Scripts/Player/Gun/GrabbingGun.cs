@@ -2,40 +2,49 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+[RequireComponent(typeof(ShootingGun))]
 
-public class GrabbingGun : MonoBehaviour
+public class GrabbingGun : AbsSettingGun
 {
-    private bool _hasASound = false;
-    public bool _catchingSound = false;
+    public bool _canCatch = false;
+    private ShootingGun _scriptShoot;
     [SerializeField] private GameObject _AreaCathing;
-    [SerializeField] private Transform _spawnProyectil,_orientationProyectil;
-    void Start()
+
+    protected override void Start()
     {
+        _timer = _timerRef;
+        _scriptShoot = GetComponent<ShootingGun>();
+    }
+    protected override void Update()
+    {
+        if (!_canCatch)
+            SubstractTimer();
+        if (_canCatch && Input.GetMouseButtonDown(1))
+            CatchingSound();
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-
-        if (!_catchingSound && Input.GetMouseButtonDown(1))
-        {
-            CatchSound();
-        }
-        if (_catchingSound && Input.GetMouseButtonUp(1))
-        {
-            _catchingSound = false;
-        }
-    }
-
-    private void CatchSound()
-    {
-        _catchingSound = true;
+    private void CatchingSound(){
+        _canCatch = true;
         var _Area = Instantiate(_AreaCathing, _spawnProyectil.position, Quaternion.identity, _spawnProyectil);
         _Area.transform.LookAt(_orientationProyectil);
+        SetTimer();
+    }
+    private void SetTimer(){
+        _canCatch = false;
+        _timer = _timerRef;
+    }
+    private void SubstractTimer()
+    {
+        if(_timer > 0)
+        _timer -= 1 * Time.deltaTime;
+        else
+        {
+            _timer = 0;
+            _canCatch = true;
+        }
     }
 
-    public void CheckSound(bool Checker)
-    {
-        _hasASound = Checker;
-    }
+
+
+
 }

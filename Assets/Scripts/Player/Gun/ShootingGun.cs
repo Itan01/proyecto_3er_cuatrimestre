@@ -2,35 +2,41 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ShootingGun : MonoBehaviour
+public class ShootingGun : AbsSettingGun
 {
-   /* private GameObject _soundShoot;
-    private bool _hasASound = false;
-    private SoundMovement _scriptSound;
-    [SerializeField] private Transform _spawnProyectil, _orientationProyectil;
+     [SerializeField] private GameObject _soundShoot;
+     private AbsStandardSoundMov _scriptSound;
+    private GrabbingGun _scriptShoot;
+    private float _speed, _size;
 
-    void Start()
-    {
+     protected override void Start()
+     {
+        _scriptShoot = GetComponent<GrabbingGun>();
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        if (_hasASound && Input.GetMouseButtonDown(0))
-        {
-            ThrowSound();
-        }
-        if (Input.GetKeyDown(KeyCode.T))
-        {
-            _hasASound = true;
-        }
-    }
-    private void ThrowSound()
-    {
-        var ThrowingSound = Instantiate(_soundShoot, _spawnProyectil.position, Quaternion.identity);
-        _scriptSound = ThrowingSound.GetComponent<SoundMovement>();
-        _scriptSound.SetVector(_orientationProyectil.position, 1, "sonido1");
-        _hasASound = false;
+    protected override void Update()
+     {
+         if (_hasASound && Input.GetMouseButtonDown(0))
+         {
+             ThrowSound();
+         }
+         if (Input.GetKeyDown(KeyCode.T))
+         {
+             _hasASound = true;
+         }
+     }
+     private void ThrowSound()
+     {
+         var ThrowingSound = Instantiate(_soundShoot, _spawnProyectil.position, Quaternion.identity);
+         _scriptSound = ThrowingSound.GetComponent<AbsStandardSoundMov>();
+         _scriptSound.Spawn(_spawnProyectil, _orientationProyectil, _speed, _size);
+         _hasASound = false;
 
-    }*/
+     }
+    public void SetSound(GameObject Object, float Speed, float Size)
+    {
+        _soundShoot = Object;
+        _speed = Speed;
+        _size = Size;
+    }
 }

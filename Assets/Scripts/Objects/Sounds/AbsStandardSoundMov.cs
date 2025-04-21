@@ -6,10 +6,12 @@ using UnityEngine;
 public class AbsStandardSoundMov : MonoBehaviour // Sonidos Genericos,Movimiento Base
 {
     [SerializeField] protected float _speed = 0.0f, _refSpeed = 0.0f, _size = 0.0f, _rotSpeed = 0.0f;
-    protected Vector3 _dir = new Vector3(0.0f, 0.0f, 0.0f);
+    [SerializeField] protected Vector3 _dir = new Vector3(0.0f, 0.0f, 0.0f);
     [SerializeField] protected Transform _target;
     [SerializeField] protected int _limit = 0;
     protected Rigidbody _rb;
+    protected ShootingGun _scriptShoot;
+    protected GrabbingGun _scriptGrab;
 
     protected virtual void Start(){
         BaseSettings();
@@ -21,13 +23,12 @@ public class AbsStandardSoundMov : MonoBehaviour // Sonidos Genericos,Movimiento
             SetDirectionToTarget();
     }
     protected virtual void FixedUpdate(){
-            Move();
     }
 
 
 
     protected virtual void Move(){
-        _rb.AddForce(_dir * _speed * Time.fixedDeltaTime);
+        _rb.MovePosition(transform.position + _dir.normalized * _speed * Time.fixedDeltaTime);
     }
 
     protected virtual void SetDirectionToTarget()
@@ -36,18 +37,22 @@ public class AbsStandardSoundMov : MonoBehaviour // Sonidos Genericos,Movimiento
         transform.forward = Vector3.Slerp(transform.forward, _dir.normalized, Time.fixedDeltaTime );
     }
 
-    public void SetTarget(Transform Target){
+    public void SetTarget(Transform Target, float Speed){
         _target = Target;
+        if(Speed == 0.0f)
+            _speed = _refSpeed;
+        else
+            _speed = Speed;
     }
 
-    public void Spawn(Transform Spawn, Transform Orientation,float Size, float Speed){
+    public void Spawn(Transform Spawn, Transform Orientation,float Speed, float Size){
         transform.position = Spawn.position;
         _dir = Orientation.position - Spawn.position;
         _size = Size;
         _speed = Speed;
     }
 
-    protected void BaseSettings()
+    protected void BaseSettings()// En Caso de que no se especifique una Variable base
     {
         _rb = GetComponent<Rigidbody>();
         _rb.useGravity = false;
@@ -65,6 +70,19 @@ public class AbsStandardSoundMov : MonoBehaviour // Sonidos Genericos,Movimiento
             _limit = 1;
         if (_dir == new Vector3(0.0f,0.0f,0.0f))
             _dir.z = 1.0f;
+    }
+
+    protected void OnTriggerEnter(Collider Player)
+    {
+        if (Player.gameObject.CompareTag("Player"))
+        {
+            _scriptShoot = Player.GetComponent<ShootingGun>();
+            _scriptShoot.SetSound(gameObject, _speed, _size);
+            _scriptShoot.CheckSound(true);
+            _scriptGrab = Player.GetComponent<GrabbingGun>();
+            _scriptGrab.CheckSound(true);
+            Destroy(gameObject,0.1f);
+        }
     }
 }
 
