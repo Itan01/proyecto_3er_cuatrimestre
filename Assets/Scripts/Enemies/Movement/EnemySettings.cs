@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class EnemySettings : MonoBehaviour
 {
-    private EnemyMovementTypeOne _setOne;
+/*    private EnemyMovementTypeOne _setOne;
     private EnemyMovementTypeTwo _setTwo;
     private int _index = 1;
     //private SoundMovement _script;
@@ -49,4 +49,5 @@ public class EnemySettings : MonoBehaviour
             Destroy(sound.gameObject);
         }
     }
+*/
 }
