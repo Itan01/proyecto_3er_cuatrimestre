@@ -1,11 +1,15 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class ShootingGun : AbsSettingGun
 {
-     [SerializeField] private GameObject _soundShoot;
-     private AbsStandardSoundMov _scriptSound;
+    [SerializeField] private GameObject[] _soundShoot;
+    [SerializeField] private int _indexBullet;
+    [SerializeField] private Image _typeOfSound;
+    private AbsStandardSoundMov _scriptSound;
     private GrabbingGun _scriptShoot;
     private float _speed, _size;
 
@@ -27,16 +31,18 @@ public class ShootingGun : AbsSettingGun
      }
      private void ThrowSound()
      {
-         var ThrowingSound = Instantiate(_soundShoot, _spawnProyectil.position, Quaternion.identity);
+         var ThrowingSound = Instantiate(_soundShoot[_indexBullet], _spawnProyectil.position, Quaternion.identity);
          _scriptSound = ThrowingSound.GetComponent<AbsStandardSoundMov>();
-         _scriptSound.Spawn(_spawnProyectil, _orientationProyectil, _speed, _size);
+         _scriptSound.Spawn(_spawnProyectil.position, _orientationProyectil.position, _speed, _size);
+        _typeOfSound.color = Color.white;
          _hasASound = false;
 
      }
-    public void SetSound(GameObject Object, float Speed, float Size)
+    public void SetSound(int Index, float Speed, float Size)
     {
-        _soundShoot = Object;
+        _indexBullet = Index;
         _speed = Speed;
         _size = Size;
+        _typeOfSound.color = _indexBullet==0 ? Color.green : _indexBullet == 1 ? Color.blue : Color.magenta;
     }
 }

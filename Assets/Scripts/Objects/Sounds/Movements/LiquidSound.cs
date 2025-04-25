@@ -9,6 +9,7 @@ public class LiquidSound : AbsStandardSoundMov
         base.Start();
         _rb.useGravity = true;
         _rb.freezeRotation = true;
+        _index = 1;
     }
     protected override void Update()
     {
@@ -18,4 +19,5 @@ public class LiquidSound : AbsStandardSoundMov
     {
         Move();
     }
+
 }

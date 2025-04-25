@@ -4,12 +4,14 @@ using UnityEngine;
 
 public class BounceObject : MonoBehaviour
 {
-    [SerializeField] private float _distanceCheck = 1.2f, _timerBetweenBounce, _forceGravity = 1.0f;
+    [SerializeField] private float _distanceCheck = 1.0f;
+    private float _timerBetweenBounce;
     private Ray _groundRay;
     [SerializeField] private LayerMask _groundRayMask;
     [SerializeField] private Vector3 _offSetPosition;
     [SerializeField] private bool _isGrounded;
     private Rigidbody _rb;
+    [SerializeField] private float _forceGravity;
 
     void Start()
     {
@@ -27,24 +29,20 @@ public class BounceObject : MonoBehaviour
         }
         _timerBetweenBounce += 1 * Time.deltaTime;
     }
-    private bool checkIfOnGround()
-    {
-        _offSetPosition = transform.position + new Vector3(0.0f,0.6f, 0.0f);
-        _groundRay = new Ray(_offSetPosition, -transform.up);
-        return Physics.Raycast(_groundRay, _distanceCheck, _groundRayMask);
 
-    }
     private void MakeBounce()
     {
-        _timerBetweenBounce = Mathf.Clamp(_timerBetweenBounce,0.1f, 10.0f);
+        _timerBetweenBounce = Mathf.Clamp(_timerBetweenBounce, 0.1f, 10.0f);
         _rb.AddForce(transform.up * _timerBetweenBounce, ForceMode.Impulse);
-        _timerBetweenBounce = 1.0f;
+        _timerBetweenBounce = 0.0f;
         _isGrounded = false;
     }
 
-    private void OnDrawGizmos()
-    { 
-            Gizmos.color = Color.red;
-            Gizmos.DrawRay(_groundRay);
+    private bool checkIfOnGround()
+    {
+        _offSetPosition = transform.position + new Vector3(0.0f, 0.5f, 0.0f);
+        _groundRay = new Ray(_offSetPosition, -transform.up);
+        return Physics.Raycast(_groundRay, _distanceCheck, _groundRayMask);
+
     }
 }

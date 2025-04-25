@@ -6,6 +6,7 @@ using UnityEngine;
 public class AbsStandardSoundMov : MonoBehaviour // Sonidos Genericos,Movimiento Base
 {
     [SerializeField] protected float _speed = 0.0f, _refSpeed = 0.0f, _size = 0.0f, _rotSpeed = 0.0f;
+    protected int _index = 0;
     [SerializeField] protected Vector3 _dir = new Vector3(0.0f, 0.0f, 0.0f);
     [SerializeField] protected Transform _target;
     [SerializeField] protected int _limit = 0;
@@ -45,9 +46,9 @@ public class AbsStandardSoundMov : MonoBehaviour // Sonidos Genericos,Movimiento
             _speed = Speed;
     }
 
-    public void Spawn(Transform Spawn, Transform Orientation,float Speed, float Size){
-        transform.position = Spawn.position;
-        _dir = Orientation.position - Spawn.position;
+    public virtual void Spawn(Vector3 Spawn, Vector3 Orientation,float Speed, float Size){
+        transform.position = Spawn;
+        _dir = Orientation - Spawn;
         _size = Size;
         _speed = Speed;
     }
@@ -60,8 +61,6 @@ public class AbsStandardSoundMov : MonoBehaviour // Sonidos Genericos,Movimiento
         _rb.constraints = RigidbodyConstraints.FreezeRotationZ;
         if (_size == 0)
             _size = 1.0f;
-        if (_refSpeed == 0)
-            _refSpeed = 15.0f;
         if (_speed == 0)
             _speed = _refSpeed;
         if (_rotSpeed == 0)
@@ -77,7 +76,7 @@ public class AbsStandardSoundMov : MonoBehaviour // Sonidos Genericos,Movimiento
         if (Player.gameObject.CompareTag("Player"))
         {
             _scriptShoot = Player.GetComponent<ShootingGun>();
-            _scriptShoot.SetSound(gameObject, _speed, _size);
+            _scriptShoot.SetSound(_index, _speed, _size);
             _scriptShoot.CheckSound(true);
             _scriptGrab = Player.GetComponent<GrabbingGun>();
             _scriptGrab.CheckSound(true);
