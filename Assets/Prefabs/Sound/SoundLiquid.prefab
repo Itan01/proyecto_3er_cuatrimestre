@@ -94,7 +94,7 @@ GameObject:
   - component: {fileID: 850393830810174952}
   - component: {fileID: 6072785716852915795}
   - component: {fileID: 6349888537662155669}
-  - component: {fileID: 801181018540109521}
+  - component: {fileID: 6806924996123111157}
   - component: {fileID: 4069691698610730419}
   m_Layer: 0
   m_Name: SoundLiquid
@@ -167,7 +167,7 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!114 &801181018540109521
+--- !u!114 &6806924996123111157
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -179,13 +179,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3ed5b38b96dcd4549b4ee583911e4c07, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _distanceCheck: 0.8
+  _distanceCheck: 1
   _groundRayMask:
     serializedVersion: 2
     m_Bits: 2147483648
   _offSetPosition: {x: 0, y: 0, z: 0}
-  _isGrounded: 0
-  _forceGravity: 3
+  _forceGravity: 2
 --- !u!114 &4069691698610730419
 MonoBehaviour:
   m_ObjectHideFlags: 0

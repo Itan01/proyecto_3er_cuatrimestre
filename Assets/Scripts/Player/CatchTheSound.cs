@@ -5,17 +5,19 @@ using UnityEngine;
 public class CatchTheSound : MonoBehaviour
 {
     private AbsStandardSoundMov _scriptSound;
+    private GrabbingGun _gun;
 
      void Start()
     {
-            Destroy(gameObject,0.25f);
+        _gun = GetComponentInParent<GrabbingGun>();
+        Destroy(gameObject,0.25f);
     }
     void OnTriggerEnter(Collider sound)
     {
         if (sound.gameObject.CompareTag("Sound"))
         {
             _scriptSound = sound.GetComponent<AbsStandardSoundMov>();
-            _scriptSound.SetTarget(transform, 10.0f);
+            _scriptSound.SetTarget(_gun.transform, 50.0f);
         }
     }
     void OnTriggerExit(Collider sound)
