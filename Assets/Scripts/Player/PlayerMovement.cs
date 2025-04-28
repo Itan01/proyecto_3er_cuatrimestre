@@ -8,7 +8,7 @@ public class PlayerMovement : MonoBehaviour
     private Rigidbody _rb;
     private Vector3 _dir = new Vector3(0.0f, 0.0f, 0.0f);
     private Vector3 _viewPlayer;
-    [SerializeField] private Transform _orientation, _model, _mainCamera;
+    [SerializeField] private Transform _model, _mainCamera,_orientation;
 
     private bool _isMoving = false;
 
@@ -16,8 +16,6 @@ public class PlayerMovement : MonoBehaviour
     {
         _rb = GetComponent<Rigidbody>();
         _rb.freezeRotation = true;
-        Cursor.lockState = CursorLockMode.Locked;
-        Cursor.visible = false;
     }
 
     void Update()
@@ -35,8 +33,8 @@ public class PlayerMovement : MonoBehaviour
 
     private bool CheckIfMoving()
     {
-        _viewPlayer = transform.position - new Vector3(_mainCamera.position.x, transform.position.y, _mainCamera.position.z);
-        _orientation.forward = _viewPlayer.normalized;
+        _viewPlayer=transform.position -new Vector3(_mainCamera.transform.position.x,transform.position.y, _mainCamera.transform.position.z);
+        _orientation.forward= _viewPlayer.normalized;
         _dir.x = Input.GetAxisRaw("Horizontal");
         _dir.z = Input.GetAxisRaw("Vertical");
         _dir = _orientation.forward * _dir.z + _orientation.right * _dir.x;

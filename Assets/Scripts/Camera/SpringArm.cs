@@ -23,8 +23,8 @@ public class SpringArm : MonoBehaviour
     [Range(0.0f, 90.0f)][SerializeField] private float _maxRotation = 75.0f;
 
     private bool _isBlocked = false;
-    private float _mouseX = 0.0f, _mouseY = 0.0f;
-    private Vector3 _dir = new(), _dirTest = new(), _camPos = new();
+    private float _mouseX = 0.0f, _mouseY = 0.0f, _maxTopDistance= 2.0f;
+    private Vector3 _dir = new(), _dirTest = new(), _camPos = new(), _camLookAt= new(), _camDir=new ();
 
     private Camera _cam;
 
@@ -60,7 +60,7 @@ public class SpringArm : MonoBehaviour
 
     private void UpdateCamRot(float x, float y)
     {
-        transform.position = _target.position;
+        _target.transform.position = transform.position;
 
         if (x == 0.0f && y == 0.0f) return;
 
@@ -81,12 +81,12 @@ public class SpringArm : MonoBehaviour
             _mouseY = Mathf.Clamp(_mouseY, _minRotation, _maxRotation);
         }
 
-        transform.rotation = Quaternion.Euler(-_mouseY, _mouseX, 0.0f);
+        _target.transform.rotation = Quaternion.Euler(-_mouseY, _mouseX, 0.0f);
     }
 
     private void UpdateSpringArm()
     {
-        _dir = -transform.forward;
+        _dir = -_target.transform.forward;
 
         if (_isBlocked)
         {
@@ -103,10 +103,20 @@ public class SpringArm : MonoBehaviour
         }
         else
         {
-            _camPos = transform.position + _dir * _maxDistance;
+            if (_mouseY <= -50.0f)
+            {
+                _camPos = transform.position + _dir * _maxDistance * ((_maxTopDistance *(-(_mouseY)-50.0f)/100)+1);
+                _camDir = transform.position - new Vector3(_camPos.x, transform.position.y, _camPos.z);
+                _camLookAt = transform.position + _camDir.normalized * ((_maxTopDistance * (-(_mouseY) - 50.0f) /100)+ 0.1f);
+            }
+            else
+            {
+                _camPos = transform.position +  _dir * _maxDistance;
+                _camLookAt = _target.transform.position;
+            }
         }
 
         _cam.transform.position = _camPos;
-        _cam.transform.LookAt(transform.position);
+        _cam.transform.LookAt(_camLookAt);
     }
 }
