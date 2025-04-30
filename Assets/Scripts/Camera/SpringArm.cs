@@ -21,6 +21,7 @@ public class SpringArm : MonoBehaviour
     [Range(1.0f, 10.0f)][SerializeField] private float _maxDistance = 4.0f;
     [Range(-90.0f, 0.0f)][SerializeField] private float _minRotation = -85.0f;
     [Range(0.0f, 90.0f)][SerializeField] private float _maxRotation = 75.0f;
+    [Range(0.0f, 10.0f)][SerializeField] private float _high = 1.0f;
 
     private bool _isBlocked = false;
     private float _mouseX = 0.0f, _mouseY = 0.0f, _maxTopDistance= 2.0f;
@@ -107,12 +108,12 @@ public class SpringArm : MonoBehaviour
             {
                 _camPos = transform.position + _dir * _maxDistance * ((_maxTopDistance *(-(_mouseY)-50.0f)/100)+1);
                 _camDir = transform.position - new Vector3(_camPos.x, transform.position.y, _camPos.z);
-                _camLookAt = transform.position + _camDir.normalized * ((_maxTopDistance * (-(_mouseY) - 50.0f) /100)+ 0.1f);
+                _camLookAt = transform.position + _camDir.normalized * ((_maxTopDistance * (-(_mouseY) - 50.0f) /100)+ 0.1f) + new Vector3(0.0f, _high, 0.0f);
             }
             else
             {
                 _camPos = transform.position +  _dir * _maxDistance;
-                _camLookAt = _target.transform.position;
+                _camLookAt = _target.transform.position + new Vector3(0.0f,_high,0.0f);
             }
         }
 

@@ -49,4 +49,22 @@ public class PlayerMovement : MonoBehaviour
         }
 
     }
+   /* private void Movement(Vector3 dir)
+    {
+        _camForwardFix = _camTransform.forward;
+        _camRightFix = _camTransform.right;
+
+        _camForwardFix.y = 0.0f;
+        _camRightFix.y = 0.0f;
+
+        Rotate(_camForwardFix);
+
+        _dirFix = (_camRightFix * dir.x + _camForwardFix * dir.z).normalized;
+
+        _rb.MovePosition(transform.position + _dirFix * _moveSpeed * Time.fixedDeltaTime);
+    }
+    private void Rotate(Vector3 dir)
+    {
+        transform.forward = dir;
+    }*/
 }

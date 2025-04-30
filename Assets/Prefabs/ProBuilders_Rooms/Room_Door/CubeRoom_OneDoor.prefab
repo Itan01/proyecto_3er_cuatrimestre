@@ -1253,7 +1253,6 @@ MonoBehaviour:
     RefIds:
     - rid: 4396241447132856327
       type: {class: Cube, ns: UnityEngine.ProBuilder.Shapes, asm: Unity.ProBuilder}
-      data: 
 --- !u!23 &8910789608696378749
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -1361,7 +1360,7 @@ GameObject:
   - component: {fileID: 1571019022651533630}
   - component: {fileID: 6583620644202902118}
   - component: {fileID: 6312921438527065101}
-  - component: {fileID: 7561951310426938012}
+  - component: {fileID: 6288569943124766309}
   m_Layer: 31
   m_Name: Floor
   m_TagString: Untagged
@@ -1572,7 +1571,6 @@ MonoBehaviour:
     RefIds:
     - rid: 4396241447132856327
       type: {class: Cube, ns: UnityEngine.ProBuilder.Shapes, asm: Unity.ProBuilder}
-      data: 
 --- !u!23 &6583620644202902118
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -1623,8 +1621,8 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7626915899898200009}
   m_Mesh: {fileID: 0}
---- !u!64 &7561951310426938012
-MeshCollider:
+--- !u!65 &6288569943124766309
+BoxCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -1641,7 +1639,6 @@ MeshCollider:
   m_IsTrigger: 0
   m_ProvidesContacts: 0
   m_Enabled: 1
-  serializedVersion: 5
-  m_Convex: 0
-  m_CookingOptions: 30
-  m_Mesh: {fileID: 0}
+  serializedVersion: 3
+  m_Size: {x: 10, y: 1, z: 10}
+  m_Center: {x: 0, y: -5.5, z: 0}
