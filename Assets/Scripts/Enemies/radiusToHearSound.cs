@@ -4,22 +4,22 @@ using UnityEngine;
 
 public class radiusToHearSound : MonoBehaviour
 {
-  /*  private SoundMovement _scriptSound;
+   private AbsStandardSoundMov _scriptSound;
 
-    void OnTriggerEnter(Collider sound)
+    void OnTriggerEnter(Collider Sound)
     {
-        if (sound.gameObject.CompareTag("sound"))
+        if (Sound.gameObject.CompareTag("Sound"))
         {
-            _scriptSound = sound.GetComponent<SoundMovement>();
-            _scriptSound.NewTarget(gameObject);
+            _scriptSound = Sound.GetComponent<AbsStandardSoundMov>();
+            _scriptSound.SetTarget(gameObject.transform, 5.0f);
         }
     }
-    void OnTriggerExit(Collider sound)
+    void OnTriggerExit(Collider Sound)
     {
-        if (sound.gameObject.CompareTag("sound"))
+        if (Sound.gameObject.CompareTag("Sound"))
         {
-            _scriptSound = sound.GetComponent<SoundMovement>();
-            _scriptSound.NewTarget(null);
+            _scriptSound = Sound.GetComponent<AbsStandardSoundMov>();
+            _scriptSound.SetTarget(null, 5.0f);
         }
-    }*/
+    }
 }

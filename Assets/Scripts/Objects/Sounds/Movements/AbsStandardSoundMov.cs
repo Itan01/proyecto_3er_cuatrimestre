@@ -52,10 +52,9 @@ public class AbsStandardSoundMov : MonoBehaviour // Sonidos Genericos,Movimiento
             _speed = Speed;
     }
 
-    public virtual void Spawn(Vector3 Spawn, Vector3 Orientation, float Speed, float Size)
+    public virtual void SetDirection(Vector3 Orientation, float Speed, float Size)
     {
-        transform.position = Spawn;
-        _dir = Orientation - Spawn;
+        _dir = Orientation - transform.position;
         _size = Size;
         _speed = Speed;
     }

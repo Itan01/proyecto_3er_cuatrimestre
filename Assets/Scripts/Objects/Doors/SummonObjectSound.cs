@@ -20,7 +20,7 @@ public class SummonObjectSound : MonoBehaviour
             var _sound = Instantiate(_soundToSummon, _selfPosition, Quaternion.identity);
             _orientation = (transform.position - player.transform.position).normalized*2 + _selfPosition;
             _settings = _sound.GetComponent<AbsStandardSoundMov>();
-            _settings.Spawn(_selfPosition, _orientation, Random.Range(3.0f,7.0f +1), 1.0f);
+            _settings.SetDirection(_orientation, Random.Range(3.0f,7.0f +1), 1.0f);
             Destroy(gameObject);
         }
     }

@@ -27,13 +27,14 @@ public class ShootingGun : AbsSettingGun
          if (Input.GetKeyDown(KeyCode.T))
          {
              _hasASound = true;
-         }
+            _indexBullet = 1;
+        }
      }
      private void ThrowSound()
      {
          var ThrowingSound = Instantiate(_soundShoot[_indexBullet], _spawnProyectil.position, Quaternion.identity);
          _scriptSound = ThrowingSound.GetComponent<AbsStandardSoundMov>();
-         _scriptSound.Spawn(_spawnProyectil.position, _orientationProyectil.position, _speed, _size);
+         _scriptSound.SetDirection(_orientationProyectil.position, 10.0f, _size);
         _typeOfSound.color = Color.white;
          _hasASound = false;
 

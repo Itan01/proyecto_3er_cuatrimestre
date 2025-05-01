@@ -63,7 +63,7 @@ public class PlayerSmoke : MonoBehaviour
         {
             var Sound = Instantiate(_genericSound, transform.position + _model.transform.forward * 2, Quaternion.identity);
             _script = Sound.GetComponent<AbsStandardSoundMov>();
-            _script.Spawn(transform.position + _model.transform.forward * 2, Sound.transform.position - _model.position, 5.0f, 1.0f);
+            _script.SetDirection(Sound.transform.position - _model.position, 5.0f, 1.0f);
             _coughTimer = _coughTimerRef;
             
         }
