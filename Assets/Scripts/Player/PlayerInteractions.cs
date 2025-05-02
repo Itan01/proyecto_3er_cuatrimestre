@@ -15,6 +15,7 @@ public class PlayerInteractions : MonoBehaviour
 
     private void Update() 
     {
+        _interactRay = new Ray(_rayOrigin.position, _rayOrientation.position);
         if (Input.GetKeyDown(_interactButton))
         {
             Interact();
@@ -24,7 +25,6 @@ public class PlayerInteractions : MonoBehaviour
 
     public void Interact()
     {
-        _interactRay = new Ray(_rayOrigin.position,_rayOrientation.position);
 
         if (Physics.SphereCast(_interactRay, _intRadius, out _intHit, _interactRayDistance, _interactRayMask))
         {
@@ -40,7 +40,7 @@ public class PlayerInteractions : MonoBehaviour
     {
         Gizmos.color = Color.green;
 
-        Gizmos.DrawLine(_interactRay.origin, _interactRay.direction * _interactRayDistance);
+        Gizmos.DrawLine(Vector3.zero, _interactRay.origin + _interactRay.direction * _interactRayDistance);
 
 
     }
