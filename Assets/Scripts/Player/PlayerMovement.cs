@@ -4,8 +4,11 @@ using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
 {
+    [SerializeField] private string _xAxisName = "xAxis";
+    [SerializeField] private string _zAxisName = "zAxis";
     [SerializeField] private float _movSpeed = 5f, _rotSpeed = 10f ;
     private Rigidbody _rb;
+    private Animator _animator;
     private Vector3 _dir = new Vector3(0.0f, 0.0f, 0.0f);
     private Vector3 _viewPlayer;
     [SerializeField] private Transform _model, _mainCamera,_orientation;
@@ -16,11 +19,14 @@ public class PlayerMovement : MonoBehaviour
     {
         _rb = GetComponent<Rigidbody>();
         _rb.freezeRotation = true;
+
+        _animator = GetComponentInChildren<Animator>();
     }
 
     void Update()
     {
         _isMoving = CheckIfMoving();
+
     }
     void FixedUpdate()
     {
@@ -39,6 +45,7 @@ public class PlayerMovement : MonoBehaviour
         _dir.z = Input.GetAxisRaw("Vertical");
         _dir = _orientation.forward * _dir.z + _orientation.right * _dir.x;
 
+
         if (_dir.sqrMagnitude != 0)
         {
             return true;
@@ -48,7 +55,10 @@ public class PlayerMovement : MonoBehaviour
             return false;
         }
 
+        _animator.SetFloat(_xAxisName, _dir.x);
+        _animator.SetFloat(_zAxisName, _dir.z);
     }
+   
    /* private void Movement(Vector3 dir)
     {
         _camForwardFix = _camTransform.forward;
