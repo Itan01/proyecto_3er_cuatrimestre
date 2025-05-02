@@ -9,7 +9,6 @@ public abstract class AbsEnemyVariables : MonoBehaviour
     protected float _speed = 0.0f;
     protected Rigidbody _rb;
     protected Vector3 _dir;
-    protected GameObject _target=null;  
 
     protected virtual void Start()
     {
@@ -43,5 +42,9 @@ public abstract class AbsEnemyVariables : MonoBehaviour
     {
         _rb.MovePosition(transform.position + _dir.normalized * _speed * Time.fixedDeltaTime);
         //_model.forward = Vector3.Slerp(_model.forward, _dir.normalized, Time.fixedDeltaTime * _rotSpeed);
+    }
+    public virtual void SetActivate(bool mode)
+    {
+        _enable = mode;
     }
 }

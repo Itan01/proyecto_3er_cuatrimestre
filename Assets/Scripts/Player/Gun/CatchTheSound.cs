@@ -17,7 +17,7 @@ public class CatchTheSound : MonoBehaviour
         if (sound.gameObject.CompareTag("Sound"))
         {
             _scriptSound = sound.GetComponent<AbsStandardSoundMov>();
-            _scriptSound.SetTarget(_gun.transform, 50.0f);
+            _scriptSound.SetTarget(_gun.transform,20.0f);
         }
     }
     void OnTriggerExit(Collider sound)

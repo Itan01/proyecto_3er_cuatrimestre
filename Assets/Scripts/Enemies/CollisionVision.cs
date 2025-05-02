@@ -4,16 +4,23 @@ using UnityEngine;
 
 public class CollisionVision : MonoBehaviour
 {
-    private PlayerSetCheckpoint _scriptCheckpoint;
+    [SerializeField]private EnemyMovFollowTarget _scriptFollow;
+    [SerializeField] private EnemyController _scriptControl;
     private void Start()
     {
+        _scriptControl = GetComponentInParent<EnemyController>();
+        _scriptFollow = GetComponentInParent<EnemyMovFollowTarget>();
     }
     void OnTriggerEnter(Collider player)
     {
         if (player.gameObject.CompareTag("Player"))
         {
-            _scriptCheckpoint = player.GetComponent<PlayerSetCheckpoint>();
-            _scriptCheckpoint.MoveToCheckPoint();
+            if (!_scriptFollow._hasTarget)
+            {
+                _scriptFollow.SetTargetToFollow(player.gameObject.transform);
+                _scriptControl.SetTypeOfMovement(2);
+            }
+
         }
     }
 }

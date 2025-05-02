@@ -4,11 +4,16 @@ using UnityEngine;
 
 public class EnemyMovFollowTarget : AbsEnemyVariables
 {
-    private Vector3 _moveToPosition;
+    [SerializeField] private Vector3 _moveToPosition;
+    private EnemyController _scriptController;
+    public bool _hasTarget;
+    private Transform _target;
+    private Vector3 _distanceTarget;
 
     protected override void Start()
     {
         base.Start();
+        _scriptController = GetComponent<EnemyController>();
     }
 
     // Update is called once per frame
@@ -28,20 +33,48 @@ public class EnemyMovFollowTarget : AbsEnemyVariables
     }
     public void SetPostionToFollow(Vector3 _position)
     {
-        _moveToPosition = _position;
+        _moveToPosition = new Vector3(_position.x, transform.position.y, _position.z);
+    }
+    public void SetTargetToFollow(Transform Target)
+    {
+        _hasTarget = true;
+        _target = Target;
     }
 
     private void GetDirection()
     {
-        float yRef= transform.position.y;   
+        float yRef = transform.position.y;
         transform.LookAt(_moveToPosition);
-        _dir = _moveToPosition - transform.position;
+        if (_hasTarget)
+        {
+
+            _dir = _target.position - transform.position;
+            transform.LookAt(_target);
+            CheckDistance();
+        }
+        else
+        {
+            _dir = _moveToPosition - transform.position;
+        }
         _dir.y = yRef;
         if (_dir.magnitude <= 0.1)
         {
-            _enable=false;
+            Reset();
         }
-
-
+    }
+    private void CheckDistance()
+    {
+        _distanceTarget = _target.position - transform.position;
+        if(_distanceTarget.magnitude >= 15.0f) 
+        {
+            Reset();
+        }
+    }
+    public void Reset()
+    {
+        _enable = false;
+        _target = null;
+        _hasTarget = false;
+        _scriptController.SetTypeOfMovement(1);
     }
 }

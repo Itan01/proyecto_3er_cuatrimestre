@@ -6,10 +6,12 @@ using UnityEngine;
 public class AbsStandardSoundMov : MonoBehaviour // Sonidos Genericos,Movimiento Base
 {
     [SerializeField] protected float _refSpeed = 0.0f,  _originalSize = 1.0f, _speedState = 2.0f;
-    protected float _speed = 0.0f, _rotSpeed = 0.0f, _plusLimitSize = 0.25f, _size = 0.0f, _subLimitSize = -0.25f;
-    protected int _index = 0;
+    protected float _rotSpeed = 0.0f, _plusLimitSize = 0.25f, _subLimitSize = -0.25f;
+    public float _speed = 0.0f, _size = 0.0f;
+    public int _index = 0;
     [SerializeField] protected Vector3 _dir = new Vector3(0.0f, 0.0f, 0.0f);
-    [SerializeField] protected Transform _target;
+    public Vector3 _startPosition;
+    protected Transform _target;
     [SerializeField] protected int _limit = 0;
     [SerializeField] protected bool _statePlusSize = true;
     protected Rigidbody _rb;
@@ -19,6 +21,7 @@ public class AbsStandardSoundMov : MonoBehaviour // Sonidos Genericos,Movimiento
     protected virtual void Start()
     {
         BaseSettings();
+        _startPosition = transform.position;
     }
 
     protected virtual void Update()
@@ -79,18 +82,7 @@ public class AbsStandardSoundMov : MonoBehaviour // Sonidos Genericos,Movimiento
             _subLimitSize = -0.25f;
     }
 
-    protected void OnTriggerEnter(Collider Player)
-    {
-        if (Player.gameObject.CompareTag("Player"))
-        {
-            _scriptShoot = Player.GetComponent<ShootingGun>();
-            _scriptShoot.SetSound(_index, _speed, _size);
-            _scriptShoot.CheckSound(true);
-            _scriptGrab = Player.GetComponent<GrabbingGun>();
-            _scriptGrab.CheckSound(true);
-            Destroy(gameObject, 0.1f);
-        }
-    }
+
     protected void TravelSize()
     {
         if (_size >= 0.25f)
@@ -116,6 +108,19 @@ public class AbsStandardSoundMov : MonoBehaviour // Sonidos Genericos,Movimiento
             transform.localScale = new Vector3(_size, _size, _size);
         }
 
+    }
+
+    private void OnTriggerEnter(Collider Player)
+    {
+        if (Player.gameObject.CompareTag("Player"))
+        {
+            _scriptGrab = Player.GetComponent<GrabbingGun>();
+            _scriptShoot = Player.GetComponent<ShootingGun>();
+                _scriptShoot.CheckSound(true);
+                _scriptGrab.CheckSound(true);
+                _scriptShoot.SetSound(_index, _speed, _size);
+                Destroy(gameObject);
+        }
     }
 }
 

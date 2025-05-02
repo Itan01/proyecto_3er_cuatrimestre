@@ -8,6 +8,7 @@ public class GrabbingGun : AbsSettingGun
 {
     public bool _canCatch = false;
     private ShootingGun _scriptShoot;
+    private AbsStandardSoundMov _scriptSound;
     [SerializeField] private GameObject _AreaCathing;
 
     protected override void Start()
@@ -43,8 +44,6 @@ public class GrabbingGun : AbsSettingGun
             _canCatch = true;
         }
     }
-
-
 
 
 }

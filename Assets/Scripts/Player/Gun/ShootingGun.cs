@@ -10,12 +10,12 @@ public class ShootingGun : AbsSettingGun
     [SerializeField] private int _indexBullet;
     [SerializeField] private Image _typeOfSound;
     private AbsStandardSoundMov _scriptSound;
-    private GrabbingGun _scriptShoot;
+    private GrabbingGun _scriptGrab;
     private float _speed, _size;
 
      protected override void Start()
      {
-        _scriptShoot = GetComponent<GrabbingGun>();
+        _scriptGrab = GetComponent<GrabbingGun>();
     }
 
     protected override void Update()
@@ -37,6 +37,7 @@ public class ShootingGun : AbsSettingGun
          _scriptSound.SetDirection(_orientationProyectil.position, 10.0f, _size);
         _typeOfSound.color = Color.white;
          _hasASound = false;
+        _scriptGrab.CheckSound(false);
 
      }
     public void SetSound(int Index, float Speed, float Size)
