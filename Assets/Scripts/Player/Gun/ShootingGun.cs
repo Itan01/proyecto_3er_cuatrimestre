@@ -32,19 +32,28 @@ public class ShootingGun : AbsSettingGun
      }
      private void ThrowSound()
      {
-         var ThrowingSound = Instantiate(_soundShoot[_indexBullet], _spawnProyectil.position, Quaternion.identity);
-         _scriptSound = ThrowingSound.GetComponent<AbsStandardSoundMov>();
-         _scriptSound.SetDirection(_orientationProyectil.position, 10.0f, _size);
-        _typeOfSound.color = Color.white;
-         _hasASound = false;
-        _scriptGrab.CheckSound(false);
+        var ThrowingSound = Instantiate(_soundShoot[_indexBullet], _spawnProyectil.position, Quaternion.identity);
 
+        _scriptSound = ThrowingSound.GetComponent<AbsStandardSoundMov>();
+        _scriptSound.SetDirection(_orientationProyectil.position, 10.0f, _size);
+
+        var impactExplosion = ThrowingSound.GetComponent<ImpactExplosion>();
+        if (impactExplosion != null)
+        {
+            impactExplosion.MarkAsThrown();
+        }
+
+        _typeOfSound.color = Color.white;
+        _hasASound = false;
+        _scriptGrab.CheckSound(false);
      }
+
     public void SetSound(int Index, float Speed, float Size)
     {
         _indexBullet = Index;
         _speed = Speed;
         _size = Size;
-        _typeOfSound.color = _indexBullet==0 ? Color.green : _indexBullet == 1 ? Color.blue : Color.magenta;
+        _typeOfSound.color = _indexBullet == 0 ? Color.green : _indexBullet == 1 ? Color.blue : _indexBullet == 2 ? Color.magenta : Color.red;
     }
 }
+

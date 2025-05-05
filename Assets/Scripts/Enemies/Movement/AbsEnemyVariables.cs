@@ -4,7 +4,7 @@ using UnityEngine;
 [RequireComponent(typeof(Rigidbody))]
 public abstract class AbsEnemyVariables : MonoBehaviour
 {
-    [SerializeField] protected bool _enable=false;
+    [SerializeField] protected bool _enable = false;
     [SerializeField] protected float _refSpeed = 0.0f, _rotSpeed = 0.0f;
     protected float _speed = 0.0f;
     protected Rigidbody _rb;
@@ -16,9 +16,9 @@ public abstract class AbsEnemyVariables : MonoBehaviour
     }
 
     // Update is called once per frame
-    protected virtual void  FixedUpdate()
+    protected virtual void FixedUpdate()
     {
-        
+
     }
     protected virtual void Update()
     {
