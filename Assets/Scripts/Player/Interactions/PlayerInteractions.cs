@@ -5,25 +5,31 @@ using UnityEngine;
 public class PlayerInteractions : MonoBehaviour
 {
     [SerializeField] private KeyCode _interactButton;
-    [SerializeField] private float _interactRayDistance = 10.0f;
+    [SerializeField] private float _interactRayDistance = 5.0f;
     [SerializeField] private float _intRadius = 0.75f;
     [SerializeField] private LayerMask _interactRayMask;
     [SerializeField] private Ray _interactRay;
     [SerializeField] private RaycastHit _intHit;
-    [SerializeField] private Transform _rayOrigin,_rayOrientation;
-    [SerializeField] private bool _objectCheck;
+    [SerializeField] private Transform _rayOrigin;
+    [SerializeField] private Vector3 _offSet= new Vector3(0.0f,1.5f,0.0f);
+    private PlayerScore _script;
 
+    private void Start()
+    {
+        _script = GetComponent<PlayerScore>();
+    }
     private void Update() 
     {
-        _interactRay = new Ray(_rayOrigin.position, _rayOrientation.position);
+        _interactRay = new Ray(_rayOrigin.position + _offSet, _rayOrigin.forward);
         if (Input.GetKeyDown(_interactButton))
         {
+            Debug.Log($"Verificando");
             Interact();
         }
         
     }
 
-    public void Interact()
+    private void Interact()
     {
 
         if (Physics.SphereCast(_interactRay, _intRadius, out _intHit, _interactRayDistance, _interactRayMask))
@@ -32,16 +38,16 @@ public class PlayerInteractions : MonoBehaviour
 
             if (_intHit.collider.TryGetComponent(out IInteractableObject interactable))
             {
-                interactable.OnInteract();
+                interactable.OnInteract(_script);
             }
         }
     }
+
+
     private void OnDrawGizmos()
     {
         Gizmos.color = Color.green;
 
-        Gizmos.DrawLine(Vector3.zero, _interactRay.origin + _interactRay.direction * _interactRayDistance);
-
-
+        Gizmos.DrawRay(_interactRay);
     }
 }

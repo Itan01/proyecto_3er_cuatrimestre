@@ -4,9 +4,11 @@ using UnityEngine;
 
 public class ObjectValueble : MonoBehaviour , IInteractableObject
 {
-    public void OnInteract ()
+    [SerializeField] private int _value;
+    public void OnInteract (PlayerScore script)
     {
-        Destroy(gameObject);
+        script.SetScore(_value);
         Debug.Log("Objeto destruido");
+        Destroy(gameObject);
     }
 }

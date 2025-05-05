@@ -42,7 +42,7 @@ public class AbsStandardSoundMov : MonoBehaviour // Sonidos Genericos,Movimiento
 
     protected virtual void SetDirectionToTarget()
     {
-        _dir = (_target.position - transform.position).normalized;
+        _dir = (_target.position + new Vector3(0,1.0f,0) - transform.position).normalized;
         transform.forward = Vector3.Slerp(transform.forward, _dir.normalized, Time.fixedDeltaTime);
     }
 
@@ -115,11 +115,17 @@ public class AbsStandardSoundMov : MonoBehaviour // Sonidos Genericos,Movimiento
         if (Player.gameObject.CompareTag("Player"))
         {
             _scriptGrab = Player.GetComponent<GrabbingGun>();
+            if (_scriptGrab._canCatch == false) {
             _scriptShoot = Player.GetComponent<ShootingGun>();
                 _scriptShoot.CheckSound(true);
                 _scriptGrab.CheckSound(true);
                 _scriptShoot.SetSound(_index, _speed, _size);
                 Destroy(gameObject);
+            }
+            else
+            {
+                SetTarget(null,5.0f);
+            }
         }
     }
 }

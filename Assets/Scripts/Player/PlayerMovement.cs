@@ -46,6 +46,8 @@ public class PlayerMovement : MonoBehaviour
         _dir = _orientation.forward * _dir.z + _orientation.right * _dir.x;
 
 
+        _animator.SetFloat(_xAxisName, _dir.x);
+        _animator.SetFloat(_zAxisName, _dir.z);
         if (_dir.sqrMagnitude != 0)
         {
             return true;
@@ -55,26 +57,5 @@ public class PlayerMovement : MonoBehaviour
             return false;
         }
 
-        _animator.SetFloat(_xAxisName, _dir.x);
-        _animator.SetFloat(_zAxisName, _dir.z);
     }
-   
-   /* private void Movement(Vector3 dir)
-    {
-        _camForwardFix = _camTransform.forward;
-        _camRightFix = _camTransform.right;
-
-        _camForwardFix.y = 0.0f;
-        _camRightFix.y = 0.0f;
-
-        Rotate(_camForwardFix);
-
-        _dirFix = (_camRightFix * dir.x + _camForwardFix * dir.z).normalized;
-
-        _rb.MovePosition(transform.position + _dirFix * _moveSpeed * Time.fixedDeltaTime);
-    }
-    private void Rotate(Vector3 dir)
-    {
-        transform.forward = dir;
-    }*/
 }

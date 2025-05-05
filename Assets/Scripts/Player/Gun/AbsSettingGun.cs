@@ -5,7 +5,7 @@ using UnityEngine;
 public abstract class AbsSettingGun : MonoBehaviour
 {
     [SerializeField] protected bool _hasASound = false;
-    [SerializeField] protected float _timer = 0.0f, _timerRef = 0.25f;
+    [SerializeField] protected float _timer = 0.0f, _timerRef = 1.0f;
     [SerializeField] protected Transform _spawnProyectil, _orientationProyectil;
     protected virtual void Start()
     {

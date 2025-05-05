@@ -5,23 +5,25 @@ using UnityEngine;
 public class SummonObjectSound : MonoBehaviour
 {
     private Vector3 _orientation, _selfPosition;
-
+    private Animation _animator;
     [SerializeField] private GameObject _soundToSummon;
     private AbsStandardSoundMov _settings;
     void Start()
     {
-        
+        _animator = GetComponent<Animation>();
     }
-    private void OnCollisionEnter(Collision player)
+
+    private void OnTriggerEnter(Collider Player)
     {
-        if (player.gameObject.CompareTag("Player"))
+        if (Player.gameObject.CompareTag("Player"))
         {
+            if(_animator.isPlaying) return;
+            _animator.Play();
             _selfPosition = transform.position + new Vector3(0.0f, 1.0f, 0.0f);
             var _sound = Instantiate(_soundToSummon, _selfPosition, Quaternion.identity);
-            _orientation = (transform.position - player.transform.position).normalized*2 + _selfPosition;
+            _orientation = (transform.position - Player.transform.position).normalized*2 + _selfPosition;
             _settings = _sound.GetComponent<AbsStandardSoundMov>();
             _settings.SetDirection(_orientation, Random.Range(3.0f,7.0f +1), 1.0f);
-            Destroy(gameObject);
         }
     }
 }
