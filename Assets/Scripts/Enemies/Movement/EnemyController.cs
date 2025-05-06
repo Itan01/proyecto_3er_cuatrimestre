@@ -9,11 +9,9 @@ public class EnemyController : MonoBehaviour
     private AbsStandardSoundMov _scriptSound;
     private PlayerSetCheckpoint _scriptPlayer;
     private int _index = 1;
-    private Rigidbody _rb;
+
     void Start()
     {
-        _rb = GetComponent<Rigidbody>();
-        _rb.freezeRotation = true;
         _scriptPattern = GetComponent<EnemyMovPattern>();
         _scriptFollow = GetComponent<EnemyMovFollowTarget>();
         SetTypeOfMovement(_index);
@@ -57,5 +55,4 @@ public class EnemyController : MonoBehaviour
             SetTypeOfMovement(1);
         }
     }
-
 }

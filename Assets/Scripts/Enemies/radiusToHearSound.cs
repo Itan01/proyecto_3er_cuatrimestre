@@ -5,6 +5,12 @@ using UnityEngine;
 public class radiusToHearSound : MonoBehaviour
 {
    private AbsStandardSoundMov _scriptSound;
+   private EnemyConfused _scriptConfused;
+
+    private void Start()
+    {
+        _scriptConfused = GetComponentInParent<EnemyConfused>();
+    }
 
     void OnTriggerEnter(Collider Sound)
     {
@@ -12,8 +18,16 @@ public class radiusToHearSound : MonoBehaviour
         {
             _scriptSound = Sound.GetComponent<AbsStandardSoundMov>();
             _scriptSound.SetTarget(gameObject.transform, 5.0f);
+
+            if (_scriptConfused != null)
+            {
+                _scriptConfused.SetActivate(true);
+            }
+
+            Destroy(Sound.gameObject); // Opcional: destruir el sonido al oírlo
         }
     }
+
     void OnTriggerExit(Collider Sound)
     {
         if (Sound.gameObject.CompareTag("Sound"))

@@ -1,7 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+
 [RequireComponent(typeof(Rigidbody))]
+
 public abstract class AbsEnemyVariables : MonoBehaviour
 {
     [SerializeField] protected bool _enable = false;

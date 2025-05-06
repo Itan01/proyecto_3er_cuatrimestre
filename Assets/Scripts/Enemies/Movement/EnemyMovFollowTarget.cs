@@ -16,25 +16,37 @@ public class EnemyMovFollowTarget : AbsEnemyVariables
         _scriptController = GetComponent<EnemyController>();
     }
 
-    // Update is called once per frame
     protected override void Update()
     {
-        if (_enable)
-        {
-            GetDirection();
-        }
+        if (!_enable) return;
+        GetDirection();
     }
+
     protected override void FixedUpdate()
     {
-        if (_enable)
+        if (!_enable) return;
+        Move();
+    }
+
+    public override void SetActivate(bool mode)
+    {
+        base.SetActivate(mode);
+
+        if (!mode)
         {
-            Move();
+            if (_rb != null)
+            {
+                _rb.velocity = Vector3.zero;
+                _rb.angularVelocity = Vector3.zero;
+            }
         }
     }
+
     public void SetPostionToFollow(Vector3 _position)
     {
         _moveToPosition = new Vector3(_position.x, transform.position.y, _position.z);
     }
+
     public void SetTargetToFollow(Transform Target)
     {
         _hasTarget = true;
@@ -45,9 +57,9 @@ public class EnemyMovFollowTarget : AbsEnemyVariables
     {
         float yRef = transform.position.y;
         transform.LookAt(_moveToPosition);
+
         if (_hasTarget)
         {
-
             _dir = _target.position - transform.position;
             transform.LookAt(_target);
             CheckDistance();
@@ -56,20 +68,23 @@ public class EnemyMovFollowTarget : AbsEnemyVariables
         {
             _dir = _moveToPosition - transform.position;
         }
+
         _dir.y = yRef;
-        if (_dir.magnitude <= 0.1)
+        if (_dir.magnitude <= 0.1f)
         {
             Reset();
         }
     }
+
     private void CheckDistance()
     {
         _distanceTarget = _target.position - transform.position;
-        if(_distanceTarget.magnitude >= 15.0f) 
+        if (_distanceTarget.magnitude >= 15.0f)
         {
             Reset();
         }
     }
+
     public void Reset()
     {
         _enable = false;
