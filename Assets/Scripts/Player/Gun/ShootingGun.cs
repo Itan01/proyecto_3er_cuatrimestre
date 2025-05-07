@@ -7,7 +7,8 @@ using UnityEngine.SceneManagement;
 public class ShootingGun : AbsSettingGun
 {
     [SerializeField] private GameObject[] _soundShoot;
-    [SerializeField] private int _indexBullet;
+    [SerializeField] private Sprite[] _sprites;
+    [SerializeField] private int _indexBullet=0;
     [SerializeField] private Image _typeOfSound;
     private AbsStandardSoundMov _scriptSound;
     private GrabbingGun _scriptGrab;
@@ -27,8 +28,8 @@ public class ShootingGun : AbsSettingGun
          }
          if (Input.GetKeyDown(KeyCode.T))
          {
+            SetSound(_indexBullet, 5.0f, 1.0f);
              _hasASound = true;
-            _indexBullet = 1;
         }
      }
      private void ThrowSound()
@@ -44,7 +45,7 @@ public class ShootingGun : AbsSettingGun
             impactExplosion.MarkAsThrown();
         }
 
-        _typeOfSound.color = Color.white;
+        _typeOfSound.sprite = _sprites[4];
         _hasASound = false;
         _scriptGrab.CheckSound(false);
      }
@@ -54,7 +55,7 @@ public class ShootingGun : AbsSettingGun
         _indexBullet = Index;
         _speed = Speed;
         _size = Size;
-        _typeOfSound.color = _indexBullet == 0 ? Color.green : _indexBullet == 1 ? Color.blue : _indexBullet == 2 ? Color.magenta : Color.red;
+        _typeOfSound.sprite= _sprites[Index];
     }
 
     public void ShootEnable(bool state) 

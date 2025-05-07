@@ -11,9 +11,9 @@ public class AbsStandardSoundMov : MonoBehaviour // Sonidos Genericos,Movimiento
     public int _index = 0;
     [SerializeField] protected Vector3 _dir = new Vector3(0.0f, 0.0f, 0.0f);
     public Vector3 _startPosition;
-    protected Transform _target;
-    [SerializeField] protected int _limit = 0;
-    [SerializeField] protected bool _statePlusSize = true;
+    [SerializeField] protected Transform _target;
+    protected int _limit = 0;
+    protected bool _statePlusSize = true;
     protected Rigidbody _rb;
     protected ShootingGun _scriptShoot;
     protected GrabbingGun _scriptGrab;
