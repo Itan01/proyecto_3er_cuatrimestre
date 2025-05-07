@@ -6,6 +6,7 @@ public class EnemyController : MonoBehaviour
 {
     private EnemyMovPattern _scriptPattern;
     private EnemyMovFollowTarget _scriptFollow;
+    private EnemyConfused _scriptConfused;
     private AbsStandardSoundMov _scriptSound;
     private PlayerSetCheckpoint _scriptPlayer;
     private int _index = 1;
@@ -14,6 +15,7 @@ public class EnemyController : MonoBehaviour
     {
         _scriptPattern = GetComponent<EnemyMovPattern>();
         _scriptFollow = GetComponent<EnemyMovFollowTarget>();
+        _scriptConfused = GetComponent<EnemyConfused>();
         SetTypeOfMovement(_index);
     }
 
@@ -21,20 +23,23 @@ public class EnemyController : MonoBehaviour
     {
         _index = IndexMovement;
 
-        if (_index == 1)
+        if (_index == 1) // Patrullar
         {
             _scriptPattern.SetActivate(true);
             _scriptFollow.SetActivate(false);
+            _scriptConfused?.SetActivate(false);
         }
-        else if (_index == 2)
+        else if (_index == 2) // Seguir sonido
         {
             _scriptPattern.SetActivate(false);
             _scriptFollow.SetActivate(true);
+            _scriptConfused?.SetActivate(false);
         }
-        else
+        else if (_index == 3) // Confundido
         {
-            _scriptPattern.SetActivate(true);
+            _scriptPattern.SetActivate(false);
             _scriptFollow.SetActivate(false);
+            _scriptConfused?.SetActivate(true);
         }
     }
 
@@ -47,7 +52,12 @@ public class EnemyController : MonoBehaviour
             SetTypeOfMovement(2);
             Destroy(Obj.gameObject);
         }
-        if (Obj.gameObject.CompareTag("Player"))
+        else if (Obj.gameObject.CompareTag("Explosion"))
+        {
+            SetTypeOfMovement(3);
+            Destroy(Obj.gameObject);
+        }
+        else if (Obj.gameObject.CompareTag("Player"))
         {
             _scriptPlayer = Obj.gameObject.GetComponent<PlayerSetCheckpoint>();
             _scriptPlayer.MoveToCheckPoint();
@@ -56,3 +66,4 @@ public class EnemyController : MonoBehaviour
         }
     }
 }
+

@@ -4,32 +4,39 @@ using UnityEngine;
 
 public class SoundRadiusTrigger : MonoBehaviour
 {
+    [SerializeField] private float tiempoDeVida = 3f; 
+
+    private void Start()
+    {
+        Destroy(gameObject, tiempoDeVida); 
+    }
+
     private void OnTriggerEnter(Collider other)
     {
-        //Debug.Log("Algo entró al radio: " + other.name); // Log para ver si entra algo
+        Debug.Log("Algo entró al radio: " + other.name); 
 
         if (other.CompareTag("Enemy"))
         {
-           // Debug.Log("¡Es un enemigo!");
+            Debug.Log("¡Es un enemigo!");
 
-            // Busca el script en el objeto o en sus padres
-            EnemyConfused confused = other.GetComponent<EnemyConfused>();
-            if (confused == null)
-                confused = other.GetComponentInParent<EnemyConfused>();
+            // Buscar el EnemyController en el objeto o en sus padres
+            EnemyController controller = other.GetComponent<EnemyController>();
+            if (controller == null)
+                controller = other.GetComponentInParent<EnemyController>();
 
-            if (confused != null)
+            if (controller != null)
             {
-              //  Debug.Log("Confundiendo al enemigo...");
-                confused.SetActivate(true);
+                Debug.Log("Activando modo confundido desde el controlador...");
+                controller.SetTypeOfMovement(3);
             }
             else
             {
-              //  Debug.LogWarning("No se encontró el script EnemyConfused en el objeto ni en sus padres.");
+                Debug.LogWarning("No se encontró el EnemyController en el objeto ni en sus padres.");
             }
         }
         else
         {
-           // Debug.Log("No es un enemigo, tag: " + other.tag);
+            Debug.Log("No es un enemigo, tag: " + other.tag);
         }
     }
 }

@@ -9,15 +9,11 @@ public class EnemyConfused : AbsEnemyVariables
 
     private float _timer;
     private bool _active;
-    private EnemyMovPattern _scriptPattern;
-    private EnemyMovFollowTarget _scriptFollow;
 
     protected override void Start()
     {
         base.Start();
         if (_confusedIcon != null) _confusedIcon.SetActive(false);
-        _scriptPattern = GetComponent<EnemyMovPattern>();
-        _scriptFollow = GetComponent<EnemyMovFollowTarget>();
     }
 
     protected override void Update()
@@ -26,14 +22,12 @@ public class EnemyConfused : AbsEnemyVariables
 
         _timer -= Time.deltaTime;
 
-        // Detener movimiento
         if (_rb != null)
         {
             _rb.velocity = Vector3.zero;
             _rb.angularVelocity = Vector3.zero;
         }
 
-        // Rotar visualmente
         transform.Rotate(Vector3.up * 360f * Time.deltaTime);
 
         if (_timer <= 0)
@@ -46,7 +40,6 @@ public class EnemyConfused : AbsEnemyVariables
 
     public override void SetActivate(bool mode)
     {
-        Debug.Log("Enemigo Aturdido");
         base.SetActivate(mode);
         _active = mode;
 
@@ -54,10 +47,6 @@ public class EnemyConfused : AbsEnemyVariables
         {
             _timer = _confuseTime;
             if (_confusedIcon != null) _confusedIcon.SetActive(true);
-
-            // Detener los otros comportamientos
-            if (_scriptPattern != null) _scriptPattern.SetActivate(false);
-            if (_scriptFollow != null) _scriptFollow.SetActivate(false);
         }
         else
         {
