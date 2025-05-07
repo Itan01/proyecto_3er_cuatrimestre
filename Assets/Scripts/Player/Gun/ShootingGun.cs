@@ -12,6 +12,7 @@ public class ShootingGun : AbsSettingGun
     private AbsStandardSoundMov _scriptSound;
     private GrabbingGun _scriptGrab;
     private float _speed, _size;
+    [SerializeField] private bool _soundEnabled = true;
 
      protected override void Start()
      {
@@ -20,7 +21,7 @@ public class ShootingGun : AbsSettingGun
 
     protected override void Update()
      {
-         if (_hasASound && Input.GetMouseButtonDown(0))
+         if (_hasASound && Input.GetMouseButtonDown(0) && _soundEnabled)
          {
              ThrowSound();
          }
@@ -54,6 +55,11 @@ public class ShootingGun : AbsSettingGun
         _speed = Speed;
         _size = Size;
         _typeOfSound.color = _indexBullet == 0 ? Color.green : _indexBullet == 1 ? Color.blue : _indexBullet == 2 ? Color.magenta : Color.red;
+    }
+
+    public void ShootEnable(bool state) 
+    { 
+        _soundEnabled = state;
     }
 }
 

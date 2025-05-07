@@ -127,10 +127,6 @@ public class SpringArm : MonoBehaviour
     private bool CheckIfEnviroment()
     {
         bool aux = Physics.SphereCast(_camRay, _detectionRadius, out _camHit, _maxDistance, Enviroment);
-        if (aux)
-        {
-            Debug.Log(_camHit.collider.name);
-        }
         return aux;
     }
 }
