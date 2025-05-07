@@ -17,7 +17,7 @@ public class radiusToHearSound : MonoBehaviour
         if (Sound.gameObject.CompareTag("Sound"))
         {
             _scriptSound = Sound.GetComponent<AbsStandardSoundMov>();
-            _scriptSound.SetTarget(gameObject.transform, 5.0f);
+            _scriptSound.SetTarget(transform, 5.0f);
 
             if (_scriptConfused != null)
             {

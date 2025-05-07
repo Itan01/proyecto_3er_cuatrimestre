@@ -46,6 +46,7 @@ public class EnemyConfused : AbsEnemyVariables
 
     public override void SetActivate(bool mode)
     {
+        Debug.Log("Enemigo Aturdido");
         base.SetActivate(mode);
         _active = mode;
 

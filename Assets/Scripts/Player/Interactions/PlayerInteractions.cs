@@ -23,7 +23,6 @@ public class PlayerInteractions : MonoBehaviour
         _interactRay = new Ray(_rayOrigin.position + _offSet, _rayOrigin.forward);
         if (Input.GetKeyDown(_interactButton))
         {
-            Debug.Log($"Verificando");
             Interact();
         }
         
@@ -34,7 +33,7 @@ public class PlayerInteractions : MonoBehaviour
 
         if (Physics.SphereCast(_interactRay, _intRadius, out _intHit, _interactRayDistance, _interactRayMask))
         {
-            Debug.Log($"Collided obj : {_intHit.collider.name}.");
+           // Debug.Log($"Collided obj : {_intHit.collider.name}.");
 
             if (_intHit.collider.TryGetComponent(out IInteractableObject interactable))
             {

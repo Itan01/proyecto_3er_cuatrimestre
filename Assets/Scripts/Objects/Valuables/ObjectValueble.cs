@@ -8,7 +8,6 @@ public class ObjectValueble : MonoBehaviour , IInteractableObject
     public void OnInteract (PlayerScore script)
     {
         script.SetScore(_value);
-        Debug.Log("Objeto destruido");
         Destroy(gameObject);
     }
 }
