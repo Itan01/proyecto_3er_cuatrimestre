@@ -32,8 +32,6 @@ public class AbstractSound : MonoBehaviour // Sonidos Genericos,Movimiento Base
     {
     }
 
-
-
     protected virtual void Move()
     {
         _rb.MovePosition(transform.position + _dir.normalized * _speed * Time.fixedDeltaTime);

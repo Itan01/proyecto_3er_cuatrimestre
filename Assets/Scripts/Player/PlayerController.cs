@@ -18,4 +18,10 @@ public class PlayerController
         if (Input.GetMouseButtonDown(1))
             ScriptGrabGun.CatchingSound();
     }
+    public void ChecKShootGunInput(PlayerShootingGun ScriptShootGun)
+    {
+        bool HasASound= ScriptShootGun.CheckSound();
+        if (Input.GetMouseButtonDown(0) && HasASound)
+            ScriptShootGun.ThrowSound();
+    }
 }

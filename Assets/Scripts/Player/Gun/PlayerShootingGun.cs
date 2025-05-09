@@ -3,46 +3,29 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
+using System.Security.Cryptography.X509Certificates;
 
 public class PlayerShootingGun
 {
     private GameObject _soundReference;
     private PlayerGrabbingGun _scriptGrab;
-    private float _speed, _size;
+    private float _speed=5.0f, _size=1.0f;
+    private Transform _spawn;
     [SerializeField] private bool _soundEnabled = true;
     private bool _hasASound;
 
-    public PlayerShootingGun(PlayerGrabbingGun ScriptGrab)
+    public PlayerShootingGun(PlayerGrabbingGun ScriptGrab, Transform SpawnProyectil)
     {
         _scriptGrab= ScriptGrab;
+        _spawn = SpawnProyectil;
     }
-    private void Update()
+     public void ThrowSound()
      {
-         if (_hasASound && Input.GetMouseButtonDown(0) && _soundEnabled)
-         {
-             ThrowSound();
-         }
-         if (Input.GetKeyDown(KeyCode.T))
-         {
-             _hasASound = true;
-        }
-     }
-     private void ThrowSound()
-     {
-        //var ThrowingSound = Instantiate(_soundShoot[_indexBullet], _spawnProyectil.position, Quaternion.identity);
-
-        //_scriptSound = ThrowingSound.GetComponent<AbsStandardSoundMov>();
-        //_scriptSound.SetDirection(_orientationProyectil.position, 10.0f, _size);
-
-        //var impactExplosion = ThrowingSound.GetComponent<ImpactExplosion>();
-        //if (impactExplosion != null)
-        //{
-        //    impactExplosion.MarkAsThrown();
-        //}
-
-        //_typeOfSound.sprite = _sprites[4];
-        //_hasASound = false;
-        //_scriptGrab.CheckSound(false);
+        AbstractSound _script = _soundReference.GetComponent<AbstractSound>();
+        _soundReference.transform.position = _spawn.position;
+        _script.SetTarget(null, 0.0f);
+        _script.SetDirection(_spawn.position + _spawn.forward * 20, _speed, _size);
+        _hasASound = false;
      }
 
     public void SetSound(GameObject Sound)
@@ -56,6 +39,10 @@ public class PlayerShootingGun
     public void ShootEnable(bool state) 
     { 
         _soundEnabled = state;
+    }
+    public bool CheckSound()
+    {
+        return _hasASound;
     }
 }
 
