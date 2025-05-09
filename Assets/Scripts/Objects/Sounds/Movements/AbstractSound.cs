@@ -3,10 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 [RequireComponent(typeof(Rigidbody))]
 
-public class AbsStandardSoundMov : MonoBehaviour // Sonidos Genericos,Movimiento Base
+public class AbstractSound : MonoBehaviour // Sonidos Genericos,Movimiento Base
 {
-    [SerializeField] protected float _refSpeed = 0.0f,  _originalSize = 1.0f, _speedState = 2.0f;
-    protected float _rotSpeed = 0.0f, _plusLimitSize = 0.25f, _subLimitSize = -0.25f;
+    [SerializeField] protected float _refSpeed = 0.0f,  _originalSize = 1.0f, _speedState = 2.0f, _rotSpeed=10.0f;
     public float _speed = 0.0f, _size = 0.0f;
     public int _index = 0;
     [SerializeField] protected Vector3 _dir = new Vector3(0.0f, 0.0f, 0.0f);
@@ -15,8 +14,8 @@ public class AbsStandardSoundMov : MonoBehaviour // Sonidos Genericos,Movimiento
     protected int _limit = 0;
     protected bool _statePlusSize = true;
     protected Rigidbody _rb;
-    protected ShootingGun _scriptShoot;
-    protected GrabbingGun _scriptGrab;
+    protected PlayerShootingGun _scriptShoot;
+    protected PlayerGrabbingGun _scriptGrab;
 
     protected virtual void Start()
     {
@@ -72,53 +71,49 @@ public class AbsStandardSoundMov : MonoBehaviour // Sonidos Genericos,Movimiento
             _size = _originalSize;
         if (_speed == 0)
             _speed = _refSpeed;
-        if (_rotSpeed == 0)
-            _rotSpeed = 10.0f;
         if (_limit == 0)
             _limit = 1;
-        if (_plusLimitSize == 0)
-            _plusLimitSize = 0.25f;
-        if (_subLimitSize == 0)
-            _subLimitSize = -0.25f;
+        //if (_plusLimitSize == 0)
+        //    _plusLimitSize = 0.25f;
+        //if (_subLimitSize == 0)
+        //    _subLimitSize = -0.25f;
     }
 
 
-    protected void TravelSize()
-    {
-        if (_size >= 0.25f)
-        {
-            if (_statePlusSize)
-            {
-                _size += _plusLimitSize * Time.deltaTime *_speedState;
-                if (_size >= _originalSize + _plusLimitSize)
-                {
-                    _size = _originalSize + _plusLimitSize;
-                    _statePlusSize = false;
-                }
-            }
-            else
-            {
-                _size += _subLimitSize * Time.deltaTime * _speedState;
-                if (_size <= _originalSize + _subLimitSize)
-                {
-                    _size = _originalSize + _subLimitSize;
-                    _statePlusSize = true;
-                }
-            }
-            transform.localScale = new Vector3(_size, _size, _size);
-        }
+    //protected void TravelSize()
+    //{
+    //    if (_size >= 0.25f)
+    //    {
+    //        if (_statePlusSize)
+    //        {
+    //            _size += _plusLimitSize * Time.deltaTime *_speedState;
+    //            if (_size >= _originalSize + _plusLimitSize)
+    //            {
+    //                _size = _originalSize + _plusLimitSize;
+    //                _statePlusSize = false;
+    //            }
+    //        }
+    //        else
+    //        {
+    //            _size += _subLimitSize * Time.deltaTime * _speedState;
+    //            if (_size <= _originalSize + _subLimitSize)
+    //            {
+    //                _size = _originalSize + _subLimitSize;
+    //                _statePlusSize = true;
+    //            }
+    //        }
+    //        transform.localScale = new Vector3(_size, _size, _size);
+    //    }
 
-    }
+    //}
 
     private void OnTriggerEnter(Collider Player)
     {
         if (Player.gameObject.CompareTag("Player"))
         {
-            _scriptGrab = Player.GetComponent<GrabbingGun>();
+            _scriptGrab = Player.GetComponent<PlayerGrabbingGun>();
             if (_scriptGrab._canCatch == false) {
-            _scriptShoot = Player.GetComponent<ShootingGun>();
-                _scriptShoot.CheckSound(true);
-                _scriptGrab.CheckSound(true);
+            _scriptShoot = Player.GetComponent<PlayerShootingGun>();
                 _scriptShoot.SetSound(_index, _speed, _size);
                 Destroy(gameObject);
             }

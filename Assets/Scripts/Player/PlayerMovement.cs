@@ -1,61 +1,33 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Runtime.CompilerServices;
 using UnityEngine;
 
-public class PlayerMovement : MonoBehaviour
+public class PlayerMovement
 {
-    [SerializeField] private string _xAxisName = "xAxis";
-    [SerializeField] private string _zAxisName = "zAxis";
-    [SerializeField] private float _movSpeed = 5f, _rotSpeed = 10f ;
+    private float _movSpeed = 5f, _rotSpeed = 10.0f;
+    private Transform _transform, _model, _cam;
     private Rigidbody _rb;
-    private Animator _animator;
     private Vector3 _dir = new Vector3(0.0f, 0.0f, 0.0f);
-    private Vector3 _viewPlayer;
-    [SerializeField] private Transform _model, _mainCamera,_orientation;
 
-    private bool _isMoving = false;
-
-    void Start()
+    public PlayerMovement(Transform PlayerTransform, Rigidbody PlayerRigibody, Transform CameraTransform, Transform ModelTransform)
     {
-        _rb = GetComponent<Rigidbody>();
-        _rb.freezeRotation = true;
-
-        _animator = GetComponentInChildren<Animator>();
+        _transform = PlayerTransform;
+        _rb = PlayerRigibody;
+        _cam = CameraTransform;
+        _model = ModelTransform;
     }
-
-    void Update()
+    public void CheckIfMoving(float x, float z)
     {
-        _isMoving = CheckIfMoving();
-
-    }
-    void FixedUpdate()
+        _dir = (_cam.forward * z + _cam.right * x).normalized;
+        if (_dir.sqrMagnitude != 0) 
+            Move();
+    } 
+    private void Move()
     {
-        if (_isMoving)
-        {
-            _rb.MovePosition(transform.position + _dir.normalized * _movSpeed * Time.fixedDeltaTime);
-            _model.forward = Vector3.Slerp(_model.forward, _dir.normalized, Time.fixedDeltaTime * _rotSpeed);
-        }
-    }
-
-    private bool CheckIfMoving()
-    {
-        _viewPlayer=transform.position -new Vector3(_mainCamera.transform.position.x,transform.position.y, _mainCamera.transform.position.z);
-        _orientation.forward= _viewPlayer.normalized;
-        _dir.x = Input.GetAxisRaw("Horizontal");
-        _dir.z = Input.GetAxisRaw("Vertical");
-        _dir = _orientation.forward * _dir.z + _orientation.right * _dir.x;
-
-
-        _animator.SetFloat(_xAxisName, _dir.x);
-        _animator.SetFloat(_zAxisName, _dir.z);
-        if (_dir.sqrMagnitude != 0)
-        {
-            return true;
-        }
-        else
-        {
-            return false;
-        }
-
+        _rb.MovePosition(_transform.position + _dir.normalized * _movSpeed * Time.fixedDeltaTime);
+        _model.forward = Vector3.Slerp(_model.forward, _dir.normalized, Time.fixedDeltaTime * _rotSpeed);
     }
 }
+
+

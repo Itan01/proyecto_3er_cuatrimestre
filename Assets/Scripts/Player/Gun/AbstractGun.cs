@@ -2,11 +2,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public abstract class AbsSettingGun : MonoBehaviour
+public abstract class AbstractGun : MonoBehaviour
 {
-    [SerializeField] protected bool _hasASound = false;
-    [SerializeField] protected float _timer = 0.0f, _timerRef = 1.0f;
-    [SerializeField] protected Transform _spawnProyectil, _orientationProyectil;
+    protected bool _hasASound = false;
+    protected float _timer = 0.0f, _timerRef = 1.0f;
+    protected Transform _spawnProyectil;
     protected virtual void Start()
     {
 

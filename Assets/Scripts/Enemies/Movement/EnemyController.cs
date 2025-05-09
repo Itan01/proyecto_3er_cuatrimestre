@@ -7,7 +7,7 @@ public class EnemyController : MonoBehaviour
     private EnemyMovPattern _scriptPattern;
     private EnemyMovFollowTarget _scriptFollow;
     private EnemyConfused _scriptConfused;
-    private AbsStandardSoundMov _scriptSound;
+    private AbstractSound _scriptSound;
     private PlayerSetCheckpoint _scriptPlayer;
     private int _index = 1;
 
@@ -47,7 +47,7 @@ public class EnemyController : MonoBehaviour
     {
         if (Obj.gameObject.CompareTag("Sound"))
         {
-            _scriptSound = Obj.gameObject.GetComponent<AbsStandardSoundMov>();
+            _scriptSound = Obj.gameObject.GetComponent<AbstractSound>();
             _scriptFollow.SetPostionToFollow(_scriptSound._startPosition);
             SetTypeOfMovement(2);
             Destroy(Obj.gameObject);

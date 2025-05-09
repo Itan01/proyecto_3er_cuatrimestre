@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SpringArm : MonoBehaviour
+public class CameraManager : MonoBehaviour
 {
     [Header("Components")]
     [SerializeField] private Transform _target;

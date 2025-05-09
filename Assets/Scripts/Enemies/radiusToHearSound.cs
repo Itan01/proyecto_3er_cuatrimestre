@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class radiusToHearSound : MonoBehaviour
 {
-   private AbsStandardSoundMov _scriptSound;
+   private AbstractSound _scriptSound;
    //private EnemyConfused _scriptConfused;
 
     private void Start()
@@ -16,7 +16,7 @@ public class radiusToHearSound : MonoBehaviour
     {
         if (Sound.gameObject.CompareTag("Sound"))
         {
-            _scriptSound = Sound.GetComponent<AbsStandardSoundMov>();
+            _scriptSound = Sound.GetComponent<AbstractSound>();
             _scriptSound.SetTarget(transform, 7.5f);
 
             //if (_scriptConfused != null)
@@ -32,7 +32,7 @@ public class radiusToHearSound : MonoBehaviour
     {
         if (Sound.gameObject.CompareTag("Sound"))
         {
-            _scriptSound = Sound.GetComponent<AbsStandardSoundMov>();
+            _scriptSound = Sound.GetComponent<AbstractSound>();
             _scriptSound.SetTarget(null, 5.0f);
         }
     }

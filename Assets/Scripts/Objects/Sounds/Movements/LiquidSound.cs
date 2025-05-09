@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class LiquidSound : AbsStandardSoundMov
+public class LiquidSound : AbstractSound
 {
     private BounceObject _scriptBounce;
     private bool _isOnGround=false;
