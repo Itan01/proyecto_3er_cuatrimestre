@@ -6,11 +6,8 @@ using UnityEngine.SceneManagement;
 
 public class PlayerShootingGun
 {
-    [SerializeField] private GameObject[] _soundShoot;
-    [SerializeField] private Sprite[] _sprites;
-    [SerializeField] private int _indexBullet = 0;
+    private GameObject _soundReference;
     private PlayerGrabbingGun _scriptGrab;
-    private AbstractSound _scriptSound;
     private float _speed, _size;
     [SerializeField] private bool _soundEnabled = true;
     private bool _hasASound;
@@ -27,7 +24,6 @@ public class PlayerShootingGun
          }
          if (Input.GetKeyDown(KeyCode.T))
          {
-            SetSound(_indexBullet, 5.0f, 1.0f);
              _hasASound = true;
         }
      }
@@ -49,12 +45,12 @@ public class PlayerShootingGun
         //_scriptGrab.CheckSound(false);
      }
 
-    public void SetSound(int Index, float Speed, float Size)
+    public void SetSound(GameObject Sound)
     {
-        _indexBullet = Index;
-        _speed = Speed;
-        _size = Size;
-        //_typeOfSound.sprite= _sprites[Index];
+        _hasASound = true;
+        Vector3 _auxVector = new Vector3(0.0f, 10000.0f, 0.0f);
+        _soundReference = UnityEngine.Object.Instantiate(Sound, _auxVector, Quaternion.identity);
+        Debug.Log("SonidoCreado");
     }
 
     public void ShootEnable(bool state) 

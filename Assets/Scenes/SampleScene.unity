@@ -38,6 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
+  m_IndirectSpecularColor: {r: 0.18028378, g: 0.22571412, b: 0.30692285, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -8895,12 +8896,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7c4b5c0be3d91814cadc9385970e4674, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _layerMask:
+  _soundMask:
     serializedVersion: 2
     m_Bits: 268435456
+  _enviormentMask:
+    serializedVersion: 2
+    m_Bits: 3758096384
   _camTransform: {fileID: 957515939}
   _modelTransform: {fileID: 1993654384}
-  SpawnProyectil: {fileID: 839765077}
+  _spawnProyectil: {fileID: 839765077}
+  _isMoving: 0
+  _isGrabbing: 0
 --- !u!43 &1027471476
 Mesh:
   m_ObjectHideFlags: 0
@@ -13932,7 +13938,6 @@ MonoBehaviour:
     RefIds:
     - rid: 4396241447132856324
       type: {class: Cube, ns: UnityEngine.ProBuilder.Shapes, asm: Unity.ProBuilder}
-      data: 
 --- !u!1001 &1160964021282026167
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -14753,7 +14758,6 @@ MonoBehaviour:
     RefIds:
     - rid: 4396241447132856324
       type: {class: Cube, ns: UnityEngine.ProBuilder.Shapes, asm: Unity.ProBuilder}
-      data: 
 --- !u!114 &4369707033776203937
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -21866,7 +21870,6 @@ MonoBehaviour:
     RefIds:
     - rid: 4396241447132856324
       type: {class: Cube, ns: UnityEngine.ProBuilder.Shapes, asm: Unity.ProBuilder}
-      data: 
 --- !u!23 &7831922961093215207
 MeshRenderer:
   m_ObjectHideFlags: 0

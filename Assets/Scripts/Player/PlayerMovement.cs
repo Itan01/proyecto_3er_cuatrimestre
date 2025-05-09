@@ -17,13 +17,15 @@ public class PlayerMovement
         _cam = CameraTransform;
         _model = ModelTransform;
     }
-    public void CheckIfMoving(float x, float z)
+    public bool CheckIfMoving(float x, float z)
     {
         _dir = (_cam.forward * z + _cam.right * x).normalized;
-        if (_dir.sqrMagnitude != 0) 
-            Move();
-    } 
-    private void Move()
+        if (_dir.sqrMagnitude != 0)
+            return true;
+        else 
+            return false;
+    }
+    public void Move()
     {
         _rb.MovePosition(_transform.position + _dir.normalized * _movSpeed * Time.fixedDeltaTime);
         _model.forward = Vector3.Slerp(_model.forward, _dir.normalized, Time.fixedDeltaTime * _rotSpeed);

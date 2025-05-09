@@ -107,20 +107,12 @@ public class AbstractSound : MonoBehaviour // Sonidos Genericos,Movimiento Base
 
     //}
 
-    private void OnTriggerEnter(Collider Player)
+    private void OnTriggerEnter(Collider Entity)
     {
-        if (Player.gameObject.CompareTag("Player"))
+        if (Entity.TryGetComponent<PlayerManager>(out PlayerManager PlayerScript))
         {
-            _scriptGrab = Player.GetComponent<PlayerGrabbingGun>();
-            if (_scriptGrab._canCatch == false) {
-            _scriptShoot = Player.GetComponent<PlayerShootingGun>();
-                _scriptShoot.SetSound(_index, _speed, _size);
-                Destroy(gameObject);
-            }
-            else
-            {
-                SetTarget(null,5.0f);
-            }
+            PlayerScript.ShootGunSetSound(gameObject);
+            Destroy(gameObject);
         }
     }
 }

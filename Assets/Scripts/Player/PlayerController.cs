@@ -9,15 +9,13 @@ public class PlayerController
 
     }
 
-    public void CheckMovementInputs(PlayerMovement Script)
+    public bool CheckMovementInputs(PlayerMovement Script)
     {
-        Script.CheckIfMoving(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
+        return Script.CheckIfMoving(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
     }
-    public void ChecKMouseInputs(PlayerGrabbingGun ScriptGrab, PlayerShootingGun ScriptShoot)
+    public void ChecKGrabGunInput(PlayerGrabbingGun ScriptGrabGun)
     {
         if (Input.GetMouseButtonDown(1))
-        {
-            ScriptGrab.CatchingSound();
-        }
+            ScriptGrabGun.CatchingSound();
     }
 }

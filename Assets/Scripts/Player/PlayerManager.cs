@@ -8,10 +8,11 @@ public class PlayerManager : MonoBehaviour
     private PlayerMovement _scriptMovement;
     private PlayerShootingGun _scriptShootingGun;
     private PlayerGrabbingGun _scriptGrabbingGun;
-    [SerializeField] private LayerMask _layerMask;
-    [SerializeField] private Transform _camTransform, _modelTransform, SpawnProyectil;
+    [SerializeField] private LayerMask _soundMask, _enviormentMask;
+    [SerializeField] private Transform _camTransform, _modelTransform, _spawnProyectil;
     private Rigidbody _rb;
     private Animator _animator;
+    [SerializeField]private bool _isMoving=false, _isGrabbing=false;
     void Start()
     {
         GetComponents();
@@ -20,11 +21,12 @@ public class PlayerManager : MonoBehaviour
 
     private void Update()
     {
+        CheckInputs();
     }
     private void FixedUpdate()
     {
-        CheckInputs();
-
+        if (_isMoving)
+            _scriptMovement.Move();
     }
     private void GetComponents()
     {
@@ -34,14 +36,19 @@ public class PlayerManager : MonoBehaviour
 
     private void CheckInputs()
     {
-        _scriptController.CheckMovementInputs(_scriptMovement);
-        _scriptController.ChecKMouseInputs(_scriptGrabbingGun, _scriptShootingGun);
+        _isMoving=_scriptController.CheckMovementInputs(_scriptMovement);
+        _scriptController.ChecKGrabGunInput(_scriptGrabbingGun);
     }
     private void GetScripts()
     {
         _scriptController = new PlayerController();
         _scriptMovement = new PlayerMovement(transform, _rb, _camTransform, _modelTransform);
-        _scriptGrabbingGun = new PlayerGrabbingGun(_scriptShootingGun, _modelTransform, _camTransform, _layerMask);
+        _scriptGrabbingGun = new PlayerGrabbingGun(_scriptShootingGun, _modelTransform, _camTransform, _soundMask);
         _scriptShootingGun = new PlayerShootingGun(_scriptGrabbingGun);
+    }
+
+    public void ShootGunSetSound(GameObject reference)
+    {
+
     }
 }
