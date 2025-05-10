@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UIElements;
 
 public class PlayerManager : MonoBehaviour
 {
@@ -8,6 +9,7 @@ public class PlayerManager : MonoBehaviour
     private PlayerMovement _scriptMovement;
     private PlayerShootingGun _scriptShootingGun;
     private PlayerGrabbingGun _scriptGrabbingGun;
+    private PlayerAnimation _scriptAnimation;
     [SerializeField] private LayerMask _soundMask, _enviormentMask;
     [SerializeField] private Transform _camTransform, _modelTransform, _spawnProyectil;
     private Rigidbody _rb;
@@ -32,7 +34,7 @@ public class PlayerManager : MonoBehaviour
     {
         _rb = GetComponent<Rigidbody>();
         _rb.freezeRotation = true;
-        _animator = GetComponent<Animator>();
+        _animator = GetComponentInChildren<Animator>();
     }
 
     private void CheckInputs()
@@ -43,14 +45,16 @@ public class PlayerManager : MonoBehaviour
     }
     private void GetScripts()
     {
+        _scriptAnimation = new PlayerAnimation(_animator);
         _scriptController = new PlayerController();
-        _scriptMovement = new PlayerMovement(transform, _rb, _camTransform, _modelTransform);
-        _scriptGrabbingGun = new PlayerGrabbingGun(_scriptShootingGun, _modelTransform, _camTransform, _soundMask);
-        _scriptShootingGun = new PlayerShootingGun(_scriptGrabbingGun, _spawnProyectil);
+        _scriptMovement = new PlayerMovement(transform, _rb, _camTransform, _modelTransform, _scriptAnimation);
+        _scriptGrabbingGun = new PlayerGrabbingGun(_modelTransform, _camTransform, _soundMask,_enviormentMask);
+        _scriptShootingGun = new PlayerShootingGun(_spawnProyectil, _camTransform);
     }
 
     public void ShootGunSetSound(GameObject reference)
     {
         _scriptShootingGun.SetSound(reference);
     }
+
 }

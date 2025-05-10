@@ -6,6 +6,8 @@ using UnityEngine;
 public class AbstractSound : MonoBehaviour // Sonidos Genericos,Movimiento Base
 {
     [SerializeField] protected float _refSpeed = 0.0f,  _originalSize = 1.0f, _speedState = 2.0f, _rotSpeed=10.0f;
+    private float _maxDistanceRay=20.0f;
+    private bool _canCatch = false; 
     public float _speed = 0.0f, _size = 0.0f;
     public int _index = 0;
     [SerializeField] protected Vector3 _dir = new Vector3(0.0f, 0.0f, 0.0f);
@@ -30,6 +32,7 @@ public class AbstractSound : MonoBehaviour // Sonidos Genericos,Movimiento Base
     }
     protected virtual void FixedUpdate()
     {
+        Move();
     }
 
     protected virtual void Move()
@@ -109,9 +112,31 @@ public class AbstractSound : MonoBehaviour // Sonidos Genericos,Movimiento Base
     {
         if (Entity.TryGetComponent<PlayerManager>(out PlayerManager PlayerScript))
         {
-            PlayerScript.ShootGunSetSound(gameObject);
-            Destroy(gameObject);
+            if (_canCatch)
+            {
+                PlayerScript.ShootGunSetSound(gameObject);
+                Destroy(gameObject);
+            }
         }
+    }
+    public bool HasLineOfVision(LayerMask mask, Vector3 EntityPosition)
+    {
+        RaycastHit hit;
+        Vector3 orientation= EntityPosition - transform.position;
+        if (Physics.Raycast(transform.position, orientation, out hit, _maxDistanceRay, mask))
+        {
+
+            if (hit.collider.TryGetComponent(out PlayerManager Player))
+            {
+                return true;
+            }
+
+        }
+        return false;
+    }
+    public void PlayerCanCatchIt(bool State)
+    {
+        _canCatch = State;
     }
 }
 
