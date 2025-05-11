@@ -13,15 +13,20 @@ public class PlayerController
 
         return (Script.CheckIfMoving(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical")));
     }
-    public void ChecKGrabGunInput(PlayerGrabbingGun ScriptGrabGun)
+    public void CheckGrabGunInput(PlayerGrabbingGun ScriptGrabGun)
     {
         if (Input.GetMouseButtonDown(1))
             ScriptGrabGun.CatchingSound();
     }
-    public void ChecKShootGunInput(PlayerShootingGun ScriptShootGun)
+    public void CheckShootGunInput(PlayerShootingGun ScriptShootGun)
     {
         bool HasASound= ScriptShootGun.CheckSound();
         if (Input.GetMouseButtonDown(0) && HasASound)
             ScriptShootGun.ThrowSound();
+    }
+    public void CheckInteractions(PlayerInteractions ScriptInteractions)
+    {
+        if (Input.GetKeyDown(KeyCode.E))
+            ScriptInteractions.Interact();
     }
 }

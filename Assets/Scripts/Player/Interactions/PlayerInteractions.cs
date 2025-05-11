@@ -2,51 +2,34 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerInteractions : MonoBehaviour
+public class PlayerInteractions
 {
-    [SerializeField] private KeyCode _interactButton;
-    [SerializeField] private float _interactRayDistance = 5.0f;
-    [SerializeField] private float _intRadius = 0.75f;
-    [SerializeField] private LayerMask _interactRayMask;
-    [SerializeField] private Ray _interactRay;
-    [SerializeField] private RaycastHit _intHit;
-    [SerializeField] private Transform _rayOrigin;
-    [SerializeField] private Vector3 _offSet= new Vector3(0.0f,1.5f,0.0f);
-    private PlayerScore _script;
-
-    private void Start()
+    private float _interactRayDistance = 2.0f, _intRadius = 0.75f;
+    //private LayerMask _interactRayMask;
+    private RaycastHit _intHit;
+    private Transform _transform;
+    private Transform _orientation;
+    private Vector3 _offSet= new Vector3(0.0f,1.5f,0.0f);
+    private PlayerScore _scriptScore;
+    private LayerMask _interactMask;
+    public PlayerInteractions(PlayerScore ScriptScore, Transform PlayerTransform, Transform CameraTransform, LayerMask InteractMask)
     {
-        _script = GetComponent<PlayerScore>();
+        _scriptScore = ScriptScore;
+        _transform= PlayerTransform;
+        _orientation = CameraTransform;
+        _interactMask = InteractMask;
     }
-    private void Update() 
+    public void Interact()
     {
-        _interactRay = new Ray(_rayOrigin.position + _offSet, _rayOrigin.forward);
-        if (Input.GetKeyDown(_interactButton))
+        Ray _interactRay = new Ray(_transform.position + _offSet, _orientation.forward);
+        if (Physics.SphereCast(_interactRay, _intRadius, out _intHit, _interactRayDistance, _interactMask))
         {
-            Interact();
-        }
-        
-    }
-
-    private void Interact()
-    {
-
-        if (Physics.SphereCast(_interactRay, _intRadius, out _intHit, _interactRayDistance, _interactRayMask))
-        {
-           // Debug.Log($"Collided obj : {_intHit.collider.name}.");
+           Debug.Log($"Collided obj : {_intHit.collider.name}.");
 
             if (_intHit.collider.TryGetComponent(out IInteractableObject interactable))
             {
-                interactable.OnInteract(_script);
+                interactable.OnInteract(_scriptScore);
             }
         }
-    }
-
-
-    private void OnDrawGizmos()
-    {
-        Gizmos.color = Color.green;
-
-        Gizmos.DrawRay(_interactRay);
     }
 }
