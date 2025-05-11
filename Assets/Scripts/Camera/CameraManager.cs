@@ -46,7 +46,6 @@ public class CameraManager : MonoBehaviour
 
         _mouseX = transform.eulerAngles.y;
         _mouseY = transform.eulerAngles.x;
-        _offSetTarget = new Vector3(0, 0.5f, 0);
     }
 
     private void FixedUpdate()

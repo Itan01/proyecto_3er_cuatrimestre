@@ -8,7 +8,7 @@ public class MessageSound : AbstractSound
     {
         base.Start();
         _rb.freezeRotation = true;
-        _index = 2;
+        _index = 3;
     }
     protected override void Update()
     {

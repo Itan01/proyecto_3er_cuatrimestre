@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ObjectValueble : MonoBehaviour , IInteractableObject
+public class ObjectValuable : MonoBehaviour , IInteractableObject
 {
     [SerializeField] private int _value;
     public void OnInteract (PlayerScore script)

@@ -9,7 +9,7 @@ public class AbstractSound : MonoBehaviour // Sonidos Genericos,Movimiento Base
     private float _maxDistanceRay=20.0f;
     private bool _canCatch = false; 
     public float _speed = 0.0f, _size = 0.0f;
-    public int _index = 0;
+    public int _index = 1   ;
     [SerializeField] protected Vector3 _dir = new Vector3(0.0f, 0.0f, 0.0f);
     public Vector3 _startPosition;
     [SerializeField] protected Transform _target;
@@ -115,6 +115,7 @@ public class AbstractSound : MonoBehaviour // Sonidos Genericos,Movimiento Base
             if (_canCatch)
             {
                 PlayerScript.ShootGunSetSound(gameObject);
+                PlayerScript.SetSoundUI(_index);
                 Destroy(gameObject);
             }
         }

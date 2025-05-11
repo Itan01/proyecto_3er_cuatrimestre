@@ -13,7 +13,7 @@ public class LiquidSound : AbstractSound
         base.Start();
         _rb.useGravity = true;
         _rb.freezeRotation = true;
-        _index = 1;
+        _index = 2;
         _scriptBounce = GetComponent<BounceObject>();
     }
     protected override void Update()

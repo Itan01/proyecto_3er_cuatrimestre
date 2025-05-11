@@ -12,17 +12,20 @@ public class PlayerShootingGun
     private Transform _spawn, _orientation;
     [SerializeField] private bool _soundEnabled = true;
     private bool _hasASound;
+    private UISetSound _scriptUISound;
 
-    public PlayerShootingGun(Transform SpawnProyectil, Transform Orientation)
+    public PlayerShootingGun(Transform SpawnProyectil, Transform Orientation, UISetSound UI)
     {
         _spawn = SpawnProyectil;
         _orientation=Orientation;
+        _scriptUISound = UI;
     }
      public void ThrowSound()
      {
         AbstractSound _script = _soundReference.GetComponent<AbstractSound>();
         _script.SetTarget(null, 0.0f);
         _script.PlayerCanCatchIt(false);
+        _scriptUISound.SetSound(0);
         _soundReference.transform.position = _spawn.position;
         _script.SetDirection(_spawn.position + _orientation.forward * 20, _speed, _size);
         _hasASound = false;
