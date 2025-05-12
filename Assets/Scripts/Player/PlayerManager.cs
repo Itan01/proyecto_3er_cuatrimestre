@@ -13,6 +13,7 @@ public class PlayerManager : EntityMonobehaviour
     private PlayerAnimation _scriptAnimation;
     private PlayerInteractions _scriptInteractions;
     private PlayerScore _scriptScore;
+    private SetSizeCollider _setSizeCollider;
     [Header("<color=green>LayersMask</color>")]
     [SerializeField] private LayerMask _soundMask;
     [SerializeField] private LayerMask _enviormentMask;
@@ -50,14 +51,14 @@ public class PlayerManager : EntityMonobehaviour
     }
     protected override void GetScripts()
     {
+        _setSizeCollider = new SetSizeCollider(_boxCollider, _capsuleCollider);
         _scriptAnimation = new PlayerAnimation(_animator);
         _scriptScore = new PlayerScore(_pointsUI);
         _scriptController = new PlayerController();
-        _scriptMovement = new PlayerMovement(transform, _rb, _camTransform, _modelTransform, _scriptAnimation);
+        _scriptMovement = new PlayerMovement(transform, _rb, _camTransform, _modelTransform, _scriptAnimation, _setSizeCollider);
         _scriptGrabbingGun = new PlayerGrabbingGun(_modelTransform, _camTransform, _soundMask,_enviormentMask, _areaCatching);
         _scriptShootingGun = new PlayerShootingGun(_spawnProyectil, _camTransform, _scriptUISound);
         _scriptInteractions = new PlayerInteractions(_scriptScore, transform, _camTransform, InteractMask);
-
     }
 
     public void ShootGunSetSound(GameObject reference)

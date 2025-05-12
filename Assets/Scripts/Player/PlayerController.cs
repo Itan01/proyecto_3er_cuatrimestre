@@ -10,8 +10,10 @@ public class PlayerController
 
     public bool CheckMovementInputs(PlayerMovement Script)
     {
+        bool isPressingCrouch=false;
+        isPressingCrouch = Input.GetKey(KeyCode.C);
 
-        return (Script.CheckIfMoving(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical")));
+        return (Script.CheckIfMoving(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"), isPressingCrouch));
     }
     public void CheckGrabGunInput(PlayerGrabbingGun ScriptGrabGun)
     {

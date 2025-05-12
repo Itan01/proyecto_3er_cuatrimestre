@@ -10,26 +10,30 @@ public class PlayerMovement
     private Rigidbody _rb;
     private Vector3 _dir = new Vector3(0.0f, 0.0f, 0.0f);
     private PlayerAnimation _scriptAnimation;
+    private SetSizeCollider _scriptCollider;
 
-    public PlayerMovement(Transform PlayerTransform, Rigidbody PlayerRigibody, Transform CameraTransform, Transform ModelTransform, PlayerAnimation scriptAnimation)
+    public PlayerMovement(Transform PlayerTransform, Rigidbody PlayerRigibody, Transform CameraTransform, Transform ModelTransform, PlayerAnimation scriptAnimation, SetSizeCollider ScriptCollider)
     {
         _transform = PlayerTransform;
         _rb = PlayerRigibody;
         _cam = CameraTransform;
         _model = ModelTransform;
         _scriptAnimation = scriptAnimation;
+        _scriptCollider = ScriptCollider;
     }
-    public bool CheckIfMoving(float x, float z)
+    public bool CheckIfMoving(float x, float z, bool crouching)
     {
         _dir = (_cam.forward * z + _cam.right * x).normalized;
         _dir.y = 0.0f;
-        _scriptAnimation.SetFloatAnimator("xAxis", x);
-        _scriptAnimation.SetFloatAnimator("zAxis", z);
+        SetAnimation(x,z,crouching);
         if (_dir.sqrMagnitude != 0)
+        {
+            _scriptAnimation.SetBoolAnimator("isMoving", true);
             return true;
+        }      
         else
         {
-
+            _scriptAnimation.SetBoolAnimator("isMoving", false);
             return false;
         }
     }
@@ -37,6 +41,25 @@ public class PlayerMovement
     {
         _rb.MovePosition(_transform.position + _dir.normalized * _movSpeed * Time.fixedDeltaTime);
         _model.forward = Vector3.Slerp(_model.forward, _dir.normalized, Time.fixedDeltaTime * _rotSpeed);
+    }
+    private void SetAnimation(float x, float z, bool crouching)
+    {
+        float y;
+        _scriptAnimation.SetBoolAnimator("isCrouching", crouching);
+        _scriptAnimation.SetFloatAnimator("xAxis", x);
+        _scriptAnimation.SetFloatAnimator("zAxis", z);
+        if (crouching)
+        {
+            _movSpeed = 2.0f;
+            y = 1.25f;
+        }
+
+        else
+        {
+            _movSpeed = 5.0f;
+            y = 1.75f;
+        }
+        _scriptCollider.SetSize(y);   
     }
 }
 
