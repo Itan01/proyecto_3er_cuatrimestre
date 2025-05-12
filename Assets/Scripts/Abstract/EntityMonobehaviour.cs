@@ -8,15 +8,24 @@ public class EntityMonobehaviour : MonoBehaviour
     protected Animator _animator;
     protected virtual void Start()
     {
-        
+        GetComponents();
+        GetScripts();
     }
-
-    // Update is called once per frame
     protected virtual void Update()
     {
         
     }
     protected virtual void FixedUpdate()
+    {
+
+    }
+    protected virtual void GetComponents()
+    {
+        _rb=GetComponent<Rigidbody>();
+        _rb.freezeRotation = true;
+        _animator =GetComponentInChildren<Animator>();
+    }
+    protected virtual void GetScripts()
     {
 
     }

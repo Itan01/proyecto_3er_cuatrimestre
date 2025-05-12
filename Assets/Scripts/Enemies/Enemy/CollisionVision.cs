@@ -4,23 +4,17 @@ using UnityEngine;
 
 public class CollisionVision : MonoBehaviour
 {
-    [SerializeField]private EnemyMovFollowTarget _scriptFollow;
-    [SerializeField] private EnemyController _scriptControl;
+    private EnemyStandardManager _scriptManager;
     private void Start()
     {
-        _scriptControl = GetComponentInParent<EnemyController>();
-        _scriptFollow = GetComponentInParent<EnemyMovFollowTarget>();
+        _scriptManager = GetComponentInParent<EnemyStandardManager>();
     }
-    void OnTriggerEnter(Collider player)
+    void OnTriggerEnter(Collider Player)
     {
-        if (player.gameObject.CompareTag("Player"))
+        if (Player.gameObject.layer == 27)
         {
-            if (!_scriptFollow._hasTarget)
-            {
-                _scriptFollow.SetTargetToFollow(player.gameObject.transform);
-                _scriptControl.SetTypeOfMovement(2);
-            }
-
+            _scriptManager.SetTarget(Player.transform);
+            _scriptManager.SetMode(1);
         }
     }
 }

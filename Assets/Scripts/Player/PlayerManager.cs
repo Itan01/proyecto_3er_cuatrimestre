@@ -29,8 +29,7 @@ public class PlayerManager : EntityMonobehaviour
     [SerializeField] UISetSound _scriptUISound;
     protected override void Start()
     {
-        GetComponents();
-        GetScripts();
+        base.Start();
     }
 
     protected override void Update()
@@ -42,13 +41,6 @@ public class PlayerManager : EntityMonobehaviour
         if (_isMoving)
             _scriptMovement.Move();
     }
-    private void GetComponents()
-    {
-        _rb = GetComponent<Rigidbody>();
-        _rb.freezeRotation = true;
-        _animator = GetComponentInChildren<Animator>();
-    }
-
     private void CheckInputs()
     {
         _isMoving=_scriptController.CheckMovementInputs(_scriptMovement);
@@ -56,7 +48,7 @@ public class PlayerManager : EntityMonobehaviour
         _scriptController.CheckShootGunInput(_scriptShootingGun);
         _scriptController.CheckInteractions(_scriptInteractions);
     }
-    private void GetScripts()
+    protected override void GetScripts()
     {
         _scriptAnimation = new PlayerAnimation(_animator);
         _scriptScore = new PlayerScore(_pointsUI);

@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SummonSoundObject : MonoBehaviour
+public class SummonSoundFromObject : MonoBehaviour
 {
     [SerializeField] private GameObject _sound;
     private AbstractSound _script;

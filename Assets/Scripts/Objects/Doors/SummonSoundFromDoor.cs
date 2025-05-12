@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SummonObjectSound : MonoBehaviour
+public class SummonSoundFromDoor : MonoBehaviour
 {
     private Animation _animator;
     [SerializeField] private GameObject _soundToSummon;
