@@ -14,6 +14,6 @@ public class StandardSound : AbstractSound
     }
     protected override void FixedUpdate()
     {
-        Move();
+        base.FixedUpdate();
     }
 }

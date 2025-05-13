@@ -22,12 +22,9 @@ public class PlayerShootingGun
     }
      public void ThrowSound()
      {
-        AbstractSound _script = _soundReference.GetComponent<AbstractSound>();
-        _script.SetTarget(null, 0.0f);
-        _script.PlayerCanCatchIt(false);
+        AvailableSound();
         _scriptUISound.SetSound(0);
         _soundReference.transform.position = _spawn.position;
-        _script.SetDirection(_spawn.position + _orientation.forward * 20, _speed, _size);
         _hasASound = false;
      }
 
@@ -35,8 +32,9 @@ public class PlayerShootingGun
     {
         _hasASound = true;
         Vector3 _auxVector = new Vector3(0.0f, 10000.0f, 0.0f);
-        _soundReference = UnityEngine.Object.Instantiate(Sound, _auxVector, Quaternion.identity);
-        Debug.Log("SonidoCreado");
+        var Reference=_soundReference = UnityEngine.Object.Instantiate(Sound, _auxVector, Quaternion.identity);
+        AbstractSound script= Reference.GetComponent<AbstractSound>();
+        script.FreezeObject(true);
     }
 
     public void ShootEnable(bool state) 
@@ -47,5 +45,15 @@ public class PlayerShootingGun
     {
         return _hasASound;
     }
+
+    private void AvailableSound() 
+    {
+        AbstractSound script = _soundReference.GetComponent<AbstractSound>();
+        script.SetTarget(null,0.0f);
+        script.SetDirection(_orientation.forward, _speed, _size);
+        script.FreezeObject(false);
+        script.PlayerCanCatchIt(false);
+    }
+
 }
 

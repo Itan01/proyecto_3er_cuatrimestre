@@ -14,6 +14,7 @@ public class PlayerManager : EntityMonobehaviour
     private PlayerInteractions _scriptInteractions;
     private PlayerScore _scriptScore;
     private SetSizeCollider _setSizeCollider;
+    private PlayerCheckpoint _scriptSetCheckpoint;
     [Header("<color=green>LayersMask</color>")]
     [SerializeField] private LayerMask _soundMask;
     [SerializeField] private LayerMask _enviormentMask;
@@ -51,6 +52,7 @@ public class PlayerManager : EntityMonobehaviour
     }
     protected override void GetScripts()
     {
+        _scriptSetCheckpoint = new PlayerCheckpoint(transform);
         _setSizeCollider = new SetSizeCollider(_boxCollider, _capsuleCollider);
         _scriptAnimation = new PlayerAnimation(_animator);
         _scriptScore = new PlayerScore(_pointsUI);
@@ -59,6 +61,7 @@ public class PlayerManager : EntityMonobehaviour
         _scriptGrabbingGun = new PlayerGrabbingGun(_modelTransform, _camTransform, _soundMask,_enviormentMask, _areaCatching);
         _scriptShootingGun = new PlayerShootingGun(_spawnProyectil, _camTransform, _scriptUISound);
         _scriptInteractions = new PlayerInteractions(_scriptScore, transform, _camTransform, InteractMask);
+        _scriptSetCheckpoint.SetCheckpoint(transform.position);
     }
 
     public void ShootGunSetSound(GameObject reference)
@@ -69,5 +72,15 @@ public class PlayerManager : EntityMonobehaviour
     {
         _scriptUISound.SetSound(index);
     }
-
+    public void MovetoCheckPoint()
+    {
+        _scriptSetCheckpoint.Respawn();
+    }
+    private void OnTriggerEnter(Collider checkpoint)
+    {
+        if (checkpoint.gameObject.layer == 25)
+        {
+            _scriptSetCheckpoint.SetCheckpoint(checkpoint.transform.position);
+        }
+    }
 }

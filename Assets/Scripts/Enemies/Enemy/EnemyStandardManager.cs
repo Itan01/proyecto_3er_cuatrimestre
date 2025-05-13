@@ -64,5 +64,14 @@ public class EnemyStandardManager : EntityMonobehaviour
     {
         _scriptFollowTarget.SetTargetToFollow(Target);
     }
+
+    private void OnCollisionEnter(Collision Player)
+    {
+        if (Player.gameObject.TryGetComponent<PlayerManager>(out PlayerManager script))
+        {
+            script.MovetoCheckPoint();
+            _scriptFollowTarget.Reset();
+        }
+    }
 }
 

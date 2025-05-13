@@ -94,7 +94,6 @@ GameObject:
   - component: {fileID: 850393830810174952}
   - component: {fileID: 6072785716852915795}
   - component: {fileID: 6349888537662155669}
-  - component: {fileID: 6806924996123111157}
   - component: {fileID: 4069691698610730419}
   m_Layer: 28
   m_Name: SoundLiquid
@@ -167,22 +166,6 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!114 &6806924996123111157
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8906569069889883939}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3ed5b38b96dcd4549b4ee583911e4c07, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _forceGravity: 2
-  _groundRayMask:
-    serializedVersion: 2
-    m_Bits: 2147483648
 --- !u!114 &4069691698610730419
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -195,14 +178,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f54193e292a41534b90402128ad07805, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _refSpeed: 5
-  _originalSize: 1
-  _speedState: 2
-  _rotSpeed: 10
+  _canCatch: 0
+  _freeze: 0
   _speed: 5
   _size: 0
-  _index: 2
   _dir: {x: 0, y: 0, z: 0}
-  _startPosition: {x: 0, y: 0, z: 0}
   _target: {fileID: 0}
+  _groundRayMask:
+    serializedVersion: 2
+    m_Bits: 2147483648
   _timerBetweenBounce: 0

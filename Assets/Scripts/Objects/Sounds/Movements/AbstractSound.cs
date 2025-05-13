@@ -5,16 +5,14 @@ using UnityEngine;
 
 public class AbstractSound : MonoBehaviour // Sonidos Genericos,Movimiento Base
 {
-    [SerializeField] protected float _refSpeed = 0.0f,  _originalSize = 1.0f, _speedState = 2.0f, _rotSpeed=10.0f;
-    private float _maxDistanceRay=20.0f;
-    private bool _canCatch = false; 
-    public float _speed = 0.0f, _size = 0.0f;
-    public int _index = 1   ;
+    protected float _rotSpeed=10.0f;
+    protected float _maxDistanceRay=20.0f;
+    [SerializeField] protected bool _canCatch = false, _freeze = false;
+    [SerializeField] protected float _speed = 5.0f, _size = 1.0f;
+    protected int _index = 1 ;
     [SerializeField] protected Vector3 _dir = new Vector3(0.0f, 0.0f, 0.0f);
-    public Vector3 _startPosition;
+    protected Vector3 _startPosition;
     [SerializeField] protected Transform _target;
-    protected int _limit = 0;
-    protected bool _statePlusSize = true;
     protected Rigidbody _rb;
     protected PlayerShootingGun _scriptShoot;
     protected PlayerGrabbingGun _scriptGrab;
@@ -27,12 +25,18 @@ public class AbstractSound : MonoBehaviour // Sonidos Genericos,Movimiento Base
 
     protected virtual void Update()
     {
+        if (!_freeze)
+        {
+            ReduceSize();
+        }
+        
         if (_target)
             SetDirectionToTarget();
     }
     protected virtual void FixedUpdate()
     {
         Move();
+
     }
 
     protected virtual void Move()
@@ -50,65 +54,42 @@ public class AbstractSound : MonoBehaviour // Sonidos Genericos,Movimiento Base
     {
         _target = Target;
         if (Speed == 0.0f)
-            _speed = _refSpeed;
+            _speed =5.0f;
         else
             _speed = Speed;
     }
 
     public virtual void SetDirection(Vector3 Orientation, float Speed, float Size)
     {
-        _dir = Orientation - transform.position;
+        _dir = Orientation;
         _size = Size;
-        _speed = Speed;
+        if (Speed == 0.0f)
+            _speed = 5.0f;
+        else
+            _speed = Speed;
     }
 
     protected void BaseSettings()// En Caso de que no se especifique una Variable base
     {
         _rb = GetComponent<Rigidbody>();
         _rb.useGravity = false;
-        _rb.constraints = RigidbodyConstraints.FreezeRotationX;
-        _rb.constraints = RigidbodyConstraints.FreezeRotationZ;
-        if (_size == 0)
-            _size = _originalSize;
-        if (_speed == 0)
-            _speed = _refSpeed;
-        if (_limit == 0)
-            _limit = 1;
-        //if (_plusLimitSize == 0)
-        //    _plusLimitSize = 0.25f;
-        //if (_subLimitSize == 0)
-        //    _subLimitSize = -0.25f;
+        _rb.freezeRotation = true;
     }
 
 
-    //protected void TravelSize()
-    //{
-    //    if (_size >= 0.25f)
-    //    {
-    //        if (_statePlusSize)
-    //        {
-    //            _size += _plusLimitSize * Time.deltaTime *_speedState;
-    //            if (_size >= _originalSize + _plusLimitSize)
-    //            {
-    //                _size = _originalSize + _plusLimitSize;
-    //                _statePlusSize = false;
-    //            }
-    //        }
-    //        else
-    //        {
-    //            _size += _subLimitSize * Time.deltaTime * _speedState;
-    //            if (_size <= _originalSize + _subLimitSize)
-    //            {
-    //                _size = _originalSize + _subLimitSize;
-    //                _statePlusSize = true;
-    //            }
-    //        }
-    //        transform.localScale = new Vector3(_size, _size, _size);
-    //    }
+    protected void ReduceSize()
+    {
+        if (_size >= 0.25f)
+        {
+            _size -= 0.25f * Time.deltaTime;
+            transform.localScale = new Vector3(_size, _size, _size);
+        }
+        else
+            Destroy(gameObject);
 
-    //}
+    }
 
-    private void OnTriggerEnter(Collider Entity)
+    protected void OnTriggerEnter(Collider Entity)
     {
         if (Entity.TryGetComponent<PlayerManager>(out PlayerManager PlayerScript))
         {
@@ -138,6 +119,10 @@ public class AbstractSound : MonoBehaviour // Sonidos Genericos,Movimiento Base
     public void PlayerCanCatchIt(bool State)
     {
         _canCatch = State;
+    }
+    public void FreezeObject(bool freezeState)
+    {
+        _freeze = freezeState;
     }
 }
 
