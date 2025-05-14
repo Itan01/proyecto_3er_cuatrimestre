@@ -9,12 +9,14 @@ public class EnemyFollowTarget
     private Transform _target;
     private Transform _transform;
     private EnemyStandardManager _scriptManager;
+    private ControlAnimator _scriptAnimator;
 
 
-    public EnemyFollowTarget(EnemyStandardManager ScriptManager, Transform EnemyPosition)
+    public EnemyFollowTarget(EnemyStandardManager ScriptManager, Transform EnemyPosition, ControlAnimator ControlAnimator)
     {
         _transform = EnemyPosition;
         _scriptManager= ScriptManager;
+        _scriptAnimator = ControlAnimator;
     }
 
     public void SetPostionToFollow(Vector3 _position)

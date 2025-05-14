@@ -8,12 +8,13 @@ public class EnemyStandardManager : EntityMonobehaviour
     private EnemyPattern _scriptPattern;
     private EnemyFollowTarget _scriptFollowTarget;
     private EnemyStandardManager _manager;
+    private ControlAnimator _scriptAnimator;
     [SerializeField] bool _canFollowTarget;
     [SerializeField] bool _canMovPattern;
     [SerializeField] private Transform[] _positionSequence;
     private Vector3 _dir= new Vector3();
     private float _speed = 3.5f;
-    [SerializeField] private int _mode = 0;
+    [SerializeField] private int _mode = 1;
     protected override void Start()
     {
 
@@ -33,10 +34,11 @@ public class EnemyStandardManager : EntityMonobehaviour
     protected override void GetScripts()
     {
         _manager = GetComponent<EnemyStandardManager>();
+        _scriptAnimator = new ControlAnimator(_animator);
         if (_canFollowTarget)
-            _scriptFollowTarget = new EnemyFollowTarget(_manager, transform);
+            _scriptFollowTarget = new EnemyFollowTarget(_manager, transform, _scriptAnimator);
         if (_canMovPattern)
-            _scriptPattern = new EnemyPattern(_positionSequence, transform);
+            _scriptPattern = new EnemyPattern(_positionSequence, transform, _scriptAnimator);
     }
     private void GameMode()
     {
@@ -59,6 +61,17 @@ public class EnemyStandardManager : EntityMonobehaviour
     public void SetMode(int Mode)
     {
         _mode = Mode;
+        if (_mode == 0)
+        {
+            _speed = 3.0f;
+            _scriptAnimator.SetBoolAnimator("isRunning", false);
+        }
+
+        if (_mode == 1)
+        {
+            _scriptAnimator.SetBoolAnimator("isRunning", true);
+            _speed = 5.0f;
+        }
     }
     public void SetTarget(Transform Target)
     {
@@ -69,7 +82,7 @@ public class EnemyStandardManager : EntityMonobehaviour
     {
         if (Player.gameObject.TryGetComponent<PlayerManager>(out PlayerManager script))
         {
-            script.MovetoCheckPoint();
+            script.SetDeathAnimation();
             _scriptFollowTarget.Reset();
         }
     }

@@ -8,11 +8,13 @@ public class EnemyPattern
     private Transform[] _sequence;
     private Transform _transform;
     private Vector3 _dir= new Vector3();
+    private ControlAnimator _scriptAnimator;
 
-    public EnemyPattern(Transform[] Sequence, Transform EnemyPosition)
+    public EnemyPattern(Transform[] Sequence, Transform EnemyPosition, ControlAnimator ControlAnimator)
     {
         _sequence=Sequence;
         _transform=EnemyPosition;
+        _scriptAnimator= ControlAnimator;
     }
     private bool DistanceToNextPosition()
     {

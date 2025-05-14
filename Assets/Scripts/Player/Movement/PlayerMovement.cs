@@ -9,10 +9,10 @@ public class PlayerMovement
     private Transform _transform, _model, _cam;
     private Rigidbody _rb;
     private Vector3 _dir = new Vector3(0.0f, 0.0f, 0.0f);
-    private PlayerAnimation _scriptAnimation;
+    private ControlAnimator _scriptAnimation;
     private SetSizeCollider _scriptCollider;
 
-    public PlayerMovement(Transform PlayerTransform, Rigidbody PlayerRigibody, Transform CameraTransform, Transform ModelTransform, PlayerAnimation scriptAnimation, SetSizeCollider ScriptCollider)
+    public PlayerMovement(Transform PlayerTransform, Rigidbody PlayerRigibody, Transform CameraTransform, Transform ModelTransform, ControlAnimator scriptAnimation, SetSizeCollider ScriptCollider)
     {
         _transform = PlayerTransform;
         _rb = PlayerRigibody;
@@ -60,6 +60,11 @@ public class PlayerMovement
             y = 1.75f;
         }
         _scriptCollider.SetSize(y);   
+    }
+
+    public void SetMoveZero()
+    {
+        _dir = Vector3.zero;
     }
 }
 

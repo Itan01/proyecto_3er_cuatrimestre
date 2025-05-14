@@ -10,11 +10,12 @@ public class PlayerManager : EntityMonobehaviour
     private PlayerMovement _scriptMovement;
     private PlayerShootingGun _scriptShootingGun;
     private PlayerGrabbingGun _scriptGrabbingGun;
-    private PlayerAnimation _scriptAnimation;
+    private ControlAnimator _scriptAnimation;
     private PlayerInteractions _scriptInteractions;
     private PlayerScore _scriptScore;
     private SetSizeCollider _setSizeCollider;
     private PlayerCheckpoint _scriptSetCheckpoint;
+    private float _counter = 0;
     [Header("<color=green>LayersMask</color>")]
     [SerializeField] private LayerMask _soundMask;
     [SerializeField] private LayerMask _enviormentMask;
@@ -26,9 +27,10 @@ public class PlayerManager : EntityMonobehaviour
     [Header("<color=blue>UI</color>")]
     [SerializeField] private TMP_Text _pointsUI;
     [Header("<color=yellow>Variables and Prefabs</color>")]
-    [SerializeField] private bool _isMoving = false;
+    [SerializeField] private bool _isMoving = false, _isDeath=false;
     [SerializeField] GameObject _areaCatching;
     [SerializeField] UISetSound _scriptUISound;
+    [SerializeField] TransitionFade _scriptTransition;
     protected override void Start()
     {
         base.Start();
@@ -36,7 +38,10 @@ public class PlayerManager : EntityMonobehaviour
 
     protected override void Update()
     {
-        CheckInputs();
+        if (!_isDeath)
+            CheckInputs();
+        else
+            AddCounter();
     }
     protected override void FixedUpdate()
     {
@@ -54,7 +59,7 @@ public class PlayerManager : EntityMonobehaviour
     {
         _scriptSetCheckpoint = new PlayerCheckpoint(transform);
         _setSizeCollider = new SetSizeCollider(_boxCollider, _capsuleCollider);
-        _scriptAnimation = new PlayerAnimation(_animator);
+        _scriptAnimation = new ControlAnimator(_animator);
         _scriptScore = new PlayerScore(_pointsUI);
         _scriptController = new PlayerController();
         _scriptMovement = new PlayerMovement(transform, _rb, _camTransform, _modelTransform, _scriptAnimation, _setSizeCollider);
@@ -81,6 +86,25 @@ public class PlayerManager : EntityMonobehaviour
         if (checkpoint.gameObject.layer == 25)
         {
             _scriptSetCheckpoint.SetCheckpoint(checkpoint.transform.position);
+        }
+    }
+    public void SetDeathAnimation()
+    {
+        _isDeath=true;
+        _scriptAnimation.SetBoolAnimator("isDeath", _isDeath);
+        _scriptMovement.SetMoveZero();
+        _scriptTransition.ShowBlackScreen();
+    }
+    private void AddCounter()
+    {
+        _counter += Time.deltaTime;
+        if ( _counter > 1.75f)
+        {
+            _scriptSetCheckpoint.Respawn();
+            _counter=0;
+            _isDeath = false;
+            _scriptAnimation.SetBoolAnimator("isDeath",_isDeath);
+            _scriptTransition.FadeOut();
         }
     }
 }
