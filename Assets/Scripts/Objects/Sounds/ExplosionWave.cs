@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class ImpactExplosion : MonoBehaviour
 {
-    public GameObject soundRadiusPrefab;
+    [SerializeField] GameObject soundRadiusPrefab;
     private bool hasExploded = false;
     private bool hasBeenThrown = false; 
 

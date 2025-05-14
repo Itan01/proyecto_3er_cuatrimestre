@@ -9,7 +9,7 @@ public class PlayerSmoke : MonoBehaviour
 {
     [SerializeField] private bool _isInSmoke = false, _cough = false;
     [SerializeField] GameObject _genericSound;
-    private AbsStandardSoundMov _script;
+    private AbstractSound _script;
     [SerializeField] private Image _smokeUI;
     [SerializeField] private Transform _model, _orientation;
     private float _timer = 3.0f, _timerRef = 3.0f;
@@ -62,7 +62,7 @@ public class PlayerSmoke : MonoBehaviour
         else if (_coughTimer <= 0)
         {
             var Sound = Instantiate(_genericSound, transform.position, Quaternion.identity);
-            _script = Sound.GetComponent<AbsStandardSoundMov>();
+            _script = Sound.GetComponent<AbstractSound>();
             _script.SetDirection(_orientation.position, 5.0f, 1.0f);
             _coughTimer = _coughTimerRef;
             

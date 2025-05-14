@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class StandardSound : AbsStandardSoundMov
+public class StandardSound : AbstractSound
 {
     protected override void Start()
     {
@@ -14,6 +14,6 @@ public class StandardSound : AbsStandardSoundMov
     }
     protected override void FixedUpdate()
     {
-        Move();
+        base.FixedUpdate();
     }
 }

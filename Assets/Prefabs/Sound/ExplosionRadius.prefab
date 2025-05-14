@@ -10,11 +10,10 @@ GameObject:
   m_Component:
   - component: {fileID: 1497595074415906235}
   - component: {fileID: 7418676277079384146}
-  - component: {fileID: -3579706195699853432}
   - component: {fileID: -5189123955780340612}
   m_Layer: 0
   m_Name: ExplosionRadius
-  m_TagString: Untagged
+  m_TagString: Explosion
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -56,19 +55,6 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &-3579706195699853432
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6797170181603135953}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2af4d271748acc94682800247a490e09, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _lifeTime: 3
 --- !u!114 &-5189123955780340612
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -81,6 +67,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f116f914618928a45b62d7b7a6fbdc96, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  tiempoDeVida: 3
 --- !u!1 &8521096954667732334
 GameObject:
   m_ObjectHideFlags: 0

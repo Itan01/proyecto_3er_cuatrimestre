@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ExplosionSound : AbsStandardSoundMov
+public class ExplosionSound : AbstractSound
 {
     protected override void Start()
     {
@@ -13,7 +13,6 @@ public class ExplosionSound : AbsStandardSoundMov
     protected override void Update()
     {
         base.Update();
-        TravelSize();
     }
     protected override void FixedUpdate()
     {

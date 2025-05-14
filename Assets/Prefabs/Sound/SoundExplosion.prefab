@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 3594732566358664551}
   - component: {fileID: 8671540623140772390}
   - component: {fileID: 7536658445700430724}
-  m_Layer: 0
+  m_Layer: 28
   m_Name: Model
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -28,8 +28,8 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
+  m_LocalScale: {x: 90, y: 90, z: 90}
+  m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 2596262900413216439}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -40,7 +40,7 @@ MeshFilter:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1322741384070684651}
-  m_Mesh: {fileID: 10207, guid: 0000000000000000e000000000000000, type: 0}
+  m_Mesh: {fileID: -5872077933228866730, guid: c1ccd21ef9be3c845a1c84d4b43d56b9, type: 3}
 --- !u!23 &7536658445700430724
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -96,7 +96,7 @@ GameObject:
   - component: {fileID: 8404353824629674347}
   - component: {fileID: 775801438569945113}
   - component: {fileID: 563399449457421154}
-  m_Layer: 0
+  m_Layer: 28
   m_Name: SoundExplosion
   m_TagString: Sound
   m_Icon: {fileID: 0}
@@ -182,13 +182,13 @@ MonoBehaviour:
   _refSpeed: 0
   _originalSize: 1
   _speedState: 2
+  _rotSpeed: 10
   _speed: 0
   _size: 0
-  _index: 0
+  _index: 4
   _dir: {x: 0, y: 0, z: 0}
   _startPosition: {x: 0, y: 0, z: 0}
-  _limit: 0
-  _statePlusSize: 1
+  _target: {fileID: 0}
 --- !u!114 &563399449457421154
 MonoBehaviour:
   m_ObjectHideFlags: 0

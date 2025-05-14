@@ -2,18 +2,17 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class MessageSound : AbsStandardSoundMov
+public class MessageSound : AbstractSound
 {
     protected override void Start()
     {
         base.Start();
         _rb.freezeRotation = true;
-        _index = 2;
+        _index = 3;
     }
     protected override void Update()
     {
         base.Update();
-        TravelSize();
     }
     protected override void FixedUpdate()
     {
