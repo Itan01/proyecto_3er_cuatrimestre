@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UIElements;
 using TMPro;
+using System;
 
 public class PlayerManager : EntityMonobehaviour
 {
@@ -106,5 +107,10 @@ public class PlayerManager : EntityMonobehaviour
             _scriptAnimation.SetBoolAnimator("isDeath",_isDeath);
             _scriptTransition.FadeOut();
         }
+    }
+    public void DisableShoot(bool State)
+    {
+        _scriptShootingGun.ShootEnable(State);
+
     }
 }

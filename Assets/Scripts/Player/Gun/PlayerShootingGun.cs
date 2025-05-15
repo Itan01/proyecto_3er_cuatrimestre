@@ -22,6 +22,7 @@ public class PlayerShootingGun
     }
      public void ThrowSound()
      {
+        if (!_soundEnabled) return;
         AvailableSound();
         _scriptUISound.SetSound(0);
         _soundReference.transform.position = _spawn.position;

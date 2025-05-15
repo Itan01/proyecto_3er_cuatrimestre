@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class CameraDetector : MonoBehaviour
 {
-    private PlayerShootingGun _shootingGunScript;
     private CameraObstacleController _CameraObstacleScript;
 
     private void Start()
@@ -14,10 +13,10 @@ public class CameraDetector : MonoBehaviour
 
     void OnTriggerEnter(Collider Player)
     {
-        if (Player.gameObject.CompareTag("Player"))
+        if (Player.gameObject.layer == 27)
         {
-            _shootingGunScript = Player.GetComponent<PlayerShootingGun>();
-            _shootingGunScript.ShootEnable(false);
+            Player.GetComponent<PlayerManager>().DisableShoot(true) ;
+            _CameraObstacleScript.SetDoors(false);
             _CameraObstacleScript.SetTarget(Player.transform);
             //Debug.Log("OFF");
         }
@@ -25,13 +24,12 @@ public class CameraDetector : MonoBehaviour
 
     void OnTriggerExit(Collider Player)
     {
-        if (Player.gameObject.CompareTag("Player"))
+        if (Player.gameObject.layer == 27)
         {
-            _shootingGunScript = Player.GetComponent<PlayerShootingGun>();
-            _shootingGunScript.ShootEnable(true);
+            Player.GetComponent<PlayerManager>().DisableShoot(true);
+            _CameraObstacleScript.SetDoors(true);
             _CameraObstacleScript.SetTarget(null);
             //Debug.Log("ON");
-
         }
     }
 }

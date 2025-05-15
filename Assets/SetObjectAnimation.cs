@@ -17,9 +17,12 @@ public class SetObjectAnimation : MonoBehaviour
     {
         if (Player.TryGetComponent<PlayerManager>(out PlayerManager script))
         {
-            _isPlaying=true;
-            if(!_isPlaying)
-            _controlAnimator.SetBoolAnimator("Shine", _isPlaying);
+            if (!_isPlaying)
+            {
+                _isPlaying = true;
+
+                _controlAnimator.SetBoolAnimator("Shine", _isPlaying);
+            }
         }
     }
 
