@@ -24,6 +24,7 @@ public class PlayerManager : EntityMonobehaviour
     [SerializeField] private Transform _camTransform;
     [SerializeField] private Transform _modelTransform;
     [SerializeField] private Transform _spawnProyectil;
+    [SerializeField] private Transform _hipsPosition;
     [Header("<color=blue>UI</color>")]
     [SerializeField] private TMP_Text _pointsUI;
     [Header("<color=yellow>Variables and Prefabs</color>")]
@@ -31,6 +32,7 @@ public class PlayerManager : EntityMonobehaviour
     [SerializeField] GameObject _areaCatching;
     [SerializeField] UISetSound _scriptUISound;
     [SerializeField] TransitionFade _scriptTransition;
+
     protected override void Start()
     {
         base.Start();
@@ -106,5 +108,10 @@ public class PlayerManager : EntityMonobehaviour
             _scriptAnimation.SetBoolAnimator("isDeath",_isDeath);
             _scriptTransition.FadeOut();
         }
+    }
+
+    public Transform GetHipsPosition()
+    {
+        return _hipsPosition;
     }
 }

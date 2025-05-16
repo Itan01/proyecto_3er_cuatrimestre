@@ -5,7 +5,6 @@ using UnityEngine;
 public class PlayerInteractions
 {
     private float _interactRayDistance = 2.0f, _intRadius = 0.75f;
-    //private LayerMask _interactRayMask;
     private RaycastHit _intHit;
     private Transform _transform;
     private Transform _orientation;
@@ -24,7 +23,7 @@ public class PlayerInteractions
         Ray _interactRay = new Ray(_transform.position + _offSet, _orientation.forward);
         if (Physics.SphereCast(_interactRay, _intRadius, out _intHit, _interactRayDistance, _interactMask))
         {
-           Debug.Log($"Collided obj : {_intHit.collider.name}.");
+           //Debug.Log($"Collided obj : {_intHit.collider.name}.");
 
             if (_intHit.collider.TryGetComponent(out IInteractableObject interactable))
             {

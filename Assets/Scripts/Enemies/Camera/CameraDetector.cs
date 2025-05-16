@@ -14,21 +14,19 @@ public class CameraDetector : MonoBehaviour
 
     void OnTriggerEnter(Collider Player)
     {
-        if (Player.gameObject.CompareTag("Player"))
+        if (Player.TryGetComponent<PlayerManager>(out PlayerManager Script))
         {
-            _shootingGunScript = Player.GetComponent<PlayerShootingGun>();
-            _shootingGunScript.ShootEnable(false);
-            _CameraObstacleScript.SetTarget(Player.transform);
-            //Debug.Log("OFF");
+            // Script.GetComponent<PlayerShootingGun>().ShootEnable(false);
+            _CameraObstacleScript.SetTarget(Script.GetHipsPosition());
+            Debug.Log("OFF");
         }
     }
 
     void OnTriggerExit(Collider Player)
     {
-        if (Player.gameObject.CompareTag("Player"))
+        if (Player.TryGetComponent<PlayerManager>(out PlayerManager Script))
         {
-            _shootingGunScript = Player.GetComponent<PlayerShootingGun>();
-            _shootingGunScript.ShootEnable(true);
+            //Script.GetComponent<PlayerShootingGun>().ShootEnable(true);
             _CameraObstacleScript.SetTarget(null);
             //Debug.Log("ON");
 
