@@ -1,6 +1,5 @@
 using System.Collections;
 using System.Collections.Generic;
-using TreeEditor;
 using UnityEngine;
 
 public class EnemyStandardManager : EntityMonobehaviour
@@ -12,9 +11,10 @@ public class EnemyStandardManager : EntityMonobehaviour
     [SerializeField] bool _canFollowTarget;
     [SerializeField] bool _canMovPattern;
     [SerializeField] private Transform[] _positionSequence;
+    [SerializeField] GameObject _questionMark;
     private Vector3 _dir= new Vector3();
     private float _speed = 3.5f;
-    [SerializeField] private int _mode = 1;
+    [SerializeField] private int _mode = 0;
     protected override void Start()
     {
 
@@ -44,6 +44,8 @@ public class EnemyStandardManager : EntityMonobehaviour
     {
         if (_mode == 0)
         {
+            _speed = 3.0f;
+            _questionMark.SetActive(false);
             Debug.Log("Modo 1");
             _dir = _scriptPattern.CheckIfHasArrive();
         }
@@ -55,35 +57,31 @@ public class EnemyStandardManager : EntityMonobehaviour
     }
     private void Move()
     {
-        _dir.y = transform.position.y;
         _rb.MovePosition(transform.position + _dir.normalized * _speed * Time.fixedDeltaTime);
     }
     public void SetMode(int Mode)
     {
         _mode = Mode;
-        if (_mode == 0)
-        {
-            _speed = 3.0f;
-            _scriptAnimator.SetBoolAnimator("isRunning", false);
-        }
-
-        if (_mode == 1)
-        {
-            _scriptAnimator.SetBoolAnimator("isRunning", true);
-            _speed = 5.0f;
-        }
     }
     public void SetTarget(Transform Target)
     {
         _scriptFollowTarget.SetTargetToFollow(Target);
+        _speed = 5.0f;
     }
 
-    private void OnCollisionEnter(Collision Player)
+    private void OnCollisionEnter(Collision Entity)
     {
-        if (Player.gameObject.TryGetComponent<PlayerManager>(out PlayerManager script))
+        if (Entity.gameObject.TryGetComponent<PlayerManager>(out PlayerManager Entityscript))
         {
-            script.SetDeathAnimation();
+            Entityscript.SetDeathAnimation();
             _scriptFollowTarget.Reset();
+        }
+        if (Entity.gameObject.TryGetComponent<AbstractSound>(out AbstractSound SoundScript))
+        {
+            _speed = 3.0f;
+            _questionMark.SetActive(true);
+            _scriptFollowTarget.SetPostionToFollow(SoundScript.GetStartPoint());
+            SetMode(1);
         }
     }
 }

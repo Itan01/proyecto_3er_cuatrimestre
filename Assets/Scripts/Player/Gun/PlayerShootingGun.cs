@@ -22,7 +22,6 @@ public class PlayerShootingGun
     }
      public void ThrowSound()
      {
-        if (!_soundEnabled) return;
         AvailableSound();
         _scriptUISound.SetSound(0);
         _soundReference.transform.position = _spawn.position;
@@ -54,6 +53,7 @@ public class PlayerShootingGun
         script.SetDirection(_orientation.forward, _speed, _size);
         script.FreezeObject(false);
         script.PlayerCanCatchIt(false);
+        script.SetSpawnPoint(_spawn.position);
     }
 
 }

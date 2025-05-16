@@ -4,8 +4,7 @@ using UnityEngine;
 
 public class CameraObstacleController : MonoBehaviour
 {
-    [SerializeField] private Transform _target;
-    [SerializeField] private GameObject[] _doors;
+    [SerializeField]private Transform _target;
     private Animation _animation;
 
     private void Start()
@@ -31,18 +30,5 @@ public class CameraObstacleController : MonoBehaviour
     public void SetTarget(Transform target)
     {
         _target = target;
-    }
-    public void SetDoors(bool State)
-    {
-        bool aux;
-        if (!State)
-            aux = true;
-        else
-            aux = false;
-
-        for (int i = 0; i < _doors.Length; i++)
-        {
-            _doors[i].GetComponent<SummonSoundFromDoor>().SetAnimation(State, aux);
-        }
     }
 }

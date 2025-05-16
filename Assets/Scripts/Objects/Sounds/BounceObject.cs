@@ -20,7 +20,7 @@ public class BounceObject
 
     public void MakeBounce(float Time)
     {
-        Time = Mathf.Clamp(Time, 1.0f, 10.0f);
+        Time = Mathf.Clamp(Time, 2.5f, 10.0f);
         _rb.AddForce(_transform.up * Time*2, ForceMode.Impulse);
     }
 

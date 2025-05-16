@@ -22,11 +22,13 @@ public class EnemyFollowTarget
     public void SetPostionToFollow(Vector3 _position)
     {
         _moveToPosition = new Vector3(_position.x, _transform.position.y, _position.z);
+        _scriptAnimator.SetBoolAnimator("isRunning", false);
     }
 
     public void SetTargetToFollow(Transform Target)
     {
         _hasTarget = true;
+        _scriptAnimator.SetBoolAnimator("isRunning", true);
         _target = Target;
     }
 
@@ -40,6 +42,7 @@ public class EnemyFollowTarget
         }
         else
         {
+
             _dir = _moveToPosition - _transform.position;
             _pointToSee = _moveToPosition;
         }

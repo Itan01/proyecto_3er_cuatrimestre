@@ -11,7 +11,7 @@ public class AbstractSound : MonoBehaviour // Sonidos Genericos,Movimiento Base
     [SerializeField] protected float _speed = 5.0f, _size = 1.0f;
     protected int _index = 1 ;
     [SerializeField] protected Vector3 _dir = new Vector3(0.0f, 0.0f, 0.0f);
-    protected Vector3 _startPosition;
+    [SerializeField] protected Vector3 _startPosition;
     [SerializeField] protected Transform _target;
     protected Rigidbody _rb;
     protected PlayerShootingGun _scriptShoot;
@@ -100,6 +100,10 @@ public class AbstractSound : MonoBehaviour // Sonidos Genericos,Movimiento Base
                 Destroy(gameObject);
             }
         }
+        if (Entity.TryGetComponent<EnemyStandardManager>(out EnemyStandardManager EnemyScript))
+        {
+            Destroy(gameObject, 0.1f);
+        }
     }
     public bool HasLineOfVision(LayerMask mask, Vector3 EntityPosition)
     {
@@ -123,6 +127,14 @@ public class AbstractSound : MonoBehaviour // Sonidos Genericos,Movimiento Base
     public void FreezeObject(bool freezeState)
     {
         _freeze = freezeState;
+    }
+    public Vector3 GetStartPoint()
+    {
+        return _startPosition;
+    }
+    public void SetSpawnPoint(Vector3 position)
+    {
+        _startPosition = position;
     }
 }
 

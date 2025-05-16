@@ -1,13 +1,13 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Security.Cryptography;
 using UnityEngine;
 
 public class DropWater : MonoBehaviour
 {
     private Vector3 _originPost;
-    public string groundtag = "Floor";
     public float waitTime = 5f;
-    //public GameObject soundLiquid;
+    public GameObject soundLiquid;
     private Rigidbody _rb;
     private bool _isReset = false;
 
@@ -16,10 +16,11 @@ public class DropWater : MonoBehaviour
         _originPost = transform.position;
     }
 
-    private void OnCollisionEnter(Collision collision)
+    private void OnTriggerEnter(Collider collision)
     {
-        if (!_isReset && collision.gameObject.CompareTag(groundtag))
+        if (!_isReset)
         {
+            SummonSound();
             _isReset = true;
             StartCoroutine(ResetAfterWait());
         }
@@ -43,6 +44,13 @@ public class DropWater : MonoBehaviour
         }
 
         _isReset = false;
+    }
+
+    private void SummonSound()
+    {
+        var Sound = Instantiate(soundLiquid,transform.position, Quaternion.identity);
+        Vector3 RandomDirection = new Vector3(Random.Range(-1.0f,1.0f), 0.1f, Random.Range(-1.0f,1.0f));
+        Sound.GetComponent<AbstractSound>().SetDirection(RandomDirection, 3.5f, 1.0f);
     }
 
 }

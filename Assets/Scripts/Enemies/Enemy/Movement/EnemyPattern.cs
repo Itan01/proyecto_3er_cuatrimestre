@@ -18,6 +18,7 @@ public class EnemyPattern
     }
     private bool DistanceToNextPosition()
     {
+        _scriptAnimator.SetBoolAnimator("isRunning", false);
         Vector3 NextPosition = _sequence[_index].position;
         Vector3 _distancePosition = _transform.position;
         _distancePosition = NextPosition - _distancePosition;

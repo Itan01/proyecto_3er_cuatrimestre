@@ -5,8 +5,8 @@ using UnityEngine;
 public class SummonSoundFromDoor : MonoBehaviour
 {
     private Animator _animator;
+    private bool _doorOpen=false;
     [SerializeField] private GameObject _soundToSummon;
-    private bool _forceClose;
     void Start()
     {
         _animator = GetComponentInChildren<Animator>();
@@ -14,34 +14,26 @@ public class SummonSoundFromDoor : MonoBehaviour
 
     private void OnTriggerEnter(Collider Entity)
     {
-        if (Entity.TryGetComponent<EntityMonobehaviour>(out EntityMonobehaviour ScriptEntity)&& !_forceClose)
+        if (Entity.TryGetComponent<EntityMonobehaviour>(out EntityMonobehaviour ScriptEntity))
         {
-                _animator.SetBool("isOpen", true);
-                SummonSound(Entity.gameObject);
-
+            if(_doorOpen) return;
+            _doorOpen = true;
+            _animator.SetBool("isOpen", _doorOpen);
+            Vector3 _orientation, SelfPosition;
+            SelfPosition = transform.position + new Vector3(0.0f, 1.0f, 0.0f);  
+            var Sound = Instantiate(_soundToSummon, SelfPosition, Quaternion.identity);
+            _orientation = (transform.position - Entity.transform.position).normalized + SelfPosition;
+            AbstractSound ScriptSound= Sound.GetComponent<AbstractSound>();
+            ScriptSound.SetDirection(_orientation, Random.Range(3.0f,7.0f +1), 1.0f);
         }
     }
     private void OnTriggerExit(Collider Entity)
     {
-        Debug.Log("Checkeando");
         if (Entity.TryGetComponent<EntityMonobehaviour>(out EntityMonobehaviour ScriptEntity))
         {
-                _animator.SetBool("isOpen", false);
+            if (!_doorOpen) return;
+            _doorOpen = false;
+            _animator.SetBool("isOpen", _doorOpen);
         }
-    }
-
-    private void SummonSound(GameObject Entity)
-    {
-        Vector3 _orientation, SelfPosition;
-        SelfPosition = transform.position + new Vector3(0.0f, 1.0f, 0.0f);
-        var Sound = Instantiate(_soundToSummon, SelfPosition, Quaternion.identity);
-        _orientation = (transform.position - Entity.transform.position).normalized + SelfPosition;
-        AbstractSound ScriptSound = Sound.GetComponent<AbstractSound>();
-        ScriptSound.SetDirection(_orientation, Random.Range(3.0f, 7.0f + 1), 1.0f);
-    }
-    public void SetAnimation(bool State, bool ForceClose)
-    {
-        _animator.SetBool("isOpen", State);
-        _forceClose= ForceClose;
     }
 }
