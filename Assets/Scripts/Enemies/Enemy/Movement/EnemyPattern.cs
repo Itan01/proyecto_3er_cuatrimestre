@@ -8,9 +8,9 @@ public class EnemyPattern
     private Transform[] _sequence;
     private Transform _transform;
     private Vector3 _dir= new Vector3();
-    private ControlAnimator _scriptAnimator;
+    private ControllerAnimator _scriptAnimator;
 
-    public EnemyPattern(Transform[] Sequence, Transform EnemyPosition, ControlAnimator ControlAnimator)
+    public EnemyPattern(Transform[] Sequence, Transform EnemyPosition, ControllerAnimator ControlAnimator)
     {
         _sequence=Sequence;
         _transform=EnemyPosition;

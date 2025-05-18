@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UIElements;
 public class PlayerGrabbingGun
 {
     private GameObject _areaCatching;
@@ -10,10 +11,10 @@ public class PlayerGrabbingGun
     private Transform _transform, _orientation;
     private LayerMask _soundMask, _enviromentMask;
 
-    public PlayerGrabbingGun(Transform PlayerTransform, Transform Orientation, LayerMask SoundMask, LayerMask EnviromentMask, GameObject AreaCatching)
+    public PlayerGrabbingGun(Transform ModelTransform, Transform Orientation, LayerMask SoundMask, LayerMask EnviromentMask, GameObject AreaCatching)
     {
-        _transform = PlayerTransform;
         _sizeBox = new Vector3(_length, _length, _length);
+        _transform = ModelTransform;
         _orientation = Orientation;
         _soundMask = SoundMask;
         _enviromentMask=EnviromentMask;
@@ -22,7 +23,6 @@ public class PlayerGrabbingGun
     public void CatchingSound()
     {
         _startPoint = _transform.position + new Vector3(0.0f, 1.0f, 0.0f);
-        _areaCatching.SetActive(true);
         _areaCatching.transform.forward=_orientation.forward;
         if (Physics.BoxCast(_startPoint, _sizeBox, _orientation.forward * _CatchingDistance, out _CatchHit, Quaternion.identity, _CatchingDistance, _soundMask))
         {
@@ -36,9 +36,5 @@ public class PlayerGrabbingGun
                     
             }
         }
-    }
-    public void StopCatching()
-    {
-        _areaCatching.SetActive(false);
     }
 }

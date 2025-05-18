@@ -9,10 +9,10 @@ public class EnemyFollowTarget
     private Transform _target;
     private Transform _transform;
     private EnemyStandardManager _scriptManager;
-    private ControlAnimator _scriptAnimator;
+    private ControllerAnimator _scriptAnimator;
 
 
-    public EnemyFollowTarget(EnemyStandardManager ScriptManager, Transform EnemyPosition, ControlAnimator ControlAnimator)
+    public EnemyFollowTarget(EnemyStandardManager ScriptManager, Transform EnemyPosition, ControllerAnimator ControlAnimator)
     {
         _transform = EnemyPosition;
         _scriptManager= ScriptManager;

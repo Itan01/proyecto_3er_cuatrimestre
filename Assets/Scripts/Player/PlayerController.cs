@@ -1,11 +1,20 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class PlayerController
 {
-    public PlayerController()
+    private PlayerGrabbingGun _scriptGrab;
+    private PlayerShootingGun _scriptShoot;
+    private PlayerInteractions _scriptInteract;
+    private ControllerAnimator _scriptAnimator;
+    public PlayerController( PlayerGrabbingGun ScriptGrab, PlayerShootingGun ScriptShoot,PlayerInteractions ScriptInteract, ControllerAnimator ScriptAnimation)
     {
+        _scriptGrab= ScriptGrab;
+        _scriptShoot = ScriptShoot;
+        _scriptInteract = ScriptInteract;
+        _scriptAnimator = ScriptAnimation;
     }
 
     public bool CheckMovementInputs(PlayerMovement Script)
@@ -15,22 +24,28 @@ public class PlayerController
 
         return (Script.CheckIfMoving(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"), isPressingCrouch));
     }
-    public void CheckGrabGunInput(PlayerGrabbingGun ScriptGrabGun)
+    public void CheckGunInputs()
     {
         if (Input.GetMouseButton(1))
-            ScriptGrabGun.CatchingSound();
+        {
+            _scriptGrab.CatchingSound();
+            _scriptAnimator.SetBoolAnimator("Grabbing", true);
+        }
         else
-            ScriptGrabGun.StopCatching();
-    }
-    public void CheckShootGunInput(PlayerShootingGun ScriptShootGun)
-    {
-        bool HasASound = ScriptShootGun.CheckSound();
+            _scriptAnimator.SetBoolAnimator("Grabbing", false);
+
+
+        bool HasASound = _scriptShoot.CheckSound();
+
         if (Input.GetMouseButtonDown(0) && HasASound)
-            ScriptShootGun.ThrowSound();
+        {
+            _scriptShoot.ThrowSound();
+            _scriptAnimator.SetTriggerAnimator("Shooting");
+        }
     }
-    public void CheckInteractions(PlayerInteractions ScriptInteractions)
+    public void CheckInteractions()
     {
         if (Input.GetKeyDown(KeyCode.E))
-            ScriptInteractions.Interact();
+            _scriptInteract.Interact();
     }
 }

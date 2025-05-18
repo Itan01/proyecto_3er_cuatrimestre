@@ -10,7 +10,7 @@ public class PlayerManager : EntityMonobehaviour
     private PlayerMovement _scriptMovement;
     private PlayerShootingGun _scriptShootingGun;
     private PlayerGrabbingGun _scriptGrabbingGun;
-    private ControlAnimator _scriptAnimation;
+    private ControllerAnimator _scriptAnimation;
     private PlayerInteractions _scriptInteractions;
     private PlayerScore _scriptScore;
     private SetSizeCollider _setSizeCollider;
@@ -53,21 +53,20 @@ public class PlayerManager : EntityMonobehaviour
     private void CheckInputs()
     {
         _isMoving=_scriptController.CheckMovementInputs(_scriptMovement);
-        _scriptController.CheckGrabGunInput(_scriptGrabbingGun);
-        _scriptController.CheckShootGunInput(_scriptShootingGun);
-        _scriptController.CheckInteractions(_scriptInteractions);
+        _scriptController.CheckGunInputs();
+        _scriptController.CheckInteractions();
     }
     protected override void GetScripts()
     {
         _scriptSetCheckpoint = new PlayerCheckpoint(transform);
         _setSizeCollider = new SetSizeCollider(_boxCollider, _capsuleCollider);
-        _scriptAnimation = new ControlAnimator(_animator);
+        _scriptAnimation = new ControllerAnimator(_animator);
         _scriptScore = new PlayerScore(_pointsUI);
-        _scriptController = new PlayerController();
-        _scriptMovement = new PlayerMovement(transform, _rb, _camTransform, _modelTransform, _scriptAnimation, _setSizeCollider);
-        _scriptGrabbingGun = new PlayerGrabbingGun(_modelTransform, _camTransform, _soundMask,_enviormentMask, _areaCatching);
+        _scriptGrabbingGun = new PlayerGrabbingGun(_modelTransform, _camTransform, _soundMask, _enviormentMask, _areaCatching);
         _scriptShootingGun = new PlayerShootingGun(_spawnProyectil, _camTransform, _scriptUISound);
         _scriptInteractions = new PlayerInteractions(_scriptScore, transform, _camTransform, InteractMask);
+        _scriptController = new PlayerController(_scriptGrabbingGun, _scriptShootingGun, _scriptInteractions, _scriptAnimation);
+        _scriptMovement = new PlayerMovement(transform, _rb, _camTransform, _modelTransform, _scriptAnimation, _setSizeCollider);
         _scriptSetCheckpoint.SetCheckpoint(transform.position);
     }
 
@@ -113,5 +112,10 @@ public class PlayerManager : EntityMonobehaviour
     public Transform GetHipsPosition()
     {
         return _hipsPosition;
+    }
+
+    public void SetAreaCatching(bool State)
+    {
+       _areaCatching.SetActive(State);
     }
 }

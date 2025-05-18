@@ -9,10 +9,10 @@ public class PlayerMovement
     private Transform _transform, _model, _cam;
     private Rigidbody _rb;
     private Vector3 _dir = new Vector3(0.0f, 0.0f, 0.0f);
-    private ControlAnimator _scriptAnimation;
+    private ControllerAnimator _scriptAnimation;
     private SetSizeCollider _scriptCollider;
 
-    public PlayerMovement(Transform PlayerTransform, Rigidbody PlayerRigibody, Transform CameraTransform, Transform ModelTransform, ControlAnimator scriptAnimation, SetSizeCollider ScriptCollider)
+    public PlayerMovement(Transform PlayerTransform, Rigidbody PlayerRigibody, Transform CameraTransform, Transform ModelTransform, ControllerAnimator scriptAnimation, SetSizeCollider ScriptCollider)
     {
         _transform = PlayerTransform;
         _rb = PlayerRigibody;

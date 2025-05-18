@@ -6,7 +6,7 @@ using TMPro;
 public class SetObjectAnimation : MonoBehaviour
 {
     private Animator _animator;
-    private ControlAnimator _controlAnimator;
+    private ControllerAnimator _controlAnimator;
     private bool _isPlaying;
     private string _text = "Press 'E' To Interact";
     [SerializeField] private GameObject _textInteract;
@@ -15,7 +15,7 @@ public class SetObjectAnimation : MonoBehaviour
     void Start()
     {
         _animator = GetComponent<Animator>();
-        _controlAnimator = new ControlAnimator(_animator);
+        _controlAnimator = new ControllerAnimator(_animator);
     }
 
     private void Update()

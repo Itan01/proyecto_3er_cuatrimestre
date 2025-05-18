@@ -182,6 +182,7 @@ MonoBehaviour:
   _camTransform: {fileID: 0}
   _modelTransform: {fileID: 7960441272055168766}
   _spawnProyectil: {fileID: 7472403954870710889}
+  _hipsPosition: {fileID: 0}
   _pointsUI: {fileID: 0}
   _isMoving: 0
   _isDeath: 0
@@ -2023,8 +2024,28 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: -8679921383154817045, guid: af4c61906f47c6d4a9d95bb0ead82e5c, type: 3}
       insertIndex: -1
       addedObject: {fileID: 2581150427079005200}
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: af4c61906f47c6d4a9d95bb0ead82e5c, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 8040371663833047293}
   m_SourcePrefab: {fileID: 100100000, guid: af4c61906f47c6d4a9d95bb0ead82e5c, type: 3}
+--- !u!1 &7292167298511840324 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: af4c61906f47c6d4a9d95bb0ead82e5c, type: 3}
+  m_PrefabInstance: {fileID: 7634606684316997909}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &8040371663833047293
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7292167298511840324}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5e9efd74065992a43b21bf8c288acd9f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!4 &7960441272055168766 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: af4c61906f47c6d4a9d95bb0ead82e5c, type: 3}

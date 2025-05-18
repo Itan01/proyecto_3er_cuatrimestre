@@ -7,7 +7,7 @@ public class EnemyStandardManager : EntityMonobehaviour
     private EnemyPattern _scriptPattern;
     private EnemyFollowTarget _scriptFollowTarget;
     private EnemyStandardManager _manager;
-    private ControlAnimator _scriptAnimator;
+    private ControllerAnimator _scriptAnimator;
     [SerializeField] bool _canFollowTarget;
     [SerializeField] bool _canMovPattern;
     [SerializeField] private Transform[] _positionSequence;
@@ -34,7 +34,7 @@ public class EnemyStandardManager : EntityMonobehaviour
     protected override void GetScripts()
     {
         _manager = GetComponent<EnemyStandardManager>();
-        _scriptAnimator = new ControlAnimator(_animator);
+        _scriptAnimator = new ControllerAnimator(_animator);
         if (_canFollowTarget)
             _scriptFollowTarget = new EnemyFollowTarget(_manager, transform, _scriptAnimator);
         if (_canMovPattern)

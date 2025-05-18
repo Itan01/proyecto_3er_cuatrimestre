@@ -2,10 +2,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ControlAnimator
+public class ControllerAnimator
 {
     private Animator _animator;
-    public ControlAnimator(Animator Animator)
+    public ControllerAnimator(Animator Animator)
     {
         _animator = Animator;
     }
