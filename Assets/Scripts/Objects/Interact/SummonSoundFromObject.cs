@@ -2,10 +2,20 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SummonSoundFromObject : MonoBehaviour
+public class SummonSoundFromObject : MonoBehaviour, IInteractableObject
 {
     [SerializeField] private GameObject _sound;
     private AbstractSound _script;
+    [SerializeField] private int _value;
+
+
+    public void OnInteract(PlayerScore script)
+    {
+        script.SetScore(_value);
+        Destroy(gameObject);
+    }
+
+
 
     void OnCollisionEnter(Collision Sound)
     {

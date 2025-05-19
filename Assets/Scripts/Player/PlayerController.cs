@@ -9,6 +9,7 @@ public class PlayerController
     private PlayerShootingGun _scriptShoot;
     private PlayerInteractions _scriptInteract;
     private ControllerAnimator _scriptAnimator;
+
     public PlayerController( PlayerGrabbingGun ScriptGrab, PlayerShootingGun ScriptShoot,PlayerInteractions ScriptInteract, ControllerAnimator ScriptAnimation)
     {
         _scriptGrab= ScriptGrab;
@@ -46,6 +47,9 @@ public class PlayerController
     public void CheckInteractions()
     {
         if (Input.GetKeyDown(KeyCode.E))
+        {
             _scriptInteract.Interact();
+        }
+           
     }
 }

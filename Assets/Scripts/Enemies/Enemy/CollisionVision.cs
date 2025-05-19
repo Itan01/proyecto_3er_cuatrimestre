@@ -14,7 +14,7 @@ public class CollisionVision : MonoBehaviour
         if (Player.gameObject.layer == 27)
         {
             _scriptManager.SetTarget(Player.transform);
-            _scriptManager.SetMode(1);
+            _scriptManager.SetMode(2);
         }
     }
 }

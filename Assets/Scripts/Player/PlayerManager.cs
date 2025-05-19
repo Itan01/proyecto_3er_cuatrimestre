@@ -15,6 +15,7 @@ public class PlayerManager : EntityMonobehaviour
     private PlayerScore _scriptScore;
     private SetSizeCollider _setSizeCollider;
     private PlayerCheckpoint _scriptSetCheckpoint;
+
     private float _counter = 0;
     [Header("<color=green>LayersMask</color>")]
     [SerializeField] private LayerMask _soundMask;
