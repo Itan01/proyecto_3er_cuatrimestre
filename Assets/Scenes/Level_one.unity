@@ -38,6 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
+  m_IndirectSpecularColor: {r: 0.18028378, g: 0.22571412, b: 0.30692285, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -1588,7 +1589,6 @@ MonoBehaviour:
     RefIds:
     - rid: 183291066218184704
       type: {class: Cube, ns: UnityEngine.ProBuilder.Shapes, asm: Unity.ProBuilder}
-      data: 
 --- !u!114 &178103209
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4469,7 +4469,6 @@ MonoBehaviour:
     RefIds:
     - rid: 183291058214928385
       type: {class: Cube, ns: UnityEngine.ProBuilder.Shapes, asm: Unity.ProBuilder}
-      data: 
 --- !u!114 &383690241
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4847,7 +4846,6 @@ MonoBehaviour:
     RefIds:
     - rid: 183291058214928385
       type: {class: Cube, ns: UnityEngine.ProBuilder.Shapes, asm: Unity.ProBuilder}
-      data: 
 --- !u!114 &452053823
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5415,6 +5413,50 @@ Mesh:
     offset: 0
     size: 0
     path: 
+--- !u!1 &482920521
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 482920522}
+  - component: {fileID: 482920523}
+  m_Layer: 0
+  m_Name: GameObject
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &482920522
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 482920521}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -47.34, y: 6.459999, z: 126.0425}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &482920523
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 482920521}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: adac1dee99e42904a9b6c62ecedc689c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &515430466
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -6732,7 +6774,6 @@ MonoBehaviour:
     RefIds:
     - rid: 183291058214928386
       type: {class: Cube, ns: UnityEngine.ProBuilder.Shapes, asm: Unity.ProBuilder}
-      data: 
 --- !u!114 &927141562
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -13900,7 +13941,6 @@ MonoBehaviour:
     RefIds:
     - rid: 183291058214928397
       type: {class: Cube, ns: UnityEngine.ProBuilder.Shapes, asm: Unity.ProBuilder}
-      data: 
 --- !u!114 &1211041915
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -15451,7 +15491,6 @@ MonoBehaviour:
     RefIds:
     - rid: 183291058214928387
       type: {class: Cube, ns: UnityEngine.ProBuilder.Shapes, asm: Unity.ProBuilder}
-      data: 
 --- !u!114 &1451006143
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -16617,7 +16656,6 @@ MonoBehaviour:
     RefIds:
     - rid: 5513347470395965440
       type: {class: Cube, ns: UnityEngine.ProBuilder.Shapes, asm: Unity.ProBuilder}
-      data: 
 --- !u!114 &1519609696
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -16994,7 +17032,6 @@ MonoBehaviour:
     RefIds:
     - rid: 183291058214928384
       type: {class: Cube, ns: UnityEngine.ProBuilder.Shapes, asm: Unity.ProBuilder}
-      data: 
 --- !u!114 &1546104780
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -17808,7 +17845,6 @@ MonoBehaviour:
     RefIds:
     - rid: 5513347470395965441
       type: {class: Cube, ns: UnityEngine.ProBuilder.Shapes, asm: Unity.ProBuilder}
-      data: 
 --- !u!114 &1617918777
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -19050,7 +19086,6 @@ MonoBehaviour:
     RefIds:
     - rid: 183291058214928386
       type: {class: Cube, ns: UnityEngine.ProBuilder.Shapes, asm: Unity.ProBuilder}
-      data: 
 --- !u!114 &1723214808
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -19581,7 +19616,6 @@ MonoBehaviour:
     RefIds:
     - rid: 183291066218184704
       type: {class: Cube, ns: UnityEngine.ProBuilder.Shapes, asm: Unity.ProBuilder}
-      data: 
 --- !u!114 &1837790009
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -20476,7 +20510,6 @@ MonoBehaviour:
     RefIds:
     - rid: 5513347470395965440
       type: {class: Cube, ns: UnityEngine.ProBuilder.Shapes, asm: Unity.ProBuilder}
-      data: 
 --- !u!114 &1902545428
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -23774,3 +23807,4 @@ SceneRoots:
   - {fileID: 101514355}
   - {fileID: 892119037}
   - {fileID: 1582849131}
+  - {fileID: 482920522}
