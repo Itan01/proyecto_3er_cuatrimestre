@@ -8,14 +8,14 @@ public class PlayerController
     private PlayerGrabbingGun _scriptGrab;
     private PlayerShootingGun _scriptShoot;
     private PlayerInteractions _scriptInteract;
-    private ControllerAnimator _scriptAnimator;
+    private Animator _animator;
 
-    public PlayerController( PlayerGrabbingGun ScriptGrab, PlayerShootingGun ScriptShoot,PlayerInteractions ScriptInteract, ControllerAnimator ScriptAnimation)
+    public PlayerController( PlayerGrabbingGun ScriptGrab, PlayerShootingGun ScriptShoot,PlayerInteractions ScriptInteract, Animator Animator)
     {
         _scriptGrab= ScriptGrab;
         _scriptShoot = ScriptShoot;
         _scriptInteract = ScriptInteract;
-        _scriptAnimator = ScriptAnimation;
+        _animator = Animator;
     }
 
     public bool CheckMovementInputs(PlayerMovement Script)
@@ -30,10 +30,10 @@ public class PlayerController
         if (Input.GetMouseButton(1))
         {
             _scriptGrab.CatchingSound();
-            _scriptAnimator.SetBoolAnimator("Grabbing", true);
+            _animator.SetBool("Grabbing", true);
         }
         else
-            _scriptAnimator.SetBoolAnimator("Grabbing", false);
+            _animator.SetBool("Grabbing", false);
 
 
         bool HasASound = _scriptShoot.CheckSound();
@@ -41,7 +41,7 @@ public class PlayerController
         if (Input.GetMouseButtonDown(0) && HasASound)
         {
             _scriptShoot.ThrowSound();
-            _scriptAnimator.SetTriggerAnimator("Shooting");
+            _animator.SetTrigger("Shooting");
         }
     }
     public void CheckInteractions()

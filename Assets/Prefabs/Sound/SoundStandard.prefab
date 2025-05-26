@@ -93,9 +93,10 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7278714989109304922}
-  - component: {fileID: 5387432903471384390}
+  - component: {fileID: 6781637217167815754}
   - component: {fileID: 8238166377965752754}
   - component: {fileID: 2707965798672482440}
+  - component: {fileID: 8706630358038483147}
   m_Layer: 28
   m_Name: SoundStandard
   m_TagString: Sound
@@ -119,8 +120,8 @@ Transform:
   - {fileID: 9106489059483116361}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!135 &5387432903471384390
-SphereCollider:
+--- !u!136 &6781637217167815754
+CapsuleCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -137,8 +138,10 @@ SphereCollider:
   m_IsTrigger: 0
   m_ProvidesContacts: 0
   m_Enabled: 1
-  serializedVersion: 3
+  serializedVersion: 2
   m_Radius: 0.5
+  m_Height: 1.25
+  m_Direction: 0
   m_Center: {x: 0, y: 0.5, z: 0}
 --- !u!54 &8238166377965752754
 Rigidbody:
@@ -181,8 +184,21 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _canCatch: 0
   _freeze: 0
+  _playerSummoned: 0
   _speed: 2
   _size: 0
   _dir: {x: 0, y: 0, z: 0}
   _startPosition: {x: 0, y: 0, z: 0}
   _target: {fileID: 0}
+--- !u!114 &8706630358038483147
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6372071291580569302}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 591261f071788f24eb0455f6bc9dcbbe, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

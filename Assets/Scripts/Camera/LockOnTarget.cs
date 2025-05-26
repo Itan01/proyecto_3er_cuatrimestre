@@ -4,13 +4,12 @@ using UnityEngine;
 
 public class LockOnTarget : MonoBehaviour
 {
-    [SerializeField]private GameObject _target;
-    void Start()
-    {
-        
-    }
+    private CameraManager _target;
 
-    // Update is called once per frame
+    private void Start()
+    {
+        _target= FindAnyObjectByType<CameraManager>();
+    }
     void Update()
     {
         transform.LookAt(_target.transform.position); 

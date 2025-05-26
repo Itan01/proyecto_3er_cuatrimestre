@@ -6,16 +6,13 @@ using TMPro;
 
 public class PlayerManager : EntityMonobehaviour
 {
+    private SetSizeCollider _scriptCollider;
     private PlayerController _scriptController;
     private PlayerMovement _scriptMovement;
     private PlayerShootingGun _scriptShootingGun;
     private PlayerGrabbingGun _scriptGrabbingGun;
-    private ControllerAnimator _scriptAnimation;
     private PlayerInteractions _scriptInteractions;
     private PlayerScore _scriptScore;
-    private SetSizeCollider _setSizeCollider;
-    private PlayerCheckpoint _scriptSetCheckpoint;
-
     private float _counter = 0;
     [Header("<color=green>LayersMask</color>")]
     [SerializeField] private LayerMask _soundMask;
@@ -59,16 +56,13 @@ public class PlayerManager : EntityMonobehaviour
     }
     protected override void GetScripts()
     {
-        _scriptSetCheckpoint = new PlayerCheckpoint(transform);
-        _setSizeCollider = new SetSizeCollider(_boxCollider, _capsuleCollider);
-        _scriptAnimation = new ControllerAnimator(_animator);
+        _scriptCollider = new SetSizeCollider(_capsuleCollider);
         _scriptScore = new PlayerScore(_pointsUI);
         _scriptGrabbingGun = new PlayerGrabbingGun(_modelTransform, _camTransform, _soundMask, _enviormentMask, _areaCatching);
         _scriptShootingGun = new PlayerShootingGun(_spawnProyectil, _camTransform, _scriptUISound);
         _scriptInteractions = new PlayerInteractions(_scriptScore, transform, _camTransform, InteractMask);
-        _scriptController = new PlayerController(_scriptGrabbingGun, _scriptShootingGun, _scriptInteractions, _scriptAnimation);
-        _scriptMovement = new PlayerMovement(transform, _rb, _camTransform, _modelTransform, _scriptAnimation, _setSizeCollider);
-        _scriptSetCheckpoint.SetCheckpoint(transform.position);
+        _scriptController = new PlayerController(_scriptGrabbingGun, _scriptShootingGun, _scriptInteractions, _animator);
+        _scriptMovement = new PlayerMovement(transform, _rb, _camTransform, _modelTransform, _animator, _scriptCollider);
     }
 
     public void ShootGunSetSound(GameObject reference)
@@ -79,21 +73,10 @@ public class PlayerManager : EntityMonobehaviour
     {
         _scriptUISound.SetSound(index);
     }
-    public void MovetoCheckPoint()
-    {
-        _scriptSetCheckpoint.Respawn();
-    }
-    private void OnTriggerEnter(Collider checkpoint)
-    {
-        if (checkpoint.gameObject.layer == 25)
-        {
-            _scriptSetCheckpoint.SetCheckpoint(checkpoint.transform.position);
-        }
-    }
     public void SetDeathAnimation()
     {
         _isDeath=true;
-        _scriptAnimation.SetBoolAnimator("isDeath", _isDeath);
+        _animator.SetBool("isDeath", _isDeath);
         _scriptMovement.SetMoveZero();
         _scriptTransition.ShowBlackScreen();
     }
@@ -102,10 +85,9 @@ public class PlayerManager : EntityMonobehaviour
         _counter += Time.deltaTime;
         if ( _counter > 1.75f)
         {
-            _scriptSetCheckpoint.Respawn();
             _counter=0;
             _isDeath = false;
-            _scriptAnimation.SetBoolAnimator("isDeath",_isDeath);
+            _animator.SetBool("isDeath",_isDeath);
             _scriptTransition.FadeOut();
         }
     }

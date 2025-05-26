@@ -5,9 +5,8 @@ using UnityEngine;
 
 public class AbstractSound : MonoBehaviour // Sonidos Genericos,Movimiento Base
 {
-    protected float _rotSpeed=10.0f;
     protected float _maxDistanceRay=20.0f;
-    [SerializeField] protected bool _canCatch = false, _freeze = false;
+    [SerializeField] protected bool _canCatch = false, _freeze = false, _playerSummoned=false;
     [SerializeField] protected float _speed = 5.0f, _size = 1.0f;
     protected int _index = 1 ;
     [SerializeField] protected Vector3 _dir = new Vector3(0.0f, 0.0f, 0.0f);

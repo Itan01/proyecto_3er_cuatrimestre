@@ -34,9 +34,9 @@ public class CameraManager : MonoBehaviour
 
     private Ray _camRay;
     private RaycastHit _camHit;
-
     private void Start()
     {
+        
         _cam = Camera.main;
 
         Cursor.lockState = _lockState;
