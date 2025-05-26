@@ -20,12 +20,12 @@ public class GameManager : MonoBehaviour
 
     }
     #endregion
-    private PlayerManager _playerGameObject;
+    private PlayerManager _player;
 
     public PlayerManager PlayerReference
     {
-        get { return _playerGameObject; }
-        set { _playerGameObject = value; }
+        get { return _player; }
+        set { _player = value; }
     }
 
     private Vector3 _positionToRespwan;

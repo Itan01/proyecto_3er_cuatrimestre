@@ -4,36 +4,20 @@ using UnityEngine;
 
 public class radiusToHearSound : MonoBehaviour
 {
-   private AbstractSound _scriptSound;
-   //private EnemyConfused _scriptConfused;
-
+    private StandEnemyManager _scriptManager;
     private void Start()
     {
-       // _scriptConfused = GetComponentInParent<EnemyConfused>();
+        _scriptManager = GetComponentInParent<StandEnemyManager>();
     }
 
-    void OnTriggerEnter(Collider Sound)
+    void OnTriggerEnter(Collider Entity)
     {
-        if (Sound.gameObject.CompareTag("Sound"))
+        if (Entity.TryGetComponent<AbstractSound>(out AbstractSound ScriptSound))
         {
-            _scriptSound = Sound.GetComponent<AbstractSound>();
-            _scriptSound.SetTarget(transform, 7.5f);
-
-            //if (_scriptConfused != null)
-            //{
-            //    _scriptConfused.SetActivate(true);
-            //}
-
-            //Destroy(Sound.gameObject); // Opcional: destruir el sonido al oírlo
+            ScriptSound.SetTarget(transform, 7.5f);
         }
-    }
+        if (Entity.TryGetComponent<PlayerManager>(out PlayerManager ScriptPlayer))
+            _scriptManager.SetMode(1);
 
-    void OnTriggerExit(Collider Sound)
-    {
-        if (Sound.gameObject.CompareTag("Sound"))
-        {
-            _scriptSound = Sound.GetComponent<AbstractSound>();
-            _scriptSound.SetTarget(null, 5.0f);
-        }
     }
 }

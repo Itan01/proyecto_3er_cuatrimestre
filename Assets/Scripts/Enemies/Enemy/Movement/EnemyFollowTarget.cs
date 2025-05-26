@@ -9,26 +9,26 @@ public class EnemyFollowTarget
     private Transform _target;
     private Transform _transform;
     private EnemyStandardManager _scriptManager;
-    private ControllerAnimator _scriptAnimator;
+    private Animator _animator;
 
 
-    public EnemyFollowTarget(EnemyStandardManager ScriptManager, Transform EnemyPosition, ControllerAnimator ControlAnimator)
+    public EnemyFollowTarget(EnemyStandardManager ScriptManager, Transform EnemyPosition, Animator Animator)
     {
         _transform = EnemyPosition;
         _scriptManager= ScriptManager;
-        _scriptAnimator = ControlAnimator;
+        _animator = Animator;
     }
 
     public void SetPostionToFollow(Vector3 _position)
     {
         _moveToPosition = new Vector3(_position.x, _transform.position.y, _position.z);
-        _scriptAnimator.SetBoolAnimator("isRunning", false);
+        _animator.SetBool("isRunning", false);
     }
 
     public void SetTargetToFollow(Transform Target)
     {
         _hasTarget = true;
-        _scriptAnimator.SetBoolAnimator("isRunning", true);
+        _animator.SetBool("isRunning", true);
         _target = Target;
     }
 
@@ -59,7 +59,7 @@ public class EnemyFollowTarget
 
     public void Reset()
     {
-        _scriptManager.SetMode(0);
+        _scriptManager.SetMode(1);
         _target = null;
         _hasTarget = false;
 

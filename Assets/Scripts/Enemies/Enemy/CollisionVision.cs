@@ -9,7 +9,7 @@ public class CollisionVision : MonoBehaviour
     {
         _scriptManager = GetComponentInParent<EnemyStandardManager>();
     }
-    void OnTriggerEnter(Collider Player)
+    void OnTriggerStay(Collider Player)
     {
         if (Player.gameObject.layer == 27)
         {

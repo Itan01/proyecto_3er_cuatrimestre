@@ -31,6 +31,10 @@ public class PlayerManager : EntityMonobehaviour
     [SerializeField] UISetSound _scriptUISound;
     [SerializeField] TransitionFade _scriptTransition;
 
+    protected override void Awake()
+    {
+        GameManager.Instance.PlayerReference = this;
+    }
     protected override void Start()
     {
         base.Start();
@@ -100,5 +104,10 @@ public class PlayerManager : EntityMonobehaviour
     public void SetAreaCatching(bool State)
     {
        _areaCatching.SetActive(State);
+    }
+
+    public bool IsPlayerMoving()
+    {
+        return _isMoving;
     }
 }

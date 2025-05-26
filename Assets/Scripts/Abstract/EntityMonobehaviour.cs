@@ -7,7 +7,10 @@ public class EntityMonobehaviour : MonoBehaviour
     protected Rigidbody _rb;
     protected Animator _animator;
     protected CapsuleCollider _capsuleCollider;
+    protected virtual void Awake()
+    {
 
+    }
     protected virtual void Start()
     {
         GetComponents();

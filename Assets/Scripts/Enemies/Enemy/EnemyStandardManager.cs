@@ -33,7 +33,7 @@ public class EnemyStandardManager : EntityMonobehaviour
     {
         _manager = GetComponent<EnemyStandardManager>();
         _scriptAnimator = new ControllerAnimator(_animator);
-        _scriptFollowTarget = new EnemyFollowTarget(_manager, transform, _scriptAnimator);
+        _scriptFollowTarget = new EnemyFollowTarget(_manager, transform, _animator);
         _scriptPattern = new EnemyPattern(_positionSequence, transform, _scriptAnimator);
         _mode = 1;
 
