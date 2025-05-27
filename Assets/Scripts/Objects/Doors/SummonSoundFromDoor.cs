@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using static UnityEngine.EventSystems.EventTrigger;
 
 public class SummonSoundFromDoor : MonoBehaviour
 {
@@ -20,10 +21,7 @@ public class SummonSoundFromDoor : MonoBehaviour
             if(_doorOpen) return;
             _doorOpen = true;
             _animator.SetBool("isOpen", _doorOpen);
-            if (Entity.GetComponent<PlayerManager>())
-                SummonSound(Entity.transform.position, true);
-            else
-                SummonSound(Entity.transform.position, false);
+            SummonSound(Entity.transform.position);
         }
     }
     private void OnTriggerExit(Collider Entity)
@@ -33,14 +31,11 @@ public class SummonSoundFromDoor : MonoBehaviour
             if (!_doorOpen) return;
             _doorOpen = false;
             _animator.SetBool("isOpen", _doorOpen);
-            if (Entity.GetComponent<PlayerManager>())
-                SummonSound(Entity.transform.position, true);
-            else
-                SummonSound(Entity.transform.position, false);
+            SummonSound(Entity.transform.position);
         }
     }
 
-    private void SummonSound(Vector3 EntityPosition, bool SummonedByPlayer)
+    private void SummonSound(Vector3 EntityPosition)
     {
         Vector3 Orientation, SelfPosition, ModelPosition;
         ModelPosition = GetComponentInChildren<Transform>().position;
@@ -50,7 +45,6 @@ public class SummonSoundFromDoor : MonoBehaviour
         Orientation = (SelfPosition - EntityPosition).normalized;
         Orientation.y = 0;
         AbstractSound ScriptSound = Sound.GetComponent<AbstractSound>();
-        ScriptSound.SetIfPlayerSummoned(SummonedByPlayer);
         ScriptSound.SetDirection(Orientation, Random.Range(3.0f, 7.0f + 1), 1.0f);
     }
 }

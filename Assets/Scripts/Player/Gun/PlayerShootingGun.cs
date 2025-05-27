@@ -53,7 +53,6 @@ public class PlayerShootingGun
         script.SetDirection(_orientation.forward, _speed, _size);
         script.FreezeObject(false);
         script.PlayerCanCatchIt(false);
-        script.SetIfPlayerSummoned(true);
         script.SetSpawnPoint(_spawn.position);
     }
 

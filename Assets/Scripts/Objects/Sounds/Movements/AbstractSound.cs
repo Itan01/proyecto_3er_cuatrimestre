@@ -88,10 +88,6 @@ public class AbstractSound : MonoBehaviour // Sonidos Genericos,Movimiento Base
 
     }
 
-    public bool GetIfPlayerSummoned()
-    {
-        return _playerSummoned;
-    }
     protected void OnTriggerEnter(Collider Entity)
     {
         if (Entity.TryGetComponent<PlayerManager>(out PlayerManager PlayerScript))
@@ -103,7 +99,7 @@ public class AbstractSound : MonoBehaviour // Sonidos Genericos,Movimiento Base
                 Destroy(gameObject);
             }
         }
-        if (Entity.GetComponent<AbstractEnemy>())
+        if (Entity.TryGetComponent<EnemyStandardManager>(out EnemyStandardManager EnemyScript))
         {
             Destroy(gameObject, 0.1f);
         }
@@ -126,10 +122,6 @@ public class AbstractSound : MonoBehaviour // Sonidos Genericos,Movimiento Base
     public void PlayerCanCatchIt(bool State)
     {
         _canCatch = State;
-    }
-    public void SetIfPlayerSummoned(bool State)
-    {
-        _playerSummoned = State;
     }
     public void FreezeObject(bool freezeState)
     {
