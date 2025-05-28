@@ -50,7 +50,14 @@ public class PlayerShootingGun
     {
         AbstractSound script = _soundReference.GetComponent<AbstractSound>();
         script.SetTarget(null,0.0f);
-        script.SetDirection(_orientation.forward, _speed, _size);
+        if (script.GetIndex() == 2)
+        {
+            script.SetDirection(_orientation.forward + _orientation.up, _speed, _size);
+            LiquidSound newSound = script.GetComponent<LiquidSound>();
+            newSound.SetTimeZero();
+        }
+        else
+            script.SetDirection(_orientation.forward, _speed, _size);
         script.FreezeObject(false);
         script.PlayerCanCatchIt(false);
         script.SetIfPlayerSummoned(true);

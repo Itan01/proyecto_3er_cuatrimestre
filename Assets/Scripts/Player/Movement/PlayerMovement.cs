@@ -11,6 +11,7 @@ public class PlayerMovement
     private Vector3 _dir = new Vector3(0.0f, 0.0f, 0.0f);
     private Animator _animator;
     private SetSizeCollider _scriptCollider;
+    private bool _isMoving , _isCrouching;
 
     public PlayerMovement(Transform PlayerTransform, Rigidbody PlayerRigibody, Transform CameraTransform, Transform ModelTransform, Animator Animator, SetSizeCollider ScriptCollider)
     {
@@ -23,17 +24,20 @@ public class PlayerMovement
     }
     public bool CheckIfMoving(float x, float z, bool crouching)
     {
+        _isCrouching = crouching;
         _dir = (_cam.forward * z + _cam.right * x).normalized;
         _dir.y = 0.0f;
-        SetAnimation(x,z,crouching);
+        SetAnimation(x,z);
         if (_dir.sqrMagnitude != 0)
         {
-            _animator.SetBool("isMoving", true);
+            _isMoving = true;
+            _animator.SetBool("isMoving", _isMoving);
             return true;
         }      
         else
         {
-            _animator.SetBool("isMoving", false);
+            _isMoving = false;
+            _animator.SetBool("isMoving", _isMoving);
             return false;
         }
     }
@@ -42,13 +46,14 @@ public class PlayerMovement
         _rb.MovePosition(_transform.position + _dir.normalized * _movSpeed * Time.fixedDeltaTime);
         _model.forward = Vector3.Slerp(_model.forward, _dir.normalized, Time.fixedDeltaTime * _rotSpeed);
     }
-    private void SetAnimation(float x, float z, bool crouching)
+    private void SetAnimation(float x, float z)
     {
         float y;
-        _animator.SetBool("isCrouching", crouching);
+
+        _animator.SetBool("isCrouching", _isCrouching);
         _animator.SetFloat("xAxis", x);
         _animator.SetFloat("zAxis", z);
-        if (crouching)
+        if (_isCrouching)
         {
             _movSpeed = 2.0f;
             y = 1.25f;
@@ -65,6 +70,14 @@ public class PlayerMovement
     public void SetMoveZero()
     {
         _dir = Vector3.zero;
+    }
+    public bool GetIsMoving()
+    {
+        return _isMoving;
+    }
+    public bool GetIsCrouching()
+    {
+        return _isCrouching;
     }
 }
 

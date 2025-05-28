@@ -46,4 +46,8 @@ public class LiquidSound : AbstractSound
     {
         _scriptBounce = new BounceObject(_groundRayMask, transform, _rb);
     }
+    public void SetTimeZero()
+    {
+        _timerBetweenBounce = 0.0f;
+    }
 }

@@ -33,9 +33,11 @@ public class PlayerManager : EntityMonobehaviour
     protected override void Awake()
     {
         GameManager.Instance.PlayerReference = this;
+        GameManager.Instance.RespawnReference=transform.position;
     }
     protected override void Start()
     {
+
         base.Start();
     }
 
@@ -45,6 +47,7 @@ public class PlayerManager : EntityMonobehaviour
             CheckInputs();
         else
             AddCounter();
+        GetStats();
     }
     protected override void FixedUpdate()
     {
@@ -91,6 +94,7 @@ public class PlayerManager : EntityMonobehaviour
             _isDeath = false;
             _animator.SetBool("isDeath",_isDeath);
             _scriptTransition.FadeOut();
+            transform.position = GameManager.Instance.RespawnReference;
         }
     }
 
@@ -111,5 +115,10 @@ public class PlayerManager : EntityMonobehaviour
     public bool isPlayerCrouching()
     {
         return _isCrouching;
+    }
+    private void GetStats()
+    {
+        _isCrouching=_scriptMovement.GetIsCrouching();
+        _isMoving=_scriptMovement.GetIsMoving();
     }
 }

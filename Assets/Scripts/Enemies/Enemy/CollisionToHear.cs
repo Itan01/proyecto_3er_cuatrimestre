@@ -4,21 +4,31 @@ using UnityEngine;
 
 public class CollisionToHear : MonoBehaviour
 {
-    private EnemyStandardManager _scriptManager;
+    private AbstractEnemy _scriptManager;
+    private PlayerManager _player;
     private void Start()
     {
-        _scriptManager = GetComponentInParent<EnemyStandardManager>();
+        _player = GameManager.Instance.PlayerReference;
+        _scriptManager = GetComponentInParent<AbstractEnemy>();
     }
-    void OnTriggerEnter(Collider Player)
+
+    private void Update()
     {
-        if (Player.TryGetComponent<PlayerManager>(out PlayerManager ScriptPlayer))
+        if ((_player.transform.position - transform.position).magnitude <= 6.5f)
         {
-            if (ScriptPlayer.IsPlayerMoving())
+            if (_player.IsPlayerMoving() && !_player.isPlayerCrouching())
             {
-                Debug.Log("Hearing");
-                _scriptManager.SetTarget(Player.transform);
+                _scriptManager.SetPosition(_player.transform.position);
                 _scriptManager.SetMode(2);
             }
+        }
+    }
+
+    private void OnTriggerEnter(Collider Sound)
+    {
+        if (Sound.TryGetComponent<AbstractSound>(out AbstractSound ScriptSound))
+        {
+            ScriptSound.SetTarget(transform, 7.5f);
         }
     }
 

@@ -1,10 +1,12 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Runtime.InteropServices.WindowsRuntime;
 using UnityEngine;
 using UnityEngine.AI;
 public abstract class AbstractEnemy : EntityMonobehaviour
 {
     protected NavMeshAgent _agent;
+    private float _timer = 0.0f;
     [SerializeField] protected int _mode = 0;
     [SerializeField] protected Transform _facingStartPosition;
     [SerializeField] protected Vector3 _nextPosition, _startPosition;
@@ -19,6 +21,9 @@ public abstract class AbstractEnemy : EntityMonobehaviour
     // Update is called once per frame
     protected override void Update()
     {
+        Timer();
+        GameMode();
+
     }
     protected override void FixedUpdate()
     {
@@ -30,14 +35,28 @@ public abstract class AbstractEnemy : EntityMonobehaviour
     }
     protected void Move()
     {
-        _agent.SetDestination(_nextPosition);
-
+        _agent.destination= _nextPosition;
+        if (_agent.remainingDistance <=0.2f && _timer==0.0f)
+        {
+            SetMode(0);
+        }
     }
 
     public void SetMode(int Mode)
     {
         _mode = Mode;
     }
+
+    protected void Timer()
+    {
+        _timer -= Time.deltaTime;
+        if (_timer < 0.0f)
+        {
+            _timer = 0.0f;
+        }
+    }
+
+
     protected virtual void GameMode()
     {
         if (_mode == 1) // Escucha al jugador
@@ -55,7 +74,7 @@ public abstract class AbstractEnemy : EntityMonobehaviour
         }
         else
         {
-            if (_agent.remainingDistance <= 0.2f)
+            if ((_startPosition - transform.position).magnitude<0.2f)
             {
                 transform.LookAt(_facingStartPosition.position);
                 _animator.SetBool("isMoving", false);
@@ -66,9 +85,10 @@ public abstract class AbstractEnemy : EntityMonobehaviour
                 _agent.speed = 3.5f;
                 _animator.SetBool("isMoving", true);
                 _animator.SetBool("isRunning", false);
+                _nextPosition = _startPosition;
             }
-            _nextPosition = _startPosition;
         }
+        
     }
     protected void OnCollisionEnter(Collision Entity)
     {
@@ -84,8 +104,18 @@ public abstract class AbstractEnemy : EntityMonobehaviour
             {
                 _nextPosition = SoundScript.GetStartPoint();
                 SetMode(2);
+                Debug.Log("Cambiando Al modo 2");
+                _timer = 1.0f;
             }
             Destroy(SoundScript.gameObject);
         }
+    }
+    public int GetMode()
+    {
+        return _mode; 
+    }
+    public void SetPosition(Vector3 pos)
+    {
+        _nextPosition=pos;  
     }
 }

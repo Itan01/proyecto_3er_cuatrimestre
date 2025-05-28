@@ -13,7 +13,7 @@ public class StandEnemyManager : AbstractEnemy
     // Update is called once per frame
     protected override void Update()
     {
-        GameMode();
+        base.Update();
     }
     protected override void FixedUpdate()
     {

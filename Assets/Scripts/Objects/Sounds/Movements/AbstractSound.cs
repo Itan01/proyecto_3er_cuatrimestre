@@ -90,6 +90,7 @@ public class AbstractSound : MonoBehaviour // Sonidos Genericos,Movimiento Base
     {
         return _playerSummoned;
     }
+
     protected void OnTriggerEnter(Collider Entity)
     {
         if (Entity.TryGetComponent<PlayerManager>(out PlayerManager PlayerScript))
@@ -132,6 +133,10 @@ public class AbstractSound : MonoBehaviour // Sonidos Genericos,Movimiento Base
     public Vector3 GetStartPoint()
     {
         return _startPosition;
+    }
+    public int GetIndex()
+    {
+        return _index;
     }
     public void SetSpawnPoint(Vector3 position)
     {
