@@ -13,8 +13,6 @@ public class AbstractSound : MonoBehaviour // Sonidos Genericos,Movimiento Base
     [SerializeField] protected Vector3 _startPosition;
     [SerializeField] protected Transform _target;
     protected Rigidbody _rb;
-    protected PlayerShootingGun _scriptShoot;
-    protected PlayerGrabbingGun _scriptGrab;
 
     protected virtual void Start()
     {

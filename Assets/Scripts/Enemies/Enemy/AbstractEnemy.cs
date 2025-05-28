@@ -31,6 +31,7 @@ public abstract class AbstractEnemy : EntityMonobehaviour
     protected void Move()
     {
         _agent.SetDestination(_nextPosition);
+
     }
 
     public void SetMode(int Mode)
@@ -51,8 +52,6 @@ public abstract class AbstractEnemy : EntityMonobehaviour
             _agent.speed = 3.5f;
             _animator.SetBool("isMoving", true);
             _animator.SetBool("isRunning", false);
-            if (_agent.remainingDistance <= 0.2f)
-                SetMode(0);
         }
         else
         {
@@ -85,7 +84,6 @@ public abstract class AbstractEnemy : EntityMonobehaviour
             {
                 _nextPosition = SoundScript.GetStartPoint();
                 SetMode(2);
-
             }
             Destroy(SoundScript.gameObject);
         }

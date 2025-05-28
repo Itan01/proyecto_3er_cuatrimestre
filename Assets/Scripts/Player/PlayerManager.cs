@@ -22,10 +22,10 @@ public class PlayerManager : EntityMonobehaviour
     [SerializeField] private Transform _modelTransform;
     [SerializeField] private Transform _spawnProyectil;
     [SerializeField] private Transform _hipsPosition;
-    [Header("<color=blue>UI</color>")]
-    [SerializeField] private TMP_Text _pointsUI;
     [Header("<color=yellow>Variables and Prefabs</color>")]
-    [SerializeField] private bool _isMoving = false, _isDeath=false;
+    [SerializeField] private bool _isMoving = false;
+    [SerializeField] private bool _isDeath =false;
+    [SerializeField] private bool _isCrouching=false;
     [SerializeField] GameObject _areaCatching;
     [SerializeField] UISetSound _scriptUISound;
     [SerializeField] TransitionFade _scriptTransition;
@@ -107,5 +107,9 @@ public class PlayerManager : EntityMonobehaviour
     public bool IsPlayerMoving()
     {
         return _isMoving;
+    }
+    public bool isPlayerCrouching()
+    {
+        return _isCrouching;
     }
 }

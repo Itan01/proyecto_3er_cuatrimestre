@@ -1,23 +1,27 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor;
 using UnityEngine;
 
-public class radiusToHearSound : MonoBehaviour
+public class RadiusToHearSound : MonoBehaviour
 {
-    private StandEnemyManager _scriptManager;
+    private AbstractEnemy _scriptManager;
+    private PlayerManager _player;
     private void Start()
     {
-        _scriptManager = GetComponentInParent<StandEnemyManager>();
+        _player=GameManager.Instance.PlayerReference;
+        _scriptManager = GetComponentInParent<AbstractEnemy>();
     }
 
-    void OnTriggerEnter(Collider Entity)
+    private void Update()
     {
-        if (Entity.TryGetComponent<AbstractSound>(out AbstractSound ScriptSound))
-        {
-            ScriptSound.SetTarget(transform, 7.5f);
-        }
-        if (Entity.TryGetComponent<PlayerManager>(out PlayerManager ScriptPlayer))
-            _scriptManager.SetMode(1);
 
+        if ((_player.transform.position - transform.position).magnitude <= 5.0f)
+        {
+            if(_player.IsPlayerMoving() && !_player.isPlayerCrouching())
+            {
+                _scriptManager.SetMode(1);
+            }
+        }
     }
 }

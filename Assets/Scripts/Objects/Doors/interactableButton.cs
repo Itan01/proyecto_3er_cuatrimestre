@@ -34,13 +34,14 @@ public class interactableButton : MonoBehaviour, IInteractableObject
             GetComponent<BoxCollider>().isTrigger = true;
             GetComponent<BoxCollider>().center = new Vector3(0.0f, 1.0f, -3.5f);
             GetComponent<BoxCollider>().size = new Vector3(4.0f, 8.0f, 5.0f);
+            gameObject.layer = 0;
         }
 
     }
 
     private void OnTriggerEnter(Collider Player)
     {
-        if (Player.TryGetComponent<PlayerManager>(out PlayerManager script))
+        if (Player.GetComponent<PlayerManager>())
         {
             _check = true;
             _textInteract.GetComponentInChildren<TMP_Text>().text = _text;
@@ -49,7 +50,7 @@ public class interactableButton : MonoBehaviour, IInteractableObject
 
     private void OnTriggerExit(Collider Player)
     {
-        if (Player.TryGetComponent<PlayerManager>(out PlayerManager script))
+        if (Player.GetComponent<PlayerManager>())
         {
             _check = false;
         }

@@ -34,6 +34,11 @@ public class CameraManager : MonoBehaviour
 
     private Ray _camRay;
     private RaycastHit _camHit;
+
+    private void Awake()
+    {
+       GameManager.Instance.CameraReference=transform;
+    }
     private void Start()
     {
         
