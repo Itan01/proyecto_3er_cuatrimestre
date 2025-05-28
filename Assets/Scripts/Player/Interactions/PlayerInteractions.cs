@@ -8,10 +8,9 @@ public class PlayerInteractions
     private RaycastHit _intHit;
     private Transform _transform, _orientation;
     private Vector3 _offSet= new Vector3(0.0f,1.5f,0.0f);
-    private PlayerScore _scriptScore;
-    private LayerMask _interactMask;    public PlayerInteractions(PlayerScore ScriptScore, Transform PlayerTransform, Transform CameraTransform, LayerMask InteractMask)
+    private LayerMask _interactMask;   
+    public PlayerInteractions(Transform PlayerTransform, Transform CameraTransform, LayerMask InteractMask)
     {
-        _scriptScore = ScriptScore;
         _transform= PlayerTransform;
         _orientation = CameraTransform;
         _interactMask = InteractMask;
@@ -25,7 +24,7 @@ public class PlayerInteractions
 
             if (_intHit.collider.TryGetComponent(out IInteractableObject interactable))
             {
-                interactable.OnInteract(_scriptScore);
+                interactable.OnInteract();
             }
         }
     }

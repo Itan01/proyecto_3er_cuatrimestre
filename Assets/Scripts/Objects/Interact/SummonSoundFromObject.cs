@@ -9,9 +9,9 @@ public class SummonSoundFromObject : MonoBehaviour, IInteractableObject
     [SerializeField] private int _value;
 
 
-    public void OnInteract(PlayerScore script)
+    public void OnInteract()
     {
-        script.SetScore(_value);
+        GameManager.Instance.SetScore += _value;
         Destroy(gameObject);
     }
 

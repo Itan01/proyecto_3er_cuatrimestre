@@ -103,10 +103,6 @@ public class AbstractSound : MonoBehaviour // Sonidos Genericos,Movimiento Base
                 Destroy(gameObject);
             }
         }
-        if (Entity.GetComponent<AbstractEnemy>())
-        {
-            Destroy(gameObject, 0.1f);
-        }
     }
     public bool HasLineOfVision(LayerMask mask, Vector3 EntityPosition)
     {

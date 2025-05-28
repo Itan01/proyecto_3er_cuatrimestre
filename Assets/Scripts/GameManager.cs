@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 public class GameManager : MonoBehaviour
@@ -40,6 +41,26 @@ public class GameManager : MonoBehaviour
     {
         get { return _camera; }
         set { _camera = value; }
+    }
+
+    private int _score=0;
+    private TMP_Text _pointsUI;
+    public TMP_Text TextReference
+    {
+        get { return _pointsUI; }
+        set { _pointsUI=value; }
+    }
+    private string _mainText = "Score: ";
+    public int SetScore
+    {
+        get { return _score; }
+        set{ ChangeScore(value); }
+    }
+
+    private void ChangeScore(int value)
+    {
+        _score += value;
+        _pointsUI.text = ($"{_mainText}{_score}");
     }
 
 }

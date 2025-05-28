@@ -4,6 +4,6 @@ using UnityEngine;
 
 public interface IInteractableObject 
 {
-     public void OnInteract(PlayerScore script);
+     public void OnInteract();
    
 }

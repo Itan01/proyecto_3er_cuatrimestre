@@ -167,6 +167,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _mode: 0
+  _facingStartPosition: {fileID: 0}
+  _nextPosition: {x: 0, y: 0, z: 0}
+  _startPosition: {x: 0, y: 0, z: 0}
 --- !u!195 &5208218105896456396
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -176,7 +179,7 @@ NavMeshAgent:
   m_GameObject: {fileID: 2676467245434364467}
   m_Enabled: 1
   m_AgentTypeID: -1372625422
-  m_Radius: 0.5
+  m_Radius: 0.25
   m_Speed: 3.5
   m_Acceleration: 8
   avoidancePriority: 50

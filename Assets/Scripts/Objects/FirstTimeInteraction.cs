@@ -54,5 +54,9 @@ public class FirstTimeInteraction : MonoBehaviour
             _controlAnimator.SetBoolAnimator("Shine", _isPlaying);
         }
 
-    }   
+    }
+    private void OnDestroy()
+    {
+        _textInteract.SetActive(false);
+    }
 }
