@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class CameraDetector : MonoBehaviour
 {
-    private PlayerShootingGun _shootingGunScript;
     private CameraObstacleController _CameraObstacleScript;
 
     private void Start()
@@ -18,7 +17,6 @@ public class CameraDetector : MonoBehaviour
         {
             // Script.GetComponent<PlayerShootingGun>().ShootEnable(false);
             _CameraObstacleScript.SetTarget(Script.GetHipsPosition());
-            Debug.Log("OFF");
         }
     }
 

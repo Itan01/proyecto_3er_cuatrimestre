@@ -6,7 +6,7 @@ using UnityEngine;
 public class SummonSoundFromDoor : MonoBehaviour
 {
     private Animator _animator;
-    private bool _doorOpen=false;
+    private bool _doorOpen=false, _forceDoor=false;
     [SerializeField] private GameObject _soundToSummon;
     void Start()
     {
@@ -15,7 +15,7 @@ public class SummonSoundFromDoor : MonoBehaviour
 
     private void OnTriggerEnter(Collider Entity)
     {
-        if (Entity.GetComponent<EntityMonobehaviour>())
+        if (Entity.GetComponent<EntityMonobehaviour>() && !_forceDoor)
         {
             if(_doorOpen) return;
             _doorOpen = true;
@@ -28,7 +28,7 @@ public class SummonSoundFromDoor : MonoBehaviour
     }
     private void OnTriggerExit(Collider Entity)
     {
-        if (Entity.GetComponent<EntityMonobehaviour>())
+        if (Entity.GetComponent<EntityMonobehaviour>() && !_forceDoor)
         {
             if (!_doorOpen) return;
             _doorOpen = false;
@@ -52,5 +52,10 @@ public class SummonSoundFromDoor : MonoBehaviour
         AbstractSound ScriptSound = Sound.GetComponent<AbstractSound>();
         ScriptSound.SetIfPlayerSummoned(SummonedByPlayer);
         ScriptSound.SetDirection(Orientation, Random.Range(3.0f, 7.0f + 1), 1.0f);
+    }
+
+    public void ForceDoorsClose(bool State)
+    {
+        _forceDoor = State;
     }
 }

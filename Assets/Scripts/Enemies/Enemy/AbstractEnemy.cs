@@ -6,7 +6,7 @@ using UnityEngine.AI;
 public abstract class AbstractEnemy : EntityMonobehaviour
 {
     protected NavMeshAgent _agent;
-    private float _timer = 0.0f;
+    protected float _timer = 0.0f;
     [SerializeField] protected int _mode = 0;
     [SerializeField] protected Transform _facingStartPosition;
     [SerializeField] protected Vector3 _nextPosition, _startPosition;
