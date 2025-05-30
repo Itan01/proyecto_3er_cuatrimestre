@@ -10,9 +10,9 @@ GameObject:
   m_Component:
   - component: {fileID: 6882439513058366600}
   - component: {fileID: 7127239023139922044}
-  - component: {fileID: 9113852118375543781}
   - component: {fileID: 5270783453466874296}
-  m_Layer: 24
+  - component: {fileID: 6069608491837540640}
+  m_Layer: 22
   m_Name: LiquidObject
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -58,19 +58,6 @@ CapsuleCollider:
   m_Height: 3
   m_Direction: 1
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &9113852118375543781
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3147555831445080072}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 94fcd27d99fa9e34fbfdff4771ba5778, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _value: 100
 --- !u!114 &5270783453466874296
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -84,6 +71,28 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _sound: {fileID: 8906569069889883939, guid: 9800151b8affc8d4d98fe1f157f7dd76, type: 3}
+  _value: 100
+--- !u!95 &6069608491837540640
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3147555831445080072}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 88849cc1cd110784ea5c6f04c4a87544, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &3383384377978684426
 GameObject:
   m_ObjectHideFlags: 0
@@ -95,7 +104,7 @@ GameObject:
   - component: {fileID: 1291292565382197163}
   - component: {fileID: 3125335920131804096}
   - component: {fileID: 2747951648979895343}
-  m_Layer: 24
+  m_Layer: 22
   m_Name: Model
   m_TagString: Untagged
   m_Icon: {fileID: 0}

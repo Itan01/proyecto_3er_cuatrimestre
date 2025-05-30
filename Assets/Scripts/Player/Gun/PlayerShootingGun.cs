@@ -24,16 +24,16 @@ public class PlayerShootingGun
      {
         AvailableSound();
         _scriptUISound.SetSound(0);
-        _soundReference.transform.position = _spawn.position;
-        _hasASound = false;
      }
 
     public void SetSound(GameObject Sound)
     {
+        if(_soundReference != null)
+            _soundReference.GetComponent<AbstractSound>().FreezeObject(false);
         _hasASound = true;
         Vector3 _auxVector = new Vector3(0.0f, 10000.0f, 0.0f);
-        var Reference=_soundReference = UnityEngine.Object.Instantiate(Sound, _auxVector, Quaternion.identity);
-        AbstractSound script= Reference.GetComponent<AbstractSound>();
+        _soundReference = UnityEngine.Object.Instantiate(Sound, _auxVector, Quaternion.identity);
+        AbstractSound script= _soundReference.GetComponent<AbstractSound>();
         script.FreezeObject(true);
     }
 
@@ -48,16 +48,11 @@ public class PlayerShootingGun
 
     private void AvailableSound() 
     {
-        AbstractSound script = _soundReference.GetComponent<AbstractSound>();
-        script.SetTarget(null,0.0f);
-        if (script.GetIndex() == 2)
-        {
-            script.SetDirection(_orientation.forward + _orientation.up, _speed, _size);
-            LiquidSound newSound = script.GetComponent<LiquidSound>();
-            newSound.SetTimeZero();
-        }
-        else
-            script.SetDirection(_orientation.forward, _speed, _size);
+        _hasASound = false;
+        var NewSound = UnityEngine.Object.Instantiate(_soundReference, _spawn.position, Quaternion.identity);
+        AbstractSound script = NewSound.GetComponent<AbstractSound>();
+        script.SetTarget(null, 0.0f);
+        script.SetDirection(_orientation.forward, _speed, _size);
         script.FreezeObject(false);
         script.PlayerCanCatchIt(false);
         script.SetIfPlayerSummoned(true);

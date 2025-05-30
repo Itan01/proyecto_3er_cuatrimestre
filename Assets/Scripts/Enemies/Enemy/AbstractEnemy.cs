@@ -22,6 +22,7 @@ public abstract class AbstractEnemy : EntityMonobehaviour
     protected override void Update()
     {
         Timer();
+        if(_timer ==0)
         GameMode();
 
     }
@@ -46,7 +47,6 @@ public abstract class AbstractEnemy : EntityMonobehaviour
     {
         _mode = Mode;
     }
-
     protected void Timer()
     {
         _timer -= Time.deltaTime;
@@ -97,6 +97,7 @@ public abstract class AbstractEnemy : EntityMonobehaviour
             Entityscript.SetDeathAnimation();
             _nextPosition = _startPosition;
             SetMode(0);
+            _timer = 2.0f;
         }
         if (Entity.gameObject.TryGetComponent<AbstractSound>(out AbstractSound SoundScript))
         {

@@ -16,9 +16,10 @@ public class CollisionToHear : MonoBehaviour
     {
         if ((_player.transform.position - transform.position).magnitude <= 6.5f)
         {
-            if (_player.IsPlayerMoving() && !_player.isPlayerCrouching())
+            if (_player.IsPlayerMoving() && !_player.IsPlayerCrouching())
             {
                 _scriptManager.SetPosition(_player.transform.position);
+                if(_scriptManager.GetMode() != 1)
                 _scriptManager.SetMode(2);
             }
         }

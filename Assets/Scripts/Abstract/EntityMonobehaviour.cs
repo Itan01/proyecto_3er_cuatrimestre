@@ -7,6 +7,7 @@ public class EntityMonobehaviour : MonoBehaviour
     protected Rigidbody _rb;
     protected Animator _animator;
     protected CapsuleCollider _capsuleCollider;
+    protected BoxCollider _boxCollider;
     protected virtual void Awake()
     {
 
@@ -30,6 +31,7 @@ public class EntityMonobehaviour : MonoBehaviour
         _rb.freezeRotation = true;
         _animator =GetComponentInChildren<Animator>();
         _capsuleCollider = GetComponent<CapsuleCollider>();
+        _boxCollider=GetComponent<BoxCollider>();
     }
     protected virtual void GetScripts()
     {

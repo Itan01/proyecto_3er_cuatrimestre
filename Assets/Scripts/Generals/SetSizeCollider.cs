@@ -4,18 +4,22 @@ using UnityEngine;
 
 public class SetSizeCollider
 {
-    private CapsuleCollider _collider;
-    public SetSizeCollider(CapsuleCollider Collider)
+    private CapsuleCollider _capsuleCollider;
+    private BoxCollider _boxCollider;
+    public SetSizeCollider(CapsuleCollider Capsule, BoxCollider Box)
     {
-        _collider=Collider;
+        _capsuleCollider = Capsule;
+        _boxCollider= Box;
     }
 
     public void SetSize(float ySize)
     {
         float Center = ySize/2, Size=0.3f;
-        _collider.radius = Size;
-        _collider.height =ySize;
-        _collider.center = new Vector3(0, Center, 0);
+        _capsuleCollider.radius = Size;
+        _capsuleCollider.height =ySize;
+        _capsuleCollider.center = new Vector3(0, Center, 0);
+        _boxCollider.center = new Vector3(0, Center, 0); ;
+        _boxCollider.size = new Vector3(Size, ySize, Size);
 
     }
 }

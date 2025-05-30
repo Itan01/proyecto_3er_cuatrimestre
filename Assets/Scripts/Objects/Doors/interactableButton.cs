@@ -15,7 +15,7 @@ public class interactableButton : MonoBehaviour, IInteractableObject
     private void Start()
     {
         _doorAnimation = GetComponentInChildren<Animation>();
-    }
+    }   
 
     private void Update()
     {

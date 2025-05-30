@@ -6,7 +6,7 @@ using UnityEngine;
 public class SummonSoundFromDoor : MonoBehaviour
 {
     private Animator _animator;
-    private bool _doorOpen=false, _forceDoor=false;
+    [SerializeField] private bool _doorOpen=false, _forceDoor=false;
     [SerializeField] private GameObject _soundToSummon;
     void Start()
     {
@@ -57,5 +57,7 @@ public class SummonSoundFromDoor : MonoBehaviour
     public void ForceDoorsClose(bool State)
     {
         _forceDoor = State;
+        if (!_doorOpen) return;
+        _animator.SetBool("isOpen", false);
     }
 }

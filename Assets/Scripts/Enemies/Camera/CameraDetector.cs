@@ -13,20 +13,20 @@ public class CameraDetector : MonoBehaviour
 
     void OnTriggerEnter(Collider Player)
     {
-        if (Player.TryGetComponent<PlayerManager>(out PlayerManager Script))
+        if (Player.GetComponent<PlayerManager>())
         {
-            // Script.GetComponent<PlayerShootingGun>().ShootEnable(false);
-            _CameraObstacleScript.SetTarget(Script.GetHipsPosition());
+            _CameraObstacleScript.SetTarget(true);
+            Debug.Log("ON");
         }
     }
 
     void OnTriggerExit(Collider Player)
     {
-        if (Player.TryGetComponent<PlayerManager>(out PlayerManager Script))
+        if (Player.GetComponent<PlayerManager>())
         {
             //Script.GetComponent<PlayerShootingGun>().ShootEnable(true);
-            _CameraObstacleScript.SetTarget(null);
-            //Debug.Log("ON");
+            _CameraObstacleScript.SetTarget(false);
+          Debug.Log("OFF");
 
         }
     }

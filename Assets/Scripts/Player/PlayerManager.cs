@@ -62,7 +62,7 @@ public class PlayerManager : EntityMonobehaviour
     }
     protected override void GetScripts()
     {
-        _scriptCollider = new SetSizeCollider(_capsuleCollider);
+        _scriptCollider = new SetSizeCollider(_capsuleCollider,_boxCollider);
         _scriptGrabbingGun = new PlayerGrabbingGun(_modelTransform, _camTransform, _soundMask, _enviormentMask, _areaCatching);
         _scriptShootingGun = new PlayerShootingGun(_spawnProyectil, _camTransform, _scriptUISound);
         _scriptInteractions = new PlayerInteractions(transform, _camTransform, InteractMask);
@@ -112,9 +112,13 @@ public class PlayerManager : EntityMonobehaviour
     {
         return _isMoving;
     }
-    public bool isPlayerCrouching()
+    public bool IsPlayerCrouching()
     {
         return _isCrouching;
+    }
+    public bool IsPlayerDeath()
+    {
+        return _isDeath;
     }
     private void GetStats()
     {

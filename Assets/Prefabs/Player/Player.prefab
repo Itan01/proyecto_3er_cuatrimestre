@@ -154,17 +154,17 @@ MonoBehaviour:
     m_Bits: 268435456
   _enviormentMask:
     serializedVersion: 2
-    m_Bits: 3909091328
+    m_Bits: 3913285632
   InteractMask:
     serializedVersion: 2
-    m_Bits: 16777216
+    m_Bits: 4194304
   _camTransform: {fileID: 0}
   _modelTransform: {fileID: 7960441272055168766}
   _spawnProyectil: {fileID: 7472403954870710889}
-  _hipsPosition: {fileID: 0}
-  _pointsUI: {fileID: 0}
+  _hipsPosition: {fileID: 2461632698473160298}
   _isMoving: 0
   _isDeath: 0
+  _isCrouching: 0
   _areaCatching: {fileID: 1805916780471943676}
   _scriptUISound: {fileID: 0}
   _scriptTransition: {fileID: 0}
@@ -2029,6 +2029,11 @@ PrefabInstance:
       insertIndex: -1
       addedObject: {fileID: 8040371663833047293}
   m_SourcePrefab: {fileID: 100100000, guid: af4c61906f47c6d4a9d95bb0ead82e5c, type: 3}
+--- !u!4 &2461632698473160298 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 5465940246521907071, guid: af4c61906f47c6d4a9d95bb0ead82e5c, type: 3}
+  m_PrefabInstance: {fileID: 7634606684316997909}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &7292167298511840324 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: af4c61906f47c6d4a9d95bb0ead82e5c, type: 3}
