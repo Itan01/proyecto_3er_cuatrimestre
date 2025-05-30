@@ -1827,6 +1827,7 @@ GameObject:
   m_Component:
   - component: {fileID: 818067270851365835}
   - component: {fileID: 7882553219936557643}
+  - component: {fileID: 8514467406169601711}
   m_Layer: 0
   m_Name: RadiusToHear
   m_TagString: Enemy
@@ -1862,6 +1863,27 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e4be45b6e3cd45b46afa824ec257ffa6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!135 &8514467406169601711
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5831508370102359836}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Radius: 5
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &5942037173904589410
 GameObject:
   m_ObjectHideFlags: 0
