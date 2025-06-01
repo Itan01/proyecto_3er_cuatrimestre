@@ -6,11 +6,12 @@ using UnityEngine;
 public class AbstractSound : MonoBehaviour // Sonidos Genericos,Movimiento Base
 {
     protected float _maxDistanceRay=20.0f;
-    [SerializeField] protected bool _canCatch = false, _freeze = false, _playerSummoned=false;
+    [SerializeField] protected bool _playerSummoned=false;
+    protected bool _canCatch = false, _freeze = false;
     [SerializeField] protected float _speed = 5.0f, _size = 1.0f;
     protected int _index = 1 ;
-    [SerializeField] protected Vector3 _dir = new Vector3(0.0f, 0.0f, 0.0f);
-    [SerializeField] protected Vector3 _startPosition;
+    protected Vector3 _dir = new Vector3(0.0f, 0.0f, 0.0f);
+    protected Vector3 _startPosition;
     [SerializeField] protected Transform _target;
     protected Rigidbody _rb;
 
@@ -126,9 +127,9 @@ public class AbstractSound : MonoBehaviour // Sonidos Genericos,Movimiento Base
     {
         _playerSummoned = State;
     }
-    public void FreezeObject(bool freezeState)
+    public void FreezeObject(bool State)
     {
-        _freeze = freezeState;
+        _freeze = State;
     }
     public Vector3 GetStartPoint()
     {

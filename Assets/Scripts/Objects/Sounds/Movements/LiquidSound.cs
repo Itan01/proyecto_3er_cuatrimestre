@@ -7,6 +7,7 @@ public class LiquidSound : AbstractSound
     private BounceObject _scriptBounce;
     private bool _isOnGround=false;
     [SerializeField] private LayerMask _groundRayMask;
+    [Range(1.0f,100.0f)][SerializeField] private float _powerBounce;
     [SerializeField] private float _timerBetweenBounce;
 
     protected override void Start()
@@ -36,7 +37,7 @@ public class LiquidSound : AbstractSound
     {
         if (_isOnGround)
         {
-            _scriptBounce.MakeBounce(_timerBetweenBounce);
+            _scriptBounce.MakeBounce(_timerBetweenBounce, _powerBounce);
             _isOnGround = false;
             _timerBetweenBounce = 0.0f;
         }

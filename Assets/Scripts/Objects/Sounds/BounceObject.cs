@@ -18,10 +18,10 @@ public class BounceObject
         _rb = rb;
     }
 
-    public void MakeBounce(float Time)
+    public void MakeBounce(float Time, float Power)
     {
-        Time = Mathf.Clamp(Time, 2.5f, 5.0f);
-        _rb.AddForce(_transform.up * Time, ForceMode.Impulse);
+        Time = Mathf.Clamp(Time, 1.0f, 5.0f);
+        _rb.AddForce(_transform.up * Time* Power, ForceMode.Impulse);
     }
 
     public bool CheckIfOnGround(float Size)

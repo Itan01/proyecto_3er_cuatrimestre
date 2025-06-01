@@ -8,7 +8,7 @@ using System.Security.Cryptography.X509Certificates;
 public class PlayerShootingGun
 {
     private GameObject _soundReference;
-    private float _speed=5.0f, _size=1.0f;
+    private float _speed=3.5f, _size=1.2f;
     private Transform _spawn, _orientation;
     [SerializeField] private bool _soundEnabled = true;
     private bool _hasASound;
@@ -29,7 +29,7 @@ public class PlayerShootingGun
     public void SetSound(GameObject Sound)
     {
         if(_soundReference != null)
-            _soundReference.GetComponent<AbstractSound>().FreezeObject(false);
+          _soundReference.GetComponent<AbstractSound>().FreezeObject(false);
         _hasASound = true;
         Vector3 _auxVector = new Vector3(0.0f, 10000.0f, 0.0f);
         _soundReference = UnityEngine.Object.Instantiate(Sound, _auxVector, Quaternion.identity);
