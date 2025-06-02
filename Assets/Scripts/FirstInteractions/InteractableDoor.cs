@@ -6,7 +6,7 @@ using UnityEngine;
 public class InteractableDoor : MonoBehaviour
 {
     [SerializeField] private GameObject _door;
-    [SerializeField] private bool _playOnce = false, _check = false;
+    [SerializeField] private bool _playOnce = false;
     private Animator _doorAnimation;
 
 

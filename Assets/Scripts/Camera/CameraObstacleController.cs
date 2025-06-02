@@ -22,12 +22,13 @@ public class CameraObstacleController : MonoBehaviour
 
     private void Update()
     {
-        _target = GameManager.Instance.PlayerReference.transform.position;
-        if (_seePlayer && CheckTarget())
+        if (!_seePlayer) return;
+        _target = GameManager.Instance.PlayerReference.GetHipsPosition();
+        if (CheckTarget())
         {
             CloseDoors(true);
             _animation.Stop();
-            transform.LookAt(_target+ new Vector3(0,1,0));
+            transform.LookAt(_target);
         }
         else
         {      
@@ -44,7 +45,7 @@ public class CameraObstacleController : MonoBehaviour
 
     private bool CheckTarget()
     {
-         _startPosition = new Ray(transform.position + new Vector3(0, 1.0f, 0), (_target- transform.position));
+         _startPosition = new Ray(transform.position, (_target+ new Vector3(0,0.4f,0) - transform.position));
         if (Physics.Raycast(_startPosition, out _intHit, 20.0f, _layerMask))
         {
             Debug.Log($"Collided obj : {_intHit.collider.name}.");

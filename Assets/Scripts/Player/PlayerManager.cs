@@ -96,9 +96,9 @@ public class PlayerManager : EntityMonobehaviour
         }
     }
 
-    public Transform GetHipsPosition()
+    public Vector3 GetHipsPosition()
     {
-        return _hipsPosition;
+        return _hipsPosition.position;
     }
 
     public void SetAreaCatching(bool State)

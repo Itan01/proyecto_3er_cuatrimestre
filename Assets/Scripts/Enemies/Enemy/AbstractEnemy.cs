@@ -7,7 +7,7 @@ public abstract class AbstractEnemy : EntityMonobehaviour
 {
     protected NavMeshAgent _agent;
     protected float _timer = 0.0f;
-    protected float _baseSpeed = 3.5f, _runSpeed=7.5f;
+    protected float _baseSpeed = 3.5f, _runSpeed=9.0f;
     [SerializeField] protected int _mode = 0;
     [SerializeField] protected Transform _facingStartPosition;
     [SerializeField] protected Vector3 _nextPosition, _startPosition;

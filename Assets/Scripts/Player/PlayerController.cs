@@ -2,12 +2,14 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class PlayerController
 {
     private PlayerGrabbingGun _scriptGrab;
     private PlayerShootingGun _scriptShoot;
     private PlayerInteractions _scriptInteract;
+    bool _isPressingCrouch = false;
     private Animator _animator;
 
     public PlayerController( PlayerGrabbingGun ScriptGrab, PlayerShootingGun ScriptShoot,PlayerInteractions ScriptInteract, Animator Animator)
@@ -20,10 +22,10 @@ public class PlayerController
 
     public bool CheckMovementInputs(PlayerMovement Script)
     {
-        bool isPressingCrouch=false;
-        isPressingCrouch = Input.GetKey(KeyCode.C);
+        if (Input.GetKeyDown(KeyCode.LeftShift))
+            _isPressingCrouch = !_isPressingCrouch;
 
-        return (Script.CheckIfMoving(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"), isPressingCrouch));
+        return (Script.CheckIfMoving(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"), _isPressingCrouch));
     }
     public void CheckGunInputs()
     {
