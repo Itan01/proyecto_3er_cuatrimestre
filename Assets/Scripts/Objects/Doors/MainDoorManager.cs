@@ -4,20 +4,26 @@ using UnityEngine;
 
 public class MainDoorManager : MonoBehaviour
 {
-    [SerializeField] int _indexToDestroy;
+    [SerializeField] private int _maxValue;
+    private int _indexToDestroy;
     private Animator _animator;
+    private SetCountDoor _scriptText;
     void Start()
     {
         _animator = GetComponentInChildren<Animator>();
-        if (_indexToDestroy == 0)
+        _scriptText = GetComponentInChildren<SetCountDoor>();
+        if (_maxValue == 0)
         {
-            _indexToDestroy = 1;
+            _maxValue = 1;
         }
+        _indexToDestroy = _maxValue;
+        _scriptText.SetValue(_indexToDestroy, _maxValue);
     }
 
     public void CheckStatus()
     {
         _indexToDestroy--;
+        _scriptText.SetValue(_indexToDestroy, _maxValue);
         Debug.Log($" Remains {_indexToDestroy} to Open");
         if (_indexToDestroy <= 0)
             OpenDoor();

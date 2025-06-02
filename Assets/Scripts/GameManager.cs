@@ -50,7 +50,7 @@ public class GameManager : MonoBehaviour
         get { return _pointsUI; }
         set { _pointsUI=value; }
     }
-    private string _mainText = "Score: ";
+    private string _mainText = "Gold: ";
     public int SetScore
     {
         get { return _score; }
