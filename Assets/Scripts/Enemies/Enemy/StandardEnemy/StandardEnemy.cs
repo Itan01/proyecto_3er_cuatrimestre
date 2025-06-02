@@ -35,12 +35,12 @@ public class StandardEnemy : AbstractEnemy
         {
             _animator.SetBool("isRunning", true);
             _animator.SetBool("isMoving", true);
-            _agent.speed = 5.0f;
+            _agent.speed = _runSpeed;
             _nextPosition = GameManager.Instance.PlayerReference.transform.position;
         }
         else if (_mode == 2)// Escucha un Sonido
         {
-            _agent.speed = 3.5f;
+            _agent.speed = _baseSpeed;
             _animator.SetBool("isMoving", true);
             _animator.SetBool("isRunning", false);
         }
@@ -61,7 +61,7 @@ public class StandardEnemy : AbstractEnemy
             }
             else
             {
-                _agent.speed = 3.5f;
+                _agent.speed = _baseSpeed;
                 _nextPosition = _positions[_index];
             }
         }

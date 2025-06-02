@@ -5,6 +5,8 @@ using UnityEngine;
 
 public class PlayerMovement
 {
+    public delegate void Movement();
+    private Movement _movement;
     private float _movSpeed = 5f, _rotSpeed = 10.0f;
     private Transform _transform, _model, _cam;
     private Rigidbody _rb;
@@ -21,6 +23,7 @@ public class PlayerMovement
         _model = ModelTransform;
         _animator = Animator;
         _scriptCollider = ScriptCollider;
+        _movement = BaseMovement;
     }
     public bool CheckIfMoving(float x, float z, bool crouching)
     {
@@ -43,8 +46,7 @@ public class PlayerMovement
     }
     public void Move()
     {
-        _rb.MovePosition(_transform.position + _dir.normalized * _movSpeed * Time.fixedDeltaTime);
-        _model.forward = Vector3.Slerp(_model.forward, _dir.normalized, Time.fixedDeltaTime * _rotSpeed);
+        _movement();
     }
     private void SetAnimation(float x, float z)
     {
@@ -79,6 +81,21 @@ public class PlayerMovement
     {
         return _isCrouching;
     }
+
+    private void BaseMovement()
+    {
+        _rb.MovePosition(_transform.position + _dir.normalized * _movSpeed * Time.fixedDeltaTime);
+        _model.forward = Vector3.Slerp(_model.forward, _dir.normalized, Time.fixedDeltaTime * _rotSpeed);
+        Debug.Log("BaseMovement");
+    }
+    private void CrouchMovement()
+    {
+        _rb.MovePosition(_transform.position + _dir.normalized * _movSpeed * Time.fixedDeltaTime);
+        _model.forward = _cam.forward;
+
+        Debug.Log("CrouchMovement");
+    }
+
 }
 
 

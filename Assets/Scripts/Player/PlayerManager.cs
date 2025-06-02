@@ -23,9 +23,6 @@ public class PlayerManager : EntityMonobehaviour
     [SerializeField] private Transform _spawnProyectil;
     [SerializeField] private Transform _hipsPosition;
     [Header("<color=yellow>Variables and Prefabs</color>")]
-    [SerializeField] private bool _isMoving = false;
-    [SerializeField] private bool _isDeath =false;
-    [SerializeField] private bool _isCrouching=false;
     [SerializeField] GameObject _areaCatching;
     [SerializeField] UISetSound _scriptUISound;
     [SerializeField] TransitionFade _scriptTransition;
@@ -43,6 +40,7 @@ public class PlayerManager : EntityMonobehaviour
 
     protected override void Update()
     {
+        base.Update();
         if (!_isDeath)
             CheckInputs();
         else
@@ -106,19 +104,6 @@ public class PlayerManager : EntityMonobehaviour
     public void SetAreaCatching(bool State)
     {
        _areaCatching.SetActive(State);
-    }
-
-    public bool IsPlayerMoving()
-    {
-        return _isMoving;
-    }
-    public bool IsPlayerCrouching()
-    {
-        return _isCrouching;
-    }
-    public bool IsPlayerDeath()
-    {
-        return _isDeath;
     }
     private void GetStats()
     {

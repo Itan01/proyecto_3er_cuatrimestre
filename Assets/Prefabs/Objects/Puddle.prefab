@@ -93,6 +93,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8050855415905852651}
   - component: {fileID: 2571028606569711836}
+  - component: {fileID: 6673463277164336077}
   m_Layer: 0
   m_Name: Puddle
   m_TagString: Untagged
@@ -136,8 +137,21 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 6, y: 2, z: 6}
-  m_Center: {x: 0, y: 1, z: 0}
+  m_Size: {x: 6, y: 0.5, z: 6}
+  m_Center: {x: 0, y: 0.25, z: 0}
+--- !u!114 &6673463277164336077
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2652221301070681176}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 20edbb1caa53bdf4e904f9cd03dd8095, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _sound: {fileID: 8906569069889883939, guid: 9800151b8affc8d4d98fe1f157f7dd76, type: 3}
 --- !u!1 &2723729256596914334
 GameObject:
   m_ObjectHideFlags: 0
@@ -430,13 +444,21 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 8050855415905852651}
     m_Modifications:
+    - target: {fileID: 2638687132145205567, guid: ce72572b559a9b645ae33dd19a3f13b4, type: 3}
+      propertyPath: m_IsTrigger
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3928604239222208106, guid: ce72572b559a9b645ae33dd19a3f13b4, type: 3}
+      propertyPath: m_Mass
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 7207835525403036791, guid: ce72572b559a9b645ae33dd19a3f13b4, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0.5999999
       objectReference: {fileID: 0}
     - target: {fileID: 7207835525403036791, guid: ce72572b559a9b645ae33dd19a3f13b4, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 20.77
+      value: 18.73
       objectReference: {fileID: 0}
     - target: {fileID: 7207835525403036791, guid: ce72572b559a9b645ae33dd19a3f13b4, type: 3}
       propertyPath: m_LocalPosition.z

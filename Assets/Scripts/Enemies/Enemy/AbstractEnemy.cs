@@ -7,6 +7,7 @@ public abstract class AbstractEnemy : EntityMonobehaviour
 {
     protected NavMeshAgent _agent;
     protected float _timer = 0.0f;
+    protected float _baseSpeed = 3.5f, _runSpeed=7.5f;
     [SerializeField] protected int _mode = 0;
     [SerializeField] protected Transform _facingStartPosition;
     [SerializeField] protected Vector3 _nextPosition, _startPosition;
@@ -63,12 +64,12 @@ public abstract class AbstractEnemy : EntityMonobehaviour
         {
             _animator.SetBool("isRunning", true);
             _animator.SetBool("isMoving", true);
-            _agent.speed = 5.0f;
+            _agent.speed = _runSpeed;
             _nextPosition = GameManager.Instance.PlayerReference.transform.position;
         }
         else if (_mode == 2)// Escucha un Sonido
         {
-            _agent.speed = 3.5f;
+            _agent.speed = _baseSpeed;
             _animator.SetBool("isMoving", true);
             _animator.SetBool("isRunning", false);
         }
