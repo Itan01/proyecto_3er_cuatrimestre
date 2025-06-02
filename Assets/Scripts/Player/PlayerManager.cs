@@ -86,11 +86,11 @@ public class PlayerManager : EntityMonobehaviour
     private void AddCounter()
     {
         _counter += Time.deltaTime;
-        if ( _counter > 1.75f)
+        if (2.0f < _counter)
         {
-            _counter=0;
             _isDeath = false;
-            _animator.SetBool("isDeath",_isDeath);
+            _counter = 0.0f;
+            _animator.SetBool("isDeath", _isDeath);
             _scriptTransition.FadeOut();
             transform.position = GameManager.Instance.RespawnReference;
         }

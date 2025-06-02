@@ -9,7 +9,7 @@ public class CollisionVision : MonoBehaviour
     [SerializeField]private LayerMask _layerMask;
     private RaycastHit _inHit;
     private Vector3 _PlayerReference;
-    private bool _checkIfCanSeeit, _playerDeath=false;
+    [SerializeField] private bool _checkIfCanSeeit, _playerDeath=false;
     private void Start()
     {
         _scriptManager = GetComponentInParent<AbstractEnemy>();
@@ -18,7 +18,8 @@ public class CollisionVision : MonoBehaviour
     private void Update()
     {
         _playerDeath = GameManager.Instance.PlayerReference.IsPlayerDeath();
-        if (_checkIfCanSeeit && _scriptManager.GetMode()!= 1 && !_playerDeath)
+        if (_playerDeath) return;
+        if (_checkIfCanSeeit && _scriptManager.GetMode()!= 1)
         {
             _PlayerReference = GameManager.Instance.PlayerReference.transform.position;
             CheckRaycast();
@@ -50,10 +51,5 @@ public class CollisionVision : MonoBehaviour
                 _scriptManager.SetMode(1);
             }
         }
-    }
-    private void OnDrawGizmos()
-    {
-        Gizmos.color = Color.yellow;
-        Gizmos.DrawRay(transform.position + new Vector3(0, 1, 0), (_PlayerReference-transform.position).normalized *20.0f);
     }
 }

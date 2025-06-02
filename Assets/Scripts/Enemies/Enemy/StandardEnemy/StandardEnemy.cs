@@ -48,7 +48,7 @@ public class StandardEnemy : AbstractEnemy
         {
             _animator.SetBool("isMoving", true);
             _animator.SetBool("isRunning", false);
-            if (_agent.remainingDistance <= 0.2f)
+            if (_agent.remainingDistance <= 0.4f)
             {
                 _index++;
                 _timer = 0.5f;

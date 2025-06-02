@@ -7,7 +7,7 @@ public abstract class AbstractEnemy : EntityMonobehaviour
 {
     protected NavMeshAgent _agent;
     protected float _timer = 0.0f;
-    protected float _baseSpeed = 3.5f, _runSpeed=9.0f;
+    protected float _baseSpeed = 3.5f, _runSpeed=7.5f;
     [SerializeField] protected int _mode = 0;
     [SerializeField] protected Transform _facingStartPosition;
     [SerializeField] protected Vector3 _nextPosition, _startPosition;
@@ -23,7 +23,6 @@ public abstract class AbstractEnemy : EntityMonobehaviour
     protected override void Update()
     {
         Timer();
-        if(_timer ==0)
         GameMode();
 
     }
@@ -38,7 +37,7 @@ public abstract class AbstractEnemy : EntityMonobehaviour
     protected void Move()
     {
         _agent.destination= _nextPosition;
-        if (_agent.remainingDistance <=0.2f && _timer==0.0f)
+        if (_agent.remainingDistance <= 0.25f && _timer==0.0f)
         {
             SetMode(0);
         }
@@ -66,6 +65,7 @@ public abstract class AbstractEnemy : EntityMonobehaviour
             _animator.SetBool("isMoving", true);
             _agent.speed = _runSpeed;
             _nextPosition = GameManager.Instance.PlayerReference.transform.position;
+            transform.LookAt( _nextPosition);
         }
         else if (_mode == 2)// Escucha un Sonido
         {
@@ -75,7 +75,8 @@ public abstract class AbstractEnemy : EntityMonobehaviour
         }
         else
         {
-            if ((_startPosition - transform.position).magnitude<0.2f)
+            transform.LookAt(_nextPosition); 
+            if ((_startPosition - transform.position).magnitude< 0.25f)
             {
                 transform.LookAt(_facingStartPosition.position);
                 _animator.SetBool("isMoving", false);
@@ -83,11 +84,12 @@ public abstract class AbstractEnemy : EntityMonobehaviour
             }
             else
             {
-                _agent.speed = 3.5f;
+                _agent.speed = _runSpeed / 2;
                 _animator.SetBool("isMoving", true);
                 _animator.SetBool("isRunning", false);
-                _nextPosition = _startPosition;
+                
             }
+            _nextPosition = _startPosition;
         }
         
     }
@@ -95,10 +97,15 @@ public abstract class AbstractEnemy : EntityMonobehaviour
     {
         if (Entity.gameObject.TryGetComponent<PlayerManager>(out PlayerManager Entityscript))
         {
-            Entityscript.SetDeathAnimation();
-            _nextPosition = _startPosition;
-            SetMode(0);
-            _timer = 2.0f;
+            if (!Entityscript.IsPlayerDeath())
+                {
+                Entityscript.SetDeathAnimation();
+                SetMode(0);
+                _nextPosition = _startPosition;
+                _timer = 1.0f;
+            }
+
+
         }
         if (Entity.gameObject.TryGetComponent<AbstractSound>(out AbstractSound SoundScript))
         {
@@ -106,7 +113,6 @@ public abstract class AbstractEnemy : EntityMonobehaviour
             {
                 _nextPosition = SoundScript.GetStartPoint();
                 SetMode(2);
-                Debug.Log("Cambiando Al modo 2");
                 _timer = 1.0f;
             }
             Destroy(SoundScript.gameObject);

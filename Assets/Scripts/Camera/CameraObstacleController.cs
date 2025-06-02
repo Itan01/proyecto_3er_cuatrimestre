@@ -48,7 +48,7 @@ public class CameraObstacleController : MonoBehaviour
          _startPosition = new Ray(transform.position, (_target+ new Vector3(0,0.4f,0) - transform.position));
         if (Physics.Raycast(_startPosition, out _intHit, 20.0f, _layerMask))
         {
-            Debug.Log($"Collided obj : {_intHit.collider.name}.");
+           // Debug.Log($"Collided obj : {_intHit.collider.name}.");
 
             return (_intHit.collider.GetComponent<PlayerManager>());
         }
