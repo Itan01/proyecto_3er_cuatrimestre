@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using static UnityEngine.ParticleSystem;
 [RequireComponent(typeof(Rigidbody))]
 
 public class AbstractSound : MonoBehaviour // Sonidos Genericos,Movimiento Base
@@ -14,11 +15,14 @@ public class AbstractSound : MonoBehaviour // Sonidos Genericos,Movimiento Base
     protected Vector3 _startPosition;
     [SerializeField] protected Transform _target;
     protected Rigidbody _rb;
+    [SerializeField] private TrailRenderer _trail;
+
 
     protected virtual void Start()
     {
         BaseSettings();
         _startPosition = transform.position;
+        _trail = GetComponentInChildren<TrailRenderer>();
     }
 
     protected virtual void Update()
@@ -75,12 +79,13 @@ public class AbstractSound : MonoBehaviour // Sonidos Genericos,Movimiento Base
     }
 
 
-    protected void ReduceSize()
+    protected virtual void ReduceSize()
     {
         if (_size >= 0.25f)
         {
             _size -= 0.25f * Time.deltaTime;
             transform.localScale = new Vector3(_size, _size, _size);
+            _trail.widthMultiplier = _size;
         }
         else
             Destroy(gameObject);
