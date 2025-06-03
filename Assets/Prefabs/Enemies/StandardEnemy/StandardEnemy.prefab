@@ -140,7 +140,7 @@ SpriteRenderer:
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: ff3b511749516d042b5b1c1d00f83bca, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_FlipX: 1
+  m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
   m_Size: {x: 1, y: 1}
@@ -2939,6 +2939,7 @@ MonoBehaviour:
   _isMoving: 0
   _isDeath: 0
   _isCrouching: 0
+  _questionMark: {fileID: 442869479642895917}
   _mode: 0
   _facingStartPosition: {fileID: 3537782074150218625}
   _nextPosition: {x: 0, y: 0, z: 0}

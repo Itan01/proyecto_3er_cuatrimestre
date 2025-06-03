@@ -29,7 +29,7 @@ public class CollisionToHear : MonoBehaviour
     {
         if (Sound.TryGetComponent<AbstractSound>(out AbstractSound ScriptSound))
         {
-            ScriptSound.SetTarget(transform, 7.5f);
+            ScriptSound.SetTarget(transform, 10.0f);
         }
     }
 

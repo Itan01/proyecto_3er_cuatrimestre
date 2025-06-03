@@ -6,6 +6,7 @@ using UnityEngine.AI;
 public abstract class AbstractEnemy : EntityMonobehaviour
 {
     protected NavMeshAgent _agent;
+    [SerializeField] protected GameObject _questionMark;
     protected float _timer = 0.0f;
     protected float _baseSpeed = 3.5f, _runSpeed=7.5f;
     [SerializeField] protected int _mode = 0;
@@ -69,12 +70,14 @@ public abstract class AbstractEnemy : EntityMonobehaviour
         }
         else if (_mode == 2)// Escucha un Sonido
         {
+            _questionMark.SetActive(true);
             _agent.speed = _baseSpeed;
             _animator.SetBool("isMoving", true);
             _animator.SetBool("isRunning", false);
         }
         else
         {
+            _questionMark.SetActive(false);
             transform.LookAt(_nextPosition); 
             if ((_startPosition - transform.position).magnitude< 0.25f)
             {
