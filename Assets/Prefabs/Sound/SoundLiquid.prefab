@@ -73,7 +73,7 @@ TrailRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: -1
   m_Time: 1
   m_PreviewTimeScale: 1
   m_Parameters:
@@ -105,8 +105,8 @@ TrailRenderer:
       m_RotationOrder: 4
     colorGradient:
       serializedVersion: 2
-      key0: {r: 0.07058824, g: 0.10980393, b: 0.2509804, a: 1}
-      key1: {r: 0.18431373, g: 0.23529413, b: 0.4156863, a: 0.78431374}
+      key0: {r: 0.07058824, g: 0.10980393, b: 0.2509804, a: 0.78431374}
+      key1: {r: 0.18431373, g: 0.23529413, b: 0.4156863, a: 0.5882353}
       key2: {r: 0, g: 0, b: 0, a: 0}
       key3: {r: 0, g: 0, b: 0, a: 0}
       key4: {r: 0, g: 0, b: 0, a: 0}
@@ -332,6 +332,7 @@ MonoBehaviour:
   _speed: 1
   _size: 0
   _target: {fileID: 0}
+  _trail: {fileID: 0}
   _groundRayMask:
     serializedVersion: 2
     m_Bits: 2147483648
