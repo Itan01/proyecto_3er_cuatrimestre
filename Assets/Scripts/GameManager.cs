@@ -45,6 +45,7 @@ public class GameManager : MonoBehaviour
 
     private int _score=0;
     private TMP_Text _pointsUI;
+    private GameObject _parent;
     public TMP_Text TextReference
     {
         get { return _pointsUI; }

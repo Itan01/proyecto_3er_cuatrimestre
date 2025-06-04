@@ -106,6 +106,7 @@ public abstract class AbstractEnemy : EntityMonobehaviour
                 SetMode(0);
                 _nextPosition = _startPosition;
                 _timer = 1.0f;
+               
             }
 
 

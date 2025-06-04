@@ -18,12 +18,17 @@ public class SummonSoundFromDoor : MonoBehaviour
         if (Entity.GetComponent<EntityMonobehaviour>() && !_forceDoor)
         {
             if(_doorOpen) return;
-            _doorOpen = true;
-            _animator.SetBool("isOpen", _doorOpen);
-            if (Entity.GetComponent<PlayerManager>())
+            if (Entity.TryGetComponent<PlayerManager>(out PlayerManager script))
+            {
+                if(script.GetCaptured())
                 SummonSound(Entity.transform.position, true);
+            }
+                
             else
                 SummonSound(Entity.transform.position, false);
+            _doorOpen = true;
+            _animator.SetBool("isOpen", _doorOpen);
+
         }
     }
     private void OnTriggerExit(Collider Entity)
@@ -45,8 +50,8 @@ public class SummonSoundFromDoor : MonoBehaviour
         Vector3 Orientation, SelfPosition, ModelPosition;
         ModelPosition = GetComponentInChildren<Transform>().position;
         SelfPosition = transform.position;
-        SelfPosition.y += ModelPosition.y / 2;
-        var Sound = Instantiate(_soundToSummon, SelfPosition, Quaternion.identity);
+        SelfPosition.y += ModelPosition.y;
+        var Sound = Instantiate(_soundToSummon, transform.position, Quaternion.identity);
         Orientation = (SelfPosition - EntityPosition).normalized;
         Orientation.y = 0;
         AbstractSound ScriptSound = Sound.GetComponent<AbstractSound>();

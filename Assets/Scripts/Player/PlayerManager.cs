@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UIElements;
 using TMPro;
+using System.Security.Cryptography;
 
 public class PlayerManager : EntityMonobehaviour
 {
@@ -13,6 +14,7 @@ public class PlayerManager : EntityMonobehaviour
     private PlayerGrabbingGun _scriptGrabbingGun;
     private PlayerInteractions _scriptInteractions;
     private float _counter = 0;
+    [SerializeField] private bool _onCaptured = false;
     [Header("<color=green>LayersMask</color>")]
     [SerializeField] private LayerMask _soundMask;
     [SerializeField] private LayerMask _enviormentMask;
@@ -30,7 +32,7 @@ public class PlayerManager : EntityMonobehaviour
     protected override void Awake()
     {
         GameManager.Instance.PlayerReference = this;
-        GameManager.Instance.RespawnReference=transform.position;
+        GameManager.Instance.RespawnReference = transform.position;
     }
     protected override void Start()
     {
@@ -49,18 +51,17 @@ public class PlayerManager : EntityMonobehaviour
     }
     protected override void FixedUpdate()
     {
-        if (_isMoving)
-            _scriptMovement.Move();
+        _scriptMovement.Move();
     }
     private void CheckInputs()
     {
-        _isMoving=_scriptController.CheckMovementInputs(_scriptMovement);
+        _isMoving = _scriptController.CheckMovementInputs(_scriptMovement);
         _scriptController.CheckGunInputs();
         _scriptController.CheckInteractions();
     }
     protected override void GetScripts()
     {
-        _scriptCollider = new SetSizeCollider(_capsuleCollider,_boxCollider);
+        _scriptCollider = new SetSizeCollider(_capsuleCollider, _boxCollider);
         _scriptGrabbingGun = new PlayerGrabbingGun(_modelTransform, _camTransform, _soundMask, _enviormentMask, _areaCatching);
         _scriptShootingGun = new PlayerShootingGun(_spawnProyectil, _camTransform, _scriptUISound);
         _scriptInteractions = new PlayerInteractions(transform, _camTransform, InteractMask);
@@ -78,7 +79,7 @@ public class PlayerManager : EntityMonobehaviour
     }
     public void SetDeathAnimation()
     {
-        _isDeath=true;
+        _isDeath = true;
         _animator.SetBool("isDeath", _isDeath);
         _scriptMovement.SetMoveZero();
         _scriptTransition.ShowBlackScreen();
@@ -89,6 +90,7 @@ public class PlayerManager : EntityMonobehaviour
         if (2.0f < _counter)
         {
             _isDeath = false;
+            SetCaptured(false);
             _counter = 0.0f;
             _animator.SetBool("isDeath", _isDeath);
             _scriptTransition.FadeOut();
@@ -103,11 +105,19 @@ public class PlayerManager : EntityMonobehaviour
 
     public void SetAreaCatching(bool State)
     {
-       _areaCatching.SetActive(State);
+        _areaCatching.SetActive(State);
     }
     private void GetStats()
     {
-        _isCrouching=_scriptMovement.GetIsCrouching();
-        _isMoving=_scriptMovement.GetIsMoving();
+        _isCrouching = _scriptMovement.GetIsCrouching();
+        _isMoving = _scriptMovement.GetIsMoving();
+    }
+    public void SetCaptured(bool State)
+    {
+        _onCaptured = State;
+    }
+    public bool GetCaptured()
+    {
+        return _onCaptured;
     }
 }

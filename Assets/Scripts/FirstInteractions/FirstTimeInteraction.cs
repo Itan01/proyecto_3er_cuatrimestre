@@ -8,13 +8,15 @@ public class FirstTimeInteraction : MonoBehaviour
     private Animator _animator;
     private ControllerAnimator _controlAnimator;
     private bool _isPlaying;
-    private string _text = "Press 'E' To Interact";
-    [SerializeField] private GameObject _textInteract;
+    [SerializeField] private string _text = "Press any Button To do it";
+    [SerializeField] private GameObject _showText;
+    private TMP_Text _textInteract;
     [SerializeField] private bool _check = false;
     [SerializeField] private Transform _transformPlayer=null;
     void Start()
     {
         _animator = GetComponent<Animator>();
+        _textInteract = GameManager.Instance.TextReference;
         _controlAnimator = new ControllerAnimator(_animator);
     }
 
@@ -23,9 +25,9 @@ public class FirstTimeInteraction : MonoBehaviour
         if (_check)
         {
             if ((_transformPlayer.transform.position - transform.position).magnitude <= 4.0f)
-                _textInteract.SetActive(true);
+                _showText.SetActive(true);
             else
-                _textInteract.SetActive(false);
+                _showText.SetActive(false);
         }
 
     }
@@ -35,7 +37,7 @@ public class FirstTimeInteraction : MonoBehaviour
         {
             _check = true;
             _transformPlayer =script.transform;
-            _textInteract.GetComponentInChildren<TMP_Text>().text = _text;
+            _showText.GetComponentInChildren<TMP_Text>().text = _text;
 
             if (!_isPlaying)
             {
@@ -52,11 +54,12 @@ public class FirstTimeInteraction : MonoBehaviour
             _check = false;
             _isPlaying = false;
             _controlAnimator.SetBoolAnimator("Shine", _isPlaying);
+            _showText.SetActive(false);
         }
 
     }
     private void OnDestroy()
     {
-        _textInteract.SetActive(false);
+        _showText.SetActive(false);
     }
 }

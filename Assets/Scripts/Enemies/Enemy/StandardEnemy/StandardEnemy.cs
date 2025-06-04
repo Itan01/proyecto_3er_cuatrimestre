@@ -16,6 +16,7 @@ public class StandardEnemy : AbstractEnemy
         _positions[0]=transform.position;
         _index = 0;
         _nextPosition = _positions[_index];
+        _startPosition = _positions[0];
     }
 
     // Update is called once per frame
@@ -50,19 +51,23 @@ public class StandardEnemy : AbstractEnemy
             _animator.SetBool("isRunning", false);
             if (_agent.remainingDistance <= 0.4f)
             {
+               
                 _index++;
                 _timer = 0.5f;
+                
                 if (_index >= _positions.Length)
                 {
                     _index = 0;
                 }
                 transform.LookAt(new Vector3(_positions[_index].x,transform.position.y, _positions[_index].z));
                 _nextPosition = _positions[_index];
+
             }
             else
             {
                 _agent.speed = _baseSpeed;
                 _nextPosition = _positions[_index];
+                _startPosition = _nextPosition;
             }
         }
 

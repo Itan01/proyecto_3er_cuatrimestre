@@ -7,10 +7,10 @@ public class PlayerMovement
 {
     public delegate void Movement();
     private Movement _movement;
-    private float _movSpeed = 5f, _rotSpeed = 10.0f;
+    private float _movSpeed = 5f,_crouchSpeed=3.5f, _rotSpeed = 10.0f;
     private Transform _transform, _model, _cam;
     private Rigidbody _rb;
-    private Vector3 _dir = new Vector3(0.0f, 0.0f, 0.0f);
+    private Vector3 _dir, _orientation;
     private Animator _animator;
     private SetSizeCollider _scriptCollider;
     private bool _isMoving , _isCrouching;
@@ -46,7 +46,13 @@ public class PlayerMovement
     }
     public void Move()
     {
+        _orientation = _dir;
         _movement();
+        if (_animator.GetBool("Grabbing")){
+            _orientation = _cam.forward;
+            _orientation.y = 0.0f;  
+        }
+        _model.forward = Vector3.Slerp(_model.forward, _orientation.normalized, Time.fixedDeltaTime * _rotSpeed);
     }
     private void SetAnimation(float x, float z)
     {
@@ -57,13 +63,13 @@ public class PlayerMovement
         _animator.SetFloat("zAxis", z);
         if (_isCrouching)
         {
-            _movSpeed = 2.0f;
             y = 1.25f;
+            _movement= CrouchMovement;
         }
 
         else
         {
-            _movSpeed = 5.0f;
+            _movement = BaseMovement;
             y = 1.75f;
         }
         _scriptCollider.SetSize(y);   
@@ -85,14 +91,11 @@ public class PlayerMovement
     private void BaseMovement()
     {
         _rb.MovePosition(_transform.position + _dir.normalized * _movSpeed * Time.fixedDeltaTime);
-        _model.forward = Vector3.Slerp(_model.forward, _dir.normalized, Time.fixedDeltaTime * _rotSpeed);
         Debug.Log("BaseMovement");
     }
-    private void CrouchMovement()
+    private void CrouchMovement() 
     {
-        _rb.MovePosition(_transform.position + _dir.normalized * _movSpeed * Time.fixedDeltaTime);
-        _model.forward = _cam.forward;
-
+        _rb.MovePosition(_transform.position + _dir.normalized * _crouchSpeed * Time.fixedDeltaTime);
         Debug.Log("CrouchMovement");
     }
 

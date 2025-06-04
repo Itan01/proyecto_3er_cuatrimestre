@@ -46,8 +46,9 @@ public class CollisionVision : MonoBehaviour
         _ray = new Ray(transform.position+ new Vector3(0,1,0), (_PlayerReference-transform.position).normalized);
         if (Physics.Raycast(_ray,out _inHit,20.0f, _layerMask))
         {
-            if (_inHit.collider.GetComponent<PlayerManager>())
+            if (_inHit.collider.TryGetComponent<PlayerManager>(out PlayerManager script))
             {
+                script.SetCaptured(true);
                 _scriptManager.SetMode(1);
             }
         }
