@@ -95,6 +95,7 @@ public class PlayerManager : EntityMonobehaviour
             _animator.SetBool("isDeath", _isDeath);
             _scriptTransition.FadeOut();
             transform.position = GameManager.Instance.RespawnReference;
+            GameManager.Instance.RespawnAllEnemies();
         }
     }
 

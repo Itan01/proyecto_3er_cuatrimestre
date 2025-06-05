@@ -7,6 +7,7 @@ public class GameManager : MonoBehaviour
 {
     #region Sigleton
     public static GameManager Instance;
+
     private void Awake()
     {
         if (!Instance)
@@ -22,11 +23,17 @@ public class GameManager : MonoBehaviour
     }
     #endregion
     private PlayerManager _player;
+    private List<AbstractEnemy> _enemies = new List<AbstractEnemy>();
 
     public PlayerManager PlayerReference
     {
         get { return _player; }
         set { _player = value; }
+    }
+
+    public void RegisterEnemy(AbstractEnemy enemy)
+    {
+        _enemies.Add(enemy);
     }
 
     private Vector3 _positionToRespwan;
@@ -36,6 +43,13 @@ public class GameManager : MonoBehaviour
         set { _positionToRespwan = value; }
     }
 
+    public void RespawnAllEnemies()
+    {
+        foreach (var enemy in _enemies)
+        {
+            enemy.Respawn();
+        }
+    }
     private Transform _camera;
     public Transform CameraReference
     {
@@ -43,19 +57,19 @@ public class GameManager : MonoBehaviour
         set { _camera = value; }
     }
 
-    private int _score=0;
+    private int _score = 0;
     private TMP_Text _pointsUI;
     private GameObject _parent;
     public TMP_Text TextReference
     {
         get { return _pointsUI; }
-        set { _pointsUI=value; }
+        set { _pointsUI = value; }
     }
     private string _mainText = "Gold: ";
     public int SetScore
     {
         get { return _score; }
-        set{ ChangeScore(value); }
+        set { ChangeScore(value); }
     }
 
     private void ChangeScore(int value)
