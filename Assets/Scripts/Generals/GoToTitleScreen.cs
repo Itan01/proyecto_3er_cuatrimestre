@@ -5,15 +5,12 @@ using UnityEngine.SceneManagement;
 
 public class GoToTitleScreen : MonoBehaviour
 {
-
-    [SerializeField] private string _playerObjectName = "Player";
     [SerializeField] private string _menuSceneName = "MainMenu";
 
-    private void OnTriggerEnter(Collider other)
+    private void OnTriggerEnter(Collider Player)
     {
-        if (other.gameObject.name == _playerObjectName)
+        if (Player.gameObject.layer == 27)
         {
-
             SceneManager.LoadScene(_menuSceneName);
         }
     }

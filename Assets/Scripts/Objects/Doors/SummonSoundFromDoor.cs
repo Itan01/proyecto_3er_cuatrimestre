@@ -20,7 +20,7 @@ public class SummonSoundFromDoor : MonoBehaviour
             if(_doorOpen) return;
             if (Entity.TryGetComponent<PlayerManager>(out PlayerManager script))
             {
-                if(script.GetCaptured())
+                if(script.GetCaptured()) return;
                 SummonSound(Entity.transform.position, true);
             }
                 

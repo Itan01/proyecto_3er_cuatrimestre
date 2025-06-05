@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class MainDoorManagerExample : MonoBehaviour
 {
-    private int _indexToDestroy = 0;
     private Animator _animator;
     void Start()
     {

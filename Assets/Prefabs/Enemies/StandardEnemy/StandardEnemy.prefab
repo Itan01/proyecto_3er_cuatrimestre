@@ -75,13 +75,14 @@ GameObject:
   - component: {fileID: 162141142404220856}
   - component: {fileID: 2869679526492367794}
   - component: {fileID: 9064586862444772427}
+  - component: {fileID: 8707855237099066444}
   m_Layer: 0
   m_Name: QuestionMark
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &162141142404220856
 Transform:
   m_ObjectHideFlags: 0
@@ -161,6 +162,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 591261f071788f24eb0455f6bc9dcbbe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &8707855237099066444
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 442869479642895917}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c132d8a206904df4593f6e6c7abd58f9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _spritesStates:
+  - {fileID: 21300000, guid: ff3b511749516d042b5b1c1d00f83bca, type: 3}
+  - {fileID: 21300000, guid: fbfe39c5600e0da46bec5f4c16bfcc56, type: 3}
 --- !u!1 &579815881623321520
 GameObject:
   m_ObjectHideFlags: 0
@@ -2939,7 +2955,7 @@ MonoBehaviour:
   _isMoving: 0
   _isDeath: 0
   _isCrouching: 0
-  _questionMark: {fileID: 442869479642895917}
+  _questionMark: {fileID: 0}
   _mode: 0
   _facingStartPosition: {fileID: 3537782074150218625}
   _nextPosition: {x: 0, y: 0, z: 0}

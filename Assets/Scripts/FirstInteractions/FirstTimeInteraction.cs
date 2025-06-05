@@ -5,61 +5,32 @@ using TMPro;
 
 public class FirstTimeInteraction : MonoBehaviour
 {
-    private Animator _animator;
-    private ControllerAnimator _controlAnimator;
-    private bool _isPlaying;
     [SerializeField] private string _text = "Press any Button To do it";
-    [SerializeField] private GameObject _showText;
-    private TMP_Text _textInteract;
-    [SerializeField] private bool _check = false;
-    [SerializeField] private Transform _transformPlayer=null;
-    void Start()
-    {
-        _animator = GetComponent<Animator>();
-        _textInteract = GameManager.Instance.TextReference;
-        _controlAnimator = new ControllerAnimator(_animator);
-    }
+    private TuriorialFirstTime _showText;
 
-    private void Update()
+    private void Start()
     {
-        if (_check)
-        {
-            if ((_transformPlayer.transform.position - transform.position).magnitude <= 4.0f)
-                _showText.SetActive(true);
-            else
-                _showText.SetActive(false);
-        }
-
+        _showText=GameManager.Instance.FirstTimeReference;
     }
     private void OnTriggerEnter(Collider Player)
     {
-        if (Player.TryGetComponent<PlayerManager>(out PlayerManager script))
+        if (Player.GetComponent<PlayerManager>())
         {
-            _check = true;
-            _transformPlayer =script.transform;
+            _showText.gameObject.SetActive(true);
             _showText.GetComponentInChildren<TMP_Text>().text = _text;
-
-            if (!_isPlaying)
-            {
-                _isPlaying = true;
-                _controlAnimator.SetBoolAnimator("Shine", _isPlaying);
-            }
         }
     }
 
     private void OnTriggerExit(Collider Player)
     {
-        if (Player.TryGetComponent<PlayerManager>(out PlayerManager script))
+        if (Player.GetComponent<PlayerManager>())
         {
-            _check = false;
-            _isPlaying = false;
-            _controlAnimator.SetBoolAnimator("Shine", _isPlaying);
-            _showText.SetActive(false);
+            _showText.gameObject.SetActive(false);
         }
 
     }
     private void OnDestroy()
     {
-        _showText.SetActive(false);
+        _showText.gameObject.SetActive(false);
     }
 }

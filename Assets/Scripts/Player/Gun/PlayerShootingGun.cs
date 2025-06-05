@@ -8,7 +8,7 @@ using System.Security.Cryptography.X509Certificates;
 public class PlayerShootingGun
 {
     private GameObject _soundReference;
-    private float _speed=3.5f, _size=1.2f;
+    private float _speed=6.0f, _size=1.2f;
     private Transform _spawn, _orientation;
     [SerializeField] private bool _soundEnabled = true;
     private bool _hasASound;

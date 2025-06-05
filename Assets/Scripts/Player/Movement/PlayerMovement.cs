@@ -91,12 +91,12 @@ public class PlayerMovement
     private void BaseMovement()
     {
         _rb.MovePosition(_transform.position + _dir.normalized * _movSpeed * Time.fixedDeltaTime);
-        Debug.Log("BaseMovement");
+        //Debug.Log("BaseMovement");
     }
     private void CrouchMovement() 
     {
         _rb.MovePosition(_transform.position + _dir.normalized * _crouchSpeed * Time.fixedDeltaTime);
-        Debug.Log("CrouchMovement");
+        //Debug.Log("CrouchMovement");
     }
 
 }

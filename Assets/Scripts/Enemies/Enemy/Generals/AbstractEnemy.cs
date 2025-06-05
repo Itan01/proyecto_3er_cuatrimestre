@@ -6,8 +6,7 @@ using UnityEngine.AI;
 public abstract class AbstractEnemy : EntityMonobehaviour
 {
     protected NavMeshAgent _agent;
-    [SerializeField] protected GameObject _questionMark;
-    [SerializeField] protected GameObject _exclamationMark;
+    [SerializeField] protected QuestionMarkManager _questionMark;
     protected float _timer = 0.0f;
     protected float _baseSpeed = 3.5f, _runSpeed = 7.5f;
     [SerializeField] protected int _mode = 0;
@@ -20,6 +19,7 @@ public abstract class AbstractEnemy : EntityMonobehaviour
     {
         base.Start();
         GameManager.Instance.RegisterEnemy(this);
+        _questionMark = GetComponentInChildren<QuestionMarkManager>();
     }
 
     // Update is called once per frame
@@ -64,8 +64,7 @@ public abstract class AbstractEnemy : EntityMonobehaviour
     {
         if (_mode == 1) // Escucha al jugador
         {
-            _questionMark.SetActive(false);
-            _exclamationMark.SetActive(true);
+            _questionMark.Setting(true, 1);
             _animator.SetBool("isRunning", true);
             _animator.SetBool("isMoving", true);
             _agent.speed = _runSpeed;
@@ -74,16 +73,14 @@ public abstract class AbstractEnemy : EntityMonobehaviour
         }
         else if (_mode == 2) // Escucha un Sonido
         {
-            _exclamationMark.SetActive(false);
-            _questionMark.SetActive(true);
+            _questionMark.Setting(true, 0);
             _agent.speed = _baseSpeed;
             _animator.SetBool("isMoving", true);
             _animator.SetBool("isRunning", false);
         }
         else
         {
-            _exclamationMark.SetActive(false);
-            _questionMark.SetActive(false);
+            _questionMark.Setting(false, 0);
             transform.LookAt(_nextPosition);
             if ((_startPosition - transform.position).magnitude < 0.25f)
             {
@@ -119,7 +116,7 @@ public abstract class AbstractEnemy : EntityMonobehaviour
         }
         if (Entity.gameObject.TryGetComponent<AbstractSound>(out AbstractSound SoundScript))
         {
-            if (SoundScript.GetIfPlayerSummoned())
+            if (SoundScript.GetIfPlayerSummoned() && _mode !=1)
             {
                 _nextPosition = SoundScript.GetStartPoint();
                 SetMode(2);

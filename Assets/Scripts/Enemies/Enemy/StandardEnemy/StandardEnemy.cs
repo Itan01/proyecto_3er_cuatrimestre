@@ -17,6 +17,7 @@ public class StandardEnemy : AbstractEnemy
         _index = 0;
         _nextPosition = _positions[_index];
         _startPosition = _positions[0];
+        _questionMark.Setting(false, 0);
     }
 
     // Update is called once per frame
@@ -34,6 +35,7 @@ public class StandardEnemy : AbstractEnemy
     {
         if (_mode == 1) // Escucha al jugador
         {
+            _questionMark.Setting(true, 1);
             _animator.SetBool("isRunning", true);
             _animator.SetBool("isMoving", true);
             _agent.speed = _runSpeed;
@@ -44,9 +46,11 @@ public class StandardEnemy : AbstractEnemy
             _agent.speed = _baseSpeed;
             _animator.SetBool("isMoving", true);
             _animator.SetBool("isRunning", false);
+            _questionMark.Setting(true, 0);
         }
         else
         {
+            _questionMark.Setting(false, 0);
             _animator.SetBool("isMoving", true);
             _animator.SetBool("isRunning", false);
             if (_agent.remainingDistance <= 0.4f)

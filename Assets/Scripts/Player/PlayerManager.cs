@@ -36,7 +36,7 @@ public class PlayerManager : EntityMonobehaviour
     }
     protected override void Start()
     {
-
+        _summonedByPlayer = true;
         base.Start();
     }
 

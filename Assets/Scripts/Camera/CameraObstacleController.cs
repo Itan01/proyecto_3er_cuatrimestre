@@ -45,7 +45,7 @@ public class CameraObstacleController : MonoBehaviour
 
     private bool CheckTarget()
     {
-         _startPosition = new Ray(transform.position, (_target+ new Vector3(0,0.4f,0) - transform.position));
+         _startPosition = new Ray(transform.position, (_target+ new Vector3(0,0.35f,0) - transform.position));
         if (Physics.Raycast(_startPosition, out _intHit, 20.0f, _layerMask))
         {
            // Debug.Log($"Collided obj : {_intHit.collider.name}.");
@@ -63,7 +63,7 @@ public class CameraObstacleController : MonoBehaviour
        else
             Gizmos.color = Color.yellow;
         if (_target != null)
-            Gizmos.DrawRay(transform.position + new Vector3(0, 1.0f, 0), (_target - transform.position) * 20.0f);
+            Gizmos.DrawRay(transform.position, (_target + new Vector3(0, 0.35f, 0) - transform.position));
     }
     private void CloseDoors(bool State)
     {
