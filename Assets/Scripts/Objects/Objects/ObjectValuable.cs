@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ObjectValuable : AbstractObjects
+public class ObjectValuable : AbstractObjects, IInteractableObject
 {
     [SerializeField] private int _value;
     public void OnInteract ()
