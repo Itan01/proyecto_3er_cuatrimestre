@@ -63,7 +63,7 @@ public class PlayerManager : EntityMonobehaviour
     {
         _scriptCollider = new SetSizeCollider(_capsuleCollider, _boxCollider);
         _scriptGrabbingGun = new PlayerGrabbingGun(_modelTransform, _camTransform, _soundMask, _enviormentMask, _areaCatching);
-        _scriptShootingGun = new PlayerShootingGun(_spawnProyectil, _camTransform, _scriptUISound);
+        _scriptShootingGun = new PlayerShootingGun(_spawnProyectil, _camTransform, _scriptUISound, transform);
         _scriptInteractions = new PlayerInteractions(transform, _camTransform, InteractMask);
         _scriptController = new PlayerController(_scriptGrabbingGun, _scriptShootingGun, _scriptInteractions, _animator);
         _scriptMovement = new PlayerMovement(transform, _rb, _camTransform, _modelTransform, _animator, _scriptCollider);

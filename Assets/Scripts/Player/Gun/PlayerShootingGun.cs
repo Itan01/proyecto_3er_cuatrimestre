@@ -9,16 +9,17 @@ public class PlayerShootingGun
 {
     private GameObject _soundReference;
     private float _speed=6.0f, _size=1.2f;
-    private Transform _spawn, _orientation;
+    private Transform _spawn, _orientation, _player;
     [SerializeField] private bool _soundEnabled = true;
     private bool _hasASound;
     private UISetSound _scriptUISound;
 
-    public PlayerShootingGun(Transform SpawnProyectil, Transform Orientation, UISetSound UI)
+    public PlayerShootingGun(Transform SpawnProyectil, Transform Orientation, UISetSound UI, Transform Player)
     {
         _spawn = SpawnProyectil;
         _orientation=Orientation;
         _scriptUISound = UI;
+        _player=Player;
     }
      public void ThrowSound()
      {
@@ -56,7 +57,7 @@ public class PlayerShootingGun
         script.FreezeObject(false);
         script.PlayerCanCatchIt(false);
         script.SetIfPlayerSummoned(true);
-        script.SetSpawnPoint(_spawn.position);
+        script.SetSpawnPoint(_player.position);
     }
 
 }

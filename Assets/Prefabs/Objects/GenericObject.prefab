@@ -95,7 +95,7 @@ GameObject:
   - component: {fileID: 6483774810900840682}
   - component: {fileID: 5356547771588789968}
   - component: {fileID: 7311463387569806562}
-  m_Layer: 0
+  m_Layer: 22
   m_Name: Particle System
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4922,10 +4922,10 @@ GameObject:
   m_Component:
   - component: {fileID: 6490965321789183121}
   - component: {fileID: 5056918458550287076}
-  - component: {fileID: 4265545073356029406}
   - component: {fileID: 7260471339786856060}
-  - component: {fileID: 653813631234498062}
-  m_Layer: 0
+  - component: {fileID: 8762589038197286198}
+  - component: {fileID: 888156773209846131}
+  m_Layer: 22
   m_Name: GenericObject
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4969,29 +4969,6 @@ SphereCollider:
   serializedVersion: 3
   m_Radius: 7.5
   m_Center: {x: 0, y: 0, z: 0}
---- !u!136 &4265545073356029406
-CapsuleCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7900192745537698518}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Radius: 0.6
-  m_Height: 3
-  m_Direction: 1
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!95 &7260471339786856060
 Animator:
   serializedVersion: 5
@@ -5013,7 +4990,30 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
---- !u!114 &653813631234498062
+--- !u!136 &8762589038197286198
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7900192745537698518}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 1.2
+  m_Height: 2
+  m_Direction: 1
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &888156773209846131
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}

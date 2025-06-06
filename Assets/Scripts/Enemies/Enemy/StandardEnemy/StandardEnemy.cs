@@ -51,7 +51,7 @@ public class StandardEnemy : AbstractEnemy
             _questionMark.Setting(false, 0);
             _animator.SetBool("isMoving", true);
             _animator.SetBool("isRunning", false);
-            if (_agent.remainingDistance <= 0.1f)
+            if (_agent.remainingDistance <= 0.4f)
             {
                
                 _index++;

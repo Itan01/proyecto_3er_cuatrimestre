@@ -7,8 +7,15 @@ public class ObjectValuable : AbstractObjects, IInteractableObject
     [SerializeField] private int _value;
     public void OnInteract ()
     {
-        GameManager.Instance.SetScore += _value;
-        Destroy(gameObject);
+        Debug.Log("HII");
+        Vector3 player = GameManager.Instance.PlayerReference.transform.position;
+        if ((transform.position - player).magnitude < 4.0f)
+        {
+            Debug.Log("HEE");
+            GameManager.Instance.SetScore = _value;
+            Destroy(gameObject);
+        }
+
     }
 
     protected override void OnTriggerEnter(Collider Player)
