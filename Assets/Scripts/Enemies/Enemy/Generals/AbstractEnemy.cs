@@ -40,7 +40,7 @@ public abstract class AbstractEnemy : EntityMonobehaviour
     protected void Move()
     {
         _agent.destination = _nextPosition;
-        if (_agent.remainingDistance <= 0.25f && _timer == 0.0f)
+        if (_agent.remainingDistance <= 0.1f && _timer == 0.0f)
         {
             SetMode(0);
         }
@@ -82,7 +82,7 @@ public abstract class AbstractEnemy : EntityMonobehaviour
         {
             _questionMark.Setting(false, 0);
             transform.LookAt(_nextPosition);
-            if ((_startPosition - transform.position).magnitude < 0.25f)
+            if ((_startPosition - transform.position).magnitude < 0.1f)
             {
                 transform.LookAt(_facingStartPosition.position);
                 _animator.SetBool("isMoving", false);

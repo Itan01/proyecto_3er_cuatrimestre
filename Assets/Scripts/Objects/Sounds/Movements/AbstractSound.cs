@@ -48,7 +48,7 @@ public class AbstractSound : MonoBehaviour // Sonidos Genericos,Movimiento Base
 
     protected virtual void SetDirectionToTarget()
     {
-        _dir = (_target.position + new Vector3(0,1.0f,0) - transform.position).normalized;
+        _dir = (_target.position + new Vector3(0,0.5f,0) - transform.position).normalized;
         transform.forward = Vector3.Slerp(transform.forward, _dir.normalized, Time.fixedDeltaTime);
     }
 

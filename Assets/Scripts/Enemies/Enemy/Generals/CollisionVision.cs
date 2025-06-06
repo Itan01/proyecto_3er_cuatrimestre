@@ -43,7 +43,7 @@ public class CollisionVision : MonoBehaviour
     }
     private void CheckRaycast()
     {
-        _ray = new Ray(transform.position+ new Vector3(0,1,0), (_PlayerReference-transform.position).normalized);
+        _ray = new Ray(transform.position + new Vector3(0, 1, 0), (_PlayerReference - transform.position + new Vector3(0, 1.5f, 0)).normalized);
         if (Physics.Raycast(_ray,out _inHit,20.0f, _layerMask))
         {
             if (_inHit.collider.TryGetComponent<PlayerManager>(out PlayerManager script))
@@ -52,5 +52,10 @@ public class CollisionVision : MonoBehaviour
                 _scriptManager.SetMode(1);
             }
         }
+    }
+
+    private void OnDrawGizmos()
+    {
+        Gizmos.DrawRay(transform.position + new Vector3(0, 1, 0), (_PlayerReference - transform.position).normalized * 20.0f);
     }
 }

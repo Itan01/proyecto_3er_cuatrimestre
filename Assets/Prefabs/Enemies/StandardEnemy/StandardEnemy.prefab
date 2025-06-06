@@ -139,7 +139,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: ff3b511749516d042b5b1c1d00f83bca, type: 3}
+  m_Sprite: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -147,7 +147,7 @@ SpriteRenderer:
   m_Size: {x: 1, y: 1}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 1
+  m_WasSpriteAssigned: 0
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
 --- !u!114 &9064586862444772427
@@ -2926,7 +2926,7 @@ NavMeshAgent:
   m_GameObject: {fileID: 8908676807321237897}
   m_Enabled: 1
   m_AgentTypeID: -1372625422
-  m_Radius: 0.25
+  m_Radius: 0.1
   m_Speed: 3.5
   m_Acceleration: 1000
   avoidancePriority: 50
@@ -2952,10 +2952,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _makeNoise: 0
+  _summonedByPlayer: 0
   _isMoving: 0
   _isDeath: 0
   _isCrouching: 0
-  _questionMark: {fileID: 0}
+  _questionMark: {fileID: 8707855237099066444}
   _mode: 0
   _facingStartPosition: {fileID: 3537782074150218625}
   _nextPosition: {x: 0, y: 0, z: 0}

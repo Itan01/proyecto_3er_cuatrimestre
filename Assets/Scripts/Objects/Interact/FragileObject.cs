@@ -29,7 +29,7 @@ public class FragileObject : AbstractObjects
         if (Player.GetComponent<PlayerManager>())
         {
             _animator.SetBool("Shine", true);
-            _particles.Play();
+            //_particles.Play();
         }
     }
     protected override void OnTriggerExit(Collider Player)
@@ -37,7 +37,7 @@ public class FragileObject : AbstractObjects
         if (Player.GetComponent<PlayerManager>())
         {
             _animator.SetBool("Shine", false);
-            _particles.Stop();
+            //  _particles.Stop();
         }
     }
 

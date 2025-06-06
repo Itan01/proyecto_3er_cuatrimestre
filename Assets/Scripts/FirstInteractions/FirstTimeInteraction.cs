@@ -29,8 +29,4 @@ public class FirstTimeInteraction : MonoBehaviour
         }
 
     }
-    private void OnDestroy()
-    {
-        _showText.gameObject.SetActive(false);
-    }
 }

@@ -14,7 +14,9 @@ public class QuestionMarkManager : MonoBehaviour
 
     public void Setting(bool State, int index) // 0 = questionMark, 1 = ExclamationMark
     {
-        gameObject.SetActive(State);
+        if(State)
         _render.sprite = _spritesStates[index];
+        else
+            _render.sprite = null;
     }
 }

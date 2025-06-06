@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class VoiceButton : MonoBehaviour
+public class VoiceButton : MonoBehaviour, IInteractableObject
 {
     private VoiceDoorManager _doorManager;
     [SerializeField] protected ParticleSystem[] _particles;

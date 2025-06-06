@@ -11,7 +11,10 @@ public class GoToTitleScreen : MonoBehaviour
     {
         if (Player.gameObject.layer == 27)
         {
+            Debug.Log("HII");
             SceneManager.LoadScene(_menuSceneName);
+            Cursor.lockState = CursorLockMode.None;
+            Cursor.visible = true;
         }
     }
 }

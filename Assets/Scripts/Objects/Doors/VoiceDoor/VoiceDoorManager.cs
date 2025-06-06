@@ -27,8 +27,12 @@ public class VoiceDoorManager : AbstracDoors
         _timer = _timerRef;
         _animator.SetBool("isOpen", false);
         _indexToDestroy = _maxValue;
-        _scriptText.gameObject.SetActive(true);
-        _scriptText.SetValue(_indexToDestroy, _maxValue);
+        for (int i = 0; i < _scriptText.Length; i++)
+        {
+            _scriptText[i].gameObject.SetActive(true);
+            _scriptText[i].SetValue(_indexToDestroy, _maxValue);
+        }
+       
         _animator.speed = 1.0f;
     }
 }

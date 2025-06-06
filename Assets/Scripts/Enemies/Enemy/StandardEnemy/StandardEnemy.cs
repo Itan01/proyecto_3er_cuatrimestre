@@ -16,8 +16,6 @@ public class StandardEnemy : AbstractEnemy
         _positions[0]=transform.position;
         _index = 0;
         _nextPosition = _positions[_index];
-        _startPosition = _positions[0];
-        _questionMark.Setting(false, 0);
     }
 
     // Update is called once per frame
@@ -53,7 +51,7 @@ public class StandardEnemy : AbstractEnemy
             _questionMark.Setting(false, 0);
             _animator.SetBool("isMoving", true);
             _animator.SetBool("isRunning", false);
-            if (_agent.remainingDistance <= 0.4f)
+            if (_agent.remainingDistance <= 0.1f)
             {
                
                 _index++;

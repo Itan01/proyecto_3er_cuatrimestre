@@ -5,9 +5,9 @@ using UnityEngine;
 
 public class SetCountDoor : MonoBehaviour
 {
-    private TMP_Text _textMesh;
+    [SerializeField]private TMP_Text _textMesh;
 
-    private void Start()
+    private void Awake()
     {
         _textMesh= GetComponent<TMP_Text>();
     }

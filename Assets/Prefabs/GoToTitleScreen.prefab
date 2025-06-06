@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2208867031670506800}
   - component: {fileID: 5355937035276879084}
+  - component: {fileID: 5273622431132538604}
   m_Layer: 0
   m_Name: GoToTitleScreen
   m_TagString: Untagged
@@ -45,8 +46,28 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 61314585be6ce334198cdcac778eb52e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _playerObjectName: Player
   _menuSceneName: MainMenu
+--- !u!65 &5273622431132538604
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 382898470951837111}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 4, y: 5, z: 4}
+  m_Center: {x: 0, y: 2.5, z: 0}
 --- !u!1 &5110301143386099786
 GameObject:
   m_ObjectHideFlags: 0
@@ -58,7 +79,6 @@ GameObject:
   - component: {fileID: 2539703418717179498}
   - component: {fileID: 7922720759880794693}
   - component: {fileID: 4376131031753217405}
-  - component: {fileID: 1124218350841293842}
   m_Layer: 0
   m_Name: Cube
   m_TagString: Untagged
@@ -76,7 +96,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 1.84, z: 0}
-  m_LocalScale: {x: 3.7886, y: 3.6909344, z: 0.61031}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 2208867031670506800}
@@ -131,24 +151,3 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!65 &1124218350841293842
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5110301143386099786}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 1
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
