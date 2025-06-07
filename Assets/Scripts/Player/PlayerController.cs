@@ -22,7 +22,7 @@ public class PlayerController
 
     public bool CheckMovementInputs(PlayerMovement Script)
     {
-        if (Input.GetKeyDown(KeyCode.LeftShift))
+        if (Input.GetKeyDown(KeyCode.LeftControl) || Input.GetKeyDown(KeyCode.C))
             _isPressingCrouch = !_isPressingCrouch;
 
         return (Script.CheckIfMoving(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"), _isPressingCrouch));
