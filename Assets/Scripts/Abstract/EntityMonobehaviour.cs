@@ -12,8 +12,8 @@ public class EntityMonobehaviour : MonoBehaviour
     [SerializeField] protected bool _makeNoise, _summonedByPlayer = false;
     protected float _noiseTimer=0.5f, _noiseTimerRef=0.5f;
     [SerializeField] protected bool _isMoving = false;
-    [SerializeField] protected bool _isDeath = false;
-    [SerializeField] protected bool _isCrouching = false;
+    protected bool _isDeath = false;
+    protected bool _isCrouching = false;
     protected virtual void Awake()
     {
 
