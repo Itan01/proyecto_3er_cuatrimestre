@@ -10,7 +10,7 @@ public class AbstractSound : MonoBehaviour // Sonidos Genericos,Movimiento Base
     protected float _maxDistanceRay = 25.0f;
     [SerializeField] protected bool _playerSummoned = false, _playerShooted= false ;
     protected bool _canCatch = false, _freeze = false;
-    protected float _speed = 5.0f, _size = 1.0f, _timeToCapture=0.1f;
+    protected float _speed = 5.0f, _size = 1.0f;
     protected int _index = 1;
     protected Vector3 _dir = new Vector3(0.0f, 0.0f, 0.0f);
     protected Vector3 _startPosition;
@@ -36,7 +36,6 @@ public class AbstractSound : MonoBehaviour // Sonidos Genericos,Movimiento Base
 
         if (_target)
             SetDirectionToTarget();
-        if (_timeToCapture >= 0.0f) _timeToCapture -= Time.deltaTime;
     }
     protected virtual void FixedUpdate()
     {
@@ -117,7 +116,7 @@ public class AbstractSound : MonoBehaviour // Sonidos Genericos,Movimiento Base
         Vector3 orientation = EntityPosition - transform.position;
         if (Physics.Raycast(transform.position, orientation, out hit, _maxDistanceRay, mask))
         {
-            if (hit.collider.GetComponent<PlayerManager>())
+            if (hit.collider.gameObject.layer==27)
             {
                 _playerSummoned = false;
                 return true;   

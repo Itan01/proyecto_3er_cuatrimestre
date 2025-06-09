@@ -37,6 +37,7 @@ public class PlayerManager : EntityMonobehaviour
     {
         _summonedByPlayer = true;
         _areaCatching = GetComponentInChildren<GrabbingSound>();
+        SetAreaCatching(false);
         base.Start();
     }
 

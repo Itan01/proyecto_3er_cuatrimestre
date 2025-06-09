@@ -11,7 +11,7 @@ public class GrabbingSound : MonoBehaviour
     {
         transform.forward = Camera.main.transform.forward;
     }
-    private void OnTriggerStay(Collider Sound)
+    private void OnTriggerEnter(Collider Sound)
     {
         if (Sound.TryGetComponent<AbstractSound>(out AbstractSound Script))
         {

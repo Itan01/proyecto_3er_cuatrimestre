@@ -25,11 +25,11 @@ public class StandardSound : AbstractSound
     }
     private void OnCollisionEnter(Collision Enviroment)
     {
-        if (_timeToCapture > 0.0f) return;
         if (_playerShooted)
         {
             SummonExplosion();
         }
+        Destroy(gameObject);
     }
     protected void SummonExplosion()
     {
