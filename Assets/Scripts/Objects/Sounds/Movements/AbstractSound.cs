@@ -6,11 +6,11 @@ using static UnityEngine.ParticleSystem;
 
 public class AbstractSound : MonoBehaviour // Sonidos Genericos,Movimiento Base
 {
-    protected float _maxDistanceRay=20.0f;
-    [SerializeField] protected bool _playerSummoned=false;
+    protected float _maxDistanceRay = 20.0f;
+    [SerializeField] protected bool _playerSummoned = false;
     protected bool _canCatch = false, _freeze = false;
     [SerializeField] protected float _speed = 5.0f, _size = 1.0f;
-    protected int _index = 1 ;
+    protected int _index = 1;
     protected Vector3 _dir = new Vector3(0.0f, 0.0f, 0.0f);
     protected Vector3 _startPosition;
     [SerializeField] protected Transform _target;
@@ -31,7 +31,7 @@ public class AbstractSound : MonoBehaviour // Sonidos Genericos,Movimiento Base
         {
             ReduceSize();
         }
-        
+
         if (_target)
             SetDirectionToTarget();
     }
@@ -48,7 +48,7 @@ public class AbstractSound : MonoBehaviour // Sonidos Genericos,Movimiento Base
 
     protected virtual void SetDirectionToTarget()
     {
-        _dir = (_target.position + new Vector3(0,0.5f,0) - transform.position).normalized;
+        _dir = (_target.position + new Vector3(0, 0.5f, 0) - transform.position).normalized;
         transform.forward = Vector3.Slerp(transform.forward, _dir.normalized, Time.fixedDeltaTime);
     }
 
@@ -56,7 +56,7 @@ public class AbstractSound : MonoBehaviour // Sonidos Genericos,Movimiento Base
     {
         _target = Target;
         if (Speed == 0.0f)
-            _speed =5.0f;
+            _speed = 5.0f;
         else
             _speed = Speed;
     }
@@ -105,25 +105,26 @@ public class AbstractSound : MonoBehaviour // Sonidos Genericos,Movimiento Base
             {
                 PlayerScript.ShootGunSetSound(gameObject);
                 PlayerScript.SetSoundUI(_index);
-                Destroy(gameObject);
             }
         }
     }
     public bool HasLineOfVision(LayerMask mask, Vector3 EntityPosition)
     {
         RaycastHit hit;
-        Vector3 orientation= EntityPosition - transform.position;
+        Vector3 orientation = EntityPosition - transform.position;
         if (Physics.Raycast(transform.position, orientation, out hit, _maxDistanceRay, mask))
         {
 
             if (hit.collider.TryGetComponent(out PlayerManager Player))
             {
-                return true;
+                _playerSummoned = false;
+                return true;   
             }
 
         }
         return false;
     }
+    #region GetValues
     public void PlayerCanCatchIt(bool State)
     {
         _canCatch = State;
@@ -144,9 +145,11 @@ public class AbstractSound : MonoBehaviour // Sonidos Genericos,Movimiento Base
     {
         return _index;
     }
+    #endregion
     public void SetSpawnPoint(Vector3 position)
     {
         _startPosition = position;
     }
 }
+
 
