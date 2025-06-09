@@ -4,15 +4,15 @@ using UnityEngine;
 
 public class StandardSound : AbstractSound
 {
-    [SerializeField] private ParticleSystem[] _lines;
+    [SerializeField] private ParticlesSoundManager _particleManager;
     [SerializeField] private GameObject _soundExplosion;
     protected override void Start()
     {
         base.Start();
         if (_playerSummoned)
         {
-            for (int i = 0; i < _lines.Length; i++)
-                _lines[i].Play();
+            _particleManager = GetComponentInChildren<ParticlesSoundManager>();
+            _particleManager.StarPlay();
         }
     }
     protected override void Update()
@@ -25,11 +25,11 @@ public class StandardSound : AbstractSound
     }
     private void OnCollisionEnter(Collision Enviroment)
     {
-        if (_playerSummoned)
+        if (_timeToCapture > 0.0f) return;
+        if (_playerShooted)
         {
             SummonExplosion();
         }
-        Destroy(gameObject, 0.1f);
     }
     protected void SummonExplosion()
     {

@@ -11,7 +11,6 @@ public class PlayerManager : EntityMonobehaviour
     private PlayerController _scriptController;
     private PlayerMovement _scriptMovement;
     private PlayerShootingGun _scriptShootingGun;
-    private PlayerGrabbingGun _scriptGrabbingGun;
     private PlayerInteractions _scriptInteractions;
     private float _counter = 0;
     [SerializeField] private bool _onCaptured = false;
@@ -25,7 +24,7 @@ public class PlayerManager : EntityMonobehaviour
     [SerializeField] private Transform _spawnProyectil;
     [SerializeField] private Transform _hipsPosition;
     [Header("<color=yellow>Variables and Prefabs</color>")]
-    [SerializeField] GameObject _areaCatching;
+    private GrabbingSound _areaCatching;
     [SerializeField] UISetSound _scriptUISound;
     [SerializeField] TransitionFade _scriptTransition;
 
@@ -37,6 +36,7 @@ public class PlayerManager : EntityMonobehaviour
     protected override void Start()
     {
         _summonedByPlayer = true;
+        _areaCatching = GetComponentInChildren<GrabbingSound>();
         base.Start();
     }
 
@@ -62,10 +62,9 @@ public class PlayerManager : EntityMonobehaviour
     protected override void GetScripts()
     {
         _scriptCollider = new SetSizeCollider(_capsuleCollider, _boxCollider);
-        _scriptGrabbingGun = new PlayerGrabbingGun(_modelTransform, _camTransform, _soundMask, _enviormentMask, _areaCatching);
         _scriptShootingGun = new PlayerShootingGun(_spawnProyectil, _camTransform, _scriptUISound, transform);
         _scriptInteractions = new PlayerInteractions(transform, _camTransform, InteractMask);
-        _scriptController = new PlayerController(_scriptGrabbingGun, _scriptShootingGun, _scriptInteractions, _animator);
+        _scriptController = new PlayerController(_scriptShootingGun, _scriptInteractions, _animator);
         _scriptMovement = new PlayerMovement(transform, _rb, _camTransform, _modelTransform, _animator, _scriptCollider);
     }
 
@@ -106,7 +105,7 @@ public class PlayerManager : EntityMonobehaviour
 
     public void SetAreaCatching(bool State)
     {
-        _areaCatching.SetActive(State);
+        _areaCatching.gameObject.SetActive(State);
     }
     private void GetStats()
     {

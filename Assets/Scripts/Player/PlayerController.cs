@@ -6,15 +6,13 @@ using UnityEngine.UI;
 
 public class PlayerController
 {
-    private PlayerGrabbingGun _scriptGrab;
     private PlayerShootingGun _scriptShoot;
     private PlayerInteractions _scriptInteract;
     bool _isPressingCrouch = false;
     private Animator _animator;
 
-    public PlayerController( PlayerGrabbingGun ScriptGrab, PlayerShootingGun ScriptShoot,PlayerInteractions ScriptInteract, Animator Animator)
+    public PlayerController(PlayerShootingGun ScriptShoot,PlayerInteractions ScriptInteract, Animator Animator)
     {
-        _scriptGrab= ScriptGrab;
         _scriptShoot = ScriptShoot;
         _scriptInteract = ScriptInteract;
         _animator = Animator;
@@ -31,7 +29,6 @@ public class PlayerController
     {
         if (Input.GetMouseButton(1))
         {
-            _scriptGrab.CatchingSound();
             _animator.SetBool("Grabbing", true);
         }
         else

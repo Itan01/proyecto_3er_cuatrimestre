@@ -57,6 +57,7 @@ public class PlayerShootingGun
         script.FreezeObject(false);
         script.PlayerCanCatchIt(false);
         script.SetIfPlayerSummoned(true);
+        script.SetPlayerShootIt(true);
         script.SetSpawnPoint(_player.position);
     }
 

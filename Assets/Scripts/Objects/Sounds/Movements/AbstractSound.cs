@@ -1,15 +1,16 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Runtime.InteropServices.WindowsRuntime;
 using UnityEngine;
 using static UnityEngine.ParticleSystem;
 [RequireComponent(typeof(Rigidbody))]
 
 public class AbstractSound : MonoBehaviour // Sonidos Genericos,Movimiento Base
 {
-    protected float _maxDistanceRay = 20.0f;
-    [SerializeField] protected bool _playerSummoned = false;
+    protected float _maxDistanceRay = 25.0f;
+    [SerializeField] protected bool _playerSummoned = false, _playerShooted= false ;
     protected bool _canCatch = false, _freeze = false;
-    [SerializeField] protected float _speed = 5.0f, _size = 1.0f;
+    protected float _speed = 5.0f, _size = 1.0f, _timeToCapture=0.1f;
     protected int _index = 1;
     protected Vector3 _dir = new Vector3(0.0f, 0.0f, 0.0f);
     protected Vector3 _startPosition;
@@ -27,6 +28,7 @@ public class AbstractSound : MonoBehaviour // Sonidos Genericos,Movimiento Base
 
     protected virtual void Update()
     {
+
         if (!_freeze)
         {
             ReduceSize();
@@ -34,6 +36,7 @@ public class AbstractSound : MonoBehaviour // Sonidos Genericos,Movimiento Base
 
         if (_target)
             SetDirectionToTarget();
+        if (_timeToCapture >= 0.0f) _timeToCapture -= Time.deltaTime;
     }
     protected virtual void FixedUpdate()
     {
@@ -114,8 +117,7 @@ public class AbstractSound : MonoBehaviour // Sonidos Genericos,Movimiento Base
         Vector3 orientation = EntityPosition - transform.position;
         if (Physics.Raycast(transform.position, orientation, out hit, _maxDistanceRay, mask))
         {
-
-            if (hit.collider.TryGetComponent(out PlayerManager Player))
+            if (hit.collider.GetComponent<PlayerManager>())
             {
                 _playerSummoned = false;
                 return true;   
@@ -125,6 +127,15 @@ public class AbstractSound : MonoBehaviour // Sonidos Genericos,Movimiento Base
         return false;
     }
     #region GetValues
+
+    public void SetPlayerShootIt(bool State)
+    {
+         _playerShooted= State;
+    }
+    public bool PlayerShootIt()
+    {
+        return _playerShooted;
+    }
     public void PlayerCanCatchIt(bool State)
     {
         _canCatch = State;
