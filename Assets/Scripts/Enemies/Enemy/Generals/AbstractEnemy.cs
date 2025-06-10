@@ -62,7 +62,7 @@ public abstract class AbstractEnemy : EntityMonobehaviour
 
     protected virtual void GameMode()
     {
-        if (_mode == 1) // Escucha al jugador
+        if (_mode == 1) 
         {
             _questionMark.Setting(true, 1);
             _animator.SetBool("isRunning", true);
@@ -71,7 +71,7 @@ public abstract class AbstractEnemy : EntityMonobehaviour
             _nextPosition = GameManager.Instance.PlayerReference.transform.position;
             transform.LookAt(_nextPosition);
         }
-        else if (_mode == 2) // Escucha un Sonido
+        else if (_mode == 2) 
         {
             _questionMark.Setting(true, 0);
             _agent.speed = _baseSpeed;
@@ -114,16 +114,16 @@ public abstract class AbstractEnemy : EntityMonobehaviour
 
 
         }
-        if (Entity.gameObject.TryGetComponent<AbstractSound>(out AbstractSound SoundScript))
-        {
-            if (SoundScript.GetIfPlayerSummoned() && _mode !=1)
-            {
-                _nextPosition = SoundScript.GetStartPoint();
-                SetMode(2);
-                _timer = 1.0f;
-            }
-            Destroy(SoundScript.gameObject);
-        }
+        //if (Entity.gameObject.TryGetComponent<AbstractSound>(out AbstractSound SoundScript))
+        //{
+        //    if (SoundScript.GetIfPlayerSummoned() && _mode !=1)
+        //    {
+        //        _nextPosition = SoundScript.GetStartPoint();
+        //        SetMode(2);
+        //        _timer = 1.0f;
+        //    }
+        //    Destroy(SoundScript.gameObject);
+        //}
     }
     public int GetMode()
     {
