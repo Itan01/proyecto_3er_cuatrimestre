@@ -7,6 +7,7 @@ using UnityEngine.UI;
 public class UISetSound : MonoBehaviour
 {
     [SerializeField] Sprite[] _sound;
+    [SerializeField] ParticleSystem _particlesUI;
     private Image _uI;
     private Color _color;
     private void Start()
@@ -22,7 +23,9 @@ public class UISetSound : MonoBehaviour
         if (index == 0)
         {
             _color.a = 0.5f;
-            _uI.color = _color;
+            _uI.color = _color; 
+            if(_particlesUI != null ) 
+              _particlesUI.Play();
         }
         else
         {
