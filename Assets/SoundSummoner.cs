@@ -8,6 +8,7 @@ public class SoundSummoner : MonoBehaviour
     private float _timerRef;
     private int _amount;
     [Range(1, 5)][SerializeField] private int _amountRef;
+    [SerializeField] float _startRotationY=0;
     [SerializeField] private Transform _spawnPosition;
     [SerializeField] private GameObject _sound;
 
@@ -36,7 +37,7 @@ public class SoundSummoner : MonoBehaviour
     }
     private void SummonSound()
     {
-        _spawnPosition.rotation= Quaternion.Euler(Random.Range(-45.0f, 45.0f + 1), Random.Range(45.0f, 135.0f + 1), 0);
+        _spawnPosition.rotation= Quaternion.Euler(Random.Range(-45.0f, 45.0f + 1), _startRotationY+ Random.Range(45.0f, 135.0f + 1), 0);
         var Sound = Instantiate(_sound, _spawnPosition.position, Quaternion.identity);
         AbstractSound script = Sound.GetComponent<AbstractSound>();
         script.SetDirection(_spawnPosition.forward, 5.0f, 1.0f);

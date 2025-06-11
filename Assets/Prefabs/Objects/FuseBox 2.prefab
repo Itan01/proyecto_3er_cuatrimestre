@@ -152,7 +152,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _timer: 2
-  _amountRef: 5
+  _amountRef: 2
+  _startRotationY: 180
   _spawnPosition: {fileID: 5374279862811731578}
   _sound: {fileID: 6372071291580569302, guid: 8ddbe5c7d66751e4abe35b6712dc69f8, type: 3}
 --- !u!1 &7616587779723674677
@@ -180,7 +181,7 @@ Transform:
   m_GameObject: {fileID: 7616587779723674677}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: 0.70710707, z: -0, w: 0.70710653}
-  m_LocalPosition: {x: 1, y: 0, z: 0}
+  m_LocalPosition: {x: 1.25, y: 0, z: -0.0000003427267}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []

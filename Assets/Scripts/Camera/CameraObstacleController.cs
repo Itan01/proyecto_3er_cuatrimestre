@@ -8,6 +8,7 @@ public class CameraObstacleController : MonoBehaviour
     [SerializeField]private Vector3 _target;
     [SerializeField] private bool _seePlayer;
     [SerializeField] private SummonSoundFromDoor[] _doors;
+    [SerializeField] private bool _noDoors=false;
     private Animation _animation;
     [SerializeField] private LayerMask _layerMask;
     private RaycastHit _intHit;
@@ -17,6 +18,8 @@ public class CameraObstacleController : MonoBehaviour
     {
         _animation = GetComponent<Animation>();
         _animation.Play();
+        if (_doors==null)
+            _noDoors = true;
         CloseDoors(false);
     }
 
@@ -26,15 +29,20 @@ public class CameraObstacleController : MonoBehaviour
         _target = GameManager.Instance.PlayerReference.GetHipsPosition();
         if (CheckTarget())
         {
-            CloseDoors(true);
             _animation.Stop();
             transform.LookAt(_target);
+            if (_noDoors) return;
+            CloseDoors(true);
+
         }
         else
-        {      
+        {
             if (_animation.isPlaying) return;
             _animation.Play();
+            if (_noDoors) return;
             CloseDoors(false);
+           
+
         }
     }
 
@@ -67,7 +75,8 @@ public class CameraObstacleController : MonoBehaviour
     }
     private void CloseDoors(bool State)
     {
-        foreach(var Doors in _doors)
+
+        foreach (var Doors in _doors)
         {
             Doors.ForceDoorsClose(State);
         }

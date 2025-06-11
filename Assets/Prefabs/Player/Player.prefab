@@ -166,7 +166,6 @@ MonoBehaviour:
   _modelTransform: {fileID: 7960441272055168766}
   _spawnProyectil: {fileID: 7472403954870710889}
   _hipsPosition: {fileID: 2461632698473160298}
-  _areaCatching: {fileID: 1805916780471943676}
   _scriptUISound: {fileID: 0}
   _scriptTransition: {fileID: 0}
 --- !u!65 &7747024848938081973
@@ -230,16 +229,12 @@ PrefabInstance:
     m_TransformParent: {fileID: 7472403954870710889}
     m_Modifications:
     - target: {fileID: 3116911911213293296, guid: 1d8d47af0ab4b374dade2ec8e4d74105, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3116911911213293296, guid: 1d8d47af0ab4b374dade2ec8e4d74105, type: 3}
       propertyPath: m_LocalPosition.y
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3116911911213293296, guid: 1d8d47af0ab4b374dade2ec8e4d74105, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0
+      value: -0.6
       objectReference: {fileID: 0}
     - target: {fileID: 3116911911213293296, guid: 1d8d47af0ab4b374dade2ec8e4d74105, type: 3}
       propertyPath: m_LocalRotation.w
@@ -282,11 +277,6 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1d8d47af0ab4b374dade2ec8e4d74105, type: 3}
---- !u!1 &1805916780471943676 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 5513978918407130319, guid: 1d8d47af0ab4b374dade2ec8e4d74105, type: 3}
-  m_PrefabInstance: {fileID: 6163863434264104243}
-  m_PrefabAsset: {fileID: 0}
 --- !u!4 &9136413845321520067 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 3116911911213293296, guid: 1d8d47af0ab4b374dade2ec8e4d74105, type: 3}
