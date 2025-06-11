@@ -27,10 +27,12 @@ public class EnemyVision : MonoBehaviour
 
     private Mesh visionMesh;
     private MeshFilter meshFilter;
+    private MeshRenderer meshRenderer;
 
     void Start()
     {
         meshFilter = GetComponent<MeshFilter>();
+        meshRenderer = GetComponent<MeshRenderer>();
         visionMesh = new Mesh();
         visionMesh.name = "Vision Mesh";
         meshFilter.mesh = visionMesh;
@@ -42,7 +44,7 @@ public class EnemyVision : MonoBehaviour
     void LateUpdate()
     {
         _playerDeath = _player.IsPlayerDeath();
-        if (!_playerDeath && _scriptManager.GetMode() != 1)
+        if (!_playerDeath)
         {
             DrawFieldOfView();
         }
@@ -50,6 +52,25 @@ public class EnemyVision : MonoBehaviour
 
     void DrawFieldOfView()
     {
+        switch (_scriptManager.GetMode())
+        {
+            case 0:
+                visionColor = new Color(0, 1, 0, 0.3f); // verde
+                break;
+            case 2:
+            case 3:
+                visionColor = new Color(1, 1, 0, 0.3f); // amarillo
+                break;
+            case 1:
+                visionColor = new Color(1, 0, 0, 0.3f); // rojo
+                break;
+        }
+
+        if (meshRenderer != null)
+        {
+            meshRenderer.material.color = visionColor;
+        }
+
         Vector3[] vertices = new Vector3[rayCount + 2];
         int[] triangles = new int[rayCount * 3];
 
@@ -77,13 +98,17 @@ public class EnemyVision : MonoBehaviour
 
             vertices[i + 1] = vertex;
 
-            
+
             if (Physics.Raycast(origin, dir, out hit, viewRadius, detectableMask))
             {
                 if (hit.collider.TryGetComponent<PlayerManager>(out PlayerManager script))
                 {
                     script.SetCaptured(true);
-                    _scriptManager.SetMode(1); 
+
+                    if (_scriptManager.GetMode() == 0)
+                    {
+                        _scriptManager.EnterConfusedState();
+                    }
                 }
             }
 
@@ -125,5 +150,20 @@ public class EnemyVision : MonoBehaviour
 
         Gizmos.DrawLine(transform.position, transform.position + left * viewRadius);
         Gizmos.DrawLine(transform.position, transform.position + right * viewRadius);
+    }
+
+    public bool IsPlayerVisible()
+    {
+        Vector3 dirToPlayer = (_player.transform.position - transform.position).normalized;
+        float dstToPlayer = Vector3.Distance(transform.position, _player.transform.position);
+
+        if (Vector3.Angle(transform.forward, dirToPlayer) < viewAngle / 2 && dstToPlayer < viewRadius)
+        {
+            if (!Physics.Raycast(transform.position, dirToPlayer, dstToPlayer, obstacleMask))
+            {
+                return true;
+            }
+        }
+        return false;
     }
 }

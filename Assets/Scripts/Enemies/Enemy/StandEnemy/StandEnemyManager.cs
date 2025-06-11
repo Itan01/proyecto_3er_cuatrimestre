@@ -5,19 +5,9 @@ using UnityEngine.AI;
 
 public class StandEnemyManager : AbstractEnemy
 {
-    protected override void Start()
-    {
-        base.Start();
-    }
-
-    // Update is called once per frame
-    protected override void Update()
-    {
-        base.Update();
-    }
     protected override void FixedUpdate()
     {
-        Move();
+        Move(); // en abstractEnemy
     }
 
 }
