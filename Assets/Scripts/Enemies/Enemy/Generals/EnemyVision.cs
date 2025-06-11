@@ -24,6 +24,7 @@ public class EnemyVision : MonoBehaviour
     [Header("Debug")]
     public bool drawGizmos = true;
     public Color visionColor = new Color(1, 1, 0, 0.3f);
+    private bool _seePlayer=false;
 
     private Mesh visionMesh;
     private MeshFilter meshFilter;
@@ -52,6 +53,7 @@ public class EnemyVision : MonoBehaviour
 
     void DrawFieldOfView()
     {
+        _seePlayer = false;
         switch (_scriptManager.GetMode())
         {
             case 0:
@@ -104,7 +106,7 @@ public class EnemyVision : MonoBehaviour
                 if (hit.collider.TryGetComponent<PlayerManager>(out PlayerManager script))
                 {
                     script.SetCaptured(true);
-
+                    _seePlayer = true;
                     if (_scriptManager.GetMode() == 0)
                     {
                         _scriptManager.EnterConfusedState();
@@ -127,6 +129,8 @@ public class EnemyVision : MonoBehaviour
         visionMesh.vertices = vertices;
         visionMesh.triangles = triangles;
         visionMesh.RecalculateNormals();
+
+        _scriptManager.WatchingPlayer(_seePlayer);
     }
 
     Vector3 DirFromAngle(float angleDegrees, bool global)

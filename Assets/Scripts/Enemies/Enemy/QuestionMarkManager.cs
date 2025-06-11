@@ -12,7 +12,7 @@ public class QuestionMarkManager : MonoBehaviour
         _render = GetComponent<SpriteRenderer>();
     }
 
-    public void Setting(bool State, int index) // 0 = questionMark, 1 = ExclamationMark
+    public void Setting(bool State, int index) //true=ShowMark, false=HideMark / 0 = questionMark, 1 = ExclamationMark
     {
         if(State)
         _render.sprite = _spritesStates[index];

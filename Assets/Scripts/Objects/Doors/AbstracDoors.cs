@@ -33,7 +33,7 @@ public class AbstracDoors : MonoBehaviour
         {
             _scriptText[i].SetValue(_indexToDestroy, _maxValue);
         }
-        Debug.Log($" Remains {_indexToDestroy} to Open");
+       // Debug.Log($" Remains {_indexToDestroy} to Open");
         if (_indexToDestroy <= 0)
             OpenDoor();
 

@@ -20,7 +20,7 @@ public class CollisionToHear : MonoBehaviour
             {
                 _scriptManager.SetPosition(_player.transform.position);
                 if(_scriptManager.GetMode() != 1)
-                _scriptManager.SetMode(2);
+                _scriptManager.SetModeByIndex(2);
             }
         }
     }

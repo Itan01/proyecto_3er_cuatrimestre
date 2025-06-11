@@ -21,13 +21,10 @@ public class StandardEnemy : AbstractEnemy
     // Update is called once per frame
     protected override void Update()
     {
-        Timer();
-        if(_timer==0.0f)
         Pattern();
     }
     protected override void FixedUpdate()
     {
-        Move();
     }
     protected virtual void Pattern()
     {
@@ -55,7 +52,6 @@ public class StandardEnemy : AbstractEnemy
             {
                
                 _index++;
-                _timer = 0.5f;
                 
                 if (_index >= _positions.Length)
                 {

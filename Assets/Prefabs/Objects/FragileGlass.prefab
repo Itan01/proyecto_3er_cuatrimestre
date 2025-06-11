@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 3598641643029996713}
   - component: {fileID: 2466355377202095112}
   - component: {fileID: 6537691258319100896}
+  - component: {fileID: 5620055493703702475}
   m_Layer: 30
   m_Name: FragileGlass
   m_TagString: Untagged
@@ -118,4 +119,26 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b5f40d86aa725074186c9dbbf8af2a0e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _sound: {fileID: 6372071291580569302, guid: 8ddbe5c7d66751e4abe35b6712dc69f8, type: 3}
+  _distanceToAnimate: 10
+  _sound: {fileID: 8565270419349600205, guid: ca0acd1115083b044836c659c5a9a799, type: 3}
+--- !u!95 &5620055493703702475
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4390481242497689773}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 12d9bf20c84cfff4190c796e03a25c88, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0

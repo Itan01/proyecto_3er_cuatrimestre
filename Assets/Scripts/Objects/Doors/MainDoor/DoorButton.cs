@@ -12,14 +12,14 @@ public class DoorButton : MonoBehaviour, IInteractableObject
     {
         _doorManager = GetComponentInParent<MainDoorManager>();
     }
-    private void OnTriggerEnter(Collider Sound)
+
+    private void OnTriggerEnter(Collider other)
     {
-        if (Sound.TryGetComponent<AbstractSound>(out AbstractSound ScriptSound))
+        if (other.gameObject.layer == 28)
         {
             _doorManager.CheckStatus();
             for (int i = 0; i < _particles.Length; i++)
                 _particles[i].Play();
-            Destroy(ScriptSound.gameObject);
         }
     }
 

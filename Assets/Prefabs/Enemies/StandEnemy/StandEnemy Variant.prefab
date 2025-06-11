@@ -940,6 +940,7 @@ MonoBehaviour:
   _nextPosition: {x: 0, y: 0, z: 0}
   _startPosition: {x: 0, y: 0, z: 0}
   _confusedDuration: 2
+  _searchDuration: 3.5
 --- !u!1 &2451774493874523305
 GameObject:
   m_ObjectHideFlags: 0
@@ -2627,8 +2628,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8041984105795945720}
-  - component: {fileID: 8763269076477544810}
-  - component: {fileID: 6468412930222400547}
   m_Layer: 0
   m_Name: RadiusToHear
   m_TagString: Enemy
@@ -2652,39 +2651,6 @@ Transform:
   - {fileID: 7636978917962755385}
   m_Father: {fileID: 1660908570930249641}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!135 &8763269076477544810
-SphereCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8053629598405363246}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 1
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Radius: 5
-  m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &6468412930222400547
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8053629598405363246}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e4be45b6e3cd45b46afa824ec257ffa6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &8061632534827259671
 GameObject:
   m_ObjectHideFlags: 0

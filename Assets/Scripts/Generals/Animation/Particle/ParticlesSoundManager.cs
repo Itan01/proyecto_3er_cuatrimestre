@@ -18,7 +18,6 @@ public class ParticlesSoundManager : MonoBehaviour
 
     public void StarPlay()
     {
-        Debug.Log("HII");
         foreach (ParticleSystem particle in _listParticles)
         {
             particle.Play();

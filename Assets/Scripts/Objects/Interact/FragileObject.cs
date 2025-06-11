@@ -6,12 +6,22 @@ using UnityEngine;
 public class FragileObject : AbstractObjects
 {
     [SerializeField] private GameObject _sound;
-    private ParticleSystem _particles;
+    private PlayerManager _player;
 
     protected override void Start()
     {
         base.Start();
-        _particles = GetComponentInChildren<ParticleSystem>();
+        _player = GameManager.Instance.PlayerReference;
+
+    }
+
+    protected void Update()
+    {
+        if((_player.transform.position - transform.position).magnitude <= _distanceToAnimate)//Show Animation
+            _animated=true;
+        else
+            _animated=false;
+        SetAnimation(_animated);
     }
     void OnCollisionEnter(Collision Sound)
     {
@@ -24,22 +34,9 @@ public class FragileObject : AbstractObjects
             Destroy(gameObject);
         }
     }
-    protected override void OnTriggerEnter(Collider Player)
+    private void SetAnimation(bool State)
     {
-        if (Player.GetComponent<PlayerManager>())
-        {
-            _animator.SetBool("Shine", true);
-            //_particles.Play();
-        }
+        _animator.SetBool("Shine", State);
     }
-    protected override void OnTriggerExit(Collider Player)
-    {
-        if (Player.GetComponent<PlayerManager>())
-        {
-            _animator.SetBool("Shine", false);
-            //  _particles.Stop();
-        }
-    }
-
 }
 

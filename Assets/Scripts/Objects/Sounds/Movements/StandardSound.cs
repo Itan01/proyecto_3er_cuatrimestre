@@ -29,7 +29,7 @@ public class StandardSound : AbstractSound
         {
             SummonExplosion();
         }
-        Destroy(gameObject);
+        Destroy(gameObject,0.1f);
     }
     protected void SummonExplosion()
     {

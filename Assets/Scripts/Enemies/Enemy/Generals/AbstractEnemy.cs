@@ -1,22 +1,25 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using System.Runtime.InteropServices.WindowsRuntime;
+using System.Threading;
 using UnityEngine;
 using UnityEngine.AI;
 public abstract class AbstractEnemy : EntityMonobehaviour
 {
     protected NavMeshAgent _agent;
-    [SerializeField] protected QuestionMarkManager _questionMark;
-    protected float _timer = 0.0f;
-    protected float _baseSpeed = 3.5f, _runSpeed = 7.5f;
+    protected QuestionMarkManager _questionMark;
+    protected float _baseSpeed = 3.5f, _runSpeed = 7.5f, _shortDistance = 0.2f, _timer = 0.0f;
     [SerializeField] protected int _mode = 0;
     [SerializeField] protected Transform _facingStartPosition;
-    [SerializeField] protected Vector3 _nextPosition, _startPosition;
+    protected Vector3 _nextPosition, _startPosition;
     [SerializeField] protected float _confusedDuration = 2f; // Este es el tiempo de confusión donde cree haber visto al player
-    protected float _confusedTimer = 0f;
     [SerializeField] protected float _searchDuration = 3.5f; // El tiempo que busca al player luego de que este salga del RadiusToHear
-    protected float _searchTimer = 0f;
+    protected bool _isRunning = false, _questionBool, _watchingPlayer=false;
+    protected int _questionIndex;
     private EnemyVision _vision;
+
+    public delegate void SetMove();
+    protected SetMove _movement;
     protected override void Awake()
     {
     }
@@ -31,156 +34,15 @@ public abstract class AbstractEnemy : EntityMonobehaviour
     // Update is called once per frame
     protected override void Update()
     {
-        Timer();
-        GameMode();
-
+        if (_timer != 0)
+            TimerToSearch();
+        if (_agent.remainingDistance <= _shortDistance && _timer == 0)
+            NextMovement();
+        if (_mode == 1)
+            _agent.destination = GameManager.Instance.PlayerReference.transform.position;
     }
     protected override void FixedUpdate()
     {
-    }
-    protected override void GetScripts()
-    {
-        _agent = GetComponent<NavMeshAgent>();
-        _startPosition = transform.position;
-    }
-    protected void Move()
-    {
-        if (this is StandEnemyManager) // Enemigo guardia 
-        {
-            // Solo se mueve si busca o persigue (porque sino se quedaba caminando del lugar y no volvía a su posición inicial)
-            if (_mode != 1 && _mode != 2)
-            {
-                _agent.ResetPath();
-                return;
-            }
-        }
-        else
-        {
-            // Empieza el patrullaje normal de los enemigos normalitos
-            if (_mode == 0)
-            {
-                _agent.ResetPath();
-                return;
-            }
-        }
-
-        _agent.destination = _nextPosition;
-
-        if (_agent.remainingDistance <= 0.4f && _timer == 0.0f)
-        {
-            if (_mode != 1 && _mode != 2 && _mode != 3)
-            {
-                SetMode(0); // Solo resetea si patrulla
-            }
-        }
-    }
-
-    public void SetMode(int Mode)
-    {
-        _mode = Mode;
-
-        if (Mode == 2) // Buscar
-        {
-            _searchTimer = _searchDuration; 
-        }
-    }
-    protected void Timer()
-    {
-        _timer -= Time.deltaTime;
-        if (_timer < 0.0f)
-        {
-            _timer = 0.0f;
-        }
-    }
-
-    protected void GameMode()
-    {
-        switch (_mode)
-        {
-            case 1: // Persiguiendo 
-                _questionMark.Setting(true, 1);
-                _animator.SetBool("isRunning", true);
-                _animator.SetBool("isMoving", true);
-                _agent.speed = _runSpeed;
-                _nextPosition = GameManager.Instance.PlayerReference.transform.position;
-                transform.LookAt(_nextPosition);
-                break;
-
-            case 2: // Buscando (caso de impacto con sonidos o player entrando al radio de sonido del enemigo). O sea, busca al personaje/sonido
-                _searchTimer -= Time.deltaTime;
-                _questionMark.Setting(true, 0);
-                _animator.SetBool("isMoving", true);
-                _animator.SetBool("isRunning", false);
-                _agent.speed = _baseSpeed;
-
-                // Si el player no esta el el radio, vuelve a patrullar si se acaba el tiempo 
-                {
-                    _nextPosition = _startPosition;
-
-                    // Se fija si llego a la posicion inicial, y si lo hizo, lo pone mirando a su miradainicial(? no se como le decíamos
-                    if (Vector3.Distance(transform.position, _startPosition) < 0.2f)
-                    {
-                        transform.rotation = Quaternion.LookRotation((_facingStartPosition.position - transform.position).normalized);
-                        SetMode(0);
-                    }
-                }
-
-                break;
-
-            case 3: // Confundido (ve al player) es decir, se queda quieto en el lugar pero NO LO BUSCA, esto es solo por vision, no por radiustohear
-                _confusedTimer -= Time.deltaTime;
-                _questionMark.Setting(true, 0);
-                _animator.SetBool("isMoving", false);
-                _animator.SetBool("isRunning", false);
-                if (_confusedTimer <= 0f)
-                {
-                    if (_vision.IsPlayerVisible())
-                    {
-                        SetMode(1); // comienza a perseguir
-                    }
-                    else
-                    {
-                        SetMode(0); // vuelve a patrullar
-                    }
-                }
-                break;
-
-            default: // Patrullando
-                _questionMark.Setting(false, 0);
-                _agent.speed = _runSpeed / 2;
-                _animator.SetBool("isRunning", false);
-
-                _nextPosition = _startPosition;
-
-                if (this is StandEnemyManager) 
-                {
-                    float distance = Vector3.Distance(transform.position, _startPosition);
-                    bool shouldMove = distance > 0.4f;
-
-                    if (shouldMove)
-                    {
-                        _animator.SetBool("isMoving", true);
-                    }
-                    else
-                    {
-                        _animator.SetBool("isMoving", false);
-                        transform.LookAt(_facingStartPosition.position); 
-                    }
-
-                    return;
-                }
-
-                if ((_startPosition - transform.position).magnitude < 0.4f)
-                {
-                    transform.LookAt(_facingStartPosition.position);
-                    _animator.SetBool("isMoving", false);
-                }
-                else
-                {
-                    _animator.SetBool("isMoving", true);
-                }
-                break;
-        }
     }
 
     protected void OnCollisionEnter(Collision Entity)
@@ -190,23 +52,117 @@ public abstract class AbstractEnemy : EntityMonobehaviour
             if (!Entityscript.IsPlayerDeath())
             {
                 Entityscript.SetDeathAnimation();
-
-                if (_mode == 3) // Si estaba confundido
-                {
-                    SetMode(1); // Comienza a perseguir
-                }
-                else
-                {
-                    SetMode(0); // Vuelve a patrullar
-                }
-
-                _nextPosition = _startPosition;
-                _timer = 1.0f;
+                    SetMode(MoveResettingPath);
             }
-
-
         }
+    }
 
+    public void EnterConfusedState()
+    {
+        SetMode(MoveConfused);
+    }
+    public void Respawn()
+    {
+        transform.position = _startPosition;
+        _nextPosition = _startPosition;
+        SetMode(MoveResettingPath);
+        _agent.ResetPath();
+        _animator.SetBool("isMoving", false);
+        _animator.SetBool("isRunning", false);
+    }
+    #region InternalFunctions
+    protected void SetMode(SetMove TypeOfMovement)
+    {
+        _movement = TypeOfMovement;
+        GameMode();
+    }
+    protected void GameMode()
+    {
+        _movement();
+        _animator.SetBool("isRunning", _isRunning);
+        _animator.SetBool("isMoving",_isMoving );
+        _questionMark.Setting(_questionBool, _questionIndex);
+    }
+    protected void CheckConfusedState()
+    {
+        if (_watchingPlayer)
+            SetMode(MoveFollowTarget);
+        else
+            SetMode(MoveResettingPath);
+    }
+    protected virtual void NextMovement()
+    {
+        if (_mode == 2)
+        {
+            SetMode(MoveResettingPath);
+        }
+          
+    }
+    protected override void GetScripts()
+    {
+        _agent = GetComponent<NavMeshAgent>();
+        _startPosition = transform.position;
+    }
+    protected void TimerToSearch()
+    {
+        _timer -= Time.deltaTime;
+        if (_timer < 0) // Se Acabo el timer cambia de modo (Probablemente vuelva al 0)
+        {
+            _timer = 0.0f;
+            if (_mode != 3) // Solo en el Estado de Confusion Puede cambiar a otro valor que no sea ResetPath
+                SetMode(MoveResettingPath);
+            else
+                CheckConfusedState();
+        }
+    }
+    #endregion
+    #region TypeOfMovement
+    protected void MoveFollowTarget() // Persigue al Jugador
+    {
+        _mode = 1;
+        _isMoving = true;
+        _isRunning = true;
+        _questionBool = true;
+        _questionIndex = 1;
+        _agent.speed = _runSpeed;
+        _nextPosition = GameManager.Instance.PlayerReference.transform.position;
+        transform.LookAt(_nextPosition);
+        _agent.destination = _nextPosition;
+       // Debug.Log("Mirando Al Jugador");
+    }
+    protected void MoveFollowSound() // Persigue al lugar donde se genero el Sonido
+    {
+        _mode = 2;
+        _isMoving = true;
+        _isRunning = false;
+        _questionBool = true;
+        _questionIndex = 0;
+        _agent.speed = _baseSpeed;
+        _timer = _searchDuration;
+        _agent.destination = _nextPosition;
+       // Debug.Log("Yendo a donde escucho");
+    }
+    protected virtual void MoveResettingPath() // patron normal (Esta en distintos scripts "StandEnemy""StandardEnemy")
+    {
+    }
+    protected void MoveConfused()// Confundido (ve al player) es decir, se queda quieto en el lugar pero NO LO BUSCA, esto es solo por vision, no por radiustohear
+    {
+        _mode = 3;
+        _questionBool = true;
+        _questionIndex = 0;
+        _isMoving = true;
+        _isRunning = false;
+        _timer=_confusedDuration;
+        //Debug.Log("Vi al jugador");
+    }
+    #endregion
+    #region Set/Get Values
+    public void SetModeByIndex(int State)
+    {
+        if (State==2)
+        {
+            SetMode(MoveFollowSound);
+        }
     }
     public int GetMode()
     {
@@ -216,21 +172,12 @@ public abstract class AbstractEnemy : EntityMonobehaviour
     {
         _nextPosition = pos;
     }
-    public void EnterConfusedState()
-    {
-        _confusedTimer = _confusedDuration;
-        SetMode(3);
-    }
-    public void Respawn()
-    {
-        transform.position = _startPosition;
-        _nextPosition = _startPosition;
-        SetMode(0);
-        _agent.ResetPath();
-        _animator.SetBool("isMoving", false);
-        _animator.SetBool("isRunning", false);
-    }
 
+    public void WatchingPlayer(bool State)
+    {
+        _watchingPlayer=State;
+    }
+    #endregion
 }
 
 // HOLA ITAN. Bueno, nada, si vas a modificar lo el sonido, dejé marcado en cada case 
