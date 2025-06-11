@@ -29,6 +29,7 @@ public class EnemyVision : MonoBehaviour
     private Mesh visionMesh;
     private MeshFilter meshFilter;
     private MeshRenderer meshRenderer;
+    [SerializeField] private Transform _headReference;
 
     void Start()
     {
@@ -45,10 +46,11 @@ public class EnemyVision : MonoBehaviour
     void LateUpdate()
     {
         _playerDeath = _player.IsPlayerDeath();
-        if (!_playerDeath)
-        {
+        //if (!_playerDeath)
+        //{
             DrawFieldOfView();
-        }
+        //}
+        transform.forward= _headReference.forward;
     }
 
     void DrawFieldOfView()

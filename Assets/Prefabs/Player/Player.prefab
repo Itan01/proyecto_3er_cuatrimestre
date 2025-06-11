@@ -25,7 +25,7 @@ Transform:
   m_GameObject: {fileID: 68604019780935584}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 1.25, z: 1}
+  m_LocalPosition: {x: 0, y: 1.25, z: 1.25}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -43,7 +43,6 @@ GameObject:
   - component: {fileID: 3092996438172981320}
   - component: {fileID: 6649407852399767157}
   - component: {fileID: 9108395874818623830}
-  - component: {fileID: 5996679847694108144}
   - component: {fileID: 5580997404840228424}
   - component: {fileID: 7747024848938081973}
   m_Layer: 27
@@ -119,24 +118,6 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 80
   m_CollisionDetection: 0
---- !u!114 &5996679847694108144
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 953267351316528207}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cf542ab84c6faff45838557343598024, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _isInSmoke: 0
-  _cough: 0
-  _genericSound: {fileID: 6372071291580569302, guid: 8ddbe5c7d66751e4abe35b6712dc69f8, type: 3}
-  _smokeUI: {fileID: 0}
-  _model: {fileID: 7960441272055168766}
-  _orientation: {fileID: 0}
 --- !u!114 &5580997404840228424
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -307,10 +288,6 @@ PrefabInstance:
     - target: {fileID: 3116911911213293296, guid: 1d8d47af0ab4b374dade2ec8e4d74105, type: 3}
       propertyPath: m_LocalPosition.y
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3116911911213293296, guid: 1d8d47af0ab4b374dade2ec8e4d74105, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: -0.6
       objectReference: {fileID: 0}
     - target: {fileID: 3116911911213293296, guid: 1d8d47af0ab4b374dade2ec8e4d74105, type: 3}
       propertyPath: m_LocalRotation.w

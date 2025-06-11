@@ -8,12 +8,13 @@ public abstract class AbstractEnemy : EntityMonobehaviour
 {
     protected NavMeshAgent _agent;
     protected QuestionMarkManager _questionMark;
-    protected float _baseSpeed = 3.5f, _runSpeed = 7.5f, _shortDistance = 0.2f, _timer = 0.0f;
+    protected float _baseSpeed = 3.5f, _runSpeed = 7.5f, _shortDistance = 0.2f;
+    [SerializeField] protected float _timer = 0.0f;
     [SerializeField] protected int _mode = 0;
     [SerializeField] protected Transform _facingStartPosition;
     protected Vector3 _nextPosition, _startPosition;
-    [SerializeField] protected float _confusedDuration = 2f; // Este es el tiempo de confusión donde cree haber visto al player
-    [SerializeField] protected float _searchDuration = 3.5f; // El tiempo que busca al player luego de que este salga del RadiusToHear
+    protected float _confusedDuration = 1.0f; // Este es el tiempo de confusión donde cree haber visto al player
+    protected float _searchDuration = 7.0f; // El tiempo que busca al player luego de que este salga del RadiusToHear
     protected bool _isRunning = false, _questionBool, _watchingPlayer=false;
     protected int _questionIndex;
     private EnemyVision _vision;
@@ -36,7 +37,7 @@ public abstract class AbstractEnemy : EntityMonobehaviour
     {
         if (_timer != 0)
             TimerToSearch();
-        if (_agent.remainingDistance <= _shortDistance && _timer == 0)
+        if (_agent.remainingDistance <= _shortDistance)
             NextMovement();
         if (_mode == 1)
             _agent.destination = GameManager.Instance.PlayerReference.transform.position;
@@ -94,6 +95,7 @@ public abstract class AbstractEnemy : EntityMonobehaviour
     {
         if (_mode == 2)
         {
+            _animator.SetTrigger("isLooking");
             SetMode(MoveResettingPath);
         }
           
@@ -132,12 +134,12 @@ public abstract class AbstractEnemy : EntityMonobehaviour
     }
     protected void MoveFollowSound() // Persigue al lugar donde se genero el Sonido
     {
+        _animator.SetTrigger("isHearing");
         _mode = 2;
         _isMoving = true;
         _isRunning = false;
         _questionBool = true;
         _questionIndex = 0;
-        _agent.speed = _baseSpeed;
         _timer = _searchDuration;
         _agent.destination = _nextPosition;
        // Debug.Log("Yendo a donde escucho");
@@ -157,6 +159,11 @@ public abstract class AbstractEnemy : EntityMonobehaviour
     }
     #endregion
     #region Set/Get Values
+
+   public void SetSpeed(float Speed)
+    {
+        _agent.speed = Speed;
+    }
     public void SetModeByIndex(int State)
     {
         if (State==2)

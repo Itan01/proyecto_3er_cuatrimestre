@@ -36,7 +36,7 @@ public class StandEnemyManager : AbstractEnemy
         _agent.speed = _baseSpeed;
         _nextPosition = _startPosition;
         _agent.destination = _nextPosition;
-        _timer = 1.0f;
+        _timer = 4.0f;
         if (_agent.remainingDistance <= _shortDistance)
         {
             transform.LookAt( _facingStartPosition.position);

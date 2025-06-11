@@ -14,6 +14,7 @@ public class AbstractSound : MonoBehaviour // Sonidos Genericos,Movimiento Base
     protected int _index = 1;
     protected Vector3 _dir = new Vector3(0.0f, 0.0f, 0.0f);
     protected Vector3 _startPosition;
+    protected SpriteRenderer _sprite;
     [SerializeField] protected Transform _target;
     protected Rigidbody _rb;
     [SerializeField] private TrailRenderer _trail;
@@ -24,6 +25,7 @@ public class AbstractSound : MonoBehaviour // Sonidos Genericos,Movimiento Base
         BaseSettings();
         _startPosition = transform.position;
         _trail = GetComponentInChildren<TrailRenderer>();
+        _sprite = GetComponentInChildren<SpriteRenderer>();
     }
 
     protected virtual void Update()

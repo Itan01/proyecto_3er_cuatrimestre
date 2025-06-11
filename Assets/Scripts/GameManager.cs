@@ -77,7 +77,7 @@ public class GameManager : MonoBehaviour
         _pointsUI.text = ($"{_mainText}{_score}");
     }
 
-    [SerializeField] private TuriorialFirstTime _textFirstTime;
+    private TuriorialFirstTime _textFirstTime;
 
     public TuriorialFirstTime FirstTimeReference
     {

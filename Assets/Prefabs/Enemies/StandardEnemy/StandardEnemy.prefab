@@ -1136,6 +1136,7 @@ MonoBehaviour:
     m_Bits: 134217728
   drawGizmos: 1
   visionColor: {r: 1, g: 1, b: 0, a: 0.3}
+  _headReference: {fileID: 1136905187294497498}
 --- !u!1 &3036024466360663297
 GameObject:
   m_ObjectHideFlags: 0
@@ -2906,12 +2907,9 @@ MonoBehaviour:
   _makeNoise: 0
   _summonedByPlayer: 0
   _isMoving: 0
-  _questionMark: {fileID: 8707855237099066444}
+  _timer: 0
   _mode: 0
   _facingStartPosition: {fileID: 3537782074150218625}
-  _nextPosition: {x: 0, y: 0, z: 0}
-  _startPosition: {x: 0, y: 0, z: 0}
-  _confusedDuration: 2
   _positions:
   - {x: 0, y: 0, z: 0}
   - {x: 0, y: 0, z: 5}

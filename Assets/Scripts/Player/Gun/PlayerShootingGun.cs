@@ -47,6 +47,8 @@ public class PlayerShootingGun
 
     private void AvailableSound() 
     {
+        Vector3 aux = GameManager.Instance.CameraReference.transform.forward;
+        _player.transform.forward = aux;
         _hasASound = false;
         var NewSound = UnityEngine.Object.Instantiate(_soundReference, _spawn.position, Quaternion.identity);
         AbstractSound script = NewSound.GetComponent<AbstractSound>();
@@ -57,6 +59,8 @@ public class PlayerShootingGun
         script.SetIfPlayerSummoned(true);
         script.SetPlayerShootIt(true);
         script.SetSpawnPoint(_player.position);
+        aux.y = 0.0f;
+        _player.transform.forward = aux;
     }
 
 }

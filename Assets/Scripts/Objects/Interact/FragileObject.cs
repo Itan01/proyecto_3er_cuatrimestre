@@ -28,8 +28,6 @@ public class FragileObject : AbstractObjects
         if(Sound.gameObject.GetComponent<AbstractSound>())
         {
             var Summoner = Instantiate(_sound, transform.position + new Vector3(0.0f,1.0f,0.0f), Quaternion.identity);
-             AbstractSound script = Summoner.GetComponent<AbstractSound>();
-            script.SetDirection(Summoner.transform.position - transform.position, 5.0f, 1.0f);
          
             Destroy(gameObject);
         }

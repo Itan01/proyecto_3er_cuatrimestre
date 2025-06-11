@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.ProBuilder.Shapes;
 
 public class StandardSound : AbstractSound
 {
@@ -25,11 +26,11 @@ public class StandardSound : AbstractSound
     }
     private void OnCollisionEnter(Collision Enviroment)
     {
-        if (_playerShooted)
+        if (_playerShooted && !_canCatch)
         {
             SummonExplosion();
         }
-        Destroy(gameObject,0.1f);
+        Destroy(gameObject,0.25f);
     }
     protected void SummonExplosion()
     {
