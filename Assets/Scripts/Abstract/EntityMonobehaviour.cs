@@ -62,7 +62,7 @@ public class EntityMonobehaviour : MonoBehaviour
         if (_noiseTimer <= 0)
         {
             Vector3 RandomPosition= new Vector3(Random.Range(-2.0f,1.0f + 1), 0.2f, Random.Range(-2.0f,1.0f + 1)).normalized*2;
-            Debug.Log(RandomPosition);
+            //Debug.Log(RandomPosition);
             RandomPosition += transform.position;
             Vector3 Orientation = RandomPosition - transform.position;
             var Sound = Instantiate(_noise, RandomPosition, Quaternion.identity);

@@ -11,11 +11,4 @@ public class AbstractObjects : MonoBehaviour
     {
         _animator = GetComponent<Animator>();
     }
-
-    protected virtual void OnTriggerEnter(Collider Player)
-    {
-    }
-    protected virtual void OnTriggerExit(Collider Player)
-    {
-    }
 }

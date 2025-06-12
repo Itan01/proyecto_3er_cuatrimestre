@@ -2,10 +2,12 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using static UnityEngine.EventSystems.EventTrigger;
 
 public class FragileObject : AbstractObjects
 {
     [SerializeField] private GameObject _sound;
+    [SerializeField] private float _sizeMultiplier;
     private PlayerManager _player;
 
     protected override void Start()
@@ -13,6 +15,17 @@ public class FragileObject : AbstractObjects
         base.Start();
         _player = GameManager.Instance.PlayerReference;
 
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.gameObject.layer == 28)
+        {
+            Debug.Log("HII");
+            var Sound = Instantiate(_sound,transform.position, Quaternion.identity);
+            Sound.GetComponent<SoundRadiusTrigger>().SetMultiplier(GetSize());
+            Destroy(gameObject);
+        }
     }
 
     protected void Update()
@@ -23,14 +36,9 @@ public class FragileObject : AbstractObjects
             _animated=false;
         SetAnimation(_animated);
     }
-    void OnCollisionEnter(Collision Sound)
+    public float GetSize()
     {
-        if(Sound.gameObject.GetComponent<AbstractSound>())
-        {
-            var Summoner = Instantiate(_sound, transform.position + new Vector3(0.0f,1.0f,0.0f), Quaternion.identity);
-         
-            Destroy(gameObject);
-        }
+        return _sizeMultiplier;
     }
     private void SetAnimation(bool State)
     {

@@ -10047,11 +10047,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1d72d3aeec5a1dd45af3d984ee903dfd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _soundComponents:
+    _sound: {fileID: 6372071291580569302}
+    _spriteUi: {fileID: 0}
   _playerSummoned: 0
   _playerShooted: 0
   _target: {fileID: 0}
-  _trail: {fileID: 0}
-  _particleManager: {fileID: 0}
   _soundExplosion: {fileID: 8565270419349600205, guid: ca0acd1115083b044836c659c5a9a799, type: 3}
 --- !u!114 &8706630358038483147
 MonoBehaviour:

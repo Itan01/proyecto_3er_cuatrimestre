@@ -12,6 +12,7 @@ public class PlayerManager : EntityMonobehaviour
     private PlayerMovement _scriptMovement;
     private PlayerShootingGun _scriptShootingGun;
     private PlayerInteractions _scriptInteractions;
+    private GrabbingSound _areaCatching;
     private float _counter = 0;
     [SerializeField] private bool _onCaptured = false;
     [Header("<color=green>LayersMask</color>")]
@@ -24,8 +25,6 @@ public class PlayerManager : EntityMonobehaviour
     [SerializeField] private Transform _spawnProyectil;
     [SerializeField] private Transform _hipsPosition;
     [Header("<color=yellow>Variables and Prefabs</color>")]
-    private GrabbingSound _areaCatching;
-    [SerializeField] UISetSound _scriptUISound;
     [SerializeField] TransitionFade _scriptTransition;
 
     protected override void Awake()
@@ -63,19 +62,15 @@ public class PlayerManager : EntityMonobehaviour
     protected override void GetScripts()
     {
         _scriptCollider = new SetSizeCollider(_capsuleCollider, _boxCollider);
-        _scriptShootingGun = new PlayerShootingGun(_spawnProyectil, _camTransform, _scriptUISound, transform);
+        _scriptShootingGun = new PlayerShootingGun(_spawnProyectil, _camTransform, transform);
         _scriptInteractions = new PlayerInteractions(transform, _camTransform, InteractMask);
         _scriptController = new PlayerController(_scriptShootingGun, _scriptInteractions, _animator);
         _scriptMovement = new PlayerMovement(transform, _rb, _camTransform, _modelTransform, _animator, _scriptCollider);
     }
-
-    public void ShootGunSetSound(GameObject reference)
+    public void SetSound(int Index)
     {
-        _scriptShootingGun.SetSound(reference);
-    }
-    public void SetSoundUI(int index)
-    {
-        _scriptUISound.SetSound(index);
+        SoundStruct aux = GameManager.Instance.SoundsReferences.GetSoundComponents(Index);
+        _scriptShootingGun.SetSound(aux);
     }
     public void SetDeathAnimation()
     {

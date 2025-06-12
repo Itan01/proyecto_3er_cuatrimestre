@@ -7,7 +7,7 @@ using static UnityEngine.ParticleSystem;
 
 public class AbstractSound : MonoBehaviour // Sonidos Genericos,Movimiento Base
 {
-    protected float _maxDistanceRay = 25.0f;
+    protected float _maxDistanceRay = 50.0f;
     [SerializeField] protected bool _playerSummoned = false, _playerShooted= false ;
     protected bool _canCatch = false, _freeze = false;
     protected float _speed = 5.0f, _size = 1.0f;
@@ -17,7 +17,7 @@ public class AbstractSound : MonoBehaviour // Sonidos Genericos,Movimiento Base
     protected SpriteRenderer _sprite;
     [SerializeField] protected Transform _target;
     protected Rigidbody _rb;
-    [SerializeField] private TrailRenderer _trail;
+    protected TrailRenderer _trail;
 
 
     protected virtual void Start()
@@ -42,7 +42,6 @@ public class AbstractSound : MonoBehaviour // Sonidos Genericos,Movimiento Base
     protected virtual void FixedUpdate()
     {
         Move();
-
     }
 
     protected virtual void Move()
@@ -106,10 +105,7 @@ public class AbstractSound : MonoBehaviour // Sonidos Genericos,Movimiento Base
         if (Entity.TryGetComponent<PlayerManager>(out PlayerManager PlayerScript))
         {
             if (_canCatch)
-            {
-                PlayerScript.ShootGunSetSound(gameObject);
-                PlayerScript.SetSoundUI(_index);
-            }
+                PlayerScript.SetSound(_index);
         }
     }
     public bool HasLineOfVision(LayerMask mask, Vector3 EntityPosition)

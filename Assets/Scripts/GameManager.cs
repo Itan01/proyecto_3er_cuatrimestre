@@ -31,6 +31,14 @@ public class GameManager : MonoBehaviour
         set { _player = value; }
     }
 
+    private SoundReferences _soundRef;
+    public SoundReferences SoundsReferences
+    {
+        get { return _soundRef; }
+        set {  _soundRef = value; }
+    }
+
+
     public void RegisterEnemy(AbstractEnemy enemy)
     {
         _enemies.Add(enemy);
@@ -76,6 +84,14 @@ public class GameManager : MonoBehaviour
         _score += value;
         _pointsUI.text = ($"{_mainText}{_score}");
     }
+
+    private UISetSound _soundUI;
+    public UISetSound UISound
+    {
+        get { return _soundUI; }
+        set { _soundUI=value; }
+    }
+
 
     private TuriorialFirstTime _textFirstTime;
 

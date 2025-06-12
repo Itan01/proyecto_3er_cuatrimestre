@@ -18,14 +18,14 @@ public class ObjectValuable : AbstractObjects, IInteractableObject
 
     }
 
-    protected override void OnTriggerEnter(Collider Player)
+    protected void OnTriggerEnter(Collider Player)
     {
         if (Player.GetComponent<PlayerManager>())
         {
             _animator.SetBool("Shine", true);
         }
     }
-    protected override void OnTriggerExit(Collider Player)
+    protected void OnTriggerExit(Collider Player)
     {
         if (Player.GetComponent<PlayerManager>())
         {

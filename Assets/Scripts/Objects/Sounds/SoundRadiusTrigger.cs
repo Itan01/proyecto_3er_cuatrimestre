@@ -1,9 +1,17 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.ComponentModel;
+using System.Drawing;
 using UnityEngine;
 
 public class SoundRadiusTrigger : MonoBehaviour
 {
+    private float _size=1, _multiplier=5;
+    private void Update()
+    {
+        transform.localScale = new Vector3(_size, _size, _size);
+        _size += Time.deltaTime * _multiplier;
+    }
     protected void OnTriggerEnter(Collider Entity)
     {
         if (Entity.TryGetComponent<AbstractEnemy>(out AbstractEnemy Script))// sigue el sonido, si el enemigo persigue al jugador, ignora el sonido
@@ -12,6 +20,13 @@ public class SoundRadiusTrigger : MonoBehaviour
                 Script.SetPosition(transform.position);
             Script.SetModeByIndex(2);
         }
+    }
+
+    public void SetMultiplier(float Multiplier)
+    {
+        if (Multiplier == 0)
+            Multiplier = 1;
+        _multiplier = Multiplier;
     }
 }
 

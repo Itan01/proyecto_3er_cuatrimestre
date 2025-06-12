@@ -12,7 +12,8 @@ GameObject:
   - component: {fileID: 4332557149041568687}
   - component: {fileID: 5681125853273998200}
   - component: {fileID: 2642444182709799247}
-  m_Layer: 0
+  - component: {fileID: 6894372495869266645}
+  m_Layer: 24
   m_Name: FragileObject
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -72,6 +73,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _distanceToAnimate: 10
   _sound: {fileID: 8565270419349600205, guid: ca0acd1115083b044836c659c5a9a799, type: 3}
+  _sizeMultiplier: 20
 --- !u!95 &2642444182709799247
 Animator:
   serializedVersion: 5
@@ -93,6 +95,27 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!135 &6894372495869266645
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3658063451802110657}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Radius: 1.5
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &4479748707613978806
 GameObject:
   m_ObjectHideFlags: 0
@@ -104,7 +127,7 @@ GameObject:
   - component: {fileID: 7194506539665480933}
   - component: {fileID: 5183417433609680584}
   - component: {fileID: 2328634265483699067}
-  m_Layer: 22
+  m_Layer: 24
   m_Name: Model
   m_TagString: Untagged
   m_Icon: {fileID: 0}

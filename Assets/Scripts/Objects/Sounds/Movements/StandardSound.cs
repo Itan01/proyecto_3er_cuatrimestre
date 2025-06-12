@@ -5,7 +5,7 @@ using UnityEngine.ProBuilder.Shapes;
 
 public class StandardSound : AbstractSound
 {
-    [SerializeField] private ParticlesSoundManager _particleManager;
+    private ParticlesSoundManager _particleManager;
     [SerializeField] private GameObject _soundExplosion;
     protected override void Start()
     {
