@@ -22,7 +22,7 @@ public class StandEnemyManager : AbstractEnemy
         base.NextMovement();    
         if(_mode == 0)
         {
-            SetMode(MoveResettingPath);
+            SetMode(MoveStandPosition);
         }
     }
 
@@ -35,14 +35,7 @@ public class StandEnemyManager : AbstractEnemy
         _questionIndex = 0;
         _agent.speed = _baseSpeed;
         _nextPosition = _startPosition;
-        _agent.destination = _nextPosition;
-        _timer = 4.0f;
-        if (_agent.remainingDistance <= _shortDistance)
-        {
-            transform.LookAt( _facingStartPosition.position);
-            _isMoving = false;
-        }
-            
+        _agent.destination = _nextPosition;  
         //Debug.Log("Origen");
     }
 }

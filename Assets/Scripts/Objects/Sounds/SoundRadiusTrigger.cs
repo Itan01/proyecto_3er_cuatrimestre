@@ -1,7 +1,5 @@
 using System.Collections;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Drawing;
 using UnityEngine;
 
 public class SoundRadiusTrigger : MonoBehaviour
@@ -18,7 +16,7 @@ public class SoundRadiusTrigger : MonoBehaviour
         {
             if (Script.GetMode() != 1)
                 Script.SetPosition(transform.position);
-            Script.SetModeByIndex(2);
+            Script.SetModeByIndex(5);
         }
     }
 

@@ -50,7 +50,7 @@ public class PlayerShootingGun
 
     private void AvailableSound() 
     {
-        Vector3 aux = GameManager.Instance.CameraReference.transform.forward;
+        Vector3 aux = _orientation.forward;
         _player.transform.forward = aux;
         _hasASound = false;
         var NewSound = UnityEngine.Object.Instantiate(_soundReference, _spawn.position, Quaternion.identity);

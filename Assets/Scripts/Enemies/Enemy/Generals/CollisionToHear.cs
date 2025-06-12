@@ -14,23 +14,17 @@ public class CollisionToHear : MonoBehaviour
 
     private void Update()
     {
+        if (_player.IsPlayerDeath() || !_player.IsPlayerMoving()) return;
         if ((_player.transform.position - transform.position).magnitude <= 6.5f)
         {
-            if (_player.IsPlayerMoving() && !_player.IsPlayerCrouching() && !_player.IsPlayerDeath())
-            {
+            if (_player.IsPlayerCrouching()) return;
                 _scriptManager.SetPosition(_player.transform.position);
                 if(_scriptManager.GetMode() != 1)
+                {
+                _scriptManager.SetPosition(_player.transform.position);
                 _scriptManager.SetModeByIndex(2);
-            }
+                }
+               
         }
     }
-
-    private void OnTriggerEnter(Collider Sound)
-    {
-        if (Sound.TryGetComponent<AbstractSound>(out AbstractSound ScriptSound))
-        {
-            ScriptSound.SetTarget(transform, 10.0f);
-        }
-    }
-
 }

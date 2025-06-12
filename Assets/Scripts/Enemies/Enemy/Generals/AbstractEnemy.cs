@@ -14,7 +14,7 @@ public abstract class AbstractEnemy : EntityMonobehaviour
     [SerializeField] protected Transform _facingStartPosition;
     protected Vector3 _nextPosition, _startPosition;
     protected float _confusedDuration = 1.0f; // Este es el tiempo de confusión donde cree haber visto al player
-    protected float _searchDuration = 7.0f; // El tiempo que busca al player luego de que este salga del RadiusToHear
+    protected float _searchDuration = 20.0f; // El tiempo que busca al player luego de que este salga del RadiusToHear
     protected bool _isRunning = false, _questionBool, _watchingPlayer=false;
     protected int _questionIndex;
     private EnemyVision _vision;
@@ -41,6 +41,8 @@ public abstract class AbstractEnemy : EntityMonobehaviour
             NextMovement();
         if (_mode == 1)
             _agent.destination = GameManager.Instance.PlayerReference.transform.position;
+        if (_mode == -1)
+            transform.LookAt(_facingStartPosition);
     }
     protected override void FixedUpdate()
     {
@@ -79,6 +81,7 @@ public abstract class AbstractEnemy : EntityMonobehaviour
     }
     protected void GameMode()
     {
+        transform.LookAt(Vector3.Slerp(transform.forward,_nextPosition, 10.0f));
         _movement();
         _animator.SetBool("isRunning", _isRunning);
         _animator.SetBool("isMoving",_isMoving );
@@ -95,10 +98,9 @@ public abstract class AbstractEnemy : EntityMonobehaviour
     {
         if (_mode == 2)
         {
-            _animator.SetTrigger("isLooking");
-            SetMode(MoveResettingPath);
+            SetMode(MoveLooking);
         }
-          
+
     }
     protected override void GetScripts()
     {
@@ -108,17 +110,29 @@ public abstract class AbstractEnemy : EntityMonobehaviour
     protected void TimerToSearch()
     {
         _timer -= Time.deltaTime;
-        if (_timer < 0) // Se Acabo el timer cambia de modo (Probablemente vuelva al 0)
+        if (_timer < 0)
         {
             _timer = 0.0f;
-            if (_mode != 3) // Solo en el Estado de Confusion Puede cambiar a otro valor que no sea ResetPath
-                SetMode(MoveResettingPath);
-            else
+            if (_mode == 3) // Solo en el Estado de Confusion Puede cambiar a otro valor que no sea ResetPath
                 CheckConfusedState();
-        }
+            else
+                SetMode(MoveResettingPath);
+        } // Se Acabo el timer cambia de modo (Probablemente vuelva al 0)
+
     }
     #endregion
     #region TypeOfMovement
+    protected void MoveStandPosition() // Persigue al Jugador
+    {
+        _mode = -1;
+        _isMoving = false;
+        _isRunning = false;
+        _questionBool = false;
+        _questionIndex = 1;
+        _agent.speed = 0.0f;
+        _nextPosition = _startPosition;
+        transform.LookAt( _facingStartPosition);
+    }
     protected void MoveFollowTarget() // Persigue al Jugador
     {
         _mode = 1;
@@ -128,22 +142,21 @@ public abstract class AbstractEnemy : EntityMonobehaviour
         _questionIndex = 1;
         _agent.speed = _runSpeed;
         _nextPosition = GameManager.Instance.PlayerReference.transform.position;
-        transform.LookAt(_nextPosition);
         _agent.destination = _nextPosition;
        // Debug.Log("Mirando Al Jugador");
     }
     protected void MoveFollowSound() // Persigue al lugar donde se genero el Sonido
     {
-        _animator.SetTrigger("isHearing");
         _mode = 2;
         _isMoving = true;
         _isRunning = false;
         _questionBool = true;
         _questionIndex = 0;
-        _timer = _searchDuration;
+        _agent.speed = _baseSpeed;
         _agent.destination = _nextPosition;
        // Debug.Log("Yendo a donde escucho");
     }
+
     protected virtual void MoveResettingPath() // patron normal (Esta en distintos scripts "StandEnemy""StandardEnemy")
     {
     }
@@ -152,24 +165,47 @@ public abstract class AbstractEnemy : EntityMonobehaviour
         _mode = 3;
         _questionBool = true;
         _questionIndex = 0;
-        _isMoving = true;
+        _isMoving = false;
         _isRunning = false;
         _timer=_confusedDuration;
+        transform.LookAt(GameManager.Instance.PlayerReference.transform.position);
         //Debug.Log("Vi al jugador");
+    }
+    protected void MoveLooking()
+    {
+        _mode = 4;
+        _questionBool = true;
+        _questionIndex = 0;
+        _isMoving = false;
+        _isRunning = false; 
+        _animator.SetTrigger("isLooking");
+    }
+
+    protected void MoveStartHearing() // Persigue al Jugador
+    {
+        _animator.SetTrigger("isHearing");
+        _mode = 5;
+        _isMoving = false;
+        _isRunning = false;
+        _questionBool = true;
+        _questionIndex = 0;
+        _agent.speed = _baseSpeed;
     }
     #endregion
     #region Set/Get Values
 
-   public void SetSpeed(float Speed)
+    public void SetSpeed(float Speed)
     {
         _agent.speed = Speed;
     }
     public void SetModeByIndex(int State)
     {
-        if (State==2)
-        {
+        if (State == 0)
+            SetMode(MoveResettingPath);
+        else if (State==2)
             SetMode(MoveFollowSound);
-        }
+        else if(State == 5)
+            SetMode(MoveStartHearing);
     }
     public int GetMode()
     {
@@ -177,6 +213,7 @@ public abstract class AbstractEnemy : EntityMonobehaviour
     }
     public void SetPosition(Vector3 pos)
     {
+        pos.y =transform.position.y;
         _nextPosition = pos;
     }
 
@@ -186,26 +223,3 @@ public abstract class AbstractEnemy : EntityMonobehaviour
     }
     #endregion
 }
-
-// HOLA ITAN. Bueno, nada, si vas a modificar lo el sonido, dejé marcado en cada case 
-// para lo que sirve cada uno. En teoría habría que hacer una layer como dijiste de particulas
-// y hacer que el estado de busqueda se aplique también no solo al colisionar con el player 
-// en el radiustohear, sino también que vaya a buscar al sonido. 
-// En el caso del sonido del sonido crash que hacemos ahora, tendría que funcionar solo agregarlo
-// y ya está, porque es muy similar a lo que pasa con el player ahora. 
-// La verdad no sé si sirvió de algo los comentarios pero lo di todo
-
-
-
-//if (Entity.gameObject.TryGetComponent<AbstractSound>(out AbstractSound SoundScript))
-//{
-//    if (SoundScript.GetIfPlayerSummoned() && _mode !=1)
-//    {
-//        _nextPosition = SoundScript.GetStartPoint();
-//        SetMode(2);
-//        _timer = 1.0f;
-//    }
-//    Destroy(SoundScript.gameObject);
-//}
-
-// Esto es lo que teníamos antes para cuando "atraia el sonido". lo dejé como comentario x las dudas

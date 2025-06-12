@@ -46,16 +46,14 @@ public class EnemyVision : MonoBehaviour
     void LateUpdate()
     {
         _playerDeath = _player.IsPlayerDeath();
-        //if (!_playerDeath)
-        //{
-            DrawFieldOfView();
-        //}
+        DrawFieldOfView();
+            _scriptManager.WatchingPlayer(_seePlayer);
         transform.forward= _headReference.forward;
+        _seePlayer = false;
     }
 
     void DrawFieldOfView()
     {
-        _seePlayer = false;
         switch (_scriptManager.GetMode())
         {
             case 0:
@@ -108,8 +106,8 @@ public class EnemyVision : MonoBehaviour
                 if (hit.collider.TryGetComponent<PlayerManager>(out PlayerManager script))
                 {
                     script.SetCaptured(true);
-                    _seePlayer = true;
-                    if (_scriptManager.GetMode() == 0)
+                    _seePlayer = true;  
+                    if (_scriptManager.GetMode() != 1 && _scriptManager.GetMode()!=3)
                     {
                         _scriptManager.EnterConfusedState();
                     }
@@ -131,8 +129,6 @@ public class EnemyVision : MonoBehaviour
         visionMesh.vertices = vertices;
         visionMesh.triangles = triangles;
         visionMesh.RecalculateNormals();
-
-        _scriptManager.WatchingPlayer(_seePlayer);
     }
 
     Vector3 DirFromAngle(float angleDegrees, bool global)

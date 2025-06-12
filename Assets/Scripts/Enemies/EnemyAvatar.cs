@@ -6,20 +6,22 @@ using UnityEngine.AI;
 public class EnemyAvatar : MonoBehaviour
 {
     private AbstractEnemy _enemyScript;
-    private NavMeshAgent _agent;
 
     private void Start()
     {
         _enemyScript = GetComponentInParent<AbstractEnemy>();
-        _agent = GetComponentInParent<NavMeshAgent>();
     }
 
-    public void HearSound()
+    public void ResettingPath()
     {
-        _enemyScript.SetSpeed(0.0f);
+        _enemyScript.SetModeByIndex(0);
     }
-    public void StopHearing()
+    public void SearchSound()
     {
-        _enemyScript.SetSpeed(3.5f);
+        _enemyScript.SetModeByIndex(2);
+    }
+    public void FollowTarget()
+    {
+        _enemyScript.SetModeByIndex(1);
     }
 }

@@ -21,7 +21,6 @@ public class FragileObject : AbstractObjects
     {
         if (other.gameObject.layer == 28)
         {
-            Debug.Log("HII");
             var Sound = Instantiate(_sound,transform.position, Quaternion.identity);
             Sound.GetComponent<SoundRadiusTrigger>().SetMultiplier(GetSize());
             Destroy(gameObject);
