@@ -5,6 +5,7 @@ using UnityEngine;
 public class CameraDetector : MonoBehaviour
 {
     private CameraObstacleController _CameraObstacleScript;
+    [SerializeField] private List<AbstractEnemy> _enemies ;
 
     private void Start()
     {
@@ -16,6 +17,16 @@ public class CameraDetector : MonoBehaviour
         if (Player.GetComponent<PlayerManager>())
         {
             _CameraObstacleScript.SetTarget(true);
+            foreach (AbstractEnemy enemy in _enemies)
+            {
+                if (enemy != null) 
+                {
+                    enemy.SetPosition(transform.position); 
+                    enemy.SetModeByIndex(2);
+                }
+            }
+            //_enemies.SetPosition(transform.position);
+            //_enemies.SetModeByIndex(2);
             Debug.Log("ON");
         }
     }
