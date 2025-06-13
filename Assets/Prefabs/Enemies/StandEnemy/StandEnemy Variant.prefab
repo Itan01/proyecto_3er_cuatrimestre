@@ -161,14 +161,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   viewAngle: 60
-  viewRadius: 12
+  viewRadius: 20
   rayCount: 100
   obstacleMask:
     serializedVersion: 2
-    m_Bits: 3854565376
+    m_Bits: 3850371072
   detectableMask:
     serializedVersion: 2
-    m_Bits: 134217728
+    m_Bits: 3984588800
   drawGizmos: 1
   visionColor: {r: 1, g: 1, b: 0, a: 0.3}
   _headReference: {fileID: 1961564996938581112}
@@ -907,7 +907,7 @@ NavMeshAgent:
   m_GameObject: {fileID: 2446471178231996540}
   m_Enabled: 1
   m_AgentTypeID: -1372625422
-  m_Radius: 0.5
+  m_Radius: 0.25
   m_Speed: 3.5
   m_Acceleration: 1000
   avoidancePriority: 50
@@ -934,7 +934,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _makeNoise: 0
   _summonedByPlayer: 0
+  _noiseTimer: 0.5
+  _noiseTimerRef: 0.5
   _isMoving: 0
+  _isCrouching: 0
   _timer: 0
   _mode: 0
   _facingStartPosition: {fileID: 1475923032389788533}

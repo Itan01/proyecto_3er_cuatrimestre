@@ -1126,14 +1126,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   viewAngle: 52
-  viewRadius: 10
+  viewRadius: 20
   rayCount: 100
   obstacleMask:
     serializedVersion: 2
-    m_Bits: 3854565376
+    m_Bits: 3850371072
   detectableMask:
     serializedVersion: 2
-    m_Bits: 134217728
+    m_Bits: 3984588800
   drawGizmos: 1
   visionColor: {r: 1, g: 1, b: 0, a: 0.3}
   _headReference: {fileID: 1136905187294497498}
@@ -1376,6 +1376,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8535912527422663638}
   - component: {fileID: 5904984727979150903}
+  - component: {fileID: 8492320920895008000}
   m_Layer: 0
   m_Name: Y Bot
   m_TagString: Untagged
@@ -1423,6 +1424,18 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &8492320920895008000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3670394113276447142}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f65f54d1ddd7d024ea036edad3d747de, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &3729741938857122711
 GameObject:
   m_ObjectHideFlags: 0
@@ -2879,7 +2892,7 @@ NavMeshAgent:
   m_GameObject: {fileID: 8908676807321237897}
   m_Enabled: 1
   m_AgentTypeID: -1372625422
-  m_Radius: 0.4
+  m_Radius: 0.25
   m_Speed: 3.5
   m_Acceleration: 1000
   avoidancePriority: 50
@@ -2906,7 +2919,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _makeNoise: 0
   _summonedByPlayer: 0
+  _noiseTimer: 0.5
+  _noiseTimerRef: 0.5
   _isMoving: 0
+  _isCrouching: 0
   _timer: 0
   _mode: 0
   _facingStartPosition: {fileID: 3537782074150218625}

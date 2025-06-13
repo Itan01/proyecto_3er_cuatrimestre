@@ -47,15 +47,17 @@ public class EnemyVision : MonoBehaviour
     {
         _playerDeath = _player.IsPlayerDeath();
         DrawFieldOfView();
-            _scriptManager.WatchingPlayer(_seePlayer);
-        transform.forward= _headReference.forward;
+        _scriptManager.WatchingPlayer(_seePlayer);
         _seePlayer = false;
+        GameManager.Instance.PlayerReference.SetCaptured(false);
+        transform.forward= _headReference.forward;
     }
 
     void DrawFieldOfView()
     {
         switch (_scriptManager.GetMode())
         {
+            case -1:
             case 0:
                 visionColor = new Color(0, 1, 0, 0.3f); // verde
                 break;
@@ -106,7 +108,7 @@ public class EnemyVision : MonoBehaviour
                 if (hit.collider.TryGetComponent<PlayerManager>(out PlayerManager script))
                 {
                     script.SetCaptured(true);
-                    _seePlayer = true;  
+                    _seePlayer = true; 
                     if (_scriptManager.GetMode() != 1 && _scriptManager.GetMode()!=3)
                     {
                         _scriptManager.EnterConfusedState();

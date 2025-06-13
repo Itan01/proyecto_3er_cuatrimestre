@@ -1,73 +1,50 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class StandardEnemy : AbstractEnemy
 {
-    [SerializeField] private Vector3[] _positions;
-    [SerializeField] private int _index;
+    [SerializeField] protected Vector3[] _positions;
+    [SerializeField] protected int _index;
     protected override void Start()
     {
         base.Start();
-        for(int i =0;i<_positions.Length; i++)
+        for (int i = 0; i < _positions.Length; i++)
         {
             _positions[i] += transform.position;
         }
-        _positions[0]=transform.position;
-        _index = 0;
-        _nextPosition = _positions[_index];
+        _positions[0] = transform.position;
+        SetMode(MoveResettingPath);
     }
-
-    // Update is called once per frame
     protected override void Update()
     {
-        Pattern();
+        base.Update();
     }
     protected override void FixedUpdate()
     {
     }
-    protected virtual void Pattern()
+    protected override void NextMovement()
     {
-        if (_mode == 1) // Escucha al jugador
+        base.NextMovement();
+        if (_mode == 0)
         {
-            _questionMark.Setting(true, 1);
-            _animator.SetBool("isRunning", true);
-            _animator.SetBool("isMoving", true);
-            _agent.speed = _runSpeed;
-            _nextPosition = GameManager.Instance.PlayerReference.transform.position;
+            SetMode(MoveResettingPath);
         }
-        else if (_mode == 2)// Escucha un Sonido
-        {
-            _agent.speed = _baseSpeed;
-            _animator.SetBool("isMoving", true);
-            _animator.SetBool("isRunning", false);
-            _questionMark.Setting(true, 0);
-        }
-        else
-        {
-            _questionMark.Setting(false, 0);
-            _animator.SetBool("isMoving", true);
-            _animator.SetBool("isRunning", false);
-            if (_agent.remainingDistance <= 0.4f)
-            {
-               
-                _index++;
-                
-                if (_index >= _positions.Length)
-                {
-                    _index = 0;
-                }
-                transform.LookAt(new Vector3(_positions[_index].x,transform.position.y, _positions[_index].z));
-                _nextPosition = _positions[_index];
+    }
 
-            }
-            else
-            {
-                _agent.speed = _baseSpeed;
-                _nextPosition = _positions[_index];
-                _startPosition = _nextPosition;
-            }
-        }
-
+    protected override void MoveResettingPath() // patron normal (Esta en distintos scripts "StandEnemy""StandardEnemy")
+    {
+        _mode = 0;
+        _isMoving = true;
+        _isRunning = false;
+        _questionBool = false;
+        _questionIndex = 0;
+        _agent.speed = _baseSpeed;
+        _index++;
+        if (_index >= _positions.Length) _index = 0;
+        _nextPosition = _positions[_index];
+        _agent.destination = _nextPosition;
+        _startPosition = _nextPosition;
     }
 }

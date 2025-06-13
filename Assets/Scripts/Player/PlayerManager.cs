@@ -62,7 +62,7 @@ public class PlayerManager : EntityMonobehaviour
     protected override void GetScripts()
     {
         _scriptCollider = new SetSizeCollider(_capsuleCollider, _boxCollider);
-        _scriptShootingGun = new PlayerShootingGun(_spawnProyectil, _camTransform, transform);
+        _scriptShootingGun = new PlayerShootingGun(_spawnProyectil, _camTransform, transform,_modelTransform);
         _scriptInteractions = new PlayerInteractions(transform, _camTransform, InteractMask);
         _scriptController = new PlayerController(_scriptShootingGun, _scriptInteractions, _animator);
         _scriptMovement = new PlayerMovement(transform, _rb, _camTransform, _modelTransform, _animator, _scriptCollider);

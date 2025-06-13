@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 718868970819144316}
   - component: {fileID: 8819431841741929415}
   - component: {fileID: 3603851817605580048}
-  - component: {fileID: 4027996826901416449}
+  - component: {fileID: 3233246936177080671}
   m_Layer: 0
   m_Name: Bars
   m_TagString: Untagged
@@ -84,8 +84,8 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!64 &4027996826901416449
-MeshCollider:
+--- !u!65 &3233246936177080671
+BoxCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -102,7 +102,6 @@ MeshCollider:
   m_IsTrigger: 0
   m_ProvidesContacts: 0
   m_Enabled: 1
-  serializedVersion: 5
-  m_Convex: 1
-  m_CookingOptions: 30
-  m_Mesh: {fileID: -7860970787427425400, guid: 60d389a47aa87614ea7178032ce443ef, type: 3}
+  serializedVersion: 3
+  m_Size: {x: 100.00001, y: 25, z: 100.00147}
+  m_Center: {x: 0.000007629394, y: 0.00032615662, z: -0.0019454956}

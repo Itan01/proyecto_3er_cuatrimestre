@@ -8,6 +8,7 @@ public class SummonSoundFromDoor : MonoBehaviour
     private Animator _animator;
     [SerializeField] private bool _doorOpen=false, _forceDoor=false;
     [SerializeField] private GameObject _soundToSummon;
+    private int _count = 0;
     void Start()
     {
         _animator = GetComponentInChildren<Animator>();
@@ -22,12 +23,14 @@ public class SummonSoundFromDoor : MonoBehaviour
             {
                 if(script.GetCaptured()) return;
                 SummonSound(Entity.transform.position, true);
+                
             }
                 
             else
                 SummonSound(Entity.transform.position, false);
             _doorOpen = true;
             _animator.SetBool("isOpen", _doorOpen);
+            _count++;
 
         }
     }
@@ -36,12 +39,18 @@ public class SummonSoundFromDoor : MonoBehaviour
         if (Entity.GetComponent<EntityMonobehaviour>() && !_forceDoor)
         {
             if (!_doorOpen) return;
-            _doorOpen = false;
-            _animator.SetBool("isOpen", _doorOpen);
-            if (Entity.GetComponent<PlayerManager>())
-                SummonSound(Entity.transform.position, true);
-            else
-                SummonSound(Entity.transform.position, false);
+            _count--;
+            if(_count <0)
+            {
+                _count = 0;
+                _doorOpen = false;
+                _animator.SetBool("isOpen", _doorOpen);
+                if (Entity.GetComponent<PlayerManager>())
+                    SummonSound(Entity.transform.position, true);
+                else
+                    SummonSound(Entity.transform.position, false);
+            }
+
         }
     }
 

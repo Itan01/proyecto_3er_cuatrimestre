@@ -9,6 +9,7 @@ public class SummonSoundFromWalking : MonoBehaviour
     {
         if (Entity.TryGetComponent<EntityMonobehaviour>(out EntityMonobehaviour ScriptEntity))
         {
+            //Debug.Log(Entity.name);
             ScriptEntity.SetSoundInvoker(true);
             ScriptEntity.GameObjectSoundInvoker(_sound);
         }

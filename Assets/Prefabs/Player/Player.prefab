@@ -25,7 +25,7 @@ Transform:
   m_GameObject: {fileID: 68604019780935584}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 1.25, z: 1.25}
+  m_LocalPosition: {x: 0, y: 1.5, z: 2}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -132,7 +132,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _makeNoise: 0
   _summonedByPlayer: 0
+  _noiseTimer: 0.5
+  _noiseTimerRef: 0.5
   _isMoving: 0
+  _isCrouching: 0
   _onCaptured: 0
   _soundMask:
     serializedVersion: 2
@@ -147,7 +150,6 @@ MonoBehaviour:
   _modelTransform: {fileID: 7960441272055168766}
   _spawnProyectil: {fileID: 7472403954870710889}
   _hipsPosition: {fileID: 2461632698473160298}
-  _scriptUISound: {fileID: 0}
   _scriptTransition: {fileID: 0}
 --- !u!65 &7747024848938081973
 BoxCollider:

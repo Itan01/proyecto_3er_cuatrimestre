@@ -8,16 +8,17 @@ using System.Security.Cryptography.X509Certificates;
 public class PlayerShootingGun
 {
     private GameObject _soundReference;
-    private float _speed=6.0f, _size=1.2f;
-    private Transform _spawn, _orientation, _player;
+    private float _speed=7.5f, _size=1.2f;
+    private Transform _spawn, _orientation, _player, _model;
     private bool _soundEnabled = true;
     private bool _hasASound;
 
-    public PlayerShootingGun(Transform SpawnProyectil, Transform Orientation, Transform Player)
+    public PlayerShootingGun(Transform SpawnProyectil, Transform Orientation, Transform Player, Transform Model)
     {
         _spawn = SpawnProyectil;
         _orientation=Orientation;
         _player=Player;
+        _model=Model;
     }
      public void ThrowSound()
      {
@@ -51,19 +52,19 @@ public class PlayerShootingGun
     private void AvailableSound() 
     {
         Vector3 aux = _orientation.forward;
-        _player.transform.forward = aux;
+        _model.transform.forward = aux;
         _hasASound = false;
         var NewSound = UnityEngine.Object.Instantiate(_soundReference, _spawn.position, Quaternion.identity);
         AbstractSound script = NewSound.GetComponent<AbstractSound>();
         script.SetTarget(null, 0.0f);
-        script.SetDirection(_orientation.forward, _speed, _size);
+        script.SetDirection(aux, _speed, _size);
         script.FreezeObject(false);
         script.PlayerCanCatchIt(false);
         script.SetIfPlayerSummoned(true);
         script.SetPlayerShootIt(true);
         script.SetSpawnPoint(_player.position);
         aux.y = 0.0f;
-        _player.transform.forward = aux;
+        _model.transform.forward = aux;
     }
 
 }

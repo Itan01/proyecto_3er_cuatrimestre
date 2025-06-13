@@ -9,7 +9,8 @@ public class AbstractSound : MonoBehaviour // Sonidos Genericos,Movimiento Base
 {
     protected float _maxDistanceRay = 50.0f;
     [SerializeField] protected bool _playerSummoned = false, _playerShooted= false ;
-    protected bool _canCatch = false, _freeze = false;
+    [SerializeField] protected bool _canCatch = false;
+        protected bool _freeze = false;
     protected float _speed = 5.0f, _size = 1.0f;
     protected int _index = 1;
     protected Vector3 _dir = new Vector3(0.0f, 0.0f, 0.0f);

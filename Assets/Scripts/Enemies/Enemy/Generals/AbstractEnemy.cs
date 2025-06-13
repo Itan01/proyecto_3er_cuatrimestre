@@ -8,7 +8,7 @@ public abstract class AbstractEnemy : EntityMonobehaviour
 {
     protected NavMeshAgent _agent;
     protected QuestionMarkManager _questionMark;
-    protected float _baseSpeed = 3.5f, _runSpeed = 7.5f, _shortDistance = 0.2f;
+    protected float _baseSpeed = 3.5f, _runSpeed = 7.5f, _shortDistance = 0.5f;
     [SerializeField] protected float _timer = 0.0f;
     [SerializeField] protected int _mode = 0;
     [SerializeField] protected Transform _facingStartPosition;
@@ -35,6 +35,7 @@ public abstract class AbstractEnemy : EntityMonobehaviour
     // Update is called once per frame
     protected override void Update()
     {
+        base.Update();
         if (_timer != 0)
             TimerToSearch();
         if (_agent.remainingDistance <= _shortDistance)

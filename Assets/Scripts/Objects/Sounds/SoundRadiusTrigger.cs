@@ -16,7 +16,8 @@ public class SoundRadiusTrigger : MonoBehaviour
         {
             if (Script.GetMode() != 1)
                 Script.SetPosition(transform.position);
-            Script.SetModeByIndex(5);
+            if(Script.GetMode()!=2)
+                Script.SetModeByIndex(5);
         }
     }
 

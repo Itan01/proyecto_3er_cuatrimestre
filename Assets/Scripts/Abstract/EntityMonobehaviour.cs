@@ -10,10 +10,10 @@ public class EntityMonobehaviour : MonoBehaviour
     protected BoxCollider _boxCollider;
     protected GameObject _noise;
     [SerializeField] protected bool _makeNoise, _summonedByPlayer = false;
-    protected float _noiseTimer=0.5f, _noiseTimerRef=0.5f;
+    [SerializeField] protected float _noiseTimer=0.5f, _noiseTimerRef=0.5f;
     [SerializeField] protected bool _isMoving = false;
     protected bool _isDeath = false;
-    protected bool _isCrouching = false;
+    [SerializeField] protected bool _isCrouching = false;
     protected virtual void Awake()
     {
 
@@ -61,13 +61,13 @@ public class EntityMonobehaviour : MonoBehaviour
         _noiseTimer -= Time.deltaTime;
         if (_noiseTimer <= 0)
         {
-            Vector3 RandomPosition= new Vector3(Random.Range(-2.0f,1.0f + 1), 0.2f, Random.Range(-2.0f,1.0f + 1)).normalized*2;
+            Vector3 RandomPosition= new Vector3(Random.Range(-2.0f,1.0f + 1), 1.0f, Random.Range(-2.0f,1.0f + 1)).normalized*2;
             //Debug.Log(RandomPosition);
             RandomPosition += transform.position;
             Vector3 Orientation = RandomPosition - transform.position;
             var Sound = Instantiate(_noise, RandomPosition, Quaternion.identity);
             AbstractSound Script= Sound.GetComponent<AbstractSound>();
-            Script.SetDirection(Orientation + transform.up,3.5f,1.0f);
+            Script.SetDirection(Orientation + transform.up,4.0f,1.0f);
             if (_summonedByPlayer)
             {
                 Script.SetIfPlayerSummoned(true);

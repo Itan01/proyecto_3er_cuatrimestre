@@ -27,7 +27,7 @@ public class CameraDetector : MonoBehaviour
             }
             //_enemies.SetPosition(transform.position);
             //_enemies.SetModeByIndex(2);
-            Debug.Log("ON");
+           // Debug.Log("ON");
         }
     }
 
@@ -37,7 +37,7 @@ public class CameraDetector : MonoBehaviour
         {
             //Script.GetComponent<PlayerShootingGun>().ShootEnable(true);
             _CameraObstacleScript.SetTarget(false);
-          Debug.Log("OFF");
+          //Debug.Log("OFF");
 
         }
     }

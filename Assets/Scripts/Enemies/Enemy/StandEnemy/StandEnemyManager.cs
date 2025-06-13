@@ -19,8 +19,8 @@ public class StandEnemyManager : AbstractEnemy
     }
     protected override void NextMovement()
     {
-        base.NextMovement();    
-        if(_mode == 0)
+        base.NextMovement();
+        if (_mode == 0)
         {
             SetMode(MoveStandPosition);
         }
@@ -35,7 +35,7 @@ public class StandEnemyManager : AbstractEnemy
         _questionIndex = 0;
         _agent.speed = _baseSpeed;
         _nextPosition = _startPosition;
-        _agent.destination = _nextPosition;  
+        _agent.destination = _nextPosition;
         //Debug.Log("Origen");
     }
 }
