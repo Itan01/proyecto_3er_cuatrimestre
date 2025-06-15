@@ -4,10 +4,10 @@ using UnityEngine;
 
 public class PlayerInteractions
 {
-    private float _interactRayDistance = 2.5f, _intRadius = 0.75f;
+    private float _interactRayDistance = 2.5f, _intRadius = 1.25f;
     private RaycastHit _intHit;
     private Transform _transform, _orientation;
-    private Vector3 _offSet= new Vector3(0.0f,1.5f,0.0f);
+    private Vector3 _offSet= new Vector3(0.0f,1.0f,0.0f);
     private LayerMask _interactMask;   
     public PlayerInteractions(Transform PlayerTransform, Transform CameraTransform, LayerMask InteractMask)
     {

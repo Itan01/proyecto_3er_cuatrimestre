@@ -8,15 +8,17 @@ public class FragileObject : AbstractObjects
 {
     [SerializeField] private GameObject _sound;
     [SerializeField] private float _sizeMultiplier;
-    private PlayerManager _player;
 
     protected override void Start()
     {
         base.Start();
-        _player = GameManager.Instance.PlayerReference;
 
     }
 
+    protected override void Update()
+    {
+        base.Update();
+    }
     private void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.layer == 28)
@@ -26,20 +28,12 @@ public class FragileObject : AbstractObjects
             Destroy(gameObject);
         }
     }
-
-    protected void Update()
-    {
-        if((_player.transform.position - transform.position).magnitude <= _distanceToAnimate)//Show Animation
-            _animated=true;
-        else
-            _animated=false;
-        SetAnimation(_animated);
-    }
     public float GetSize()
     {
         return _sizeMultiplier;
     }
-    private void SetAnimation(bool State)
+
+    protected override void SetFeedback(bool State)
     {
         _animator.SetBool("Shine", State);
     }

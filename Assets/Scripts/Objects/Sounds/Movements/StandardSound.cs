@@ -5,20 +5,22 @@ using UnityEngine.ProBuilder.Shapes;
 
 public class StandardSound : AbstractSound
 {
-    private ParticlesSoundManager _particleManager;
+    private ParticlesManager _particleManager;
     [SerializeField] private GameObject _soundExplosion;
     protected override void Start()
     {
         base.Start();
-        if (_playerSummoned)
+        if (_playerShooted)
         {
-            _particleManager = GetComponentInChildren<ParticlesSoundManager>();
-            _particleManager.StarPlay();
+            _particleManager = GetComponentInChildren<ParticlesManager>();
+            _particleManager.StartPlay();
         }
+
     }
     protected override void Update()
     {
         base.Update();
+
     }
     protected override void FixedUpdate()
     {
@@ -30,7 +32,7 @@ public class StandardSound : AbstractSound
         {
             SummonExplosion();
         }
-        Destroy(gameObject,0.25f);
+        Destroy(gameObject,0.15f);
     }
     protected void SummonExplosion()
     {

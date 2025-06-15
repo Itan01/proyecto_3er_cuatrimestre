@@ -27,17 +27,19 @@ public class PlayerController
     }
     public void CheckGunInputs()
     {
+        bool CanShoot = _scriptShoot.CheckSound();
         if (Input.GetMouseButton(1))
         {
             _animator.SetBool("Grabbing", true);
+            CanShoot = false;
         }
         else
             _animator.SetBool("Grabbing", false);
 
 
-        bool HasASound = _scriptShoot.CheckSound();
 
-        if (Input.GetMouseButtonDown(0) && HasASound)
+
+        if (Input.GetMouseButtonDown(0) && CanShoot)
         {
             _scriptShoot.ThrowSound();
             _animator.SetTrigger("Shooting");

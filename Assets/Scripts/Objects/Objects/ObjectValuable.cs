@@ -5,6 +5,16 @@ using UnityEngine;
 public class ObjectValuable : AbstractObjects, IInteractableObject
 {
     [SerializeField] private int _value;
+
+    protected override void Start()
+    { 
+        base.Start();
+    }
+
+    protected override void Update()
+    {
+        base.Update();  
+    }
     public void OnInteract ()
     {
         Vector3 player = GameManager.Instance.PlayerReference.transform.position;
@@ -15,19 +25,12 @@ public class ObjectValuable : AbstractObjects, IInteractableObject
         }
 
     }
-
-    protected void OnTriggerEnter(Collider Player)
+    protected override void SetFeedback(bool State)
     {
-        if (Player.GetComponent<PlayerManager>())
-        {
-            _animator.SetBool("Shine", true);
-        }
-    }
-    protected void OnTriggerExit(Collider Player)
-    {
-        if (Player.GetComponent<PlayerManager>())
-        {
-            _animator.SetBool("Shine", false);
-        }
+        if (State)
+            _particlesManager.StartPlay();
+        else
+            _particlesManager.StopPlay();
+        _animator.SetBool("Shine", _animated);
     }
 }

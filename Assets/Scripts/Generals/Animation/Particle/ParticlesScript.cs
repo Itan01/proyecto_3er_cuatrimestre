@@ -5,9 +5,9 @@ using UnityEngine;
 public class ParticlesScript : MonoBehaviour
 {
     private ParticleSystem _particles;
-    void Start()
+    private void Awake()
     {
         _particles = GetComponent<ParticleSystem>();
-        GetComponentInParent<ParticlesSoundManager>().AddTolist(_particles);
+        GetComponentInParent<ParticlesManager>().AddTolist(_particles);
     }
 }
