@@ -19,11 +19,11 @@ public class FragileObject : AbstractObjects
     {
         base.Update();
     }
-    private void OnTriggerEnter(Collider other)
+    private void OnCollisionEnter(Collision collision)
     {
-        if (other.gameObject.layer == 28)
+        if (collision.gameObject.layer == 28)
         {
-            var Sound = Instantiate(_sound,transform.position, Quaternion.identity);
+            var Sound = Instantiate(_sound, transform.position, Quaternion.identity);
             Sound.GetComponent<SoundRadiusTrigger>().SetMultiplier(GetSize());
             Destroy(gameObject);
         }

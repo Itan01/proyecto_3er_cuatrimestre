@@ -7,7 +7,7 @@ public class SummonSoundFromDoor : MonoBehaviour
 {
     private Animator _animator;
     [SerializeField] private bool _doorOpen=false, _forceDoor=false;
-    [SerializeField] private GameObject _soundToSummon;
+    //[SerializeField] private GameObject _soundToSummon;
     private int _count = 0;
     void Start()
     {
@@ -22,12 +22,12 @@ public class SummonSoundFromDoor : MonoBehaviour
             if (Entity.TryGetComponent<PlayerManager>(out PlayerManager script))
             {
                 if(script.GetCaptured()) return;
-                SummonSound(Entity.transform.position, true);
+//                SummonSound(Entity.transform.position, true);
                 
             }
                 
             else
-                SummonSound(Entity.transform.position, false);
+                //SummonSound(Entity.transform.position, false);
             _doorOpen = true;
             _animator.SetBool("isOpen", _doorOpen);
             _count++;
@@ -45,10 +45,10 @@ public class SummonSoundFromDoor : MonoBehaviour
                 _count = 0;
                 _doorOpen = false;
                 _animator.SetBool("isOpen", _doorOpen);
-                if (Entity.GetComponent<PlayerManager>())
-                    SummonSound(Entity.transform.position, true);
-                else
-                    SummonSound(Entity.transform.position, false);
+                //if (Entity.GetComponent<PlayerManager>())
+                //    SummonSound(Entity.transform.position, true);
+                //else
+                //   SummonSound(Entity.transform.position, false);
             }
 
         }
@@ -60,12 +60,12 @@ public class SummonSoundFromDoor : MonoBehaviour
         ModelPosition = GetComponentInChildren<Transform>().position;
         SelfPosition = transform.position;
         SelfPosition.y += ModelPosition.y;
-        var Sound = Instantiate(_soundToSummon, transform.position, Quaternion.identity);
+       // var Sound = Instantiate(_soundToSummon, transform.position, Quaternion.identity);
         Orientation = (SelfPosition - EntityPosition).normalized;
         Orientation.y = 0;
-        AbstractSound ScriptSound = Sound.GetComponent<AbstractSound>();
-        ScriptSound.SetIfPlayerSummoned(SummonedByPlayer);
-        ScriptSound.SetDirection(Orientation, Random.Range(3.0f, 7.0f + 1), 1.0f);
+       // AbstractSound ScriptSound = Sound.GetComponent<AbstractSound>();
+      //  ScriptSound.SetIfPlayerSummoned(SummonedByPlayer);
+       //  ScriptSound.SetDirection(Orientation, Random.Range(3.0f, 7.0f + 1), 1.0f);
     }
 
     public void ForceDoorsClose(bool State)
