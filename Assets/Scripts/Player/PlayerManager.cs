@@ -116,4 +116,8 @@ public class PlayerManager : EntityMonobehaviour
     {
         return _onCaptured;
     }
+    public void PlayerCanShoot(bool State)
+    {
+        _scriptController.PlayerCanShootAgain(State);
+    }
 }

@@ -14,7 +14,7 @@ public class SetSizeCollider
 
     public void SetSize(float ySize)
     {
-        float Center = ySize/2, Size=0.3f;
+        float Center = ySize/2, Size=1.05f;
         _capsuleCollider.radius = Size;
         _capsuleCollider.height =ySize;
         _capsuleCollider.center = new Vector3(0, Center, 0);

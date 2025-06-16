@@ -63,14 +63,14 @@ public class PlayerMovement
         _animator.SetFloat("zAxis", z);
         if (_isCrouching)
         {
-            y = 1.25f;
+            y = 1.0f;
             _movement= CrouchMovement;
         }
 
         else
         {
             _movement = BaseMovement;
-            y = 1.75f;
+            y = 2.0f;
         }
         _scriptCollider.SetSize(y);   
     }

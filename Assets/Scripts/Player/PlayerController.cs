@@ -3,12 +3,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-
 public class PlayerController
 {
     private PlayerShootingGun _scriptShoot;
     private PlayerInteractions _scriptInteract;
-    bool _isPressingCrouch = false;
+    private bool _isPressingCrouch = false;
+    private bool _canShoot=false, _wantShoot=false;
     private Animator _animator;
 
     public PlayerController(PlayerShootingGun ScriptShoot,PlayerInteractions ScriptInteract, Animator Animator)
@@ -27,22 +27,23 @@ public class PlayerController
     }
     public void CheckGunInputs()
     {
-        bool CanShoot = _scriptShoot.CheckSound();
+        if (_wantShoot)
+        {
+            SetAiming();
+        }
         if (Input.GetMouseButton(1))
         {
             _animator.SetBool("Grabbing", true);
-            CanShoot = false;
+            _animator.SetBool("StartShooting", false);
         }
         else
             _animator.SetBool("Grabbing", false);
 
 
-
-
-        if (Input.GetMouseButtonDown(0) && CanShoot)
+        if (Input.GetMouseButtonDown(0) && _scriptShoot.CheckSound() && _canShoot)
         {
-            _scriptShoot.ThrowSound();
-            _animator.SetTrigger("Shooting");
+            _wantShoot=true;
+            _animator.SetBool("StartShooting",true);
         }
     }
     public void CheckInteractions()
@@ -52,5 +53,19 @@ public class PlayerController
             _scriptInteract.Interact();
         }
            
+    }
+    public void PlayerCanShootAgain(bool State)
+    {
+        _canShoot = State;
+    }
+
+    private void SetAiming()
+    {
+        if(Input.GetMouseButtonUp(0))
+        {
+            _animator.SetTrigger("Shooting");
+            _scriptShoot.ThrowSound();
+            _animator.SetBool("StartShooting", false);
+        }
     }
 }

@@ -66,6 +66,5 @@ public class PlayerShootingGun
         aux.y = 0.0f;
         _model.transform.forward = aux;
     }
-
 }
 
