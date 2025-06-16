@@ -11,9 +11,10 @@ public class SoundSummoner : MonoBehaviour
     [SerializeField] float _startRotationY=0;
     [SerializeField] private Transform _spawnPosition;
     [SerializeField] private GameObject _sound;
-
+    private ParticlesManager _particlesManager;
     private void Start()
     {
+        _particlesManager = GetComponentInChildren<ParticlesManager>();
         _timerRef = _timer;
         _amount = _amountRef;
     }
@@ -41,6 +42,7 @@ public class SoundSummoner : MonoBehaviour
         var Sound = Instantiate(_sound, _spawnPosition.position, Quaternion.identity);
         AbstractSound script = Sound.GetComponent<AbstractSound>();
         script.SetDirection(_spawnPosition.forward, 5.0f, 1.0f);
+        _particlesManager.PlayOnce();
     }
 }
 

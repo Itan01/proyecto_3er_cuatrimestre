@@ -13,7 +13,7 @@ public class StandardSound : AbstractSound
         if (_playerShooted)
         {
             _particleManager = GetComponentInChildren<ParticlesManager>();
-            _particleManager.StartPlay();
+            _particleManager.StartLoop();
         }
 
     }

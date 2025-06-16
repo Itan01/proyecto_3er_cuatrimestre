@@ -28,9 +28,9 @@ public class ObjectValuable : AbstractObjects, IInteractableObject
     protected override void SetFeedback(bool State)
     {
         if (State)
-            _particlesManager.StartPlay();
+            _particlesManager.StartLoop();
         else
-            _particlesManager.StopPlay();
+            _particlesManager.StopLoop();
         _animator.SetBool("Shine", _animated);
     }
 }

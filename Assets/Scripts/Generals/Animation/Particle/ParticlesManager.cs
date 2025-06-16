@@ -11,7 +11,7 @@ public class ParticlesManager : MonoBehaviour
         _listParticles.Add(particles);
     }
 
-    public void StartPlay()
+    public void StartLoop()
     {
         foreach (ParticleSystem particle in _listParticles)
         {
@@ -20,12 +20,19 @@ public class ParticlesManager : MonoBehaviour
         }
     }
 
-    public void StopPlay()
+    public void StopLoop()
     {
         foreach (ParticleSystem particle in _listParticles)
         {
             EmissionModule emission = particle.emission;
             emission.enabled = false;
+        }
+    }
+    public void PlayOnce()
+    {
+        foreach (ParticleSystem particle in _listParticles)
+        {
+            particle.Play();
         }
     }
 }
