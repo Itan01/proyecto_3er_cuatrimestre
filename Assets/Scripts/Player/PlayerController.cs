@@ -63,6 +63,7 @@ public class PlayerController
     {
         if(Input.GetMouseButtonUp(0))
         {
+            _wantShoot = false;
             _animator.SetTrigger("Shooting");
             _scriptShoot.ThrowSound();
             _animator.SetBool("StartShooting", false);

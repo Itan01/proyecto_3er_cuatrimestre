@@ -12,7 +12,7 @@ public class AbstractSound : MonoBehaviour // Sonidos Genericos,Movimiento Base
     [SerializeField] protected bool _canCatch = false;
         protected bool _freeze = false;
     protected float _speed = 5.0f, _size = 1.0f;
-    protected int _index = 1;
+    protected int _index = 0;
     protected Vector3 _dir = new Vector3(0.0f, 0.0f, 0.0f);
     protected Vector3 _startPosition;
     protected SpriteRenderer _sprite;

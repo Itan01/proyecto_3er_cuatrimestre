@@ -10,7 +10,6 @@ public class PlayerShootingGun
     private GameObject _soundReference;
     private float _speed=7.5f, _size=1.2f;
     private Transform _spawn, _orientation, _player, _model;
-    private bool _soundEnabled = true;
     private bool _hasASound;
 
     public PlayerShootingGun(Transform SpawnProyectil, Transform Orientation, Transform Player, Transform Model)
@@ -23,26 +22,15 @@ public class PlayerShootingGun
      public void ThrowSound()
      {
         AvailableSound();
-        SetSound(GameManager.Instance.SoundsReferences.GetSoundComponents(0));
+        _hasASound = false; 
+        GameManager.Instance.UISound.Shooting();
      }
 
     public void SetSound(SoundStruct Sound)
     {
-        if(Sound.Index != 0)
-        {
-            _hasASound = true;
-            _soundReference = Sound.Sound;
-        }
-        else
-        {
-            _hasASound=false;
-        }
-        GameManager.Instance.UISound.SetSound(Sound.SpriteUi, Sound.Index);
-    }
-
-    public void ShootEnable(bool state) 
-    { 
-        _soundEnabled = state;
+        _hasASound = true;
+        _soundReference = Sound.Sound;
+        GameManager.Instance.UISound.SetSound(Sound.Index);
     }
     public bool CheckSound()
     {
