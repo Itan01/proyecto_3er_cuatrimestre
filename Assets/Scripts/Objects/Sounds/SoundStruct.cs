@@ -7,6 +7,7 @@ public struct SoundStruct
     [SerializeField] private GameObject _sound;
     [SerializeField] private Sprite _spriteUi;
     [SerializeField] private int _index;
+    [SerializeField] private Color _color;
 
     public GameObject Sound
     {
@@ -19,5 +20,9 @@ public struct SoundStruct
     public int Index
     {
         get { return _index; }
+    }
+    public Color Color
+    {
+        get { return _color; }
     }
 }

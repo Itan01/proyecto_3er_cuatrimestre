@@ -35,6 +35,7 @@ public class PlayerController
         {
             _animator.SetBool("Grabbing", true);
             _animator.SetBool("StartShooting", false);
+            _wantShoot = false;
         }
         else
             _animator.SetBool("Grabbing", false);

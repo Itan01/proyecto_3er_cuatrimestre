@@ -14,7 +14,7 @@ public class PlayerAvatar : MonoBehaviour
         _scriptManager.SetAreaCatching(true);
     }
 
-    public void DesActivateAreaSound()
+    public void DesactivateAreaSound()
     {
         _scriptManager.SetAreaCatching(false);
       
