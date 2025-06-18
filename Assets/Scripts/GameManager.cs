@@ -100,4 +100,13 @@ public class GameManager : MonoBehaviour
         get { return _textFirstTime; }
         set { _textFirstTime = value; }
     }
+
+
+    private AimManagerUI _aimUI;
+
+    public AimManagerUI AimUI
+    {
+        get { return _aimUI; }
+        set { _aimUI = value; }
+    }
 }

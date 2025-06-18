@@ -48,7 +48,8 @@ public class PlayerMovement
     {
         _orientation = _dir;
         _movement();
-        if (_animator.GetBool("Grabbing")){
+        if (_animator.GetBool("Grabbing")|| _animator.GetBool("StartShooting"))
+        {
             _orientation = _cam.forward;
             _orientation.y = 0.0f;  
         }

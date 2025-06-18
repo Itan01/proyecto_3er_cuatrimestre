@@ -19,9 +19,12 @@ public class CameraManager : MonoBehaviour
     [Range(10.0f, 1000.0f)][SerializeField] private float _mouseSensitivity = 500.0f;
     [Range(0.125f, 1.0f)][SerializeField] private float _minDistance = 0.25f;
     [Range(1.0f, 10.0f)][SerializeField] private float _maxDistance = 4.0f;
+    [SerializeField] private float _maxDistanceRef,_maxAuxDistance;
     [Range(-90.0f, 0.0f)][SerializeField] private float _minRotation = -85.0f;
     [Range(0.0f, 90.0f)][SerializeField] private float _maxRotation = 75.0f;
-    [SerializeField] private Vector3 _offSetTarget;
+    private float _offsetValue = 0.0f;
+    [SerializeField] private bool _setCamDis=false, _resetCamDis=false;
+    private Vector3 _offSetTarget;
 
     [Header("LayerMask")]
     [SerializeField] private LayerMask Enviroment;
@@ -41,7 +44,7 @@ public class CameraManager : MonoBehaviour
     }
     private void Start()
     {
-        
+        _maxDistanceRef = _maxDistance;
         _cam = Camera.main;
 
         Cursor.lockState = _lockState;
@@ -61,6 +64,10 @@ public class CameraManager : MonoBehaviour
 
     private void LateUpdate()
     {
+        if (_setCamDis)
+            ChangeDistance();
+        if (_resetCamDis)
+            ResetDistance();
        UpdateCamRot(Input.GetAxisRaw("Mouse X"), Input.GetAxisRaw("Mouse Y"));
 
         UpdateSpringArm();
@@ -94,6 +101,7 @@ public class CameraManager : MonoBehaviour
 
     private void UpdateSpringArm()
     {
+        _offSetTarget = -transform.right* _offsetValue;
         _dir = -transform.forward;
 
         if (_isBlocked)
@@ -108,7 +116,7 @@ public class CameraManager : MonoBehaviour
             {
                 _camPos = transform.position + _dirTest;
             }
-            _camLookAt = _target.transform.position + _offSetTarget;
+            _camLookAt = _target.transform.position;
         }
         else
         {
@@ -116,21 +124,53 @@ public class CameraManager : MonoBehaviour
             {
                 _camPos = _target.transform.position + _dir * _maxDistance * ((_maxTopDistance *(-(_mouseY)-50.0f)/100)+1.0f);
                 _camDir = _target.transform.position - new Vector3(_camPos.x,_target.transform.position.y, _camPos.z);
-                _camLookAt = _target.transform.position + _camDir.normalized * ((_maxTopDistance * (-(_mouseY) - 50.0f) /100)+ 0.1f) + _offSetTarget;
+                _camLookAt = _target.transform.position + _camDir.normalized * ((_maxTopDistance * (-(_mouseY) - 50.0f) /100)+ 0.1f);
             }
             else
             {
                 _camPos = transform.position +  _dir * _maxDistance;
-                _camLookAt = _target.transform.position +_offSetTarget;
+                _camLookAt = _target.transform.position;
             }
         }
 
         _cam.transform.position = _camPos;
-        _cam.transform.LookAt(_camLookAt);
+        _cam.transform.LookAt(_camLookAt+ _offSetTarget);
     }
     private bool CheckIfEnviroment()
     {
         bool aux = Physics.SphereCast(_camRay, _detectionRadius, out _camHit, _maxDistance, Enviroment);
         return aux;
+    }
+    private void ChangeDistance()
+    {
+        _maxDistance-= Time.deltaTime * 25.0f;
+        if (_maxDistance < _maxAuxDistance)
+        {
+            _maxDistance = _maxAuxDistance;
+            _setCamDis = false;
+            _offsetValue = 0.5f;
+        }
+    }
+    private void ResetDistance()
+    {
+        _maxDistance += Time.deltaTime*50.0f;
+        if (_maxDistance > _maxAuxDistance)
+        {
+            _maxDistance = _maxAuxDistance;
+            _resetCamDis = false;
+            _offsetValue = 0.0f;
+        }
+    }
+    public void SetCameraDistance(float MaxDistance)
+    {
+        _offsetValue = 0.75f;
+        _maxAuxDistance = MaxDistance;
+        _setCamDis = true;
+    }
+    public void ResetCameraDistance()
+    {
+        _offsetValue = 0.125f;
+        _maxAuxDistance = _maxDistanceRef;
+        _resetCamDis = true;
     }
 }

@@ -36,6 +36,7 @@ public class PlayerController
             _animator.SetBool("Grabbing", true);
             _animator.SetBool("StartShooting", false);
             _wantShoot = false;
+            GameManager.Instance.CameraReference.GetComponent<CameraManager>().ResetCameraDistance();
         }
         else
             _animator.SetBool("Grabbing", false);
@@ -45,6 +46,8 @@ public class PlayerController
         {
             _wantShoot=true;
             _animator.SetBool("StartShooting",true);
+            GameManager.Instance.AimUI.UITrigger(true);
+            GameManager.Instance.CameraReference.GetComponent<CameraManager>().SetCameraDistance(2.0f);
         }
     }
     public void CheckInteractions()
@@ -62,12 +65,15 @@ public class PlayerController
 
     private void SetAiming()
     {
+        //GameManager.Instance.PlayerReference.transform.forward=Camera.main.transform.forward;
         if(Input.GetMouseButtonUp(0))
         {
             _wantShoot = false;
             _animator.SetTrigger("Shooting");
             _scriptShoot.ThrowSound();
             _animator.SetBool("StartShooting", false);
+            GameManager.Instance.CameraReference.GetComponent<CameraManager>().ResetCameraDistance();
+            GameManager.Instance.AimUI.UITrigger(false);
         }
     }
 }
