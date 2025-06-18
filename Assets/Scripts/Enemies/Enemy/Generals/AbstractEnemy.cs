@@ -8,11 +8,11 @@ public abstract class AbstractEnemy : EntityMonobehaviour
 {
     protected NavMeshAgent _agent;
     protected QuestionMarkManager _questionMark;
-    protected float _baseSpeed = 3.5f, _runSpeed = 7.5f, _shortDistance = 0.5f;
+    protected float _baseSpeed = 3.5f, _runSpeed = 7.5f, _shortDistance = 0.25f;
     [SerializeField] protected float _timer = 0.0f;
     [SerializeField] protected int _mode = 0;
     [SerializeField] protected Transform _facingStartPosition;
-    protected Vector3 _nextPosition, _startPosition;
+    [SerializeField] protected Vector3 _nextPosition, _startPosition;
     protected float _confusedDuration = 1.0f; // Este es el tiempo de confusión donde cree haber visto al player
     protected float _searchDuration = 20.0f; // El tiempo que busca al player luego de que este salga del RadiusToHear
     protected bool _isRunning = false, _questionBool, _watchingPlayer=false;
@@ -38,7 +38,7 @@ public abstract class AbstractEnemy : EntityMonobehaviour
         base.Update();
         if (_timer != 0)
             TimerToSearch();
-        if (_agent.remainingDistance <= _shortDistance)
+        if (_agent.remainingDistance <= _shortDistance  )
             NextMovement();
         if (_mode == 1)
             _agent.destination = GameManager.Instance.PlayerReference.transform.position;
@@ -144,7 +144,7 @@ public abstract class AbstractEnemy : EntityMonobehaviour
         _agent.speed = _runSpeed;
         _nextPosition = GameManager.Instance.PlayerReference.transform.position;
         _agent.destination = _nextPosition;
-       // Debug.Log("Mirando Al Jugador");
+        Debug.Log("Mirando Al Jugador");
     }
     protected void MoveFollowSound() // Persigue al lugar donde se genero el Sonido
     {
@@ -155,7 +155,7 @@ public abstract class AbstractEnemy : EntityMonobehaviour
         _questionIndex = 0;
         _agent.speed = _baseSpeed;
         _agent.destination = _nextPosition;
-       // Debug.Log("Yendo a donde escucho");
+      Debug.Log("Yendo a donde escucho");
     }
 
     protected virtual void MoveResettingPath() // patron normal (Esta en distintos scripts "StandEnemy""StandardEnemy")
@@ -168,18 +168,21 @@ public abstract class AbstractEnemy : EntityMonobehaviour
         _questionIndex = 0;
         _isMoving = false;
         _isRunning = false;
+        _agent.speed = 0.0f;
         _timer=_confusedDuration;
         transform.LookAt(GameManager.Instance.PlayerReference.transform.position);
-        //Debug.Log("Vi al jugador");
+        Debug.Log("Vi al jugador");
     }
     protected void MoveLooking()
     {
         _mode = 4;
+        _agent.speed = 0.0f;
         _questionBool = true;
         _questionIndex = 0;
         _isMoving = false;
-        _isRunning = false; 
+        _isRunning = false;
         _animator.SetTrigger("isLooking");
+        Debug.Log("Viendo alrededor");
     }
 
     protected void MoveStartHearing() // Persigue al Jugador
@@ -190,7 +193,7 @@ public abstract class AbstractEnemy : EntityMonobehaviour
         _isRunning = false;
         _questionBool = true;
         _questionIndex = 0;
-        _agent.speed = _baseSpeed;
+        _agent.speed = 0.0f; ;
     }
     #endregion
     #region Set/Get Values
@@ -201,12 +204,12 @@ public abstract class AbstractEnemy : EntityMonobehaviour
     }
     public void SetModeByIndex(int State)
     {
-        if (State == 0)
-            SetMode(MoveResettingPath);
-        else if (State==2)
+        if (State == 2)
             SetMode(MoveFollowSound);
-        else if(State == 5)
+        else if (State == 5)
             SetMode(MoveStartHearing);
+        else
+            SetMode(MoveResettingPath);
     }
     public int GetMode()
     {

@@ -36,7 +36,6 @@ public class StandEnemyManager : AbstractEnemy
         _agent.speed = _baseSpeed;
         _nextPosition = _startPosition;
         _agent.destination = _nextPosition;
-        //Debug.Log("Origen");
     }
 }
 
