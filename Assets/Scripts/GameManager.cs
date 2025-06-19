@@ -31,6 +31,12 @@ public class GameManager : MonoBehaviour
         set { _player = value; }
     }
 
+    private TransitionFade _scriptTransition;
+    public TransitionFade Transition 
+    {
+        get { return _scriptTransition; }
+        set { _scriptTransition = value; }
+    }
     private SoundReferences _soundRef;
     public SoundReferences SoundsReferences
     {
@@ -108,5 +114,28 @@ public class GameManager : MonoBehaviour
     {
         get { return _aimUI; }
         set { _aimUI = value; }
+    }
+    private RoomManager _actualRoom;
+   
+    public RoomManager Room
+    {
+        get { return _actualRoom; }
+        set { _actualRoom = value; }
+    }
+    public void ResetGameplay()
+    {
+        StartCoroutine(ResetTImer());
+    }
+
+    private IEnumerator ResetTImer()
+    {
+        PlayerReference.SetDeath(true);
+        _scriptTransition.ShowBlackScreen();
+        yield return new WaitForSeconds(1.0f);
+        Room.ResetRoom();
+        PlayerReference.SetCaptured(false);
+        PlayerReference.SetDeath(false);
+        _scriptTransition.FadeOut();
+        PlayerReference.transform.position = RespawnReference;
     }
 }

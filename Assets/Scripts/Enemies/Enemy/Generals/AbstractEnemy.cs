@@ -2,11 +2,13 @@
 using System.Collections.Generic;
 using System.Runtime.InteropServices.WindowsRuntime;
 using System.Threading;
+using System.Timers;
 using UnityEngine;
 using UnityEngine.AI;
 public abstract class AbstractEnemy : EntityMonobehaviour
 {
     protected NavMeshAgent _agent;
+    [SerializeField] protected bool _activate;
     protected QuestionMarkManager _questionMark;
     protected float _baseSpeed = 3.5f, _runSpeed = 7.5f, _shortDistance = 0.25f;
     [SerializeField] protected float _timer = 0.0f;
@@ -17,33 +19,30 @@ public abstract class AbstractEnemy : EntityMonobehaviour
     protected float _searchDuration = 20.0f; // El tiempo que busca al player luego de que este salga del RadiusToHear
     protected bool _isRunning = false, _questionBool, _watchingPlayer=false;
     protected int _questionIndex;
-    private EnemyVision _vision;
-
     public delegate void SetMove();
     protected SetMove _movement;
     protected override void Awake()
     {
+        GetComponentInParent<RoomManager>().AddToList(this);
     }
     protected override void Start()
     {
         base.Start();
-        GameManager.Instance.RegisterEnemy(this);
+
         _questionMark = GetComponentInChildren<QuestionMarkManager>();
-        _vision = GetComponentInChildren<EnemyVision>();
     }
 
     // Update is called once per frame
     protected override void Update()
     {
+        if (!_activate) return;
         base.Update();
         if (_timer != 0)
             TimerToSearch();
-        if (_agent.remainingDistance <= _shortDistance  )
+        if (_agent.remainingDistance <= _shortDistance && _timer ==0.0f)
             NextMovement();
         if (_mode == 1)
             _agent.destination = GameManager.Instance.PlayerReference.transform.position;
-        if (_mode == -1)
-            transform.LookAt(_facingStartPosition);
     }
     protected override void FixedUpdate()
     {
@@ -51,13 +50,9 @@ public abstract class AbstractEnemy : EntityMonobehaviour
 
     protected void OnCollisionEnter(Collision Entity)
     {
-        if (Entity.gameObject.TryGetComponent<PlayerManager>(out PlayerManager Entityscript))
+        if (Entity.gameObject.GetComponent<PlayerManager>())
         {
-            if (!Entityscript.IsPlayerDeath())
-            {
-                Entityscript.SetDeathAnimation();
-                    SetMode(MoveResettingPath);
-            }
+            GameManager.Instance.ResetGameplay();
         }
     }
 
@@ -67,12 +62,8 @@ public abstract class AbstractEnemy : EntityMonobehaviour
     }
     public void Respawn()
     {
-        transform.position = _startPosition;
-        _nextPosition = _startPosition;
         SetMode(MoveResettingPath);
-        _agent.ResetPath();
-        _animator.SetBool("isMoving", false);
-        _animator.SetBool("isRunning", false);
+        transform.position = _startPosition;
     }
     #region InternalFunctions
     protected void SetMode(SetMove TypeOfMovement)
@@ -82,7 +73,6 @@ public abstract class AbstractEnemy : EntityMonobehaviour
     }
     protected void GameMode()
     {
-        transform.LookAt(Vector3.Slerp(transform.forward,_nextPosition, 10.0f));
         _movement();
         _animator.SetBool("isRunning", _isRunning);
         _animator.SetBool("isMoving",_isMoving );
@@ -116,11 +106,11 @@ public abstract class AbstractEnemy : EntityMonobehaviour
             _timer = 0.0f;
             if (_mode == 3) // Solo en el Estado de Confusion Puede cambiar a otro valor que no sea ResetPath
                 CheckConfusedState();
-            else
+            else if(_mode != 2)
                 SetMode(MoveResettingPath);
         } // Se Acabo el timer cambia de modo (Probablemente vuelva al 0)
-
     }
+
     #endregion
     #region TypeOfMovement
     protected void MoveStandPosition() // Persigue al Jugador
@@ -143,6 +133,7 @@ public abstract class AbstractEnemy : EntityMonobehaviour
         _questionIndex = 1;
         _agent.speed = _runSpeed;
         _nextPosition = GameManager.Instance.PlayerReference.transform.position;
+        transform.LookAt(_nextPosition);
         _agent.destination = _nextPosition;
         Debug.Log("Mirando Al Jugador");
     }
@@ -155,7 +146,9 @@ public abstract class AbstractEnemy : EntityMonobehaviour
         _questionIndex = 0;
         _agent.speed = _baseSpeed;
         _agent.destination = _nextPosition;
-      Debug.Log("Yendo a donde escucho");
+        transform.LookAt(_nextPosition);
+        _timer = 1.0f;
+        Debug.Log("Yendo a donde escucho");
     }
 
     protected virtual void MoveResettingPath() // patron normal (Esta en distintos scripts "StandEnemy""StandardEnemy")
@@ -170,8 +163,6 @@ public abstract class AbstractEnemy : EntityMonobehaviour
         _isRunning = false;
         _agent.speed = 0.0f;
         _timer=_confusedDuration;
-        transform.LookAt(GameManager.Instance.PlayerReference.transform.position);
-        Debug.Log("Vi al jugador");
     }
     protected void MoveLooking()
     {
@@ -224,6 +215,14 @@ public abstract class AbstractEnemy : EntityMonobehaviour
     public void WatchingPlayer(bool State)
     {
         _watchingPlayer=State;
+    }
+    public void SetActivate(bool State)
+    {
+        _activate = State;
+    }
+    public bool GetActivate()
+    {
+        return _activate;
     }
     #endregion
 }

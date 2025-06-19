@@ -5,19 +5,29 @@ using UnityEngine;
 public class SoundRadiusTrigger : MonoBehaviour
 {
     private float _size=1, _multiplier=5;
+    private SphereCollider _collider;
+
+    private void Awake()
+    {
+        _collider=GetComponent<SphereCollider>();
+    }
     private void Update()
     {
         transform.localScale = new Vector3(_size, _size, _size);
+        _collider.radius = _size * 1.25f;
         _size += Time.deltaTime * _multiplier;
     }
     protected void OnTriggerEnter(Collider Entity)
     {
         if (Entity.TryGetComponent<AbstractEnemy>(out AbstractEnemy Script))// sigue el sonido, si el enemigo persigue al jugador, ignora el sonido
         {
-            if (Script.GetMode() != 1)
-                Script.SetPosition(transform.position);
+            Vector3 aux = transform.position;
+            aux.y= Script.transform.position.y;
+            aux += (Script.transform.position -aux).normalized *2;
+            if (!Script.GetActivate() || Script.GetMode() == 1) return;
             if(Script.GetMode()!=2)
                 Script.SetModeByIndex(5);
+            Script.SetPosition(transform.position);
         }
     }
 

@@ -10,6 +10,11 @@ public class AbstractObjects : MonoBehaviour
     [SerializeField] protected bool _animated;
     protected ParticlesManager _particlesManager;
     [SerializeField] protected float _distanceToAnimate=10.0f;
+
+    protected void Awake()
+    {
+        //GetComponentInParent<RoomManager>().AddToList(this);
+    }
     protected virtual void Start()
     {
         _animator = GetComponent<Animator>();
@@ -27,5 +32,10 @@ public class AbstractObjects : MonoBehaviour
 
     protected virtual void SetFeedback(bool State)
     {
+    }
+
+    protected void Destroyed()
+    {
+        gameObject.SetActive(false);
     }
 }

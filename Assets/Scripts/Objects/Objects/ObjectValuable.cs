@@ -21,7 +21,7 @@ public class ObjectValuable : AbstractObjects, IInteractableObject
         if ((transform.position - player).magnitude < 4.0f)
         {
             GameManager.Instance.SetScore = _value;
-            Destroy(gameObject);
+            Destroyed();
         }
 
     }

@@ -5,6 +5,10 @@ using UnityEngine.AI;
 
 public class StandEnemyManager : AbstractEnemy
 {
+    protected override void Awake()
+    {
+        base.Awake();
+    }
     protected override void Start()
     {
         base.Start();
@@ -13,6 +17,8 @@ public class StandEnemyManager : AbstractEnemy
     protected override void Update()
     {
         base.Update();
+        if (_mode == -1)
+            transform.LookAt(_facingStartPosition);
     }
     protected override void FixedUpdate()
     {

@@ -110,7 +110,7 @@ public class EnemyVision : MonoBehaviour
                 {
                     script.SetCaptured(true);
                     _seePlayer = true; 
-                    if (_scriptManager.GetMode() != 1 && _scriptManager.GetMode()!=3)
+                    if (_scriptManager.GetMode()!=3 && _scriptManager.GetMode()!= 1)
                     {
                         _scriptManager.EnterConfusedState();
                     }

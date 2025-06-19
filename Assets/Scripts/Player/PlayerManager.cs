@@ -13,7 +13,6 @@ public class PlayerManager : EntityMonobehaviour
     private PlayerShootingGun _scriptShootingGun;
     private PlayerInteractions _scriptInteractions;
     private GrabbingSound _areaCatching;
-    private float _counter = 0;
     [SerializeField] private bool _onCaptured = false;
     [Header("<color=green>LayersMask</color>")]
     [SerializeField] private LayerMask _soundMask;
@@ -24,8 +23,6 @@ public class PlayerManager : EntityMonobehaviour
     [SerializeField] private Transform _modelTransform;
     [SerializeField] private Transform _spawnProyectil;
     [SerializeField] private Transform _hipsPosition;
-    [Header("<color=yellow>Variables and Prefabs</color>")]
-    [SerializeField] TransitionFade _scriptTransition;
 
     protected override void Awake()
     {
@@ -42,11 +39,9 @@ public class PlayerManager : EntityMonobehaviour
 
     protected override void Update()
     {
+        if (_isDeath) return;
         base.Update();
-        if (!_isDeath)
-            CheckInputs();
-        else
-            AddCounter();
+        CheckInputs();
         GetStats();
     }
     protected override void FixedUpdate()
@@ -72,28 +67,12 @@ public class PlayerManager : EntityMonobehaviour
         SoundStruct aux = GameManager.Instance.SoundsReferences.GetSoundComponents(Index);
         _scriptShootingGun.SetSound(aux);
     }
-    public void SetDeathAnimation()
+    public void SetDeath(bool State)
     {
-        _isDeath = true;
+        _isDeath = State;
         _animator.SetBool("isDeath", _isDeath);
         _scriptMovement.SetMoveZero();
-        _scriptTransition.ShowBlackScreen();
     }
-    private void AddCounter()
-    {
-        _counter += Time.deltaTime;
-        if (2.0f < _counter)
-        {
-            _isDeath = false;
-            SetCaptured(false);
-            _counter = 0.0f;
-            _animator.SetBool("isDeath", _isDeath);
-            _scriptTransition.FadeOut();
-            transform.position = GameManager.Instance.RespawnReference;
-            GameManager.Instance.RespawnAllEnemies();
-        }
-    }
-
     public Vector3 GetHipsPosition()
     {
         return _hipsPosition.position;

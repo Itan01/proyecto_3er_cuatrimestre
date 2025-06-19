@@ -6,21 +6,6 @@ using UnityEngine.Audio;
 [RequireComponent(typeof(AudioSource))]
 public class AudioManager : MonoBehaviour
 {
-    #region Instance
-    public static AudioManager Instance;
-    private void Awake()
-    {
-        if (!Instance)
-        {
-            Instance = this;
-            DontDestroyOnLoad(gameObject);
-        }
-        else
-        {
-            Destroy(gameObject);
-        }
-    }
-    #endregion
     public struct AudioValues
     {
         public string name;
