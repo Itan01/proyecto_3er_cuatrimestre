@@ -7,7 +7,7 @@ public class PlayerMovement
 {
     public delegate void Movement();
     private Movement _movement;
-    private float _movSpeed = 5f,_crouchSpeed=3.5f, _rotSpeed = 10.0f;
+    private float _movSpeed = 6.0f,_crouchSpeed=3.5f, _rotSpeed = 10.0f;
     private Transform _transform, _model, _cam;
     private Rigidbody _rb;
     private Vector3 _dir, _orientation;
@@ -48,7 +48,7 @@ public class PlayerMovement
     {
         _orientation = _dir;
         _movement();
-        if (_animator.GetBool("Grabbing")|| _animator.GetBool("StartShooting"))
+        if (_animator.GetBool("Grabbing") || _animator.GetBool("StartShooting"))
         {
             _orientation = _cam.forward;
             _orientation.y = 0.0f;  
@@ -71,7 +71,7 @@ public class PlayerMovement
         else
         {
             _movement = BaseMovement;
-            y = 2.0f;
+            y = 1.5f;
         }
         _scriptCollider.SetSize(y);   
     }

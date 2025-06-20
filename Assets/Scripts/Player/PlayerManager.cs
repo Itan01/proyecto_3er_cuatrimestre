@@ -13,11 +13,13 @@ public class PlayerManager : EntityMonobehaviour
     private PlayerShootingGun _scriptShootingGun;
     private PlayerInteractions _scriptInteractions;
     private GrabbingSound _areaCatching;
+
     [SerializeField] private bool _onCaptured = false;
     [Header("<color=green>LayersMask</color>")]
     [SerializeField] private LayerMask _soundMask;
     [SerializeField] private LayerMask _enviormentMask;
     [SerializeField] private LayerMask InteractMask;
+    [SerializeField] private LayerMask _enviormentMaskWithOutPlayer;
     [Header("<color=red>Transform</color>")]
     [SerializeField] private Transform _camTransform;
     [SerializeField] private Transform _modelTransform;
@@ -57,7 +59,7 @@ public class PlayerManager : EntityMonobehaviour
     protected override void GetScripts()
     {
         _scriptCollider = new SetSizeCollider(_capsuleCollider, _boxCollider);
-        _scriptShootingGun = new PlayerShootingGun(_spawnProyectil, _camTransform, transform,_modelTransform);
+        _scriptShootingGun = new PlayerShootingGun(_spawnProyectil, _camTransform,_modelTransform, _enviormentMaskWithOutPlayer);
         _scriptInteractions = new PlayerInteractions(transform, _camTransform, InteractMask);
         _scriptController = new PlayerController(_scriptShootingGun, _scriptInteractions, _animator);
         _scriptMovement = new PlayerMovement(transform, _rb, _camTransform, _modelTransform, _animator, _scriptCollider);
@@ -86,6 +88,7 @@ public class PlayerManager : EntityMonobehaviour
     {
         _isCrouching = _scriptMovement.GetIsCrouching();
         _isMoving = _scriptMovement.GetIsMoving();
+        _spawnProyectil.position = _hipsPosition.position + _camTransform.forward*1.5f;
     }
     public void SetCaptured(bool State)
     {

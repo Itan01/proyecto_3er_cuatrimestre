@@ -8,7 +8,8 @@ public class PlayerController
     private PlayerShootingGun _scriptShoot;
     private PlayerInteractions _scriptInteract;
     private bool _isPressingCrouch = false;
-    private bool _canShoot=false, _wantShoot=false;
+    private float _timer=0.0f;
+    private bool _canShoot=false, _wantShoot=false, _setAim=false;
     private Animator _animator;
 
     public PlayerController(PlayerShootingGun ScriptShoot,PlayerInteractions ScriptInteract, Animator Animator)
@@ -27,13 +28,27 @@ public class PlayerController
     }
     public void CheckGunInputs()
     {
-        if (_wantShoot )
+        if (_setAim)
         {
-            if(Input.GetMouseButtonUp(0))
+            _timer += Time.deltaTime;
+            if (_timer > 0.5f)
+            {
+                _timer = 0.0f;
+                _setAim = false;
+                GameManager.Instance.AimUI.UITrigger(true);
+                GameManager.Instance.CameraReference.GetComponent<CameraManager>().SetCameraDistance(2.0f);
+            }
+        }
+        if (_wantShoot)
+        {
+            _scriptShoot.Direction();
+            if (Input.GetMouseButtonUp(0))
                 SetAiming(true);
             else if (Input.GetMouseButtonDown(1))
                 SetAiming(false);
         }
+
+
         if (Input.GetMouseButton(1))
         {
             _animator.SetBool("Grabbing", true);
@@ -45,10 +60,13 @@ public class PlayerController
 
         if (Input.GetMouseButtonDown(0) && _scriptShoot.CheckSound() && _canShoot)
         {
-            _wantShoot=true;
+            _scriptShoot.Direction();
+            _setAim = true;
+            _wantShoot =true;
+            _timer = 0.01f;
             _animator.SetBool("StartShooting",true);
-            GameManager.Instance.AimUI.UITrigger(true);
-            GameManager.Instance.CameraReference.GetComponent<CameraManager>().SetCameraDistance(2.0f);
+
+
         }
     }
     public void CheckInteractions()
@@ -72,8 +90,8 @@ public class PlayerController
             _animator.SetTrigger("Shooting");
             _scriptShoot.ThrowSound();
         }
-        else
-            _animator.SetBool("StartShooting", false);
+        _timer = 0.0f;
+        _setAim = false;
         _animator.SetBool("StartShooting", false);
         GameManager.Instance.CameraReference.GetComponent<CameraManager>().ResetCameraDistance();
         GameManager.Instance.AimUI.UITrigger(false);

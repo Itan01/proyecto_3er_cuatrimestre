@@ -133,8 +133,8 @@ public class CameraManager : MonoBehaviour
             }
         }
 
-        _cam.transform.position = _camPos;
-        _cam.transform.LookAt(_camLookAt+ _offSetTarget);
+        _cam.transform.position = _camPos + _offSetTarget;
+        _cam.transform.LookAt(_camLookAt + _offSetTarget);
     }
     private bool CheckIfEnviroment()
     {
@@ -169,7 +169,6 @@ public class CameraManager : MonoBehaviour
     }
     public void ResetCameraDistance()
     {
-        _offsetValue = 0.125f;
         _maxAuxDistance = _maxDistanceRef;
         _resetCamDis = true;
     }

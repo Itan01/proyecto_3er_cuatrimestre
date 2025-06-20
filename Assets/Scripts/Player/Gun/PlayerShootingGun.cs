@@ -1,23 +1,28 @@
+using Autodesk.Fbx;
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor;
 using UnityEngine;
-using UnityEngine.UI;
-using UnityEngine.SceneManagement;
-using System.Security.Cryptography.X509Certificates;
+
 
 public class PlayerShootingGun
 {
     private GameObject _soundReference;
     private float _speed=7.5f, _size=1.2f;
-    private Transform _spawn, _orientation, _player, _model;
+    private Transform _spawn, _orientation, _model;
+    private Vector3 _direction, _aux;
     private bool _hasASound;
+    private float _maxdistance = 500f;
+    private LayerMask _layerMask;
+    private RaycastHit _hitPoint;
 
-    public PlayerShootingGun(Transform SpawnProyectil, Transform Orientation, Transform Player, Transform Model)
+    public PlayerShootingGun(Transform SpawnProyectil, Transform Orientation, Transform Model,LayerMask Mask)
     {
         _spawn = SpawnProyectil;
         _orientation=Orientation;
-        _player=Player;
         _model=Model;
+        _layerMask=Mask;
     }
      public void ThrowSound()
      {
@@ -39,20 +44,28 @@ public class PlayerShootingGun
 
     private void AvailableSound() 
     {
-        Vector3 aux = _orientation.forward;
-        _model.transform.forward = aux;
         _hasASound = false;
+        _model.forward = _direction;
         var NewSound = UnityEngine.Object.Instantiate(_soundReference, _spawn.position, Quaternion.identity);
         AbstractSound script = NewSound.GetComponent<AbstractSound>();
         script.SetTarget(null, 0.0f);
-        script.SetDirection(aux, _speed, _size);
+        script.SetDirection(_direction, _speed, _size);
         script.FreezeObject(false);
         script.PlayerCanCatchIt(false);
         script.SetIfPlayerSummoned(true);
         script.SetPlayerShootIt(true);
-        script.SetSpawnPoint(_player.position);
-        aux.y = 0.0f;
-        _model.transform.forward = aux;
+        _aux.y= 0.0f; 
+        _model.transform.forward = _aux;
+    }
+    public void Direction()
+    {
+        Ray ray = new Ray(_orientation.position,_orientation.forward);
+
+        if (Physics.Raycast(ray, out _hitPoint, _maxdistance, _layerMask))
+        {
+            _direction = (_hitPoint.point-_spawn.position).normalized;
+            _aux = _direction;
+        }
     }
 }
 

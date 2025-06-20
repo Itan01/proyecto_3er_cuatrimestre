@@ -142,13 +142,15 @@ MonoBehaviour:
   _isCursorVisible: 0
   _detectionRadius: 0.1
   _hitOffset: 0.25
-  _mouseSensitivity: 500
+  _mouseSensitivity: 175
   _minDistance: 0.25
   _maxDistance: 6
-  _minRotation: -85
-  _maxRotation: 75
-  _offsetValue: 1
-  _offSetTarget: {x: 0, y: 0, z: 0}
+  _maxDistanceRef: 0
+  _maxAuxDistance: 0
+  _minRotation: -45
+  _maxRotation: 60
+  _setCamDis: 0
+  _resetCamDis: 0
   Enviroment:
     serializedVersion: 2
     m_Bits: 3850371072
