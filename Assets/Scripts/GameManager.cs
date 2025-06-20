@@ -25,6 +25,10 @@ public class GameManager : MonoBehaviour
     private PlayerManager _player;
     private List<AbstractEnemy> _enemies = new List<AbstractEnemy>();
 
+    private int _displayedScore = 0;
+    private Coroutine _scoreCoroutine;
+
+
     public PlayerManager PlayerReference
     {
         get { return _player; }
@@ -32,7 +36,7 @@ public class GameManager : MonoBehaviour
     }
 
     private TransitionFade _scriptTransition;
-    public TransitionFade Transition 
+    public TransitionFade Transition
     {
         get { return _scriptTransition; }
         set { _scriptTransition = value; }
@@ -41,7 +45,7 @@ public class GameManager : MonoBehaviour
     public SoundReferences SoundsReferences
     {
         get { return _soundRef; }
-        set {  _soundRef = value; }
+        set { _soundRef = value; }
     }
 
 
@@ -78,24 +82,28 @@ public class GameManager : MonoBehaviour
         get { return _pointsUI; }
         set { _pointsUI = value; }
     }
-    private string _mainText = "Gold: ";
-    public int SetScore
+    private string _mainText = "$";
+    public void AddScore(int amount)
     {
-        get { return _score; }
-        set { ChangeScore(value); }
+        _score += amount;
+
+        if (_scoreCoroutine != null)
+            StopCoroutine(_scoreCoroutine);
+
+        _scoreCoroutine = StartCoroutine(AnimateScore());
     }
 
-    private void ChangeScore(int value)
-    {
-        _score += value;
-        _pointsUI.text = ($"{_mainText}{_score}");
-    }
+    //private void ChangeScore(int value)
+    //{
+    //    _score += value;
+    //    _pointsUI.text = ($"{_mainText}{_score}");
+    //}
 
     private UISetSound _soundUI;
     public UISetSound UISound
     {
         get { return _soundUI; }
-        set { _soundUI=value; }
+        set { _soundUI = value; }
     }
 
 
@@ -116,7 +124,7 @@ public class GameManager : MonoBehaviour
         set { _aimUI = value; }
     }
     private RoomManager _actualRoom;
-   
+
     public RoomManager Room
     {
         get { return _actualRoom; }
@@ -138,4 +146,15 @@ public class GameManager : MonoBehaviour
         _scriptTransition.FadeOut();
         PlayerReference.transform.position = RespawnReference;
     }
+
+    private IEnumerator AnimateScore()
+    {
+        while (_displayedScore < _score)
+        {
+            _displayedScore++;
+            _pointsUI.text = $"{_mainText}{_displayedScore}";
+            yield return new WaitForSeconds(0.00001f);
+        }
+    }
+
 }

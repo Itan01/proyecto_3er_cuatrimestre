@@ -14,6 +14,9 @@ public class CameraObstacleController : MonoBehaviour
     private RaycastHit _intHit;
     private Ray _startPosition;
 
+    [SerializeField] private Transform _cameraMovement;
+
+
     private void Start()
     {
         _animation = GetComponent<Animation>();
@@ -21,6 +24,7 @@ public class CameraObstacleController : MonoBehaviour
         if (_doors==null)
             _noDoors = true;
         CloseDoors(false);
+
     }
 
     private void Update()
@@ -30,7 +34,9 @@ public class CameraObstacleController : MonoBehaviour
         if (CheckTarget())
         {
             _animation.Stop();
-            transform.LookAt(_target);
+            _cameraMovement.transform.LookAt(_target);
+            GetComponentInChildren<Light>().color = Color.red;
+            GetComponentInChildren<Light>().intensity = 6f;
             if (_noDoors) return;
             CloseDoors(true);
 
@@ -54,7 +60,7 @@ public class CameraObstacleController : MonoBehaviour
     private bool CheckTarget()
     {
          _startPosition = new Ray(transform.position, (_target+ new Vector3(0,0.35f,0) - transform.position));
-        if (Physics.Raycast(_startPosition, out _intHit, 20.0f, _layerMask))
+        if (Physics.Raycast(_startPosition, out _intHit, 500.0f, _layerMask))
         {
            // Debug.Log($"Collided obj : {_intHit.collider.name}.");
 
