@@ -15,14 +15,10 @@ public class ObjectValuable : AbstractObjects, IInteractableObject
     {
         base.Update();  
     }
-    public void OnInteract ()
+    public void OnInteract()
     {
-        Vector3 player = GameManager.Instance.PlayerReference.transform.position;
-        if ((transform.position - player).magnitude < 4.0f)
-        {
-            GameManager.Instance.SetScore = _value;
-            Destroyed();
-        }
+        GameManager.Instance.SetScore = _value;
+        Destroyed();
 
     }
     protected override void SetFeedback(bool State)
