@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class PlayerInteractions
 {
-    private float _interactRayDistance = 0.5f, _intRadius = 2.5f;
+    private float _interactRayDistance = 2.0f, _intRadius = 0.75f;
     private RaycastHit _intHit;
     private Transform _transform, _orientation;
     private Vector3 _offSet= new Vector3(0.0f,1.0f,0.0f);
