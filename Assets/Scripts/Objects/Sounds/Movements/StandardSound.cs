@@ -10,15 +10,13 @@ public class StandardSound : AbstractSound
     protected override void Start()
     {
         base.Start();
+        _particleManager = GetComponentInChildren<ParticlesManager>();
         if (_playerShooted)
-        {
-            _particleManager = GetComponentInChildren<ParticlesManager>();
-            _particleManager.StartLoop();
-        }
-
+            _particleManager.PlayOnce();
     }
     protected override void Update()
     {
+
         base.Update();
 
     }
