@@ -91,13 +91,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 174855865156641189}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.13459148, y: 0, z: 0, w: 0.9909012}
-  m_LocalPosition: {x: 0, y: 1.5, z: 0}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 1.6, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 5325143585265048148}
-  m_LocalEulerAnglesHint: {x: 15.47, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!33 &4807561025079602540
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -161,8 +161,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   viewAngle: 60
-  viewRadius: 20
-  rayCount: 100
+  verticalFOV: 50
+  viewRadius: 10
+  horizontalRayCount: 20
+  verticalRayCount: 20
   obstacleMask:
     serializedVersion: 2
     m_Bits: 3850371072
