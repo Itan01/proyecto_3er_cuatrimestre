@@ -11,7 +11,8 @@ public class AbstractSound : MonoBehaviour // Sonidos Genericos,Movimiento Base
     [SerializeField] protected bool _playerSummoned = false, _playerShooted= false ;
     [SerializeField] protected bool _canCatch = false;
         protected bool _freeze = false;
-    protected float _speed = 5.0f, _size = 1.0f;
+    [SerializeField] protected float _speed = 5.0f;
+    protected float _size = 1.0f;
     protected int _index = 0;
     protected Vector3 _dir = new Vector3(0.0f, 0.0f, 0.0f);
     protected Vector3 _startPosition;
@@ -73,6 +74,11 @@ public class AbstractSound : MonoBehaviour // Sonidos Genericos,Movimiento Base
             _speed = 5.0f;
         else
             _speed = Speed;
+    }
+
+    public virtual void SetSpeed(float speed)
+    {
+        _speed = speed;
     }
 
     protected void BaseSettings()// En Caso de que no se especifique una Variable base

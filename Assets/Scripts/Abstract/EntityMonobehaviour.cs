@@ -9,8 +9,9 @@ public class EntityMonobehaviour : MonoBehaviour
     protected CapsuleCollider _capsuleCollider;
     protected BoxCollider _boxCollider;
     protected GameObject _noise;
+
     [SerializeField] protected bool _makeNoise, _summonedByPlayer = false;
-    [SerializeField] protected float _noiseTimer=0.5f, _noiseTimerRef=0.5f;
+    [SerializeField] protected float _noiseTimer = 0.5f, _noiseTimerRef = 0.5f;
     [SerializeField] protected bool _isMoving = false;
     protected bool _isDeath = false;
     [SerializeField] protected bool _isCrouching = false;
@@ -37,11 +38,11 @@ public class EntityMonobehaviour : MonoBehaviour
     }
     protected virtual void GetComponents()
     {
-        _rb =GetComponent<Rigidbody>();
+        _rb = GetComponent<Rigidbody>();
         _rb.freezeRotation = true;
-        _animator =GetComponentInChildren<Animator>();
+        _animator = GetComponentInChildren<Animator>();
         _capsuleCollider = GetComponent<CapsuleCollider>();
-        _boxCollider=GetComponent<BoxCollider>();
+        _boxCollider = GetComponent<BoxCollider>();
     }
     protected virtual void GetScripts()
     {
@@ -49,7 +50,7 @@ public class EntityMonobehaviour : MonoBehaviour
     }
     public void SetSoundInvoker(bool State)
     {
-        _makeNoise=State;
+        _makeNoise = State;
     }
     public void GameObjectSoundInvoker(GameObject Sound)
     {
@@ -61,13 +62,13 @@ public class EntityMonobehaviour : MonoBehaviour
         _noiseTimer -= Time.deltaTime;
         if (_noiseTimer <= 0)
         {
-            Vector3 RandomPosition= new Vector3(Random.Range(-2.0f,1.0f + 1), 1.0f, Random.Range(-2.0f,1.0f + 1)).normalized*2;
+            Vector3 RandomPosition = new Vector3(Random.Range(-2.0f, 1.0f + 1), 1.0f, Random.Range(-2.0f, 1.0f + 1)).normalized * 2;
             //Debug.Log(RandomPosition);
             RandomPosition += transform.position;
             Vector3 Orientation = RandomPosition - transform.position;
             var Sound = Instantiate(_noise, RandomPosition, Quaternion.identity);
-            AbstractSound Script= Sound.GetComponent<AbstractSound>();
-            Script.SetDirection(Orientation + transform.up,4.0f,1.0f);
+            AbstractSound Script = Sound.GetComponent<AbstractSound>();
+            Script.SetDirection(Orientation + transform.up, 4.0f, 1.0f);
             if (_summonedByPlayer)
             {
                 Script.SetIfPlayerSummoned(true);
@@ -88,5 +89,10 @@ public class EntityMonobehaviour : MonoBehaviour
     public bool IsPlayerDeath()
     {
         return _isDeath;
+    }
+
+    public void CoughState()
+    {
+
     }
 }

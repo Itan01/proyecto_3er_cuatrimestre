@@ -8,7 +8,8 @@ using UnityEngine;
 public class PlayerShootingGun
 {
     private GameObject _soundReference;
-    private float _speed=7.5f, _size=1.2f;
+    [SerializeField]private float _speed = 15f;
+    private float _size=1.2f;
     private Transform _spawn, _orientation, _model;
     private Vector3 _direction, _aux;
     private bool _hasASound;

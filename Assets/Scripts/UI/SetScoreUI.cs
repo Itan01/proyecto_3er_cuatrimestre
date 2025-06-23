@@ -10,6 +10,6 @@ public class SetScoreUI : MonoBehaviour
     {
         _reference = GetComponent<TMP_Text>();
         GameManager.Instance.TextReference = _reference;
-        _reference.text = "$000";
+        _reference.text = "$0";
     }
 }

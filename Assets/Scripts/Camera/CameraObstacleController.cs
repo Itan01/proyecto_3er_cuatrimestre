@@ -15,7 +15,7 @@ public class CameraObstacleController : MonoBehaviour
     private Ray _startPosition;
 
     [SerializeField] private Transform _cameraMovement;
-
+    [SerializeField] private Material _cameraLight;
 
     private void Start()
     {
@@ -35,6 +35,7 @@ public class CameraObstacleController : MonoBehaviour
         {
             _animation.Stop();
             _cameraMovement.transform.LookAt(_target);
+            //_cameraLight.color.emiss= Color.red;
             GetComponentInChildren<Light>().color = Color.red;
             GetComponentInChildren<Light>().intensity = 6f;
             if (_noDoors) return;
