@@ -30,7 +30,11 @@ public class StandardSound : AbstractSound
         {
             SummonExplosion();
         }
-        Destroy(gameObject,0.15f);
+        if (Enviroment.gameObject.TryGetComponent(out ISoundInteractions script))
+        {
+            script.Interaction();
+        }
+        Destroy(gameObject,0.1f);
     }
     protected void SummonExplosion()
     {

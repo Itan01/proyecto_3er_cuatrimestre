@@ -4,7 +4,7 @@ using TMPro;
 using UnityEngine;
 using static UnityEngine.EventSystems.EventTrigger;
 
-public class FragileObject : AbstractObjects
+public class FragileObject : AbstractObjects, ISoundInteractions
 {
     [SerializeField] private GameObject _sound;
     [SerializeField] private float _sizeMultiplier;
@@ -19,15 +19,6 @@ public class FragileObject : AbstractObjects
     {
         base.Update();
     }
-    private void OnCollisionEnter(Collision collision)
-    {
-        if (collision.gameObject.layer == 28)
-        {
-            var Sound = Instantiate(_sound, transform.position, Quaternion.identity);
-            Sound.GetComponent<SoundRadiusTrigger>().SetMultiplier(GetSize());
-            Destroy(gameObject);
-        }
-    }
     public float GetSize()
     {
         return _sizeMultiplier;
@@ -37,5 +28,13 @@ public class FragileObject : AbstractObjects
     {
         _animator.SetBool("Shine", State);
     }
+    public void Interaction()
+    {
+        var Sound = Instantiate(_sound, transform.position, Quaternion.identity);
+        Sound.GetComponent<SoundRadiusTrigger>().SetMultiplier(GetSize());
+        Destroy(gameObject);
+
+    }
+
 }
 

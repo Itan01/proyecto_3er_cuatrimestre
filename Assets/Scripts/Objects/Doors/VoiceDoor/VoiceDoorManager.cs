@@ -5,9 +5,11 @@ using UnityEngine;
 public class VoiceDoorManager : AbstracDoors
 {
     [SerializeField] private float _timer = 5.0f,_timerRef=5.0f;
+    private Animator _animator; 
     protected override void Start()
     {
         base.Start();
+        _animator= GetComponent<Animator>();    
         _timerRef = _timer;
     }
     protected override void Update()

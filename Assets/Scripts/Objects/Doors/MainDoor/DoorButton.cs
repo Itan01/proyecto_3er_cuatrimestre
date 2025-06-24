@@ -1,30 +1,21 @@
 using System.Collections;
 using System.Collections.Generic;
-using System.Linq.Expressions;
 using UnityEngine;
-using static UnityEngine.ParticleSystem;
 
-public class DoorButton : MonoBehaviour, IInteractableObject
+public class DoorButton : MonoBehaviour
 {
-    private MainDoorManager _doorManager;
+    private AbstracDoors _doorManager;
     [SerializeField]private ParticleSystem[] _particles;
     void Start()
     {
-        _doorManager = GetComponentInParent<MainDoorManager>();
+        _doorManager = GetComponentInParent<AbstracDoors>();
     }
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.layer == 28)
+        if (other.GetComponent<AbstractSound>())
         {
             _doorManager.CheckStatus();
-            for (int i = 0; i < _particles.Length; i++)
-                _particles[i].Play();
         }
-    }
-
-    public void OnInteract()
-    {
-        Debug.Log("Wrong VoiceCode");
     }
 }

@@ -14,12 +14,12 @@ public class SoundRadiusTrigger : MonoBehaviour
     private void Update()
     {
         transform.localScale = new Vector3(_size, _size, _size);
-        _collider.radius = _size * 1.25f;
+        _collider.radius = _size * 1.10f;
         _size += Time.deltaTime * _multiplier;
     }
     protected void OnTriggerEnter(Collider Entity)
     {
-        if (Entity.TryGetComponent<AbstractEnemy>(out AbstractEnemy Script))// sigue el sonido, si el enemigo persigue al jugador, ignora el sonido
+        if (Entity.TryGetComponent(out AbstractEnemy Script))// sigue el sonido, si el enemigo persigue al jugador, ignora el sonido
         {
             Vector3 aux = transform.position;
             aux.y= Script.transform.position.y;
