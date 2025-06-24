@@ -35,7 +35,7 @@ public class PlayerController
             {
                 _timer = 0.0f;
                 _setAim = false;
-                GameManager.Instance.AimUI.UITrigger(true);
+                UIManager.Instance.AimUI.UITrigger(true);
                 GameManager.Instance.CameraReference.GetComponent<CameraManager>().SetCameraDistance(2.0f);
             }
         }
@@ -94,6 +94,6 @@ public class PlayerController
         _setAim = false;
         _animator.SetBool("StartShooting", false);
         GameManager.Instance.CameraReference.GetComponent<CameraManager>().ResetCameraDistance();
-        GameManager.Instance.AimUI.UITrigger(false);
+        UIManager.Instance.AimUI.UITrigger(false);
     }
 }

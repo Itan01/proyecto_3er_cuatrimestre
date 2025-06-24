@@ -53,6 +53,7 @@ public abstract class AbstractEnemy : EntityMonobehaviour
         if (Entity.gameObject.GetComponent<PlayerManager>())
         {
             GameManager.Instance.ResetGameplay();
+            SetMode(MoveResettingPath);
         }
     }
 

@@ -28,14 +28,14 @@ public class PlayerShootingGun
      {
         AvailableSound();
         _hasASound = false; 
-        GameManager.Instance.UISound.Shooting();
+        UIManager.Instance.UISound.Shooting();
      }
 
     public void SetSound(SoundStruct Sound)
     {
         _hasASound = true;
         _soundReference = Sound.Sound;
-        GameManager.Instance.UISound.SetSound(Sound.Index);
+        UIManager.Instance.UISound.SetSound(Sound.Index);
     }
     public bool CheckSound()
     {

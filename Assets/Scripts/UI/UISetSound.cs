@@ -12,7 +12,7 @@ public class UISetSound : MonoBehaviour
     private Animator _animator;
     private void Start()
     {
-        GameManager.Instance.UISound = this;
+        UIManager.Instance.UISound = this;
         _animator= GetComponent<Animator>();
         _uI = GetComponent<Image>();
         _noSound=_uI.sprite;

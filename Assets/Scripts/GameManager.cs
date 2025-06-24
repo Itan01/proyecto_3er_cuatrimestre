@@ -24,23 +24,15 @@ public class GameManager : MonoBehaviour
     #endregion
     private PlayerManager _player;
     private List<AbstractEnemy> _enemies = new List<AbstractEnemy>();
-
-    private int _displayedScore = 0;
-    private Coroutine _scoreCoroutine;
-
-
+    private void Start()
+    {
+    }
     public PlayerManager PlayerReference
     {
         get { return _player; }
         set { _player = value; }
     }
 
-    private TransitionFade _scriptTransition;
-    public TransitionFade Transition
-    {
-        get { return _scriptTransition; }
-        set { _scriptTransition = value; }
-    }
     private SoundReferences _soundRef;
     public SoundReferences SoundsReferences
     {
@@ -75,37 +67,11 @@ public class GameManager : MonoBehaviour
         set { _camera = value; }
     }
 
-    private int _score = 0;
-    private TMP_Text _pointsUI;
-    public TMP_Text TextReference
-    {
-        get { return _pointsUI; }
-        set { _pointsUI = value; }
-    }
-    private string _mainText = "$";
-    public void AddScore(int amount)
-    {
-        _score += amount;
-
-        if (_scoreCoroutine != null)
-            StopCoroutine(_scoreCoroutine);
-
-        _scoreCoroutine = StartCoroutine(AnimateScore());
-    }
-
     //private void ChangeScore(int value)
     //{
     //    _score += value;
     //    _pointsUI.text = ($"{_mainText}{_score}");
     //}
-
-    private UISetSound _soundUI;
-    public UISetSound UISound
-    {
-        get { return _soundUI; }
-        set { _soundUI = value; }
-    }
-
 
     private TuriorialFirstTime _textFirstTime;
 
@@ -116,13 +82,6 @@ public class GameManager : MonoBehaviour
     }
 
 
-    private AimManagerUI _aimUI;
-
-    public AimManagerUI AimUI
-    {
-        get { return _aimUI; }
-        set { _aimUI = value; }
-    }
     private RoomManager _actualRoom;
 
     public RoomManager Room
@@ -134,27 +93,15 @@ public class GameManager : MonoBehaviour
     {
         StartCoroutine(ResetTImer());
     }
-
     private IEnumerator ResetTImer()
     {
         PlayerReference.SetDeath(true);
-        _scriptTransition.ShowBlackScreen();
+        UIManager.Instance.Transition.ShowBlackScreen();
         yield return new WaitForSeconds(1.0f);
         Room.ResetRoom();
         PlayerReference.SetCaptured(false);
         PlayerReference.SetDeath(false);
-        _scriptTransition.FadeOut();
+        UIManager.Instance.Transition.FadeOut();
         PlayerReference.transform.position = RespawnReference;
     }
-
-    private IEnumerator AnimateScore()
-    {
-        while (_displayedScore < _score)
-        {
-            _displayedScore++;
-            _pointsUI.text = $"{_mainText}{_displayedScore}";
-            yield return new WaitForSeconds(0.00001f);
-        }
-    }
-
 }

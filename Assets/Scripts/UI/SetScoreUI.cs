@@ -9,7 +9,7 @@ public class SetScoreUI : MonoBehaviour
     private void Start()
     {
         _reference = GetComponent<TMP_Text>();
-        GameManager.Instance.TextReference = _reference;
+        UIManager.Instance.TextReference = _reference;
         _reference.text = "$0";
     }
 }

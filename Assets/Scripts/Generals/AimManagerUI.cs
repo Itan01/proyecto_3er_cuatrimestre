@@ -7,7 +7,7 @@ public class AimManagerUI : MonoBehaviour
     private Animator _animator;
     private void Awake()
     {
-        GameManager.Instance.AimUI = this;
+        UIManager.Instance.AimUI = this;
     }
     private void Start()
     {

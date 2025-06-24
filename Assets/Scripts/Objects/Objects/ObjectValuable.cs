@@ -17,7 +17,7 @@ public class ObjectValuable : AbstractObjects, IInteractableObject
     }
     public void OnInteract()
     {
-        GameManager.Instance.AddScore(_value);
+        UIManager.Instance.AddScore(_value);
         Destroyed();
 
     }

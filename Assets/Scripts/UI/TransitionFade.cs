@@ -8,7 +8,7 @@ public class TransitionFade : MonoBehaviour
     private bool _state;
     void Start()
     {
-        GameManager.Instance.Transition = this;
+        UIManager.Instance.Transition = this;
         _animator = GetComponent<Animator>();
         _state = true;
     }
