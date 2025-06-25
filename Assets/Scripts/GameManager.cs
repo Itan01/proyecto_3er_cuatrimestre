@@ -99,6 +99,7 @@ public class GameManager : MonoBehaviour
         UIManager.Instance.Transition.ShowBlackScreen();
         yield return new WaitForSeconds(1.0f);
         Room.ResetRoom();
+        RespawnAllEnemies(); 
         PlayerReference.SetCaptured(false);
         PlayerReference.SetDeath(false);
         UIManager.Instance.Transition.FadeOut();
