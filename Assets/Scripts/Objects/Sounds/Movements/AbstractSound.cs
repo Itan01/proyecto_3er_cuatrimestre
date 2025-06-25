@@ -109,10 +109,14 @@ public class AbstractSound : MonoBehaviour // Sonidos Genericos,Movimiento Base
 
     protected virtual void OnTriggerEnter(Collider Entity)
     {
-        if (Entity.TryGetComponent<PlayerManager>(out PlayerManager PlayerScript))
+        if (Entity.TryGetComponent(out ISoundInteractions script))
         {
-            if (_canCatch)
-                PlayerScript.SetSound(_index);
+            script.Interaction();
+        }
+        if (Entity.TryGetComponent(out PlayerManager player))
+        {
+            Debug.Log("HII");
+            player.SetSound(_index);
         }
     }
     public bool HasLineOfVision(LayerMask mask, Vector3 EntityPosition)
