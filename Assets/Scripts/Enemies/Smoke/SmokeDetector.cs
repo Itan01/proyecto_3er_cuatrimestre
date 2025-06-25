@@ -4,22 +4,23 @@ using UnityEngine;
 
 public class SmokeDetector : MonoBehaviour
 {
-    private PlayerSmoke _scriptPlayer;
+    [SerializeField] private GameObject SoundReference;
     void OnTriggerEnter(Collider Player)
     {
-        if (Player.gameObject.CompareTag("Player"))
+        if (Player.TryGetComponent(out EntityMonobehaviour Script))
         {
-            _scriptPlayer = Player.GetComponent<PlayerSmoke>();
-            _scriptPlayer.ToggleState(true);
+            Script.GameObjectSoundInvoker(SoundReference);
+            Script.CoughState(true);
+            
         }
     }
 
     void OnTriggerExit(Collider Player)
     {
-    if (Player.gameObject.CompareTag("Player"))
-        {
-            _scriptPlayer = Player.GetComponent<PlayerSmoke>();
-            _scriptPlayer.ToggleState(false);
-        }
+    if (Player.TryGetComponent(out EntityMonobehaviour Script))
+    {
+        Script.CoughState(false);
+
+    }
     }
 }

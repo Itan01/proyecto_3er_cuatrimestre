@@ -9,6 +9,10 @@ public class EntityMonobehaviour : MonoBehaviour
     protected CapsuleCollider _capsuleCollider;
     protected BoxCollider _boxCollider;
     protected GameObject _noise;
+    protected bool coughCondition = false;
+    protected float coughTimer = 2f, coughTimerReference = 2f;
+    [SerializeField] Transform HeadReference;
+    
 
     [SerializeField] protected bool _makeNoise, _summonedByPlayer = false;
     [SerializeField] protected float _noiseTimer = 0.5f, _noiseTimerRef = 0.5f;
@@ -30,7 +34,10 @@ public class EntityMonobehaviour : MonoBehaviour
         {
             MakeNoiseTimer();
         }
-
+        if(coughCondition)
+        {
+            CoughTimerSubstract();
+        }
     }
     protected virtual void FixedUpdate()
     {
@@ -91,8 +98,28 @@ public class EntityMonobehaviour : MonoBehaviour
         return _isDeath;
     }
 
-    public void CoughState()
+    public void CoughState(bool coughState)
     {
+        coughCondition = coughState;
 
+    }
+
+    protected void CoughTimerSubstract()
+    {
+        coughTimer -= Time.deltaTime;
+        if (coughTimer <= 0)
+        {
+            Vector3 RandomPosition = HeadReference.position + HeadReference.forward *1.1f;
+            //Debug.Log(RandomPosition);
+            Vector3 Orientation = RandomPosition - transform.position;
+            var Sound = Instantiate(_noise, RandomPosition, Quaternion.identity);
+            AbstractSound Script = Sound.GetComponent<AbstractSound>();
+            Script.SetDirection(Orientation + transform.up, 4.0f, 1.0f);
+            if (_summonedByPlayer)
+            {
+                Script.SetIfPlayerSummoned(true);
+            }
+            coughTimer = coughTimerReference;
+        }
     }
 }
