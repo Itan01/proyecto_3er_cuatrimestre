@@ -5,12 +5,9 @@ using UnityEngine;
 public class AimManagerUI : MonoBehaviour
 {
     private Animator _animator;
-    private void Awake()
-    {
-        UIManager.Instance.AimUI = this;
-    }
     private void Start()
     {
+        UIManager.Instance.AimUI = this;
         _animator = GetComponent<Animator>();
     }
 

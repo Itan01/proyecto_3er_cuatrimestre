@@ -16,9 +16,7 @@ public class StandardSound : AbstractSound
     }
     protected override void Update()
     {
-
         base.Update();
-
     }
     protected override void FixedUpdate()
     {
@@ -30,12 +28,10 @@ public class StandardSound : AbstractSound
         {
             SummonExplosion();
         }
-        if (Enviroment.gameObject.TryGetComponent(out ISoundInteractions script))
-        {
-            script.Interaction();
-        }
-        Destroy(gameObject,0.1f);
+
+        Destroy(gameObject,0.25f);
     }
+
     protected void SummonExplosion()
     {
         Instantiate(_soundExplosion,transform.position, Quaternion.identity);
