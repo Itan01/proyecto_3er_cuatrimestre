@@ -61,7 +61,7 @@ public class PlayerManager : EntityMonobehaviour
         _scriptCollider = new SetSizeCollider(_capsuleCollider, _boxCollider);
         _scriptShootingGun = new PlayerShootingGun(_spawnProyectil, _camTransform,_modelTransform, _enviormentMaskWithOutPlayer);
         _scriptInteractions = new PlayerInteractions(transform, _camTransform, InteractMask);
-        _scriptController = new PlayerController(_scriptShootingGun, _scriptInteractions, _animator);
+        _scriptController = new PlayerController(_scriptShootingGun, _scriptInteractions, _animator,_areaCatching);
         _scriptMovement = new PlayerMovement(transform, _rb, _camTransform, _modelTransform, _animator, _scriptCollider);
     }
     public void SetSound(int Index)

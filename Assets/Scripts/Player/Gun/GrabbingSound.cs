@@ -22,4 +22,15 @@ public class GrabbingSound : MonoBehaviour
             }
         }
     }
+
+    public void Desactivate()
+    {
+        if(gameObject.activeSelf)
+        StartCoroutine(SetActivateFalse());
+    }
+    private IEnumerator SetActivateFalse()
+    {
+        yield return new WaitForSeconds(0.5f);
+        gameObject.SetActive(false);
+    }
 }

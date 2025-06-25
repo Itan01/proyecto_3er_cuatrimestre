@@ -113,9 +113,8 @@ public class AbstractSound : MonoBehaviour // Sonidos Genericos,Movimiento Base
         {
             script.Interaction();
         }
-        if (Entity.TryGetComponent(out PlayerManager player))
+        if (Entity.TryGetComponent(out PlayerManager player) && _canCatch)
         {
-            Debug.Log("HII");
             player.SetSound(_index);
         }
     }

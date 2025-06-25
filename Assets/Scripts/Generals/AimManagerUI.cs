@@ -13,9 +13,6 @@ public class AimManagerUI : MonoBehaviour
 
     public void UITrigger(bool State)
     {
-        if (State)
-            _animator.SetTrigger("Start");
-        else
-            _animator.SetTrigger("Stop");
+        _animator.SetBool("Aiming", State);
     }
 }

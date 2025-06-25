@@ -26,12 +26,13 @@ public class UISetSound : MonoBehaviour
     public void SetSound(int index)
     {
         SoundStruct SoundRef= GameManager.Instance.SoundsReferences.GetSoundComponents(index);
-        _animator.SetTrigger("Grabbing");
+        _animator.SetBool("Grabbing",true);
         _uI.sprite = SoundRef.SpriteUi;
     }
     public void Shooting()
     {
         _animator.SetTrigger("Shooting");
+        _animator.SetBool("Grabbing", false);
     }
 
     public void SetNoSound()
