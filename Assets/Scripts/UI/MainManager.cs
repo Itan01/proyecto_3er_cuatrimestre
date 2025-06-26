@@ -5,12 +5,17 @@ using UnityEngine.SceneManagement;
 
 public class MainManager : MonoBehaviour
 {
+    public Animator animator;
 
-    public void LoadScene(string _sceneName)
+    public void StartSceneChange()
     {
-        SceneManager.LoadScene(_sceneName);
+        animator.SetTrigger("Start");
     }
 
+    public void LoadScene(string sceneName)
+    {
+        SceneManager.LoadScene(sceneName);
+    }
 
     public void QuitApp()
     {
