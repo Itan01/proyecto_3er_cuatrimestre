@@ -47,7 +47,10 @@ public class UIManager : MonoBehaviour
 
 
     private int _score = 0;
-    private TMP_Text _pointsUI;
+    [SerializeField] private TMP_Text _pointsUI, _popupPointsUI;
+    [SerializeField] private GameObject _popupPoints;
+
+
     public TMP_Text TextReference
     {
         get { return _pointsUI; }
@@ -60,18 +63,82 @@ public class UIManager : MonoBehaviour
 
         if (_scoreCoroutine != null)
             StopCoroutine(_scoreCoroutine);
+        if (_popupScoreCoroutine != null)
+            StopCoroutine(_popupScoreCoroutine);
+
+        _popupScoreCoroutine = StartCoroutine(ShowPopup(amount));
+    }
+    private int _displayedScore = 0;
+    private Coroutine _scoreCoroutine, _popupScoreCoroutine;
+
+    private IEnumerator ShowPopup(int amount)
+    {
+
+        float fadeInDuration = 0.25f;
+        float fadeInTimer = 0f;
+
+        while (fadeInTimer < fadeInDuration)
+        {
+            fadeInTimer += Time.deltaTime;
+            _popupPointsUI.alpha = Mathf.Lerp(1f, 0f, fadeInTimer / fadeInDuration);
+            yield return null;
+        }
+
+        _popupPointsUI.alpha = 1f;
+        TextReference.ForceMeshUpdate();
+        int lastCharIndex = TextReference.textInfo.characterCount - 1;
+
+        if (lastCharIndex >= 0)
+        {
+            var charInfo = TextReference.textInfo.characterInfo[lastCharIndex];
+
+            Vector3 charPos = charInfo.bottomRight;
+            float charHeight = charInfo.ascender - charInfo.descender;
+            Vector3 verticalOffset = new Vector3(0f, charHeight * 0.35f, 0f);
+
+
+            Vector3 worldPos = TextReference.transform.TransformPoint(charPos + verticalOffset);
+
+            Vector3 offset = new Vector3(5f, 0f, 0f);
+
+            _popupPointsUI.rectTransform.position = worldPos + offset;
+        }
+
+
+
+        _popupPointsUI.text = $"+${amount}";
+
+        _popupPointsUI.gameObject.SetActive(true);
+
+        yield return new WaitForSeconds(0.5f);
+
+        float fadeOutDuration = 0.25f;
+        float fadeOutTimer = 0f;
+        
+        while (fadeOutTimer < fadeOutDuration)
+        {
+            fadeOutTimer += Time.deltaTime;
+            _popupPointsUI.alpha = Mathf.Lerp(1f, 0f, fadeOutTimer / fadeOutDuration);
+            yield return null;
+        }
+        _popupPointsUI.gameObject.SetActive(false);
 
         _scoreCoroutine = StartCoroutine(AnimateScore());
     }
-    private int _displayedScore = 0;
-    private Coroutine _scoreCoroutine;
+
     private IEnumerator AnimateScore()
     {
         while (_displayedScore < _score)
         {
-            _displayedScore++;
-            _pointsUI.text = $"{_mainText}{_displayedScore}";
-            yield return new WaitForSeconds(0.00001f);
+            int step = Mathf.Max(1, (_score - _displayedScore) / 10);
+            _displayedScore += step;
+
+            if (_displayedScore > _score)
+                _displayedScore = _score;
+
+            TextReference.text = $"${_displayedScore}";
+            yield return new WaitForSeconds(0.01f);
         }
     }
+
 }
