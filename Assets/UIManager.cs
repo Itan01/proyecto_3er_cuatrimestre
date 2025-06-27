@@ -61,13 +61,14 @@ public class UIManager : MonoBehaviour
     {
         _score += amount;
 
-        if (_scoreCoroutine != null)
-            StopCoroutine(_scoreCoroutine);
         if (_popupScoreCoroutine != null)
             StopCoroutine(_popupScoreCoroutine);
-
         _popupScoreCoroutine = StartCoroutine(ShowPopup(amount));
+
+        if (_scoreCoroutine == null)
+            _scoreCoroutine = StartCoroutine(AnimateScore());
     }
+
     private int _displayedScore = 0;
     private Coroutine _scoreCoroutine, _popupScoreCoroutine;
 
@@ -139,6 +140,9 @@ public class UIManager : MonoBehaviour
             TextReference.text = $"${_displayedScore}";
             yield return new WaitForSeconds(0.01f);
         }
+
+        _scoreCoroutine = null;
     }
+
 
 }
