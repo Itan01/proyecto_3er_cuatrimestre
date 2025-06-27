@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
+using UnityEngine.Audio;
 
 public class CameraObstacleController : MonoBehaviour
 {
@@ -13,16 +14,19 @@ public class CameraObstacleController : MonoBehaviour
     [SerializeField] private LayerMask _layerMask;
     private RaycastHit _intHit;
     private Ray _startPosition;
-
+    private AudioSource _source;
     [SerializeField] private Transform _cameraMovement;
     [SerializeField] private Material _cameraLight;
 
     private void Start()
     {
         _animation = GetComponent<Animation>();
+        _source = GetComponent<AudioSource>();
         _animation.Play();
         if (_doors==null)
             _noDoors = true;
+        if(_source==null)
+            Debug.Log("No hay sonido");
         CloseDoors(false);
 
     }
@@ -38,6 +42,7 @@ public class CameraObstacleController : MonoBehaviour
             //_cameraLight.color.emiss= Color.red;
             GetComponentInChildren<Light>().color = Color.red;
             GetComponentInChildren<Light>().intensity = 6f;
+            _source.Play();
             if (_noDoors) return;
             CloseDoors(true);
 
@@ -66,6 +71,7 @@ public class CameraObstacleController : MonoBehaviour
            // Debug.Log($"Collided obj : {_intHit.collider.name}.");
 
             return (_intHit.collider.GetComponent<PlayerManager>());
+            
         }
         return false;
     }
@@ -89,4 +95,5 @@ public class CameraObstacleController : MonoBehaviour
         }
     }
 
+   
 }

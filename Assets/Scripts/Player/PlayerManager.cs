@@ -52,6 +52,8 @@ public class PlayerManager : EntityMonobehaviour
     }
     private void CheckInputs()
     {
+        if (UIManager.Instance.IsMenuActive()) return; // bloquea inputs si el menú está activo
+
         _isMoving = _scriptController.CheckMovementInputs(_scriptMovement);
         _scriptController.CheckGunInputs();
         _scriptController.CheckInteractions();
@@ -59,9 +61,9 @@ public class PlayerManager : EntityMonobehaviour
     protected override void GetScripts()
     {
         _scriptCollider = new SetSizeCollider(_capsuleCollider, _boxCollider);
-        _scriptShootingGun = new PlayerShootingGun(_spawnProyectil, _camTransform,_modelTransform, _enviormentMaskWithOutPlayer);
+        _scriptShootingGun = new PlayerShootingGun(_spawnProyectil, _camTransform, _modelTransform, _enviormentMaskWithOutPlayer);
         _scriptInteractions = new PlayerInteractions(transform, _camTransform, InteractMask);
-        _scriptController = new PlayerController(_scriptShootingGun, _scriptInteractions, _animator,_areaCatching);
+        _scriptController = new PlayerController(_scriptShootingGun, _scriptInteractions, _animator, _areaCatching);
         _scriptMovement = new PlayerMovement(transform, _rb, _camTransform, _modelTransform, _animator, _scriptCollider);
     }
     public void SetSound(int Index)
@@ -88,7 +90,7 @@ public class PlayerManager : EntityMonobehaviour
     {
         _isCrouching = _scriptMovement.GetIsCrouching();
         _isMoving = _scriptMovement.GetIsMoving();
-        _spawnProyectil.position = _hipsPosition.position + _camTransform.forward*1.5f;
+        _spawnProyectil.position = _hipsPosition.position + _camTransform.forward * 1.5f;
     }
     public void SetCaptured(bool State)
     {
