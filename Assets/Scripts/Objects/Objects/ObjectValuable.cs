@@ -5,6 +5,8 @@ using UnityEngine;
 public class ObjectValuable : AbstractObjects, IInteractableObject
 {
     [SerializeField] private int _value;
+    [SerializeField] private AudioClip _pickupSound; 
+    [SerializeField] private float _soundVolume = 1.0f;
 
     protected override void Start()
     { 
@@ -18,6 +20,12 @@ public class ObjectValuable : AbstractObjects, IInteractableObject
     public void OnInteract()
     {
         UIManager.Instance.AddScore(_value);
+
+        if (_pickupSound != null)
+        {
+            AudioSource.PlayClipAtPoint(_pickupSound, transform.position, _soundVolume);
+        }
+            
         Destroyed();
 
     }
