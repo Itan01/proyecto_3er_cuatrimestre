@@ -20,6 +20,19 @@ public class UIManager : MonoBehaviour
     private void Start()
     {
         _player = GameManager.Instance.PlayerReference;
+        StartCoroutine(PlayAnimationAfterLoad());
+    }
+
+    public GameObject pauseMenu;
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            if (isMenuON)
+                Resume();
+            else
+                Pause();
+        }
     }
     private TransitionFade _scriptTransition;
     public TransitionFade Transition
@@ -144,5 +157,30 @@ public class UIManager : MonoBehaviour
         _scoreCoroutine = null;
     }
 
+    public string transAnimation;
+    public Animator animator;
+
+    private IEnumerator PlayAnimationAfterLoad()
+    {
+        yield return null;
+
+        if (animator != null && !string.IsNullOrEmpty(transAnimation))
+        {
+            animator.Play(transAnimation);
+        }
+
+    }
+
+    private bool isMenuON;
+    private void Resume()
+    {
+        pauseMenu.SetActive(false);
+        isMenuON = false;
+    }
+    private void Pause()
+    {
+        pauseMenu.SetActive(true);
+        isMenuON = true;
+    }
 
 }
