@@ -175,12 +175,18 @@ public class UIManager : MonoBehaviour
     private void Resume()
     {
         pauseMenu.SetActive(false);
+        Time.timeScale = 1f;
         isMenuON = false;
+        Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
     }
     private void Pause()
     {
         pauseMenu.SetActive(true);
+        Time.timeScale = 0f;
         isMenuON = true;
+        Cursor.lockState = CursorLockMode.None;
+        Cursor.visible = true;
     }
 
 }
