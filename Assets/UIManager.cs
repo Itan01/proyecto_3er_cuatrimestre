@@ -124,6 +124,21 @@ public class UIManager : MonoBehaviour
 
         _popupPointsUI.gameObject.SetActive(true);
 
+        float bumpDuration = 0.3f;
+        float timer = 0f;
+        Vector3 originalScale = Vector3.one;
+        Vector3 enlargedScale = originalScale * 1.3f;
+
+        while (timer < bumpDuration)
+        {
+            timer += Time.deltaTime;
+            float t = timer / bumpDuration;
+            float bump = Mathf.Sin(t * Mathf.PI); 
+            _popupPointsUI.rectTransform.localScale = Vector3.Lerp(originalScale, enlargedScale, bump);
+            yield return null;
+        }
+        _popupPointsUI.rectTransform.localScale = originalScale;
+
         yield return new WaitForSeconds(0.5f);
 
         float fadeOutDuration = 0.25f;
