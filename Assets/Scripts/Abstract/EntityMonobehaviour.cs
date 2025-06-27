@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EntityMonobehaviour : MonoBehaviour
+public abstract class EntityMonobehaviour : MonoBehaviour
 {
     protected Rigidbody _rb;
     protected Animator _animator;

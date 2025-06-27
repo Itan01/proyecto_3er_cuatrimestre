@@ -5,7 +5,7 @@ using UnityEngine;
 using static UnityEngine.ParticleSystem;
 [RequireComponent(typeof(Rigidbody))]
 
-public class AbstractSound : MonoBehaviour // Sonidos Genericos,Movimiento Base
+public abstract class AbstractSound : MonoBehaviour // Sonidos Genericos,Movimiento Base
 {
     protected float _maxDistanceRay = 50.0f;
     [SerializeField] protected bool _playerSummoned = false, _playerShooted= false ;

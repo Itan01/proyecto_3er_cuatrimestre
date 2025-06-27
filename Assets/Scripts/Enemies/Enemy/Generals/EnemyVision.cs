@@ -1,6 +1,4 @@
-using System.Collections;
 using System.Collections.Generic;
-using System.Net.Sockets;
 using UnityEngine;
 
 [ExecuteAlways]
@@ -8,8 +6,8 @@ using UnityEngine;
 public class EnemyVision : MonoBehaviour
 {
     [Header("FOV Settings")]
-    [Range(1, 360)] public float viewAngle = 90f; // Horizontal FOV
-    [Range(1, 180)] public float verticalFOV = 60f; // Vertical FOV
+    [Range(1, 360)] public float viewAngle = 90f;
+    [Range(1, 180)] public float verticalFOV = 60f;
     public float viewRadius = 10f;
     public int horizontalRayCount = 100;
     public int verticalRayCount = 30;
@@ -25,7 +23,7 @@ public class EnemyVision : MonoBehaviour
 
     [Header("Debug")]
     public bool drawGizmos = true;
-    public Color visionColor = new Color(1, 1, 0, 0.3f);
+    public Color visionColor = new(1, 1, 0, 0.3f);
     private bool _seePlayer = false;
 
     private Mesh visionMesh;
@@ -88,16 +86,10 @@ public class EnemyVision : MonoBehaviour
         }
 
         debugPoints.Clear();
-        List<Vector3> vertices = new();
-        List<int> triangles = new();
-
-        vertices.Add(Vector3.zero); // centro del cono (local)
-        int vertexIndex = 1;
+        Vector3 origin = _headReference ? _headReference.position : transform.position;
 
         float halfHorizontalFOV = viewAngle / 2f;
         float halfVerticalFOV = verticalFOV / 2f;
-
-        Vector3 origin = _headReference ? _headReference.position : transform.position;
 
         for (int v = 0; v <= verticalRayCount; v++)
         {
@@ -106,50 +98,51 @@ public class EnemyVision : MonoBehaviour
             for (int h = 0; h <= horizontalRayCount; h++)
             {
                 float yaw = Mathf.Lerp(-halfHorizontalFOV, halfHorizontalFOV, (float)h / horizontalRayCount);
-
                 Quaternion rot = Quaternion.Euler(pitch, yaw, 0);
-                Vector3 localDir = rot * Vector3.forward;
-                Vector3 worldDir = transform.rotation * localDir;
+                Vector3 dir = _headReference.rotation * (rot * Vector3.forward);
 
-                Vector3 point;
-                RaycastHit hit;
+                if (Physics.Raycast(origin, dir, out RaycastHit hit, viewRadius, obstacleMask))
+                {
+                    debugPoints.Add((hit.point, true));
+                }
+                else
+                {
+                    debugPoints.Add((origin + dir * viewRadius, false));
+                }
 
-                bool obstacleHit = Physics.Raycast(origin, worldDir, out hit, viewRadius, obstacleMask);
-                point = obstacleHit ? hit.point : origin + worldDir * viewRadius;
-                debugPoints.Add((point, obstacleHit));
-
-                vertices.Add(transform.InverseTransformPoint(point));
-
-                if (Application.isPlaying && Physics.Raycast(origin, worldDir, out hit, viewRadius, detectableMask))
+                if (Application.isPlaying &&
+                    Physics.Raycast(origin, dir, out hit, viewRadius, detectableMask))
                 {
                     if (hit.collider.TryGetComponent<PlayerManager>(out PlayerManager script))
                     {
                         script.SetCaptured(true);
                         _seePlayer = true;
                         if (_scriptManager.GetMode() != 3 && _scriptManager.GetMode() != 1)
-                        {
                             _scriptManager.EnterConfusedState();
-                        }
                     }
                 }
+            }
+        }
 
-                if (v > 0 && h > 0)
-                {
-                    int a = vertexIndex - horizontalRayCount - 2;
-                    int b = vertexIndex - horizontalRayCount - 1;
-                    int c = vertexIndex;
-                    int d = vertexIndex - 1;
+        // MESH PLANO usando raycasts ya hechos (fila del medio)
+        List<Vector3> vertices = new() { Vector3.zero };
+        List<int> triangles = new();
 
-                    triangles.Add(a);
-                    triangles.Add(b);
-                    triangles.Add(c);
+        int rowLength = horizontalRayCount + 1;
+        int startIndex = (verticalRayCount / 2) * rowLength;
 
-                    triangles.Add(a);
-                    triangles.Add(c);
-                    triangles.Add(d);
-                }
+        for (int i = 0; i <= horizontalRayCount; i++)
+        {
+            var (point, _) = debugPoints[startIndex + i];
+            Vector3 localPoint = transform.InverseTransformPoint(point);
+            vertices.Add(localPoint);
 
-                vertexIndex++;
+            if (i < horizontalRayCount)
+            {
+                int index = i * 3;
+                triangles.Add(0);
+                triangles.Add(i + 1);
+                triangles.Add(i + 2);
             }
         }
 
@@ -173,13 +166,10 @@ public class EnemyVision : MonoBehaviour
         Gizmos.DrawLine(transform.position, transform.position + right * viewRadius);
 
 #if UNITY_EDITOR
-        if (debugPoints.Count > 0)
+        foreach (var (point, hit) in debugPoints)
         {
-            foreach (var (point, hit) in debugPoints)
-            {
-                Gizmos.color = hit ? Color.red : Color.green;
-                Gizmos.DrawSphere(point, 0.05f);
-            }
+            Gizmos.color = hit ? Color.red : Color.green;
+            Gizmos.DrawSphere(point, 0.05f);
         }
 #endif
     }
