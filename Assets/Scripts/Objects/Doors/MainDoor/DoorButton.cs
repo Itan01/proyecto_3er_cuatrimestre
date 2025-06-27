@@ -13,8 +13,9 @@ public class DoorButton : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.GetComponent<AbstractSound>())
+        if (other.TryGetComponent(out AbstractSound script))
         {
+            if(script.PlayerShootIt())
             _doorManager.CheckStatus();
         }
     }
