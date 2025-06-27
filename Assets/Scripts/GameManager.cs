@@ -82,12 +82,15 @@ public class GameManager : MonoBehaviour
     }
 
 
-    private RoomManager _actualRoom;
+    [SerializeField] private List<RoomManager> _actualsRoom;
 
-    public RoomManager Room
+    public void AddRoom(RoomManager Room)
     {
-        get { return _actualRoom; }
-        set { _actualRoom = value; }
+        _actualsRoom.Add(Room);
+    }
+    public void RemoveRoom(RoomManager Room)
+    {
+        _actualsRoom.Remove(Room);
     }
     public void ResetGameplay()
     {
@@ -98,7 +101,10 @@ public class GameManager : MonoBehaviour
         PlayerReference.SetDeath(true);
         UIManager.Instance.Transition.ShowBlackScreen();
         yield return new WaitForSeconds(1.0f);
-        Room.ResetRoom();
+        foreach (var room in _actualsRoom)
+        {
+            room.ResetRoom();
+        }
         RespawnAllEnemies(); 
         PlayerReference.SetCaptured(false);
         PlayerReference.SetDeath(false);

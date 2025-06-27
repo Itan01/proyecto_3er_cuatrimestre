@@ -17,7 +17,7 @@ public class RoomManager : MonoBehaviour
     {
         if (Player.GetComponent<PlayerManager>())
         {
-            GameManager.Instance.Room = this;
+            GameManager.Instance.AddRoom(this);
             foreach (var item in _light)
             {
                 item.gameObject.SetActive(true);
@@ -34,6 +34,7 @@ public class RoomManager : MonoBehaviour
     {
         if (Player.GetComponent<PlayerManager>())
         {
+            GameManager.Instance.RemoveRoom(this);
             foreach (var item in _objects)
             {
                 if (item.gameObject.activeSelf)
