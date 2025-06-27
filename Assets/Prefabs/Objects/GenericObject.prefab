@@ -129,6 +129,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _listParticles: []
+  _animating: 0
 --- !u!1 &7157840496647475921
 GameObject:
   m_ObjectHideFlags: 0
@@ -5065,3 +5066,5 @@ MonoBehaviour:
   _animated: 0
   _distanceToAnimate: 10
   _value: 50
+  _pickupSound: {fileID: 8300000, guid: 0582b4584d78aac4b885f311ef4333c7, type: 3}
+  _soundVolume: 1
