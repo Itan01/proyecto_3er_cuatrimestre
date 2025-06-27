@@ -14,18 +14,18 @@ public class CameraObstacleController : MonoBehaviour
     [SerializeField] private LayerMask _layerMask;
     private RaycastHit _intHit;
     private Ray _startPosition;
-    private AudioSource _source;
+    [SerializeField] private AudioClip _cameraSound;
+    private float _soundVolume = 1.0f;
     [SerializeField] private Transform _cameraMovement;
     [SerializeField] private Material _cameraLight;
 
     private void Start()
     {
         _animation = GetComponent<Animation>();
-        _source = GetComponent<AudioSource>();
         _animation.Play();
         if (_doors==null)
             _noDoors = true;
-        if(_source==null)
+        if(_cameraSound==null)
             Debug.Log("No hay sonido");
         CloseDoors(false);
 
@@ -42,9 +42,12 @@ public class CameraObstacleController : MonoBehaviour
             //_cameraLight.color.emiss= Color.red;
             GetComponentInChildren<Light>().color = Color.red;
             GetComponentInChildren<Light>().intensity = 6f;
-            _source.Play();
             if (_noDoors) return;
             CloseDoors(true);
+            if (_cameraSound != null)
+            {
+                AudioSource.PlayClipAtPoint(_cameraSound, transform.position, _soundVolume);
+            }
 
         }
         else
@@ -52,10 +55,7 @@ public class CameraObstacleController : MonoBehaviour
             if (_animation.isPlaying) return;
             _animation.Play();
             if (_noDoors) return;
-            CloseDoors(false);
-           
-
-        }
+            CloseDoors(false);        }
     }
 
     public void SetTarget(bool State)
@@ -71,7 +71,8 @@ public class CameraObstacleController : MonoBehaviour
            // Debug.Log($"Collided obj : {_intHit.collider.name}.");
 
             return (_intHit.collider.GetComponent<PlayerManager>());
-            
+           
+
         }
         return false;
     }
