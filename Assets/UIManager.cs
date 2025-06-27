@@ -34,6 +34,12 @@ public class UIManager : MonoBehaviour
                 Pause();
         }
     }
+
+    public bool IsMenuActive()
+    {
+        return isMenuON;
+    }
+
     private TransitionFade _scriptTransition;
     public TransitionFade Transition
     {
@@ -133,7 +139,7 @@ public class UIManager : MonoBehaviour
         {
             timer += Time.deltaTime;
             float t = timer / bumpDuration;
-            float bump = Mathf.Sin(t * Mathf.PI); 
+            float bump = Mathf.Sin(t * Mathf.PI);
             _popupPointsUI.rectTransform.localScale = Vector3.Lerp(originalScale, enlargedScale, bump);
             yield return null;
         }
@@ -143,7 +149,7 @@ public class UIManager : MonoBehaviour
 
         float fadeOutDuration = 0.25f;
         float fadeOutTimer = 0f;
-        
+
         while (fadeOutTimer < fadeOutDuration)
         {
             fadeOutTimer += Time.deltaTime;
@@ -186,6 +192,12 @@ public class UIManager : MonoBehaviour
 
     }
 
+    private IEnumerator ClearInputBuffer()
+    {
+        yield return null;
+        Input.ResetInputAxes();
+    }
+
     private bool isMenuON;
     private void Resume()
     {
@@ -194,6 +206,9 @@ public class UIManager : MonoBehaviour
         isMenuON = false;
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
+
+        // Limpia los inputs 
+        StartCoroutine(ClearInputBuffer());
     }
     private void Pause()
     {
@@ -202,6 +217,7 @@ public class UIManager : MonoBehaviour
         isMenuON = true;
         Cursor.lockState = CursorLockMode.None;
         Cursor.visible = true;
+
     }
 
 }
