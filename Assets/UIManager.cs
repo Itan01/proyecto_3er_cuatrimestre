@@ -74,8 +74,7 @@ public class UIManager : MonoBehaviour
     {
         get { return _pointsUI; }
         set { _pointsUI = value; }
-    }
-    private string _mainText = "$";
+    }   
     public void AddScore(int amount)
     {
         _score += amount;

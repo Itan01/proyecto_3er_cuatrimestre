@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.UIElements;
 using TMPro;
 using System.Security.Cryptography;
+using UnityEditor;
 
 public class PlayerManager : EntityMonobehaviour
 {
@@ -18,7 +19,7 @@ public class PlayerManager : EntityMonobehaviour
     [Header("<color=green>LayersMask</color>")]
     [SerializeField] private LayerMask _soundMask;
     [SerializeField] private LayerMask _enviormentMask;
-    [SerializeField] private LayerMask InteractMask;
+    [SerializeField] private LayerMask _interactMask;
     [SerializeField] private LayerMask _enviormentMaskWithOutPlayer;
     [Header("<color=red>Transform</color>")]
     [SerializeField] private Transform _camTransform;
@@ -62,7 +63,7 @@ public class PlayerManager : EntityMonobehaviour
     {
         _scriptCollider = new SetSizeCollider(_capsuleCollider, _boxCollider);
         _scriptShootingGun = new PlayerShootingGun(_spawnProyectil, _camTransform, _modelTransform, _enviormentMaskWithOutPlayer);
-        _scriptInteractions = new PlayerInteractions(transform, _camTransform, InteractMask);
+        _scriptInteractions = new PlayerInteractions(transform, _camTransform, _interactMask);
         _scriptController = new PlayerController(_scriptShootingGun, _scriptInteractions, _animator, _areaCatching);
         _scriptMovement = new PlayerMovement(transform, _rb, _camTransform, _modelTransform, _animator, _scriptCollider);
     }

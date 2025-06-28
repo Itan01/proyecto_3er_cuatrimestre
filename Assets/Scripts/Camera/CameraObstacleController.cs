@@ -6,7 +6,7 @@ using UnityEngine.Audio;
 
 public class CameraObstacleController : MonoBehaviour
 {
-    [SerializeField]private Vector3 _target;
+    private Vector3 _target;
     [SerializeField] private bool _seePlayer;
     [SerializeField] private SummonSoundFromDoor[] _doors;
     [SerializeField] private bool _noDoors=false;
@@ -17,7 +17,7 @@ public class CameraObstacleController : MonoBehaviour
     [SerializeField] private AudioClip _cameraSound;
     private float _soundVolume = 1.0f;
     [SerializeField] private Transform _cameraMovement;
-    [SerializeField] private Material _cameraLight;
+    [SerializeField] private Renderer _cameraLight;
 
     private void Start()
     {
@@ -39,7 +39,8 @@ public class CameraObstacleController : MonoBehaviour
         {
             _animation.Stop();
             _cameraMovement.transform.LookAt(_target);
-            //_cameraLight.color.emiss= Color.red;
+            _cameraLight.material.SetColor("_Color", Color.red);
+            _cameraLight.material.SetColor("_EmissionColor", Color.red);
             GetComponentInChildren<Light>().color = Color.red;
             GetComponentInChildren<Light>().intensity = 6f;
             if (_noDoors) return;
@@ -54,6 +55,8 @@ public class CameraObstacleController : MonoBehaviour
         {
             if (_animation.isPlaying) return;
             _animation.Play();
+            _cameraLight.material.SetColor("_Color", Color.yellow);
+            _cameraLight.material.SetColor("_EmissionColor", Color.yellow);
             if (_noDoors) return;
             CloseDoors(false);        }
     }
@@ -65,7 +68,7 @@ public class CameraObstacleController : MonoBehaviour
 
     private bool CheckTarget()
     {
-         _startPosition = new Ray(transform.position, (_target+ new Vector3(0,0.35f,0) - transform.position));
+         _startPosition = new Ray(transform.position, (_target+ new Vector3(0,0.6f,0) - transform.position));
         if (Physics.Raycast(_startPosition, out _intHit, 500.0f, _layerMask))
         {
            // Debug.Log($"Collided obj : {_intHit.collider.name}.");

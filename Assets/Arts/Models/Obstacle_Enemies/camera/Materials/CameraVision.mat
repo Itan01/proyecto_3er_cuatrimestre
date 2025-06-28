@@ -13,6 +13,7 @@ Material:
   m_ModifiedSerializedProperties: 0
   m_ValidKeywords:
   - _EMISSION
+  - _SMOOTHNESS_TEXTURE_ALBEDO_CHANNEL_A
   m_InvalidKeywords: []
   m_LightmapFlags: 2
   m_EnableInstancingVariants: 0
@@ -62,29 +63,29 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
-    - _Brightness: 0.2
+    - _Brightness: 1
     - _BumpScale: 1
     - _Cutoff: 0.5
-    - _Detail: 0.3
+    - _Detail: 1
     - _DetailNormalMapScale: 1
     - _DstBlend: 0
     - _GlossMapScale: 1
-    - _Glossiness: 0.5
+    - _Glossiness: 0.526
     - _GlossyReflections: 1
-    - _Metallic: 0
+    - _Metallic: 0.11
     - _Mode: 0
     - _OcclusionStrength: 1
-    - _OutlineWidth: 0.01
+    - _OutlineWidth: 0.001
     - _Parallax: 0.02
-    - _SmoothnessTextureChannel: 0
+    - _SmoothnessTextureChannel: 1
     - _SpecularHighlights: 1
     - _SrcBlend: 1
-    - _Strength: 0.8
+    - _Strength: 1
     - _UVSec: 0
     - _ZWrite: 1
     m_Colors:
-    - _Color: {r: 0.9333334, g: 0.9176471, b: 0.43529415, a: 1}
-    - _EmissionColor: {r: 0.8584906, g: 0.82286185, b: 0.1579299, a: 1}
+    - _Color: {r: 0.9960785, g: 1, b: 0, a: 1}
+    - _EmissionColor: {r: 0.9384973, g: 1, b: 0, a: 0}
     - _OutlineColor: {r: 0, g: 0, b: 0, a: 1}
-    - _ShadowColor: {r: 0.09999997, g: 0.09999997, b: 0.19999996, a: 1}
+    - _ShadowColor: {r: 1, g: 0, b: 0.06464243, a: 1}
   m_BuildTextureStacks: []
