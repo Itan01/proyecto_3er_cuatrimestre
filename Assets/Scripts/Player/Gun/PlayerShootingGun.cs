@@ -16,6 +16,8 @@ public class PlayerShootingGun
     private float _maxdistance = 500f;
     private LayerMask _layerMask;
     private RaycastHit _hitPoint;
+    [SerializeField] private AudioClip _crashSound;
+    private float _soundVolume = 1.0f;
 
     public PlayerShootingGun(Transform SpawnProyectil, Transform Orientation, Transform Model,LayerMask Mask)
     {
@@ -26,6 +28,10 @@ public class PlayerShootingGun
     }
      public void ThrowSound()
      {
+        if (_crashSound != null)
+        {
+            AudioSource.PlayClipAtPoint(_crashSound, _spawn.position, _soundVolume);
+        }
         AvailableSound();
         _hasASound = false; 
         UIManager.Instance.UISound.Shooting();
@@ -56,6 +62,8 @@ public class PlayerShootingGun
         script.SetPlayerShootIt(true);
         _aux.y= 0.0f; 
         _model.transform.forward = _aux;
+        
+
     }
     public void Direction()
     {

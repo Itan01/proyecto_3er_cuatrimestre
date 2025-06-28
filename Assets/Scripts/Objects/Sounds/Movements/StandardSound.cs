@@ -8,8 +8,7 @@ public class StandardSound : AbstractSound
 {
     private ParticlesManager _particleManager;
     [SerializeField] private GameObject _soundExplosion;
-    [SerializeField] private AudioClip _crashSound;
-    private float _soundVolume = 1.0f;
+    
     protected override void Start()
     {
         base.Start();
@@ -30,10 +29,7 @@ public class StandardSound : AbstractSound
         if (_playerShooted && !_canCatch)
         {
             SummonExplosion();
-            if (_crashSound != null)
-            {
-                AudioSource.PlayClipAtPoint(_crashSound, transform.position, _soundVolume);
-            }
+            
         }
 
         Destroy(gameObject,0.25f);
