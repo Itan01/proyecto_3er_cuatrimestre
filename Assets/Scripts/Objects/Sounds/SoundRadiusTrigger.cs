@@ -24,10 +24,12 @@ public class SoundRadiusTrigger : MonoBehaviour
             Vector3 aux = transform.position;
             aux.y= Script.transform.position.y;
             aux += (Script.transform.position -aux).normalized *2;
-            if (!Script.GetActivate() || Script.GetMode() == 1) return;
-            if(Script.GetMode()!=2)
+            if (!Script.GetActivate()) return;
+            if(Script.GetMode()!= 2  && Script.GetMode() != 1)
+            {
                 Script.SetModeByIndex(5);
-            Script.SetPosition(transform.position);
+                Script.SetPosition(transform.position);
+            }
         }
     }
 

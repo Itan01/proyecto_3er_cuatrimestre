@@ -115,10 +115,10 @@ public class EnemyVision : MonoBehaviour
                 {
                     if (hit.collider.TryGetComponent<PlayerManager>(out PlayerManager script))
                     {
-                        script.SetCaptured(true);
+                        if (_playerDeath) return;
                         _seePlayer = true;
                         if (_scriptManager.GetMode() != 3 && _scriptManager.GetMode() != 1)
-                            _scriptManager.EnterConfusedState();
+                            _scriptManager.SetModeByIndex(3);
                     }
                 }
             }

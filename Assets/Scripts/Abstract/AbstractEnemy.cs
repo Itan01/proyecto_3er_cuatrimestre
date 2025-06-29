@@ -14,10 +14,11 @@ public abstract class AbstractEnemy : EntityMonobehaviour
     [SerializeField] protected float _timer = 0.0f;
     [SerializeField] protected int _mode = 0;
     [SerializeField] protected Transform _facingStartPosition;
-    [SerializeField] protected Vector3 _nextPosition, _startPosition;
+    protected Vector3 _nextPosition, _startPosition;
     protected float _confusedDuration = 1.0f; // Este es el tiempo de confusión donde cree haber visto al player
     protected float _searchDuration = 20.0f; // El tiempo que busca al player luego de que este salga del RadiusToHear
-    protected bool _isRunning = false, _questionBool, _watchingPlayer=false;
+    [SerializeField] protected bool _watchingPlayer = false;
+    protected bool _isRunning = false, _questionBool;
     protected int _questionIndex;
     public delegate void SetMove();
     protected SetMove _movement;
@@ -79,20 +80,12 @@ public abstract class AbstractEnemy : EntityMonobehaviour
         _animator.SetBool("isMoving",_isMoving );
         _questionMark.Setting(_questionBool, _questionIndex);
     }
-    protected void CheckConfusedState()
-    {
-        if (_watchingPlayer)
-            SetMode(MoveFollowTarget);
-        else
-            SetMode(MoveResettingPath);
-    }
     protected virtual void NextMovement()
     {
         if (_mode == 2)
         {
             SetMode(MoveLooking);
         }
-
     }
     protected override void GetScripts()
     {
@@ -105,11 +98,7 @@ public abstract class AbstractEnemy : EntityMonobehaviour
         if (_timer < 0)
         {
             _timer = 0.0f;
-            if (_mode == 3) // Solo en el Estado de Confusion Puede cambiar a otro valor que no sea ResetPath
-                CheckConfusedState();
-            else if(_mode != 2)
-                SetMode(MoveResettingPath);
-        } // Se Acabo el timer cambia de modo (Probablemente vuelva al 0)
+        }
     }
 
     #endregion
@@ -163,7 +152,9 @@ public abstract class AbstractEnemy : EntityMonobehaviour
         _isMoving = false;
         _isRunning = false;
         _agent.speed = 0.0f;
-        _timer=_confusedDuration;
+        transform.LookAt(GameManager.Instance.PlayerReference.transform.position);
+        StartCoroutine(CheckifWatchingPlayer());
+
     }
     protected void MoveLooking()
     {
@@ -198,6 +189,8 @@ public abstract class AbstractEnemy : EntityMonobehaviour
     {
         if (State == 2)
             SetMode(MoveFollowSound);
+        else if (State == 3)
+            SetMode(MoveConfused);
         else if (State == 5)
             SetMode(MoveStartHearing);
         else
@@ -226,4 +219,13 @@ public abstract class AbstractEnemy : EntityMonobehaviour
         return _activate;
     }
     #endregion
+
+    private IEnumerator CheckifWatchingPlayer()
+    {
+        yield return new WaitForSeconds(_confusedDuration);
+        if (_watchingPlayer)
+            SetMode(MoveFollowTarget);
+        else
+            SetMode(MoveResettingPath);
+    }
 }
