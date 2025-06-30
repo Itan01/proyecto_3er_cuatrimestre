@@ -69,7 +69,7 @@ public class PlayerShootingGun
     {
         Ray ray = new Ray(_orientation.position,_orientation.forward);
 
-        if (Physics.Raycast(ray, out _hitPoint, _maxdistance, _layerMask))
+        if (Physics.Raycast(ray, out _hitPoint, _maxdistance, _layerMask,QueryTriggerInteraction.Ignore))
         {
             _direction = (_hitPoint.point-_spawn.position).normalized;
             _aux = _direction;
