@@ -19,7 +19,7 @@ public class AudioManager : MonoBehaviour
     private AudioValues _userInterface;
     [Header("Audio")]
     [SerializeField] private AudioMixer _mixer;
-    private AudioSource _source;
+    private AudioSource _source, _musicSource;
 
     public float MasterVolume { get { return _master.volume; } }
 
@@ -40,12 +40,12 @@ public class AudioManager : MonoBehaviour
         {
             Destroy(gameObject);
         }
-
-        _source = GetComponent<AudioSource>();
     }
 
     private void Start()
     {
+        _source = GetComponent<AudioSource>();
+        _musicSource = GetComponent<AudioSource>();
         GenerateVolumes();
         SetMasterVolume(MasterVolume);
         SetMusicVolume(MusicVolume);
@@ -86,9 +86,9 @@ public class AudioManager : MonoBehaviour
 
     public void PlayMusic(AudioClip Clip)
     {
-        if (_source.isPlaying) _source.Stop();
-        _source.clip=Clip;
-        _source.Play();
+        if (_musicSource.isPlaying) _musicSource.Stop();
+        _musicSource.clip=Clip;
+        _musicSource.Play();
     }
 
     public void PlaySFX(AudioClip clip, float volume)
