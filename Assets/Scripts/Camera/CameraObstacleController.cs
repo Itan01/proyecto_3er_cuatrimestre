@@ -42,7 +42,6 @@ public class CameraObstacleController : MonoBehaviour
             {
                 if (_cameraSound != null)
                 {
-                    Debug.Log($"Sonido");
                     AudioManager.Instance.PlaySFX(_cameraSound, _soundVolume);
                 }
                 _hasSpottedPlayer = true;
