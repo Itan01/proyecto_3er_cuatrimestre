@@ -6,6 +6,7 @@ using UnityEngine.Audio;
 [RequireComponent(typeof(AudioSource))]
 public class AudioManager : MonoBehaviour
 {
+    public static AudioManager Instance { get; private set; }
     public struct AudioValues
     {
         public string name;
@@ -27,9 +28,24 @@ public class AudioManager : MonoBehaviour
     public float SFXVolume { get { return _effects.volume; } }
 
     public float UIVolumen { get { return _userInterface.volume; } }
+
+    private void Awake()
+    {
+        if (Instance == null)
+        {
+            Instance = this;
+            DontDestroyOnLoad(gameObject);
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
+
+        _source = GetComponent<AudioSource>();
+    }
+
     private void Start()
     {
-        _source = GetComponent<AudioSource>();
         GenerateVolumes();
         SetMasterVolume(MasterVolume);
         SetMusicVolume(MusicVolume);
@@ -74,4 +90,13 @@ public class AudioManager : MonoBehaviour
         _source.clip=Clip;
         _source.Play();
     }
+
+    public void PlaySFX(AudioClip clip, float volume)
+    {
+        if (clip != null)
+        {
+            _source.PlayOneShot(clip, volume);
+        }
+    }
+
 }

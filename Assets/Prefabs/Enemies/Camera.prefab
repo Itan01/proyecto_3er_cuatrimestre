@@ -210,16 +210,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 71c254bd6b1b98f49bf7ab2158b2220b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _target: {x: 0, y: 0, z: 0}
   _seePlayer: 0
-  _doors: []
+  _doors:
+  - {fileID: 0}
   _noDoors: 0
   _layerMask:
     serializedVersion: 2
     m_Bits: 1300234240
-  _cameraSound: {fileID: 8300000, guid: 8f215783f544c5b47bc71043f7cc659c, type: 3}
+  _cameraSound: {fileID: 8300000, guid: 15d60cf03cf615b4ebaf951c3098ca34, type: 3}
   _cameraMovement: {fileID: 3558956341568356611}
-  _cameraLight: {fileID: 2100000, guid: 1d91ef27869f8144ca35fad706644fe1, type: 2}
+  _cameraLight: {fileID: 8449804964111743600}
 --- !u!111 &1774185607007515985
 Animation:
   m_ObjectHideFlags: 0
@@ -471,7 +471,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8804625046137572299, guid: 59f85ed73fd90be4c91ff3c760bcc655, type: 3}
       propertyPath: m_LocalEulerAnglesHint.y
-      value: -34.77185
+      value: -9.517162
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -489,5 +489,10 @@ Transform:
 --- !u!4 &5537463016636460323 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 59f85ed73fd90be4c91ff3c760bcc655, type: 3}
+  m_PrefabInstance: {fileID: 5427888938067413704}
+  m_PrefabAsset: {fileID: 0}
+--- !u!23 &8449804964111743600 stripped
+MeshRenderer:
+  m_CorrespondingSourceObject: {fileID: 4472075407804444856, guid: 59f85ed73fd90be4c91ff3c760bcc655, type: 3}
   m_PrefabInstance: {fileID: 5427888938067413704}
   m_PrefabAsset: {fileID: 0}

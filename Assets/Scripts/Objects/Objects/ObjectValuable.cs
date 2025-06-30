@@ -6,7 +6,7 @@ public class ObjectValuable : AbstractObjects, IInteractableObject
 {
     [SerializeField] private int _value;
     [SerializeField] private AudioClip _pickupSound; 
-    [SerializeField] private float _soundVolume = 1.0f;
+    [SerializeField] private float _soundVolume = 0.80f;
 
     protected override void Start()
     { 
@@ -23,9 +23,9 @@ public class ObjectValuable : AbstractObjects, IInteractableObject
 
         if (_pickupSound != null)
         {
-            AudioSource.PlayClipAtPoint(_pickupSound, transform.position, _soundVolume);
+            AudioManager.Instance.PlaySFX(_pickupSound, _soundVolume);
         }
-            
+
         Destroyed();
 
     }
