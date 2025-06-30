@@ -9810,8 +9810,8 @@ GameObject:
   m_Component:
   - component: {fileID: 6490965321789183121}
   - component: {fileID: 7260471339786856060}
-  - component: {fileID: 8762589038197286198}
   - component: {fileID: 888156773209846131}
+  - component: {fileID: 1006703074212360344}
   m_Layer: 22
   m_Name: GenericObject
   m_TagString: Untagged
@@ -9857,29 +9857,6 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
---- !u!136 &8762589038197286198
-CapsuleCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7900192745537698518}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Radius: 1.2
-  m_Height: 2
-  m_Direction: 1
-  m_Center: {x: 0, y: 0.25, z: 0}
 --- !u!114 &888156773209846131
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -9897,3 +9874,24 @@ MonoBehaviour:
   _value: 50
   _pickupSound: {fileID: 8300000, guid: 0582b4584d78aac4b885f311ef4333c7, type: 3}
   _soundVolume: 1
+--- !u!65 &1006703074212360344
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7900192745537698518}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 2.5, y: 1.5, z: 1}
+  m_Center: {x: 0, y: -0.5, z: 0}
