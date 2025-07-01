@@ -175,6 +175,7 @@ Transform:
   - {fileID: 7647321826160565311}
   - {fileID: 7769114523438040201}
   - {fileID: 8865773798095703443}
+  - {fileID: 4036590388524312564}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &6967344237170535486
@@ -189,6 +190,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: adac1dee99e42904a9b6c62ecedc689c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _actualsRoom: []
 --- !u!1 &5151357667521703558
 GameObject:
   m_ObjectHideFlags: 0
@@ -233,6 +235,62 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6ba8d8982f3310f4c9e9a0e57f868bc0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  pauseMenu: {fileID: 0}
+  _pointsUI: {fileID: 0}
+  _popupPointsUI: {fileID: 0}
+  _popupPoints: {fileID: 0}
+  transAnimation: 
+  animator: {fileID: 0}
+--- !u!1 &6086097062491530845
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4036590388524312564}
+  - component: {fileID: 6755527651932637104}
+  m_Layer: 0
+  m_Name: SoundStorage
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4036590388524312564
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6086097062491530845}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1802195034427988181}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &6755527651932637104
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6086097062491530845}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7af8ea5aadd348f43b727eb77d579c63, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _crashSound: {fileID: 0}
+  _shootingSound: {fileID: 8300000, guid: 2e7b005a19406a64b800ce43737bd76d, type: 3}
+  _grabbingSound: {fileID: 8300000, guid: 826302dbc80ff924f9fa095d50af00e3, type: 3}
+  _glassSound: {fileID: 8300000, guid: 2437fda96e3d6f142aa4262d0132002b, type: 3}
+  _enemyConfusedSound: {fileID: 8300000, guid: 747df38c1c36d324b9e41aa7552caae0, type: 3}
+  _soundVolume: 1
 --- !u!1 &6577951075657808662
 GameObject:
   m_ObjectHideFlags: 0

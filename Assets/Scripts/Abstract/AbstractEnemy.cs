@@ -154,6 +154,7 @@ public abstract class AbstractEnemy : EntityMonobehaviour
         _agent.speed = 0.0f;
         transform.LookAt(GameManager.Instance.PlayerReference.transform.position);
         StartCoroutine(CheckifWatchingPlayer());
+        AudioStorage.Instance.EnemyConfusedSound();
 
     }
     protected void MoveLooking()
@@ -166,6 +167,7 @@ public abstract class AbstractEnemy : EntityMonobehaviour
         _isRunning = false;
         _animator.SetTrigger("isLooking");
         Debug.Log("Viendo alrededor");
+        AudioStorage.Instance.EnemyConfusedSound();
     }
 
     protected void MoveStartHearing() // Persigue al Jugador
@@ -176,7 +178,8 @@ public abstract class AbstractEnemy : EntityMonobehaviour
         _isRunning = false;
         _questionBool = true;
         _questionIndex = 0;
-        _agent.speed = 0.0f; ;
+        _agent.speed = 0.0f;
+        AudioStorage.Instance.EnemyConfusedSound();
     }
     #endregion
     #region Set/Get Values
