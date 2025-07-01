@@ -9845,6 +9845,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _listParticles: []
+  _animating: 0
 --- !u!1 &7571812411180085560
 GameObject:
   m_ObjectHideFlags: 0
@@ -10007,7 +10008,8 @@ PrefabInstance:
       value: Fusebox
       objectReference: {fileID: 0}
     m_RemovedComponents: []
-    m_RemovedGameObjects: []
+    m_RemovedGameObjects:
+    - {fileID: -2534511978163331637, guid: 2fb5234af70417d40804ed13d685c8c1, type: 3}
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2fb5234af70417d40804ed13d685c8c1, type: 3}
