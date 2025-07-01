@@ -9,10 +9,11 @@ public class SummonSoundFromDoor : MonoBehaviour
     [SerializeField] private bool _doorOpen=false, _forceDoor=false;
     //[SerializeField] private GameObject _soundToSummon;
     [SerializeField] private int _count = 0;
+    [SerializeField] private AudioClip _openSound, _closeSound;
+    [SerializeField] private float _soundVolume= 0.80f;
     void Start()
     {
         _animator = GetComponentInChildren<Animator>();
-        _animator.SetBool("isOpen", true);
     }
 
     private void OnTriggerEnter(Collider Entity)
@@ -25,6 +26,7 @@ public class SummonSoundFromDoor : MonoBehaviour
             _doorOpen = true;
             _animator.SetBool("isOpen", _doorOpen);
             _count++;
+            AudioManager.Instance.PlaySFX(_openSound, _soundVolume);
 
         }
     }
@@ -39,6 +41,7 @@ public class SummonSoundFromDoor : MonoBehaviour
                 _count = 0;
                 _doorOpen = false;
                 _animator.SetBool("isOpen", _doorOpen);
+                AudioManager.Instance.PlaySFX(_closeSound, _soundVolume);
                 //if (Entity.GetComponent<PlayerManager>())
                 //    SummonSound(Entity.transform.position, true);
                 //else
@@ -65,6 +68,8 @@ public class SummonSoundFromDoor : MonoBehaviour
     public void ForceDoorsClose(bool State)
     {
         _forceDoor = State;
-        _animator.SetBool("isOpen", !_forceDoor);
+        if (!_doorOpen) return;
+        _animator.SetBool("isOpen", false);
+        
     }
 }
