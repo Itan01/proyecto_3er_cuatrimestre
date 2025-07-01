@@ -6,10 +6,21 @@ using UnityEngine.UIElements;
 public class GrabbingSound : MonoBehaviour
 {
     [SerializeField] private LayerMask _enviromentMask;
-
+    private float _grabbingTimer = 3f;
+    private float _sinceLastPlayed = 3f;
+    
     private void Update()
     {
         transform.forward = Camera.main.transform.forward;
+        if(_sinceLastPlayed >= _grabbingTimer) 
+        {
+            AudioStorage.Instance.GrabbingSound();
+            _sinceLastPlayed = 0f;
+        }
+        else
+        {
+            _sinceLastPlayed += Time.deltaTime;
+        }
     }
     private void OnTriggerStay(Collider Sound)
     {
@@ -27,6 +38,7 @@ public class GrabbingSound : MonoBehaviour
     {
         if(gameObject.activeSelf)
         StartCoroutine(SetActivateFalse());
+        _sinceLastPlayed = 2.9f;
     }
     private IEnumerator SetActivateFalse()
     {

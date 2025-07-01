@@ -33,6 +33,7 @@ public class FragileObject : AbstractObjects, ISoundInteractions
         var Sound = Instantiate(_sound, transform.position, Quaternion.identity);
         Sound.GetComponent<SoundRadiusTrigger>().SetMultiplier(GetSize());
         Destroy(gameObject);
+        AudioStorage.Instance.GlassBrokenSound();
 
     }
 
