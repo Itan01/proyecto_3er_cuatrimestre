@@ -74,7 +74,7 @@ public class UIManager : MonoBehaviour
     {
         get { return _pointsUI; }
         set { _pointsUI = value; }
-    }   
+    }
     public void AddScore(int amount)
     {
         _score += amount;
@@ -212,11 +212,20 @@ public class UIManager : MonoBehaviour
     private void Pause()
     {
         pauseMenu.SetActive(true);
+        StartCoroutine(EnableMenuSafely());
         Time.timeScale = 0f;
         isMenuON = true;
         Cursor.lockState = CursorLockMode.None;
         Cursor.visible = true;
 
+    }
+    private IEnumerator EnableMenuSafely()
+    {
+        yield return null; // Espera 1 frame 
+        Time.timeScale = 0f;
+        isMenuON = true;
+        Cursor.lockState = CursorLockMode.None;
+        Cursor.visible = true;
     }
 
 }
