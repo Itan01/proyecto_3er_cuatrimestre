@@ -39,6 +39,10 @@ public class UIManager : MonoBehaviour
     {
         return isMenuON;
     }
+    public void SetMenuFalse()
+    {
+        isMenuON=false;
+    }
 
     private TransitionFade _scriptTransition;
     public TransitionFade Transition
