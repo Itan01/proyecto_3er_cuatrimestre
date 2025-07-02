@@ -39,9 +39,8 @@ public abstract class AbstractEnemy : EntityMonobehaviour
         if (!_activate) return;
         base.Update();
 
-        // actualiza el comportamiento en cada frame
-        _movement?.Invoke();
-
+        if (_mode == 1)
+            _agent.destination = GameManager.Instance.PlayerReference.transform.position;
         if (_timer != 0)
             TimerToSearch();
         if (_agent.remainingDistance <= _shortDistance && _timer ==0.0f)

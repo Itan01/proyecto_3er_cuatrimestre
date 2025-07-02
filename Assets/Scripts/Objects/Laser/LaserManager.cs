@@ -14,6 +14,8 @@ public class LaserManager : MonoBehaviour , ISoundInteractions
     [SerializeField] private Transform _endPosition;
     private RaycastHit _onHit;
     private Ray _ray;
+    [SerializeField] private GameObject _smokeTrapOn;
+
 
     private void Start()
     {
@@ -31,6 +33,17 @@ public class LaserManager : MonoBehaviour , ISoundInteractions
             if (_onHit.collider.GetComponent<PlayerManager>())
             {
                 Debug.Log("Hii"); // LLamar al RoomManager
+                AudioStorage.Instance.LaserAlarmSound();
+
+                if (_smokeTrapOn.activeSelf == true)
+                {
+                    return;
+                }
+                else
+                {
+                    _smokeTrapOn.SetActive(true);
+                    AudioStorage.Instance.LaserAlarmSound();
+                }
             }
         }
         else
