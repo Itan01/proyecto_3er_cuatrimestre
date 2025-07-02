@@ -44,11 +44,11 @@ public class AudioStorage : MonoBehaviour
 
     public void LaserAlarmSound()
     {
-        AudioManager.Instance.PlaySFX(_laserAlarm, _soundVolume);
+        AudioManager.Instance.PlaySFX(_laserAlarm, _soundVolume - 0.5f);
     }
 
     public void SmokeTrapSound()
     {
-        AudioManager.Instance.PlaySFX(_smokeTrapSound, _soundVolume);
+        AudioManager.Instance.PlaySFX(_smokeTrapSound, _soundVolume - 0.3f);
     }
 }
