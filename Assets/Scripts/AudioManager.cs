@@ -19,6 +19,7 @@ public class AudioManager : MonoBehaviour
     private AudioValues _userInterface;
     [Header("Audio")]
     [SerializeField] private AudioMixer _mixer;
+    [SerializeField] private AudioClip _musicM;
     private AudioSource _source, _musicSource;
 
     public float MasterVolume { get { return _master.volume; } }
@@ -45,7 +46,7 @@ public class AudioManager : MonoBehaviour
     private void Start()
     {
         _source = GetComponent<AudioSource>();
-        _musicSource = GetComponent<AudioSource>();
+        //_musicSource = GetComponent<AudioSource>();
         GenerateVolumes();
         SetMasterVolume(MasterVolume);
         SetMusicVolume(MusicVolume);
