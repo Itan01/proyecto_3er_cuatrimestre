@@ -24,6 +24,7 @@ public class GameManager : MonoBehaviour
     #endregion
     private PlayerManager _player;
     private List<AbstractEnemy> _enemies = new List<AbstractEnemy>();
+
     private void Start()
     {
     }
@@ -66,6 +67,7 @@ public class GameManager : MonoBehaviour
         get { return _camera; }
         set { _camera = value; }
     }
+    public bool HasCameraSpottedPlayer { get; set; } = false;
 
     //private void ChangeScore(int value)
     //{

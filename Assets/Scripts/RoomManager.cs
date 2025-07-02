@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class RoomManager : MonoBehaviour
 {
-    [SerializeField]private List<AbstractEnemy> _enemies;
+    [SerializeField] private List<AbstractEnemy> _enemies;
     [SerializeField] private List<Light> _light;
     [SerializeField] private List<AbstractObjects> _objects;
 
@@ -74,9 +74,20 @@ public class RoomManager : MonoBehaviour
         //{
         //    item.gameObject.SetActive(true);
         //}
-        foreach(var item in _enemies)
+        foreach (var item in _enemies)
         {
             item.Respawn();
+        }
+    }
+    public List<AbstractEnemy> GetEnemies()
+    {
+        return _enemies;
+    }
+    public void RemoveEnemy(AbstractEnemy enemy)
+    {
+        if (_enemies.Contains(enemy))
+        {
+            _enemies.Remove(enemy);
         }
     }
 

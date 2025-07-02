@@ -19,6 +19,7 @@ public class CameraObstacleController : MonoBehaviour
     private bool _hasSpottedPlayer = false;
     [SerializeField] private Transform _cameraMovement;
     [SerializeField] private Renderer _cameraLight;
+    [SerializeField] private RoomManager _room;
 
     private void Start()
     {
@@ -45,8 +46,22 @@ public class CameraObstacleController : MonoBehaviour
                     AudioManager.Instance.PlaySFX(_cameraSound, _soundVolume);
                 }
                 _hasSpottedPlayer = true;
+                GameManager.Instance.HasCameraSpottedPlayer = true;
             }
-            
+            if (_room != null)
+            {
+                foreach (var enemy in _room.GetEnemies())
+                {
+                    if (enemy == null) continue;
+
+                    if (enemy is RoombaEnemy roomba)
+                    {
+                        //Debug.Log($"Activando Roomba: {roomba.name}");
+                        roomba.SetActivate(true);
+                    }
+                }
+            }
+
             _animation.Stop();
             _cameraMovement.transform.LookAt(_target);
             _cameraLight.material.SetColor("_Color", Color.red);

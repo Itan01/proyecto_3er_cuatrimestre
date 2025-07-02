@@ -38,18 +38,20 @@ public abstract class AbstractEnemy : EntityMonobehaviour
     {
         if (!_activate) return;
         base.Update();
+
+        // actualiza el comportamiento en cada frame
+        _movement?.Invoke();
+
         if (_timer != 0)
             TimerToSearch();
         if (_agent.remainingDistance <= _shortDistance && _timer ==0.0f)
             NextMovement();
-        if (_mode == 1)
-            _agent.destination = GameManager.Instance.PlayerReference.transform.position;
     }
     protected override void FixedUpdate()
     {
     }
 
-    protected void OnCollisionEnter(Collision Entity)
+    protected virtual void OnCollisionEnter(Collision Entity)
     {
         if (Entity.gameObject.GetComponent<PlayerManager>())
         {
@@ -114,7 +116,7 @@ public abstract class AbstractEnemy : EntityMonobehaviour
         _nextPosition = _startPosition;
         transform.LookAt( _facingStartPosition);
     }
-    protected void MoveFollowTarget() // Persigue al Jugador
+    protected virtual void MoveFollowTarget() // Persigue al Jugador
     {
         _mode = 1;
         _isMoving = true;
@@ -213,7 +215,7 @@ public abstract class AbstractEnemy : EntityMonobehaviour
     {
         _watchingPlayer=State;
     }
-    public void SetActivate(bool State)
+    public virtual void SetActivate(bool State)
     {
         _activate = State;
     }
