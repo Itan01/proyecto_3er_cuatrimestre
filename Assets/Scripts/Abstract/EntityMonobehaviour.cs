@@ -10,7 +10,7 @@ public abstract class EntityMonobehaviour : MonoBehaviour
     protected BoxCollider _boxCollider;
     protected GameObject _noise;
     protected bool coughCondition = false;
-    protected float coughTimer = 2f, coughTimerReference = 2f;
+    protected float coughTimer = 2f, coughTimerReference = 2f, deathTimer = 10f, deathTimerReference = 10f;
     [SerializeField] Transform HeadReference;
     
 
@@ -107,6 +107,7 @@ public abstract class EntityMonobehaviour : MonoBehaviour
     protected void CoughTimerSubstract()
     {
         coughTimer -= Time.deltaTime;
+        deathTimer -= Time.deltaTime;
         if (coughTimer <= 0)
         {
             Vector3 RandomPosition = HeadReference.position + HeadReference.forward *1.1f;
@@ -121,5 +122,16 @@ public abstract class EntityMonobehaviour : MonoBehaviour
             }
             coughTimer = coughTimerReference;
         }
+        if (deathTimer <= 0)
+        {
+
+            GameManager.Instance.ResetGameplay();
+            deathTimer = deathTimerReference;
+        }
+    }
+
+    public void ResetDeathTimer()
+    {
+        deathTimer = deathTimerReference;
     }
 }
