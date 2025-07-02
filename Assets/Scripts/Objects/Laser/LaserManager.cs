@@ -42,6 +42,7 @@ public class LaserManager : MonoBehaviour , ISoundInteractions
                 else
                 {
                     _smokeTrapOn.SetActive(true);
+                    AudioStorage.Instance.LaserAlarmSound();
                 }
             }
         }
