@@ -5,13 +5,17 @@ public class AbstractObjects : MonoBehaviour
 {
     protected Animator _animator;
     protected Transform _player;
+    protected MeshRenderer _mesh;
+    protected Collider _collider;
     [SerializeField] protected bool _animated;
     protected ParticlesManager _particlesManager;
     [SerializeField] protected float _distanceToAnimate=10.0f;
 
     protected void Awake()
     {
-        //GetComponentInParent<RoomManager>().AddToList(this);
+        _collider=GetComponent<Collider>();
+        _mesh = GetComponentInChildren<MeshRenderer>();
+       // GetComponentInParent<RoomManager>().AddToList(this);
     }
     protected virtual void Start()
     {
@@ -32,8 +36,9 @@ public class AbstractObjects : MonoBehaviour
     {
     }
 
-    protected void Destroyed()
+    protected void DesactivateObject()
     {
-        gameObject.SetActive(false);
+        _collider.enabled = false;
+        _mesh.gameObject.SetActive(false);
     }
 }

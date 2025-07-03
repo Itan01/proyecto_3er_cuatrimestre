@@ -26,7 +26,7 @@ public class ObjectValuable : AbstractObjects, IInteractableObject
             AudioManager.Instance.PlaySFX(_pickupSound, _soundVolume);
         }
 
-        Destroyed();
+        DesactivateObject();
 
     }
     protected override void SetFeedback(bool State)
