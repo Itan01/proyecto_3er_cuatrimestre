@@ -19,7 +19,8 @@ public class SummonSoundFromDoor : MonoBehaviour
         if (Entity.GetComponent<EntityMonobehaviour>() && !_forceDoor)
         {
             if(_doorOpen) return;
-            if (Entity.GetComponent<PlayerManager>().GetCaptured()) return;
+            if (Entity.TryGetComponent<PlayerManager>(out var script))
+                if (script.GetCaptured()) return;
                 //SummonSound(Entity.transform.position, false);
             _doorOpen = true;
             _animator.SetBool("isOpen", _doorOpen);
@@ -33,7 +34,7 @@ public class SummonSoundFromDoor : MonoBehaviour
         {
             if (!_doorOpen) return;
             _count--;
-            if(_count <0)
+            if(_count <=0)
             {
                 _count = 0;
                 _doorOpen = false;
@@ -65,8 +66,7 @@ public class SummonSoundFromDoor : MonoBehaviour
     public void ForceDoorsClose(bool State)
     {
         _forceDoor = State;
-        if (!_doorOpen) return;
-        _animator.SetBool("isOpen", false);
+        _animator.SetBool("isOpen", !_forceDoor);
         
     }
 }
