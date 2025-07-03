@@ -5,7 +5,7 @@ using System.Threading;
 using System.Timers;
 using UnityEngine;
 using UnityEngine.AI;
-public abstract class AbstractEnemy : EntityMonobehaviour
+public abstract class AbstractEnemy : EntityMonobehaviour, ISoundInteractions
 {
     protected NavMeshAgent _agent;
     [SerializeField] protected bool _activate;
@@ -16,7 +16,7 @@ public abstract class AbstractEnemy : EntityMonobehaviour
     [SerializeField] protected Transform _facingStartPosition;
     protected Vector3 _nextPosition, _startPosition;
     [SerializeField] protected float _confusedDuration;
-    protected float _confusedDurationRef =5.0f; // Este es el tiempo de confusión donde cree haber visto al player
+    protected float _confusedDurationRef = 5.0f; // Este es el tiempo de confusión donde cree haber visto al player
     protected float _searchDuration = 20.0f; // El tiempo que busca al player luego de que este salga del RadiusToHear
     [SerializeField] protected bool _watchingPlayer = false;
     protected bool _isRunning = false, _questionBool;
@@ -29,7 +29,7 @@ public abstract class AbstractEnemy : EntityMonobehaviour
     protected override void Awake()
     {
         GetComponentInParent<RoomManager>().AddToList(this);
-        _confusedDuration =_confusedDurationRef;
+        _confusedDuration = _confusedDurationRef;
     }
     protected override void Start()
     {
@@ -69,11 +69,11 @@ public abstract class AbstractEnemy : EntityMonobehaviour
     #region InternalFunctions
     protected void SetMode(Setter TypeOfMovement)
     {
-        _gamemode=TypeOfMovement;
+        _gamemode = TypeOfMovement;
         _gamemode();
-        _questionMark.Setting(_questionBool,_questionIndex);
+        _questionMark.Setting(_questionBool, _questionIndex);
         _animator.SetBool("isMoving", _isMoving);
-        _animator.SetBool("isRunning",_isRunning);
+        _animator.SetBool("isRunning", _isRunning);
     }
     protected override void GetScripts()
     {
@@ -110,7 +110,7 @@ public abstract class AbstractEnemy : EntityMonobehaviour
         _isRunning = false;
         _agent.speed = _baseSpeed;
         _questionBool = true;
-        _questionIndex = 1;
+        _questionIndex = 0;
         _mode = 2;
         _previousmovement = MoveFollowSound;
         _movement = ConditionsMoveFollowSound;
@@ -148,7 +148,7 @@ public abstract class AbstractEnemy : EntityMonobehaviour
     {
         _timer -= Time.deltaTime;
         transform.LookAt(GameManager.Instance.PlayerReference.transform.position);
-        if(!_watchingPlayer)
+        if (!_watchingPlayer)
             SetMode(_previousmovement);
         if (_timer < 0.0f)
         {
@@ -174,7 +174,7 @@ public abstract class AbstractEnemy : EntityMonobehaviour
     protected void ConditionsMoveLooking()
     {
         _timer -= Time.deltaTime;
-        if(_timer < 0.0f)
+        if (_timer < 0.0f)
         {
             SetMode(_nextmovement);
         }
@@ -196,6 +196,28 @@ public abstract class AbstractEnemy : EntityMonobehaviour
         AudioStorage.Instance.EnemyConfusedSound();
     }
     protected void ConditionMoveStartHearing()
+    {
+        _timer -= Time.deltaTime;
+        if (_timer < 0.0f)
+        {
+            SetMode(_nextmovement);
+        }
+    }
+    protected virtual void MoveStunned() // Persigue al Jugador
+    {
+        _isMoving = false;
+        _isRunning = false;
+        _agent.speed = 0.0f;
+        _questionBool = false;
+        _questionIndex = 0;
+        _mode = 6;
+        _timer = 2.45f;
+        _animator.SetTrigger("Stun");
+        _movement = ConditionStunned;
+        _nextmovement = MoveBasePath;
+        Debug.Log("Stunned");
+    }
+    protected void ConditionStunned()
     {
         _timer -= Time.deltaTime;
         if (_timer < 0.0f)
@@ -227,13 +249,13 @@ public abstract class AbstractEnemy : EntityMonobehaviour
     }
     public void SetPosition(Vector3 pos)
     {
-        pos.y =transform.position.y;
+        pos.y = transform.position.y;
         _nextPosition = pos;
     }
 
     public void WatchingPlayer(bool State)
     {
-            _watchingPlayer = State;
+        _watchingPlayer = State;
     }
     public virtual void SetActivate(bool State)
     {
@@ -244,5 +266,12 @@ public abstract class AbstractEnemy : EntityMonobehaviour
         return _activate;
     }
     #endregion
-
+    public void IIteraction(bool PlayerShootIt)
+    {
+        if (PlayerShootIt)
+        {
+            Debug.Log("HIII");
+            SetMode(MoveStunned);
+        }
+    }
 }

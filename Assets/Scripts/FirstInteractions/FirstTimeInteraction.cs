@@ -6,6 +6,7 @@ using TMPro;
 public class FirstTimeInteraction : MonoBehaviour
 {
     [SerializeField] private string _text = "Press any Button To do it";
+    private bool _desactivate = false;
     private TuriorialFirstTime _showText;
 
     private void Start()
@@ -14,8 +15,9 @@ public class FirstTimeInteraction : MonoBehaviour
     }
     private void OnTriggerEnter(Collider Player)
     {
-        if (Player.GetComponent<PlayerManager>())
+        if (Player.GetComponent<PlayerManager>() && !_desactivate)
         {
+            _desactivate = true;
             _showText.gameObject.SetActive(true);
             _showText.GetComponentInChildren<TMP_Text>().text = _text;
         }

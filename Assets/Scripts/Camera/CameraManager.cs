@@ -138,7 +138,7 @@ public class CameraManager : MonoBehaviour
     }
     private bool CheckIfEnviroment()
     {
-        bool aux = Physics.SphereCast(_camRay, _detectionRadius, out _camHit, _maxDistance, Enviroment);
+        bool aux = Physics.SphereCast(_camRay, _detectionRadius, out _camHit, _maxDistance, Enviroment,QueryTriggerInteraction.Ignore );
         return aux;
     }
     private void ChangeDistance()

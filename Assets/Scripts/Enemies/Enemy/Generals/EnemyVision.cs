@@ -117,7 +117,7 @@ public class EnemyVision : MonoBehaviour
                     {
                         if (_playerDeath) return;
                         _seePlayer = true;
-                        if (_scriptManager.GetMode() != 3 && _scriptManager.GetMode() != 1)
+                        if (_scriptManager.GetMode() != 3 && _scriptManager.GetMode() != 1 && _scriptManager.GetMode() != 6)
                             _scriptManager.SetModeByIndex(3);
                     }
                 }
