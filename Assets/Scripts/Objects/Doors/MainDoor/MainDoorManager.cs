@@ -14,5 +14,6 @@ public class MainDoorManager : AbstracDoors
     {
         _animator.SetBool("isOpen", true);
         base.OpenDoor();
+        AudioStorage.Instance.OpenDoorSound();
     }
 }

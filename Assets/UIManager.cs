@@ -108,19 +108,20 @@ public class UIManager : MonoBehaviour
         }
 
         _popupPointsUI.alpha = 1f;
+        _pointsUI.text = $"${_score}";
         TextReference.ForceMeshUpdate();
         int lastCharIndex = TextReference.textInfo.characterCount - 1;
 
         if (lastCharIndex >= 0)
         {
-            var charInfo = TextReference.textInfo.characterInfo[lastCharIndex];
+            var charInfo = _pointsUI.textInfo.characterInfo[lastCharIndex];
 
             Vector3 charPos = charInfo.bottomRight;
             float charHeight = charInfo.ascender - charInfo.descender;
             Vector3 verticalOffset = new Vector3(0f, charHeight * 0.35f, 0f);
 
 
-            Vector3 worldPos = TextReference.transform.TransformPoint(charPos + verticalOffset);
+            Vector3 worldPos = _pointsUI.transform.TransformPoint(charPos + verticalOffset);
 
             Vector3 offset = new Vector3(5f, 0f, 0f);
 
