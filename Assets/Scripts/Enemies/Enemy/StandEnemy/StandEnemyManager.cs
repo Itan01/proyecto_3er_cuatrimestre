@@ -12,7 +12,7 @@ public class StandEnemyManager : AbstractEnemy
     protected override void Start()
     {
         base.Start();
-        SetMode(MoveResettingPath);
+        SetMode(MoveBasePath);
     }
     protected override void Update()
     {
@@ -23,16 +23,8 @@ public class StandEnemyManager : AbstractEnemy
     protected override void FixedUpdate()
     {
     }
-    protected override void NextMovement()
-    {
-        base.NextMovement();
-        if (_mode == 0)
-        {
-            SetMode(MoveStandPosition);
-        }
-    }
 
-    protected override void MoveResettingPath() // patron normal (Esta en distintos scripts "StandEnemy""StandardEnemy")
+    protected override void MoveBasePath() // patron normal (Esta en distintos scripts "StandEnemy""StandardEnemy")
     {
         _mode = 0;
         _isMoving = true;
@@ -42,6 +34,18 @@ public class StandEnemyManager : AbstractEnemy
         _agent.speed = _baseSpeed;
         _nextPosition = _startPosition;
         _agent.destination = _nextPosition;
+    }
+    protected void MoveStandPosition() // Persigue al Jugador
+    {
+        _mode = -1;
+        _isMoving = false;
+        _isRunning = false;
+        _questionBool = false;
+        _questionIndex = 1;
+        _agent.speed = 0.0f;
+        _nextPosition = _startPosition;
+        _timer = -1f;
+        transform.LookAt(_facingStartPosition);
     }
 }
 

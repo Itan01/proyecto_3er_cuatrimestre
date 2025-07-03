@@ -145,6 +145,5 @@ public class RoombaEnemy : AbstractEnemy
         Destroy(gameObject);
     }
 
-    protected override void NextMovement() { }
-    protected override void MoveResettingPath() { }
+    protected override void MoveBasePath() { }
 }
