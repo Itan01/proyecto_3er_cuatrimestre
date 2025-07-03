@@ -2,12 +2,16 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class MainDoorManagerExample : AbstracDoors
+public class MainDoorManagerExample : AbstracDoors, ISoundInteractions
 {
+    [SerializeField] private AudioClip _buttonSound;
+    private float _soundVolume=1.0f;
+    private ParticlesManager _particles;
     private Animation _animation;
     protected override void Start()
     {
        _animation=GetComponentInChildren<Animation>();
+        _particles=GetComponentInChildren<ParticlesManager>();
        base.Start();
     }
     public override void CheckStatus()
@@ -27,5 +31,14 @@ public class MainDoorManagerExample : AbstracDoors
     {
         _animation.Play();
         base.OpenDoor();
+    }
+    public void IIteraction(bool PlayerShootIt)
+    {
+        if (PlayerShootIt)
+        {
+            CheckStatus();
+            _particles.PlayOnce();
+            AudioSource.PlayClipAtPoint(_buttonSound, transform.position, _soundVolume);
+        }
     }
 }

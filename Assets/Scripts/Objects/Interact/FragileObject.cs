@@ -31,7 +31,7 @@ public class FragileObject : AbstractObjects, ISoundInteractions
     {
         _animator.SetBool("Shine", State);
     }
-    public void Interaction()
+    public void IIteraction(bool PlayerShootIt)
     {
         var Sound = Instantiate(_sound, transform.position, Quaternion.identity);
         Sound.GetComponent<SoundRadiusTrigger>().SetMultiplier(GetSize());

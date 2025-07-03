@@ -10,8 +10,11 @@ public class FuseBox : MonoBehaviour , ISoundInteractions
     {
         _animator = GetComponent<Animator>();
     }
-    public void Interaction()
+    public void IIteraction(bool PlayerShootIt)
     {
-        _animator.SetTrigger("destroy");
+        if (PlayerShootIt)
+        {
+            _animator.SetTrigger("destroy");
+        }
     }
 }

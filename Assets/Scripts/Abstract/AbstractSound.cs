@@ -111,7 +111,7 @@ public abstract class AbstractSound : MonoBehaviour // Sonidos Genericos,Movimie
     {
         if (Entity.TryGetComponent(out ISoundInteractions script))
         {
-            script.Interaction();
+            script.IIteraction(_playerShooted);
         }
         if (Entity.TryGetComponent(out PlayerManager player) && _canCatch)
         {
