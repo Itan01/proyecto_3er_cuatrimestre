@@ -15,7 +15,6 @@ public class StandardEnemy : AbstractEnemy
             _positions[i] += transform.position;
         }
         _positions[0] = transform.position;
-        SetMode(MoveResettingPath);
     }
     protected override void Update()
     {
@@ -24,16 +23,7 @@ public class StandardEnemy : AbstractEnemy
     protected override void FixedUpdate()
     {
     }
-    protected override void NextMovement()
-    {
-        base.NextMovement();
-        if (_mode == 0)
-        {
-            SetMode(MoveResettingPath);
-        }
-    }
-
-    protected override void MoveResettingPath() // patron normal (Esta en distintos scripts "StandEnemy""StandardEnemy")
+    protected override void MoveBasePath() // patron normal (Esta en distintos scripts "StandEnemy""StandardEnemy")
     {
         _mode = 0;
         _isMoving = true;
@@ -41,10 +31,19 @@ public class StandardEnemy : AbstractEnemy
         _questionBool = false;
         _questionIndex = 0;
         _agent.speed = _baseSpeed;
-        _index++;
-        if (_index >= _positions.Length) _index = 0;
-        _nextPosition = _positions[_index];
-        _agent.destination = _nextPosition;
-        _startPosition = _nextPosition;
+        _previousmovement = MoveBasePath;
+        _movement = ConditionMoveBasePath;
+        _nextmovement = MoveBasePath;
+    }
+
+    protected void ConditionMoveBasePath()
+    {
+        if (_agent.remainingDistance <= 0.25f)
+        {
+            _index++;
+            if (_index >= _positions.Length) _index = 0;
+            _nextPosition = _positions[_index];
+            _agent.destination = _nextPosition;
+        }
     }
 }

@@ -45,10 +45,10 @@ public class AudioManager : MonoBehaviour
     private void Start()
     {
         _source = GetComponent<AudioSource>();
-        _musicSource = GetComponent<AudioSource>();
+        //_musicSource = GetComponent<AudioSource>();
         GenerateVolumes();
         SetMasterVolume(MasterVolume);
-        SetMusicVolume(MusicVolume);
+        //SetMusicVolume(MusicVolume);
         SetSFXVolume(SFXVolume);
         SetUIVolume(UIVolumen);
     }
@@ -57,7 +57,7 @@ public class AudioManager : MonoBehaviour
         _master.name = "MasterVolume";
         _master.volume = 0.75f;
         _music.name = "MusicVolume";
-        _music.volume = 0.75f;
+        _music.volume = 1f;
         _effects.name = "SFXVolume";
         _effects.volume = 0.75f;
         _userInterface.name = "UIVolume";

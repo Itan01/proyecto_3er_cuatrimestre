@@ -4,7 +4,7 @@ using UnityEngine;
 
 public interface ISoundInteractions 
 {
-    public void Interaction()
+    public void IIteraction( bool PlayerShootIt)
     {
 
     }

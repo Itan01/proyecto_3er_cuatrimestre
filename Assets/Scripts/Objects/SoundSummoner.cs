@@ -43,6 +43,7 @@ public class SoundSummoner : MonoBehaviour
         AbstractSound script = Sound.GetComponent<AbstractSound>();
         script.SetDirection(_spawnPosition.forward, 5.0f, 1.0f);
         _particlesManager.PlayOnce();
+        //AudioStorage.Instance.ZapSound();
     }
 }
 

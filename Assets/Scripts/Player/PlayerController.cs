@@ -64,6 +64,7 @@ public class PlayerController
     {
         if (Input.GetKeyDown(KeyCode.E))
         {
+            _animator.SetTrigger("Steal");
             _scriptInteract.Interact();
         }
            

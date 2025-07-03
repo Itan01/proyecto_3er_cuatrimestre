@@ -20,7 +20,7 @@ public class SmokeDetector : MonoBehaviour
     if (Player.TryGetComponent(out EntityMonobehaviour Script))
     {
         Script.CoughState(false);
-
+        Script.ResetDeathTimer();
     }
     }
 }
