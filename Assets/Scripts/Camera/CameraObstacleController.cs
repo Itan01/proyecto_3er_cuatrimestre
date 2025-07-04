@@ -30,8 +30,6 @@ public class CameraObstacleController : MonoBehaviour
             _noDoors = true;
         if(_cameraSound==null)
             Debug.Log("No hay sonido");
-        CloseDoors(false);
-
     }
 
     private void Update()
