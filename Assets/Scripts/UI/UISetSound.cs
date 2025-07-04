@@ -39,4 +39,9 @@ public class UISetSound : MonoBehaviour
     {
         _uI.sprite= _noSound;
     }
+    public void ClearSound()
+    {
+        _uI.sprite = _noSound;
+        _animator.SetBool("Grabbing", false); 
+    }
 }

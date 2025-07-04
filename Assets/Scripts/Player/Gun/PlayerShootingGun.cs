@@ -75,5 +75,12 @@ public class PlayerShootingGun
             _aux = _direction;
         }
     }
+    public void ClearSound()
+    {
+        _hasASound = false;
+        _soundReference = null;
+        UIManager.Instance.UISound.ClearSound(); 
+    }
+
 }
 

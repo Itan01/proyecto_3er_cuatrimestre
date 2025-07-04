@@ -112,4 +112,10 @@ public class PlayerManager : EntityMonobehaviour
     {
         return _megaphoneTransform;
     }
+    public void ResetHeldSound()
+    {
+        _scriptShootingGun.ClearSound();
+        _animator.SetBool("Grabbing", false); 
+    }
+
 }

@@ -107,7 +107,8 @@ public class GameManager : MonoBehaviour
         {
             room.ResetRoom();
         }
-        RespawnAllEnemies(); 
+        RespawnAllEnemies();
+        PlayerReference.ResetHeldSound();
         PlayerReference.SetCaptured(false);
         PlayerReference.SetDeath(false);
         UIManager.Instance.Transition.FadeOut();
