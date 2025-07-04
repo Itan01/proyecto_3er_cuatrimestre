@@ -122,7 +122,7 @@ public abstract class AbstractSound : MonoBehaviour // Sonidos Genericos,Movimie
     {
         RaycastHit hit;
         Vector3 orientation = EntityPosition - transform.position;
-        if (Physics.Raycast(transform.position, orientation, out hit, _maxDistanceRay, mask))
+        if (Physics.Raycast(transform.position, orientation, out hit, _maxDistanceRay, mask, QueryTriggerInteraction.Ignore))
         {
             if (hit.collider.gameObject.layer==27)
             {
