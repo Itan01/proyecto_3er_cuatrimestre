@@ -1,7 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-public class AbstractObjects : MonoBehaviour
+public abstract class AbstractObjects : MonoBehaviour
 {
     protected Animator _animator;
     protected Transform _player;
