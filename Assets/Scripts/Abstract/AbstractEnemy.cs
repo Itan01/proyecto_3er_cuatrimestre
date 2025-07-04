@@ -220,6 +220,7 @@ public abstract class AbstractEnemy : EntityMonobehaviour, ISoundInteractions
         _animator.SetTrigger("Stun");
         _movement = ConditionStunned;
         _nextmovement = MoveBasePath;
+        AudioStorage.Instance.EnemyTensionSound();
         Debug.Log("Stunned");
     }
     protected void ConditionStunned()

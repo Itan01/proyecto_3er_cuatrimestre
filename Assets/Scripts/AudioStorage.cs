@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class AudioStorage : MonoBehaviour
 {
-    [SerializeField] private AudioClip _crashSound, _shootingSound, _grabbingSound, _glassSound, _smokeTrapSound, _enemyConfusedSound, _enemyTension, _laserAlarm;
+    [SerializeField] private AudioClip _crashSound, _shootingSound, _grabbingSound, _glassSound, _smokeTrapSound, _enemyConfusedSound, _enemyTensionSound, _laserAlarm;
     [SerializeField] private AudioClip _openDoorSound, _closeDoorSound, _zapSound;
     [SerializeField] private float _soundVolume = 1f;
     public static AudioStorage Instance;
@@ -56,9 +56,9 @@ public class AudioStorage : MonoBehaviour
     {
         AudioManager.Instance.PlaySFX(_enemyConfusedSound, _soundVolume - 0.5f);
     }
-    public void EnemyTension()
+    public void EnemyTensionSound()
     {
-        AudioManager.Instance.PlaySFX(_enemyTension, _soundVolume - 0.5f);
+        AudioManager.Instance.PlaySFX(_enemyTensionSound, _soundVolume);
     }
 
     public void LaserAlarmSound()
