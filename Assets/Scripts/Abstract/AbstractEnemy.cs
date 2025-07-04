@@ -11,13 +11,14 @@ public abstract class AbstractEnemy : EntityMonobehaviour, ISoundInteractions
     [SerializeField] protected bool _activate;
     protected QuestionMarkManager _questionMark;
     protected float _baseSpeed = 3.5f, _runSpeed = 7.0F, _shortDistance = 0.25f;
-    [SerializeField] protected float _timer = 0.0f;
+    [SerializeField] protected float _timer = 0.0f, _resetTimer=0.0f;
     [SerializeField] protected int _mode = 0;
     [SerializeField] protected Transform _facingStartPosition;
     protected Vector3 _nextPosition, _startPosition;
     [SerializeField] protected float _confusedDuration;
     protected float _confusedDurationRef = 5.0f; // Este es el tiempo de confusión donde cree haber visto al player
     protected float _searchDuration = 20.0f; // El tiempo que busca al player luego de que este salga del RadiusToHear
+    protected float _resetTimerRef = 1.0f;
     [SerializeField] protected bool _watchingPlayer = false;
     protected bool _isRunning = false, _questionBool;
     protected int _questionIndex;
@@ -145,16 +146,22 @@ public abstract class AbstractEnemy : EntityMonobehaviour, ISoundInteractions
         _questionBool = true;
         _questionIndex = 0;
         _mode = 3;
+        _resetTimer = _resetTimerRef;
         _timer = _confusedDuration;
         _movement = ConditionsMoveConfused;
+        transform.LookAt(GameManager.Instance.PlayerReference.transform.position);
         AudioStorage.Instance.EnemyConfusedSound();
     }
     protected void ConditionsMoveConfused()
     {
         _timer -= Time.deltaTime;
-        transform.LookAt(GameManager.Instance.PlayerReference.transform.position);
+       
         if (!_watchingPlayer)
-            SetMode(_previousmovement);
+        {
+            _resetTimer -= Time.deltaTime;
+            if (_resetTimer <0)
+                SetMode(_previousmovement);
+        }
         if (_timer < 0.0f)
         {
             SetMode(MoveFollowTarget);

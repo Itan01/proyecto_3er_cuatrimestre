@@ -5,9 +5,11 @@ using UnityEngine;
 public class PlayerAvatar : MonoBehaviour
 {
     private PlayerManager _scriptManager;
+    private ParticlesManager _particles;
     void Start()
     {
         _scriptManager = GetComponentInParent<PlayerManager>();
+        _particles = GetComponentInChildren<ParticlesManager>();
     }
     public void ActivateAreaSound()
     {
@@ -27,4 +29,9 @@ public class PlayerAvatar : MonoBehaviour
     {
         _scriptManager.PlayerCanShoot(true);
     }
+    public void PlayWalkParticles()
+    {
+        _particles.PlayOnce();
+    }
+
 }

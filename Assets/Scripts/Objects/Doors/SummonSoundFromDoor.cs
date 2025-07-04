@@ -12,6 +12,7 @@ public class SummonSoundFromDoor : MonoBehaviour
     void Start()
     {
         _animator = GetComponentInChildren<Animator>();
+        _animator.SetBool("isOpen",_doorOpen);
     }
 
     private void OnTriggerEnter(Collider Entity)
@@ -67,5 +68,6 @@ public class SummonSoundFromDoor : MonoBehaviour
     {
         _forceDoor = State;
         _animator.SetBool("isOpen", !_forceDoor);
+
     }
 }
