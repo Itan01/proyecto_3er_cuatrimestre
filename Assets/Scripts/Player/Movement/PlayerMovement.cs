@@ -14,6 +14,8 @@ public class PlayerMovement
     private Animator _animator;
     private SetSizeCollider _scriptCollider;
     private bool _isMoving , _isCrouching;
+    [SerializeField] private ParticleSystem _particleWalking;
+
 
     public PlayerMovement(Transform PlayerTransform, Rigidbody PlayerRigibody, Transform CameraTransform, Transform ModelTransform, Animator Animator, SetSizeCollider ScriptCollider)
     {
@@ -35,6 +37,7 @@ public class PlayerMovement
         {
             _isMoving = true;
             _animator.SetBool("isMoving", _isMoving);
+            _particleWalking.Play();
             return true;
         }      
         else
