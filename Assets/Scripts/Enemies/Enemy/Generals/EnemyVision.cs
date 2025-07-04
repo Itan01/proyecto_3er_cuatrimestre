@@ -101,7 +101,7 @@ public class EnemyVision : MonoBehaviour
                 Quaternion rot = Quaternion.Euler(pitch, yaw, 0);
                 Vector3 dir = _headReference.rotation * (rot * Vector3.forward);
 
-                if (Physics.Raycast(origin, dir, out RaycastHit hit, viewRadius, obstacleMask))
+                if (Physics.Raycast(origin, dir, out RaycastHit hit, viewRadius, obstacleMask, QueryTriggerInteraction.Ignore))
                 {
                     debugPoints.Add((hit.point, true));
                 }
@@ -111,7 +111,7 @@ public class EnemyVision : MonoBehaviour
                 }
 
                 if (Application.isPlaying &&
-                    Physics.Raycast(origin, dir, out hit, viewRadius, detectableMask))
+                    Physics.Raycast(origin, dir, out hit, viewRadius, detectableMask,QueryTriggerInteraction.Ignore))
                 {
                     if (hit.collider.TryGetComponent<PlayerManager>(out PlayerManager script))
                     {
