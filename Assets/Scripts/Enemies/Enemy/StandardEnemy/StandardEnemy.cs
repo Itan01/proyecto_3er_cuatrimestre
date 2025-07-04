@@ -23,6 +23,11 @@ public class StandardEnemy : AbstractEnemy
     protected override void FixedUpdate()
     {
     }
+    protected override void MoveResetPath() // patron normal (Esta en distintos scripts "StandEnemy""StandardEnemy")
+    {
+        _index = 0;
+        SetMode(MoveBasePath);
+    }
     protected override void MoveBasePath() // patron normal (Esta en distintos scripts "StandEnemy""StandardEnemy")
     {
         _mode = 0;
@@ -31,6 +36,8 @@ public class StandardEnemy : AbstractEnemy
         _questionBool = false;
         _questionIndex = 0;
         _agent.speed = _baseSpeed;
+        _nextPosition = _positions[_index];
+        _agent.destination = _nextPosition;
         _previousmovement = MoveBasePath;
         _movement = ConditionMoveBasePath;
         _nextmovement = MoveBasePath;

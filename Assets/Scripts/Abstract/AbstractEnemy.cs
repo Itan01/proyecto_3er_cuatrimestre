@@ -54,7 +54,8 @@ public abstract class AbstractEnemy : EntityMonobehaviour, ISoundInteractions
         if (Entity.gameObject.GetComponent<PlayerManager>())
         {
             GameManager.Instance.ResetGameplay();
-            SetMode(MoveBasePath);
+            SetMode(MoveResetPath);
+            _nextPosition = _startPosition;
         }
     }
 
@@ -64,6 +65,7 @@ public abstract class AbstractEnemy : EntityMonobehaviour, ISoundInteractions
     }
     public void Respawn()
     {
+        Debug.Log("Respawn");
         SetMode(MoveBasePath);
         transform.position = _startPosition;
     }
@@ -83,7 +85,9 @@ public abstract class AbstractEnemy : EntityMonobehaviour, ISoundInteractions
     }
     #endregion
     #region TypeOfMovement
-
+    protected virtual void MoveResetPath()
+    {
+    }
     protected virtual void MoveFollowTarget() // Persigue al Jugador
     {
         _isMoving = true;
