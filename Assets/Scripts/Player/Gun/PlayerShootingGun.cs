@@ -52,7 +52,7 @@ public class PlayerShootingGun
     {
         _hasASound = false;
         _model.forward = _direction;
-        var NewSound = UnityEngine.Object.Instantiate(_soundReference, _spawn.position, Quaternion.identity);
+        var NewSound = UnityEngine.Object.Instantiate(_soundReference, _spawn.position, _spawn.rotation);
         AbstractSound script = NewSound.GetComponent<AbstractSound>();
         script.SetTarget(null, 0.0f);
         script.SetDirection(_direction, _speed, _size);

@@ -1,4 +1,4 @@
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UIElements;
@@ -29,7 +29,7 @@ public class GrabbingSound : MonoBehaviour
             if (Script.HasLineOfVision(_enviromentMask, GameManager.Instance.PlayerReference.transform.position + new Vector3(0,1.25f,0)))
             {
                 Script.PlayerCanCatchIt(true);
-                Script.SetTarget(GameManager.Instance.PlayerReference.transform, 20.0f);
+                Script.SetTarget(GameManager.Instance.PlayerReference.GetMegaphoneTransform(), 20.0f);
             }
         }
     }

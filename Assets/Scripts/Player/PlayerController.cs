@@ -47,7 +47,6 @@ public class PlayerController
             _area.Desactivate();
         }
 
-        // Mostrar apuntado solo si tiene un sonido cargado
         if (_input.ShootPressed && _scriptShoot.CheckSound())
         {
             UIManager.Instance.AimUI.UITrigger(true);
@@ -61,7 +60,6 @@ public class PlayerController
             _animator.SetBool("StartShooting", false);
         }
 
-        // Lanzar el sonido solo cuando se suelta el botón Y hay un sonido cargado
         if (_input.ShootReleased && _scriptShoot.CheckSound() && _canShoot)
         {
             _scriptShoot.Direction();

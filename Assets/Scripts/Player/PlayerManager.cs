@@ -27,6 +27,7 @@ public class PlayerManager : EntityMonobehaviour
     [SerializeField] private Transform _modelTransform;
     [SerializeField] private Transform _spawnProyectil;
     [SerializeField] private Transform _hipsPosition;
+    [SerializeField] private Transform _megaphoneTransform;
 
     protected override void Awake()
     {
@@ -64,7 +65,7 @@ public class PlayerManager : EntityMonobehaviour
     protected override void GetScripts()
     {
         _scriptCollider = new SetSizeCollider(_capsuleCollider, _boxCollider);
-        _scriptShootingGun = new PlayerShootingGun(_spawnProyectil, _camTransform, _modelTransform, _enviormentMaskWithOutPlayer);
+        _scriptShootingGun = new PlayerShootingGun(_megaphoneTransform, _camTransform, _modelTransform, _enviormentMaskWithOutPlayer);
         _scriptInteractions = new PlayerInteractions(_interactMask);
         _scriptController = new PlayerController(_scriptShootingGun, _scriptInteractions, _animator, _areaCatching, _inputReader);
         _scriptMovement = new PlayerMovement(transform, _rb, _camTransform, _modelTransform, _animator, _scriptCollider);
@@ -93,7 +94,7 @@ public class PlayerManager : EntityMonobehaviour
     {
         _isCrouching = _scriptMovement.GetIsCrouching();
         _isMoving = _scriptMovement.GetIsMoving();
-        _spawnProyectil.position = _hipsPosition.position + _camTransform.forward * 1.5f;
+        //_spawnProyectil.position = _hipsPosition.position + _camTransform.forward * 1.5f;
     }
     public void SetCaptured(bool State)
     {
@@ -106,5 +107,9 @@ public class PlayerManager : EntityMonobehaviour
     public void PlayerCanShoot(bool State)
     {
         _scriptController.PlayerCanShootAgain(State);
+    }
+    public Transform GetMegaphoneTransform()
+    {
+        return _megaphoneTransform;
     }
 }
