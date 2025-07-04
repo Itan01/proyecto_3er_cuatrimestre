@@ -20,6 +20,7 @@ public abstract class AbstractSound : MonoBehaviour // Sonidos Genericos,Movimie
     [SerializeField] protected Transform _target;
     protected Rigidbody _rb;
     protected TrailRenderer _trail;
+    private bool _isRejected = false;
 
 
     protected virtual void Start()
@@ -48,8 +49,47 @@ public abstract class AbstractSound : MonoBehaviour // Sonidos Genericos,Movimie
 
     protected virtual void Move()
     {
-        _rb.MovePosition(transform.position + _dir.normalized * _speed * Time.fixedDeltaTime);
+        if (_isRejected)
+        {
+            _rb.MovePosition(transform.position + _dir.normalized * _speed * Time.fixedDeltaTime);
+            return;
+        }
+
+        if (_target != null)
+        {
+            Vector3 toTarget = (_target.position + new Vector3(0, 0.3f, 0)) - transform.position;
+            float distance = toTarget.magnitude;
+
+            if (distance < 0.3f)
+            {
+                if (_canCatch)
+                {
+                    PlayerManager player = GameManager.Instance.PlayerReference;
+                    if (player != null)
+                    {
+                        if (!player.PlayerHasSound())
+                        {
+                            player.SetSound(_index);
+                            Destroy(gameObject);
+                        }
+                        else
+                        {
+                            BounceBackFromMegaphone(); 
+                        }
+                    }
+                }
+                return;
+            }
+
+            _dir = toTarget.normalized;
+            _rb.MovePosition(transform.position + _dir * _speed * Time.fixedDeltaTime);
+        }
+        else
+        {
+            _rb.MovePosition(transform.position + _dir.normalized * _speed * Time.fixedDeltaTime);
+        }
     }
+
 
     protected virtual void SetDirectionToTarget()
     {
@@ -86,6 +126,7 @@ public abstract class AbstractSound : MonoBehaviour // Sonidos Genericos,Movimie
         _rb = GetComponent<Rigidbody>();
         _rb.useGravity = false;
         _rb.freezeRotation = true;
+        _rb.isKinematic = false;
     }
 
 
@@ -168,6 +209,24 @@ public abstract class AbstractSound : MonoBehaviour // Sonidos Genericos,Movimie
     {
         _startPosition = position;
     }
+    private void BounceBackFromMegaphone()
+    {
+        if (_target != null)
+        {
+            Vector3 bounceDir = (transform.position - _target.position).normalized;
+            _dir = bounceDir;
+            _target = null;
+            _canCatch = false;
+            _playerSummoned = false;
+            _speed *= 0.8f;
+            _isRejected = true;  
+        }
+    }
+    public bool IsRejected()
+    {
+        return _isRejected;
+    }
+
 }
 
 

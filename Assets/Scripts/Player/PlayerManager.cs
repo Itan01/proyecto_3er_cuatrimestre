@@ -117,5 +117,9 @@ public class PlayerManager : EntityMonobehaviour
         _scriptShootingGun.ClearSound();
         _animator.SetBool("Grabbing", false); 
     }
+    public bool PlayerHasSound()
+    {
+        return _scriptShootingGun.CheckSound();
+    }
 
 }

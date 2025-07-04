@@ -54,6 +54,7 @@ public class PlayerShootingGun
         _model.forward = _direction;
         var NewSound = UnityEngine.Object.Instantiate(_soundReference, _spawn.position, _spawn.rotation);
         AbstractSound script = NewSound.GetComponent<AbstractSound>();
+        script.GetComponent<Rigidbody>().isKinematic = false;
         script.SetTarget(null, 0.0f);
         script.SetDirection(_direction, _speed, _size);
         script.FreezeObject(false);
@@ -63,6 +64,7 @@ public class PlayerShootingGun
         _aux.y= 0.0f; 
         _model.transform.forward = _aux;
         AudioStorage.Instance.ShootingSound();
+
 
     }
     public void Direction()

@@ -26,10 +26,13 @@ public class GrabbingSound : MonoBehaviour
     {
         if (Sound.TryGetComponent<AbstractSound>(out AbstractSound Script))
         {
-            if (Script.HasLineOfVision(_enviromentMask, GameManager.Instance.PlayerReference.transform.position + new Vector3(0,1.25f,0)))
+            if (Script.HasLineOfVision(_enviromentMask, GameManager.Instance.PlayerReference.transform.position + new Vector3(0, 1.25f, 0)))
             {
-                Script.PlayerCanCatchIt(true);
-                Script.SetTarget(GameManager.Instance.PlayerReference.GetMegaphoneTransform(), 20.0f);
+                if (!Script.IsRejected()) 
+                {
+                    Script.PlayerCanCatchIt(true);
+                    Script.SetTarget(GameManager.Instance.PlayerReference.GetMegaphoneTransform(), 20.0f);
+                }
             }
         }
     }
