@@ -64,15 +64,22 @@ public class SummonSoundFromDoor : MonoBehaviour
        //  ScriptSound.SetDirection(Orientation, Random.Range(3.0f, 7.0f + 1), 1.0f);
     }
 
-    public void ForceDoorsClose(bool State)
+    public void ForceDoorsClose(bool state)
     {
+        if (_forceDoor == state) return;
 
-        _forceDoor = State;
+        _forceDoor = state;
+        _doorOpen = !state;
+        _animator.SetBool("isOpen", _doorOpen);
+
         if (_forceDoor)
+        {
             AudioStorage.Instance.CloseDoorSound();
+        }
         else
+        {
             AudioStorage.Instance.OpenDoorSound();
-        _animator.SetBool("isOpen", !_forceDoor);
-
+        }
     }
+
 }
