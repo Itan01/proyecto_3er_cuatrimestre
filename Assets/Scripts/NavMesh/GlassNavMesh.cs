@@ -34,6 +34,7 @@ public class GlassNavMesh : AbstractObjects, ISoundInteractions
         Sound.GetComponent<SoundRadiusTrigger>().SetMultiplier(GetSize());
         AudioStorage.Instance.GlassBrokenSound();
         DesactivateObject();
+
         _link.gameObject.SetActive(true);
     }
 

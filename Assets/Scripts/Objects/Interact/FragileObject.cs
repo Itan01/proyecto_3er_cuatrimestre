@@ -1,15 +1,12 @@
 using System.Collections;
 using System.Collections.Generic;
-using TMPro;
-using Unity.AI.Navigation;
 using UnityEngine;
-using UnityEngine.AI;
-using static UnityEngine.EventSystems.EventTrigger;
 
 public class FragileObject : AbstractObjects, ISoundInteractions
 {
     [SerializeField] private GameObject _sound;
     [SerializeField] private float _sizeMultiplier;
+    private bool _destroyed=false;
     protected override void Start()
     {
         base.Start();
@@ -17,6 +14,7 @@ public class FragileObject : AbstractObjects, ISoundInteractions
 
     protected override void Update()
     {
+
         base.Update();
     }
     public float GetSize()
@@ -26,6 +24,7 @@ public class FragileObject : AbstractObjects, ISoundInteractions
 
     protected override void SetFeedback(bool State)
     {
+        if (_destroyed) return;
         _animator.SetBool("Shine", State);
     }
     public void IIteraction(bool PlayerShootIt)
@@ -34,6 +33,7 @@ public class FragileObject : AbstractObjects, ISoundInteractions
         Sound.GetComponent<SoundRadiusTrigger>().SetMultiplier(GetSize());
         AudioStorage.Instance.GlassBrokenSound();
         DesactivateObject();
+        _destroyed=true;
     }   
 
 }
