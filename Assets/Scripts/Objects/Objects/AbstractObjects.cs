@@ -36,7 +36,7 @@ public class AbstractObjects : MonoBehaviour
     {
     }
 
-    protected void DesactivateObject()
+    protected virtual void DesactivateObject()
     {
         _collider.enabled = false;
         _mesh.gameObject.SetActive(false);

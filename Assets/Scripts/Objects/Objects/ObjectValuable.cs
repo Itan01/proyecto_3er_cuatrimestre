@@ -37,4 +37,9 @@ public class ObjectValuable : AbstractObjects, IInteractableObject
             _particlesManager.StopLoop();
         _animator.SetBool("Shine", _animated);
     }
+    protected override void DesactivateObject()
+    {
+        _collider.enabled = false;
+        gameObject.SetActive(false);
+    }
 }
