@@ -14,6 +14,7 @@ public class PlayerManager : EntityMonobehaviour
     private PlayerShootingGun _scriptShootingGun;
     private PlayerInteractions _scriptInteractions;
     private GrabbingSound _areaCatching;
+    private PlayerInputReader _inputReader;
 
     [SerializeField] private bool _onCaptured = false;
     [Header("<color=green>LayersMask</color>")]
@@ -31,6 +32,7 @@ public class PlayerManager : EntityMonobehaviour
     {
         GameManager.Instance.PlayerReference = this;
         GameManager.Instance.RespawnReference = transform.position;
+        _inputReader = GetComponent<PlayerInputReader>();
     }
     protected override void Start()
     {
@@ -64,7 +66,7 @@ public class PlayerManager : EntityMonobehaviour
         _scriptCollider = new SetSizeCollider(_capsuleCollider, _boxCollider);
         _scriptShootingGun = new PlayerShootingGun(_spawnProyectil, _camTransform, _modelTransform, _enviormentMaskWithOutPlayer);
         _scriptInteractions = new PlayerInteractions(_interactMask);
-        _scriptController = new PlayerController(_scriptShootingGun, _scriptInteractions, _animator, _areaCatching);
+        _scriptController = new PlayerController(_scriptShootingGun, _scriptInteractions, _animator, _areaCatching, _inputReader);
         _scriptMovement = new PlayerMovement(transform, _rb, _camTransform, _modelTransform, _animator, _scriptCollider);
     }
     public void SetSound(int Index)
