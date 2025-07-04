@@ -41,6 +41,7 @@ public abstract class AbstractEnemy : EntityMonobehaviour, ISoundInteractions
     // Update is called once per frame
     protected override void Update()
     {
+        if (!_activate) return;
         base.Update();
         _movement();
     }

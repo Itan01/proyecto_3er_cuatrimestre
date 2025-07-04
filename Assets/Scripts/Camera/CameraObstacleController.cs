@@ -24,6 +24,7 @@ public class CameraObstacleController : MonoBehaviour
     private void Start()
     {
         _animation = GetComponent<Animation>();
+        _room=GetComponentInParent<RoomManager>();
         _animation.Play();
         if (_doors==null)
             _noDoors = true;

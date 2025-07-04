@@ -220,6 +220,7 @@ MonoBehaviour:
   _cameraSound: {fileID: 8300000, guid: 15d60cf03cf615b4ebaf951c3098ca34, type: 3}
   _cameraMovement: {fileID: 3558956341568356611}
   _cameraLight: {fileID: 8449804964111743600}
+  _room: {fileID: 0}
 --- !u!111 &1774185607007515985
 Animation:
   m_ObjectHideFlags: 0
@@ -256,7 +257,7 @@ BoxCollider:
   m_Enabled: 1
   serializedVersion: 3
   m_Size: {x: 1.5, y: 1.5, z: 1.5}
-  m_Center: {x: 0, y: 0.5, z: 0.5}
+  m_Center: {x: 0, y: 0.5, z: 0}
 --- !u!82 &3922756849366758987
 AudioSource:
   m_ObjectHideFlags: 0
@@ -371,7 +372,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 59f85ed73fd90be4c91ff3c760bcc655, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 59f85ed73fd90be4c91ff3c760bcc655, type: 3}
       propertyPath: m_LocalPosition.y
@@ -437,6 +438,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: camera_model
       objectReference: {fileID: 0}
+    - target: {fileID: 1382332821042425497, guid: 59f85ed73fd90be4c91ff3c760bcc655, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1382332821042425497, guid: 59f85ed73fd90be4c91ff3c760bcc655, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -0.5
+      objectReference: {fileID: 0}
     - target: {fileID: 2639332767969421819, guid: 59f85ed73fd90be4c91ff3c760bcc655, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
@@ -464,6 +473,14 @@ PrefabInstance:
     - target: {fileID: 8523772855540137367, guid: 59f85ed73fd90be4c91ff3c760bcc655, type: 3}
       propertyPath: m_Name
       value: Camera
+      objectReference: {fileID: 0}
+    - target: {fileID: 8804625046137572299, guid: 59f85ed73fd90be4c91ff3c760bcc655, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8804625046137572299, guid: 59f85ed73fd90be4c91ff3c760bcc655, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8804625046137572299, guid: 59f85ed73fd90be4c91ff3c760bcc655, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
