@@ -66,7 +66,12 @@ public class SummonSoundFromDoor : MonoBehaviour
 
     public void ForceDoorsClose(bool State)
     {
+
         _forceDoor = State;
+        if (_forceDoor)
+            AudioStorage.Instance.CloseDoorSound();
+        else
+            AudioStorage.Instance.OpenDoorSound();
         _animator.SetBool("isOpen", !_forceDoor);
 
     }
