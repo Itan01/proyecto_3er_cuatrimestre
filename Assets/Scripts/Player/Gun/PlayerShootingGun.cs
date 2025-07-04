@@ -19,23 +19,24 @@ public class PlayerShootingGun
     //[SerializeField] private AudioClip _crashSound;
     //private float _soundVolume = 1.0f;
 
-    public PlayerShootingGun(Transform SpawnProyectil, Transform Orientation, Transform Model,LayerMask Mask)
+    public PlayerShootingGun(Transform SpawnProyectil, Transform Orientation, Transform Model, LayerMask Mask)
     {
         _spawn = SpawnProyectil;
-        _orientation=Orientation;
-        _model=Model;
-        _layerMask=Mask;
+        _orientation = Orientation;
+        _model = Model;
+        _layerMask = Mask;
     }
-     public void ThrowSound()
-     {
-        //if (_crashSound != null)
-        //{
-        //    AudioSource.PlayClipAtPoint(_crashSound, _spawn.position, _soundVolume);
-        //}
-        
+    public void ThrowSound()
+    {
+        if (!_hasASound) return;
+
         AvailableSound();
+
         UIManager.Instance.UISound.Shooting();
-     }
+
+        GameManager.Instance.CameraReference.GetComponent<CameraManager>().TriggerRecoil();
+
+    }
 
     public void SetSound(SoundStruct Sound)
     {
@@ -48,7 +49,7 @@ public class PlayerShootingGun
         return _hasASound;
     }
 
-    private void AvailableSound() 
+    private void AvailableSound()
     {
         _hasASound = false;
         _model.forward = _direction;
@@ -61,19 +62,16 @@ public class PlayerShootingGun
         script.PlayerCanCatchIt(false);
         script.SetIfPlayerSummoned(true);
         script.SetPlayerShootIt(true);
-        _aux.y= 0.0f; 
+        _aux.y = 0.0f;
         _model.transform.forward = _aux;
-        AudioStorage.Instance.ShootingSound();
-
-
     }
     public void Direction()
     {
-        Ray ray = new Ray(_orientation.position,_orientation.forward);
+        Ray ray = new Ray(_orientation.position, _orientation.forward);
 
-        if (Physics.Raycast(ray, out _hitPoint, _maxdistance, _layerMask,QueryTriggerInteraction.Ignore))
+        if (Physics.Raycast(ray, out _hitPoint, _maxdistance, _layerMask, QueryTriggerInteraction.Ignore))
         {
-            _direction = (_hitPoint.point-_spawn.position).normalized;
+            _direction = (_hitPoint.point - _spawn.position).normalized;
             _aux = _direction;
         }
     }
@@ -81,7 +79,7 @@ public class PlayerShootingGun
     {
         _hasASound = false;
         _soundReference = null;
-        UIManager.Instance.UISound.ClearSound(); 
+        UIManager.Instance.UISound.ClearSound();
     }
 
 }

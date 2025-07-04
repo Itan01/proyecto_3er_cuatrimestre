@@ -38,6 +38,8 @@ public class CameraManager : MonoBehaviour
     private Ray _camRay;
     private RaycastHit _camHit;
 
+    private Coroutine _cameraShakeCoroutine;
+
     private void Awake()
     {
        GameManager.Instance.CameraReference=transform;
@@ -172,4 +174,45 @@ public class CameraManager : MonoBehaviour
         _maxAuxDistance = _maxDistanceRef;
         _resetCamDis = true;
     }
+    public void TriggerRecoil(float intensity = 0.1f, float duration = 0.15f, float kickbackStrength = 0.15f)
+    {
+        if (_cameraShakeCoroutine != null)
+            StopCoroutine(_cameraShakeCoroutine);
+        _cameraShakeCoroutine = StartCoroutine(CameraRecoil(intensity, duration, kickbackStrength));
+    }
+
+    private IEnumerator CameraRecoil(float intensity, float duration, float kickbackStrength)
+    {
+        Vector3 originalPos = _cam.transform.localPosition;
+        float elapsed = 0f;
+
+        Vector3 kickbackPos = originalPos - transform.forward * kickbackStrength;
+
+        _cam.transform.localPosition = kickbackPos;
+
+        while (elapsed < duration)
+        {
+            float recoilX = Random.Range(-intensity, intensity);
+            float recoilY = Random.Range(-intensity, intensity);
+            float recoilZ = Random.Range(-intensity, intensity);
+
+            _cam.transform.localPosition = kickbackPos + new Vector3(recoilX, recoilY, recoilZ);
+
+            elapsed += Time.deltaTime;
+            yield return null;
+        }
+        float returnDuration = 0.15f;
+        elapsed = 0f;
+        Vector3 startPos = _cam.transform.localPosition;
+
+        while (elapsed < returnDuration)
+        {
+            _cam.transform.localPosition = Vector3.Lerp(startPos, originalPos, elapsed / returnDuration);
+            elapsed += Time.deltaTime;
+            yield return null;
+        }
+
+        _cam.transform.localPosition = originalPos;
+    }
 }
+
