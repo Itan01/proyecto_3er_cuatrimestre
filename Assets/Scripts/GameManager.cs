@@ -25,9 +25,6 @@ public class GameManager : MonoBehaviour
     private PlayerManager _player;
     private List<AbstractEnemy> _enemies = new List<AbstractEnemy>();
 
-    private void Start()
-    {
-    }
     public PlayerManager PlayerReference
     {
         get { return _player; }
@@ -40,7 +37,6 @@ public class GameManager : MonoBehaviour
         get { return _soundRef; }
         set { _soundRef = value; }
     }
-
 
     public void RegisterEnemy(AbstractEnemy enemy)
     {
@@ -67,13 +63,6 @@ public class GameManager : MonoBehaviour
         get { return _camera; }
         set { _camera = value; }
     }
-    public bool HasCameraSpottedPlayer { get; set; } = false;
-
-    //private void ChangeScore(int value)
-    //{
-    //    _score += value;
-    //    _pointsUI.text = ($"{_mainText}{_score}");
-    //}
 
     private TuriorialFirstTime _textFirstTime;
 

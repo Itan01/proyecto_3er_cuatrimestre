@@ -59,7 +59,7 @@ public class RoombaEnemy : AbstractEnemy
 
         if (state)
         {
-            if (!_isOpening && GameManager.Instance.HasCameraSpottedPlayer)
+            if (!_isOpening)
             {
                 _isOpening = true;
                 StartCoroutine(OpenAndThenWalk());
