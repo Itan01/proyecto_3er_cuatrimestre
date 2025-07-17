@@ -137,7 +137,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1576276098709830332}
   - component: {fileID: 8888997392675516290}
-  - component: {fileID: 5354688317994410760}
+  - component: {fileID: 4927788109814581403}
   m_Layer: 0
   m_Name: Door 1
   m_TagString: Untagged
@@ -182,7 +182,7 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 4, y: 5, z: 4}
   m_Center: {x: 0, y: 2.5, z: 0}
---- !u!114 &5354688317994410760
+--- !u!114 &4927788109814581403
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -191,12 +191,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 5517617587037650165}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e751f638e8ed4b443b494de839a957cf, type: 3}
+  m_Script: {fileID: 11500000, guid: c938da4f70e17c749b09bc6f2902f6d4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   _doorOpen: 0
   _forceDoor: 0
   _count: 0
-  _openSound: {fileID: 8300000, guid: 1703a88ad72e2ba41805a3197303245f, type: 3}
-  _closeSound: {fileID: 8300000, guid: f7374ef3311af26419cb03872b940d72, type: 3}
-  _soundVolume: 0.8

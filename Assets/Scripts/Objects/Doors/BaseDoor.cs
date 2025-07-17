@@ -3,15 +3,15 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 
-public class SummonSoundFromDoor : MonoBehaviour
+public class BaseDoor : MonoBehaviour
 {
     private Animator _animator;
     [SerializeField] private bool _doorOpen=false, _forceDoor=false;
-    //[SerializeField] private GameObject _soundToSummon;
     [SerializeField] private int _count = 0;
     void Start()
     {
         _animator = GetComponentInChildren<Animator>();
+        GetComponentInParent<RoomManager>().AddToList(this);
         _animator.SetBool("isOpen",_doorOpen);
     }
 
@@ -22,7 +22,6 @@ public class SummonSoundFromDoor : MonoBehaviour
             if(_doorOpen) return;
             if (Entity.TryGetComponent<PlayerManager>(out var script))
                 if (script.GetCaptured()) return;
-                //SummonSound(Entity.transform.position, false);
             _doorOpen = true;
             _animator.SetBool("isOpen", _doorOpen);
             _count++;

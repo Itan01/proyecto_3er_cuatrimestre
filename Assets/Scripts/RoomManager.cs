@@ -7,7 +7,9 @@ public class RoomManager : MonoBehaviour
     [SerializeField] private List<AbstractEnemy> _enemies;
     [SerializeField] private List<Light> _light;
     [SerializeField] private List<AbstractObjects> _objects;
-
+    [SerializeField] private List<BaseDoor> _doors;
+    [SerializeField] private List<CameraObstacleController> _camera;
+    [SerializeField] private List<RoombaEnemy> _roomba;
     private void Awake()
     {
 
@@ -67,6 +69,15 @@ public class RoomManager : MonoBehaviour
     {
         _objects.Add(Object);
     }
+    public void AddToList(BaseDoor Door)
+    {
+        _doors.Add(Door);
+    }
+    public void AddToList(CameraObstacleController Camera)
+    {
+        _camera.Add(Camera);
+    }
+
 
     public void ResetRoom()
     {
@@ -91,4 +102,23 @@ public class RoomManager : MonoBehaviour
         }
     }
 
+    public void CloseBaseDoors()
+    {
+        foreach (var Door in _doors)
+        {
+            Door.ForceDoorsClose(true);
+        }
+    }
+    public void CallRobots()
+    {
+        foreach (var Roomba in _roomba)
+        {
+            Roomba.SetActivate(true);
+        }
+    }
+    public void CameraDetection()
+    {
+        CallRobots();
+        CloseBaseDoors();
+    }
 }
