@@ -4,13 +4,27 @@ using UnityEngine;
 
 public class AudioStorage : MonoBehaviour
 {
-    [SerializeField] private AudioClip _crashSound, _shootingSound, _grabbingSound, _glassSound, _smokeTrapSound, _enemyConfusedSound, _enemyTensionSound, _laserAlarm;
-    [SerializeField] private AudioClip _openDoorSound, _closeDoorSound, _zapSound;
+    [SerializeField] private AudioClip _glassSound, _smokeTrapSound, _laserAlarm, _zapSound;
+    [Header("<color=green>Player Sounds</color>")]
+    [SerializeField] private AudioClip _crashSound;
+    [SerializeField] private AudioClip _shootingSound;
+    [SerializeField] private AudioClip _grabbingSound;
+    [Header("<color=green>Roomba Sounds</color>")]
+
+    [Header("<color=green>Enemy Sounds</color>")]
+    [SerializeField] private AudioClip _enemyConfusedSound;
+    [SerializeField] private AudioClip _enemyTensionSound;
+    [Header("<color=green>Door Sounds</color>")]
+    [SerializeField] private AudioClip _openDoorSound;
+    [SerializeField] private AudioClip _closeDoorSound;
+    [Header("<color=green>Camera Sounds</color>")]
+    [SerializeField] private AudioClip _cameraDetection;
+    [SerializeField] private AudioClip _cameraResetting;
     [SerializeField] private float _soundVolume = 1f;
     public static AudioStorage Instance;
     public AudioClip EnemySound()
     {
-      
+
         return _enemyConfusedSound;
     }
 
@@ -24,7 +38,7 @@ public class AudioStorage : MonoBehaviour
     {
         AudioManager.Instance.PlaySFX(_crashSound, _soundVolume);
     }
-    public void ShootingSound() 
+    public void ShootingSound()
     {
         AudioManager.Instance.PlaySFX(_shootingSound, _soundVolume);
     }
@@ -70,4 +84,15 @@ public class AudioStorage : MonoBehaviour
     {
         AudioManager.Instance.PlaySFX(_smokeTrapSound, _soundVolume - 0.3f);
     }
+
+    #region Camera
+    public void CameraDectection()
+    {
+        AudioManager.Instance.PlaySFX(_cameraDetection, _soundVolume - 0.3f);
+    }
+    public void CameraResetting()
+    {
+        AudioManager.Instance.PlaySFX(_cameraResetting, _soundVolume - 0.3f);
+    }
+    #endregion
 }

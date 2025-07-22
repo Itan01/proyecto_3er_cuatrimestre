@@ -7,11 +7,15 @@ public class CameraDetector : MonoBehaviour
     private CameraObstacleController _CameraObstacleScript;
     [SerializeField] private List<AbstractEnemy> _enemies ;//No tener lista
 
-    //Evento
-
-    private void Start()
+    //Event
+    private void Awake()
     {
         _CameraObstacleScript = GetComponentInParent<CameraObstacleController>();
+        _CameraObstacleScript.SetCamera(transform);
+    }
+    private void Start()
+    {
+
     }
 
     void OnTriggerEnter(Collider Player)
