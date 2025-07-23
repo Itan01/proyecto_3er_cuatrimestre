@@ -102,11 +102,11 @@ public class RoomManager : MonoBehaviour
         }
     }
 
-    public void CloseBaseDoors()
+    public void OpenOrCloseBaseDoors(bool State)
     {
         foreach (var Door in _doors)
         {
-            Door.ForceDoorsClose(true);
+            Door.ForceDoorsClose(State);
         }
     }
     public void CallRobots()
@@ -119,6 +119,10 @@ public class RoomManager : MonoBehaviour
     public void CameraDetection()
     {
         CallRobots();
-        CloseBaseDoors();
+        OpenOrCloseBaseDoors(true);
+    }
+    public void CameraResetDetection()
+    {
+        OpenOrCloseBaseDoors(false);
     }
 }
