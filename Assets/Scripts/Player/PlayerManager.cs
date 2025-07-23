@@ -94,7 +94,6 @@ public class PlayerManager : EntityMonobehaviour
     {
         _isCrouching = _scriptMovement.GetIsCrouching();
         _isMoving = _scriptMovement.GetIsMoving();
-        //_spawnProyectil.position = _hipsPosition.position + _camTransform.forward * 1.5f;
     }
     public void SetCaptured(bool State)
     {
