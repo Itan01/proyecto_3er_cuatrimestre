@@ -176,6 +176,7 @@ Transform:
   - {fileID: 7769114523438040201}
   - {fileID: 8865773798095703443}
   - {fileID: 4036590388524312564}
+  - {fileID: 5200361614711119425}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &6967344237170535486
@@ -285,17 +286,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7af8ea5aadd348f43b727eb77d579c63, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _glassSound: {fileID: 8300000, guid: 2437fda96e3d6f142aa4262d0132002b, type: 3}
+  _smokeTrapSound: {fileID: 8300000, guid: b9750d4031fa6594cbc2178833d58718, type: 3}
+  _laserAlarm: {fileID: 8300000, guid: aad4452201fb4654aa75068db337ed66, type: 3}
+  _zapSound: {fileID: 0}
   _crashSound: {fileID: 0}
   _shootingSound: {fileID: 8300000, guid: 99e8b5238b0db6849a472fb51e921e38, type: 3}
   _grabbingSound: {fileID: 8300000, guid: 826302dbc80ff924f9fa095d50af00e3, type: 3}
-  _glassSound: {fileID: 8300000, guid: 2437fda96e3d6f142aa4262d0132002b, type: 3}
-  _smokeTrapSound: {fileID: 8300000, guid: b9750d4031fa6594cbc2178833d58718, type: 3}
   _enemyConfusedSound: {fileID: 8300000, guid: 747df38c1c36d324b9e41aa7552caae0, type: 3}
-  _enemyTension: {fileID: 8300000, guid: 6a3ca8874b8e1bb438cf9e680e6f9325, type: 3}
-  _laserAlarm: {fileID: 8300000, guid: aad4452201fb4654aa75068db337ed66, type: 3}
+  _enemyTensionSound: {fileID: 0}
   _openDoorSound: {fileID: 8300000, guid: 1703a88ad72e2ba41805a3197303245f, type: 3}
   _closeDoorSound: {fileID: 8300000, guid: f7374ef3311af26419cb03872b940d72, type: 3}
-  _zapSound: {fileID: 0}
+  _cameraDetection: {fileID: 0}
+  _cameraResetting: {fileID: 0}
   _soundVolume: 1
 --- !u!1 &6577951075657808662
 GameObject:
@@ -354,3 +357,53 @@ MonoBehaviour:
     _spriteUi: {fileID: 21300000, guid: fc469a3c4d7c3494f8297919b80c8367, type: 3}
     _index: 2
     _color: {r: 0.6685285, g: 0.18600929, b: 0.7169812, a: 0}
+--- !u!1 &8126561341627322590
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 5200361614711119425}
+  - component: {fileID: 3815534818321069209}
+  m_Layer: 0
+  m_Name: LayerMaskManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &5200361614711119425
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8126561341627322590}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1802195034427988181}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &3815534818321069209
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8126561341627322590}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 27b52ea62fc309d4694a712dbb64dfa8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _obstacleMask:
+    serializedVersion: 2
+    m_Bits: 4123000832
+  _obstaclesWithPlayerMask:
+    serializedVersion: 2
+    m_Bits: 3988783104
