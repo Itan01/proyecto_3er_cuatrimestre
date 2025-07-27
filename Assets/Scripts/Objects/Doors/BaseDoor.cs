@@ -6,12 +6,13 @@ using UnityEngine;
 public class BaseDoor : MonoBehaviour
 {
     private Animator _animator;
-    [SerializeField] private bool _doorOpen=false, _forceDoor=false;
+    [SerializeField] private bool _doorOpen=true, _forceDoor=false;
     [SerializeField] private int _count = 0;
     void Start()
     {
         _animator = GetComponentInChildren<Animator>();
-        GetComponentInParent<RoomManager>().AddToList(this);
+        GetComponentInParent<RoomManager>().DetPlayer += ForceCallDoors;
+        GetComponentInParent<RoomManager>().ResetDet += ForceOpenDoors;
         _animator.SetBool("isOpen",_doorOpen);
     }
 
@@ -63,7 +64,7 @@ public class BaseDoor : MonoBehaviour
        //  ScriptSound.SetDirection(Orientation, Random.Range(3.0f, 7.0f + 1), 1.0f);
     }
 
-    public void ForceDoorsClose(bool state)
+    public void ForceCloseDoors(bool state)
     {
         if (_forceDoor == state) return;
 
@@ -81,4 +82,12 @@ public class BaseDoor : MonoBehaviour
         }
     }
 
+    public void ForceCallDoors()
+    {
+        ForceCloseDoors(true);
+    }
+    public void ForceOpenDoors()
+    {
+        ForceCloseDoors(false);
+    }
 }

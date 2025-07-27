@@ -1,11 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UIElements;
 using TMPro;
-using System.Security.Cryptography;
-using UnityEditor;
-
 public class PlayerManager : EntityMonobehaviour
 {
     private SetSizeCollider _scriptCollider;
@@ -28,6 +24,10 @@ public class PlayerManager : EntityMonobehaviour
     [SerializeField] private Transform _spawnProyectil;
     [SerializeField] private Transform _hipsPosition;
     [SerializeField] private Transform _megaphoneTransform;
+
+   [SerializeField] private float _duration=0.0f;
+   [SerializeField] private bool _invisible = false;
+   [SerializeField] private Color _basecolor;
 
     protected override void Awake()
     {
@@ -66,7 +66,7 @@ public class PlayerManager : EntityMonobehaviour
     {
         _scriptCollider = new SetSizeCollider(_capsuleCollider, _boxCollider);
         _scriptShootingGun = new PlayerShootingGun(_megaphoneTransform, _camTransform, _modelTransform, _enviormentMaskWithOutPlayer);
-        _scriptInteractions = new PlayerInteractions(_interactMask);
+        _scriptInteractions = new PlayerInteractions(_animator);
         _scriptController = new PlayerController(_scriptShootingGun, _scriptInteractions, _animator, _areaCatching, _inputReader);
         _scriptMovement = new PlayerMovement(transform, _rb, _camTransform, _modelTransform, _animator, _scriptCollider);
     }
@@ -94,6 +94,16 @@ public class PlayerManager : EntityMonobehaviour
     {
         _isCrouching = _scriptMovement.GetIsCrouching();
         _isMoving = _scriptMovement.GetIsMoving();
+        if (_duration>0.0f)
+        {
+            _duration-= Time.deltaTime;
+            if (_duration < 0.0f)
+            {
+                _duration = 0.0f;
+                _invisible = false;
+                GetComponentInChildren<SkinnedMeshRenderer>().material.SetColor("_Color", _basecolor);
+            }
+        }
     }
     public void SetCaptured(bool State)
     {
@@ -102,6 +112,10 @@ public class PlayerManager : EntityMonobehaviour
     public bool GetCaptured()
     {
         return _onCaptured;
+    }
+    public bool GetInvisible()
+    {
+        return _invisible;
     }
     public void PlayerCanShoot(bool State)
     {
@@ -119,6 +133,11 @@ public class PlayerManager : EntityMonobehaviour
     public bool PlayerHasSound()
     {
         return _scriptShootingGun.CheckSound();
+    }
+    public void SetInvisiblePowerUp(float duration)
+    {
+        _duration=duration;
+        _invisible = true;  
     }
 
 }

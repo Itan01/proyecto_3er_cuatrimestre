@@ -77,10 +77,12 @@ public class GameManager : MonoBehaviour
 
     public void AddRoom(RoomManager Room)
     {
+        Room.ActivateRoom();
         _actualsRoom.Add(Room);
     }
     public void RemoveRoom(RoomManager Room)
     {
+        Room.DesactivateRoom();
         _actualsRoom.Remove(Room);
     }
     public void ResetGameplay()

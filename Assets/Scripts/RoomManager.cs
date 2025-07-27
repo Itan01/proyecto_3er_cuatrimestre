@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -5,11 +6,12 @@ using UnityEngine;
 public class RoomManager : MonoBehaviour
 {
     [SerializeField] private List<AbstractEnemy> _enemies;
-    [SerializeField] private List<Light> _light;
     [SerializeField] private List<AbstractObjects> _objects;
     [SerializeField] private List<BaseDoor> _doors;
-    [SerializeField] private List<CameraObstacleController> _camera;
     [SerializeField] private List<RoombaEnemy> _roomba;
+
+    public event Action DetPlayer, ResetDet, FindPlayer, DesActRoom, ActRoom;
+
     private void Awake()
     {
 
@@ -20,10 +22,6 @@ public class RoomManager : MonoBehaviour
         if (Player.GetComponent<PlayerManager>())
         {
             GameManager.Instance.AddRoom(this);
-            foreach (var item in _light)
-            {
-                item.gameObject.SetActive(true);
-            }
             foreach (var item in _enemies)
             {
                 item.SetActivate(true);
@@ -44,26 +42,15 @@ public class RoomManager : MonoBehaviour
                     _objects.Remove(item);
                 }
             }
-            foreach (var item in _light)
-            {
-                item.gameObject.SetActive(false);
-            }
             foreach (var item in _enemies)
             {
                 item.SetActivate(false);
             }
         }
     }
-    //<summary>
-    //    Agrega a la lista para tener el control a la hora de activarlo/Desactivarlo
-    //<summary>
     public void AddToList(AbstractEnemy Enemies)
     {
         _enemies.Add(Enemies);
-    }
-    public void AddToList(Light Lights)
-    {
-        _light.Add(Lights);
     }
     public void AddToList(AbstractObjects Object)
     {
@@ -73,11 +60,6 @@ public class RoomManager : MonoBehaviour
     {
         _doors.Add(Door);
     }
-    public void AddToList(CameraObstacleController Camera)
-    {
-        _camera.Add(Camera);
-    }
-
 
     public void ResetRoom()
     {
@@ -106,7 +88,7 @@ public class RoomManager : MonoBehaviour
     {
         foreach (var Door in _doors)
         {
-            Door.ForceDoorsClose(State);
+            Door.ForceCloseDoors(State);
         }
     }
     public void CallRobots()
@@ -116,13 +98,30 @@ public class RoomManager : MonoBehaviour
             Roomba.SetActivate(true);
         }
     }
-    public void CameraDetection()
+    public void DetectPlayer()
     {
-        CallRobots();
-        OpenOrCloseBaseDoors(true);
+        if (DetPlayer != null)
+        DetPlayer();
     }
-    public void CameraResetDetection()
+    public void ResetDetection()
     {
-        OpenOrCloseBaseDoors(false);
+        if (ResetDet != null)
+            ResetDet();
+    }
+
+    public void WatchPlayer()
+    {
+        if (FindPlayer != null)
+            FindPlayer();
+    }
+    public void DesactivateRoom()
+    {
+        if (DesActRoom != null)
+            DesActRoom();
+    }
+    public void ActivateRoom()
+    {
+        if (ActRoom != null)
+            ActRoom();
     }
 }

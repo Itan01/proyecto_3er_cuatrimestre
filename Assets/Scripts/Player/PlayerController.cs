@@ -71,7 +71,6 @@ public class PlayerController
     {
         if (_input.InteractPressed)
         {
-            _animator.SetTrigger("Steal");
             _scriptInteract.Interact();
         }
     }
