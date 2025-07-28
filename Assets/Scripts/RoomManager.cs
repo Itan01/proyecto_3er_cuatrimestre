@@ -7,7 +7,6 @@ public class RoomManager : MonoBehaviour
 {
     [SerializeField] private List<AbstractEnemy> _enemies;
     [SerializeField] private List<AbstractObjects> _objects;
-    [SerializeField] private List<BaseDoor> _doors;
     [SerializeField] private List<RoombaEnemy> _roomba;
 
     public event Action DetPlayer, ResetDet, FindPlayer, DesActRoom, ActRoom;
@@ -56,11 +55,6 @@ public class RoomManager : MonoBehaviour
     {
         _objects.Add(Object);
     }
-    public void AddToList(BaseDoor Door)
-    {
-        _doors.Add(Door);
-    }
-
     public void ResetRoom()
     {
         //foreach(var item in _objects)
@@ -84,13 +78,6 @@ public class RoomManager : MonoBehaviour
         }
     }
 
-    public void OpenOrCloseBaseDoors(bool State)
-    {
-        foreach (var Door in _doors)
-        {
-            Door.ForceCloseDoors(State);
-        }
-    }
     public void CallRobots()
     {
         foreach (var Roomba in _roomba)

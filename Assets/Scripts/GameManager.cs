@@ -106,3 +106,4 @@ public class GameManager : MonoBehaviour
         PlayerReference.transform.position = RespawnReference;
     }
 }
+    
