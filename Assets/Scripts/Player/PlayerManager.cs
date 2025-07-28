@@ -11,13 +11,11 @@ public class PlayerManager : EntityMonobehaviour
     private PlayerInteractions _scriptInteractions;
     private GrabbingSound _areaCatching;
     private PlayerInputReader _inputReader;
+    private PlayerDash _scriptDash;
 
     [SerializeField] private bool _onCaptured = false;
     [Header("<color=green>LayersMask</color>")]
     [SerializeField] private LayerMask _soundMask;
-    [SerializeField] private LayerMask _enviormentMask;
-    [SerializeField] private LayerMask _interactMask;
-    [SerializeField] private LayerMask _enviormentMaskWithOutPlayer;
     [Header("<color=red>Transform</color>")]
     [SerializeField] private Transform _camTransform;
     [SerializeField] private Transform _modelTransform;
@@ -60,15 +58,17 @@ public class PlayerManager : EntityMonobehaviour
 
         _isMoving = _scriptController.CheckMovementInputs(_scriptMovement);
         _scriptController.CheckGunInputs();
+        _scriptController.CheckDash();
         _scriptController.CheckInteractions();
     }
     protected override void GetScripts()
     {
         _scriptCollider = new SetSizeCollider(_capsuleCollider, _boxCollider);
-        _scriptShootingGun = new PlayerShootingGun(_megaphoneTransform, _camTransform, _modelTransform, _enviormentMaskWithOutPlayer);
+        _scriptShootingGun = new PlayerShootingGun(_megaphoneTransform, _camTransform, _modelTransform);
         _scriptInteractions = new PlayerInteractions(_animator);
-        _scriptController = new PlayerController(_scriptShootingGun, _scriptInteractions, _animator, _areaCatching, _inputReader);
-        _scriptMovement = new PlayerMovement(transform, _rb, _camTransform, _modelTransform, _animator, _scriptCollider);
+        _scriptDash = new PlayerDash(_modelTransform);
+        _scriptController = new PlayerController(_scriptShootingGun, _scriptInteractions, _scriptDash,_animator, _areaCatching, _inputReader);
+        _scriptMovement = new PlayerMovement(transform, _rb, _camTransform, _modelTransform, _animator, _scriptCollider);   
     }
     public void SetSound(int Index)
     {

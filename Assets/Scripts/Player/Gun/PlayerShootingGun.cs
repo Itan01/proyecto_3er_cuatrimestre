@@ -19,12 +19,12 @@ public class PlayerShootingGun
     //[SerializeField] private AudioClip _crashSound;
     //private float _soundVolume = 1.0f;
 
-    public PlayerShootingGun(Transform SpawnProyectil, Transform Orientation, Transform Model, LayerMask Mask)
+    public PlayerShootingGun(Transform SpawnProyectil, Transform Orientation, Transform Model)
     {
         _spawn = SpawnProyectil;
         _orientation = Orientation;
         _model = Model;
-        _layerMask = Mask;
+        _layerMask = LayerManager.Instance.GetLayerMask(EnumLayers.ObstacleMask);
     }
     public void ThrowSound()
     {

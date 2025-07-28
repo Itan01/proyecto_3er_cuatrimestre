@@ -10,11 +10,12 @@ public class PlayerController
     private Animator _animator;
     private GrabbingSound _area;
     private PlayerInputReader _input;
-
-    public PlayerController(PlayerShootingGun scriptShoot, PlayerInteractions scriptInteract, Animator animator, GrabbingSound area, PlayerInputReader input)
+    private PlayerDash _scriptDash;
+    public PlayerController(PlayerShootingGun scriptShoot, PlayerInteractions scriptInteract, PlayerDash scriptDash, Animator animator, GrabbingSound area, PlayerInputReader input)
     {
         _scriptShoot = scriptShoot;
         _scriptInteract = scriptInteract;
+        _scriptDash= scriptDash;
         _animator = animator;
         _area = area;
         _input = input;
@@ -72,6 +73,14 @@ public class PlayerController
         if (_input.InteractPressed)
         {
             _scriptInteract.Interact();
+        }
+    }
+
+    public void CheckDash()
+    {
+        if (Input.GetKey(KeyCode.LeftShift))
+        {
+            _scriptDash.Dash();
         }
     }
 
