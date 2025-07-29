@@ -115,7 +115,7 @@ public class EnemyVision : MonoBehaviour
                 {
                     if (hit.collider.TryGetComponent<PlayerManager>(out PlayerManager script))
                     {
-                        if (_playerDeath) return;
+                        if (_playerDeath ||GameManager.Instance.PlayerReference.GetInvisible()) return;
                         _seePlayer = true;
                         if (_scriptManager.GetMode() != 3 && _scriptManager.GetMode() != 1 && _scriptManager.GetMode() != 6)
                             _scriptManager.SetModeByIndex(3);

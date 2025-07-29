@@ -23,7 +23,7 @@ public class PlayerManager : EntityMonobehaviour
     [SerializeField] private Transform _hipsPosition;
     [SerializeField] private Transform _megaphoneTransform;
 
-   [SerializeField] private float _duration=0.0f;
+   [SerializeField] private float _invisibleDuration=0.0f;
    [SerializeField] private bool _invisible = false;
    [SerializeField] private Color _basecolor;
 
@@ -94,12 +94,12 @@ public class PlayerManager : EntityMonobehaviour
     {
         _isCrouching = _scriptMovement.GetIsCrouching();
         _isMoving = _scriptMovement.GetIsMoving();
-        if (_duration>0.0f)
+        if (_invisibleDuration > 0.0f)
         {
-            _duration-= Time.deltaTime;
-            if (_duration < 0.0f)
+            _invisibleDuration -= Time.deltaTime;
+            if (_invisibleDuration < 0.0f)
             {
-                _duration = 0.0f;
+                _invisibleDuration = 0.0f;
                 _invisible = false;
                 GetComponentInChildren<SkinnedMeshRenderer>().material.SetColor("_Color", _basecolor);
             }
@@ -136,7 +136,7 @@ public class PlayerManager : EntityMonobehaviour
     }
     public void SetInvisiblePowerUp(float duration)
     {
-        _duration=duration;
+        _invisibleDuration =duration;
         _invisible = true;  
     }
 
