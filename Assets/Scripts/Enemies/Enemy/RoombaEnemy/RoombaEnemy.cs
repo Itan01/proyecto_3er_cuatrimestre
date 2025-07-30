@@ -1,74 +1,40 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using UnityEngine;
+using UnityEngine.AI;
 
-public class RoombaEnemy : AbstractEnemy
+public class RoombaEnemy : MonoBehaviour
 {
-    [SerializeField] private float _explodeDistance = 1.0f;
+    [SerializeField] private float _explodeDistance = 2.0f;
     [SerializeField] private float _timeBeforeExplosion = 2.0f;
-    [SerializeField] private RoomManager _roomManager;
-
+    private Animator _animator;
     [SerializeField] private GameObject _explosionParticlesPrefab;
     [SerializeField] private GameObject _soundExplosionPrefab;
     [SerializeField] private int _amountOfSounds = 3;
     [SerializeField] private float _soundForce = 5f;
     [SerializeField] private float _spread = 1.5f;
+    Action Momevent;
+    private NavMeshAgent _agent;
 
-    private bool _isOpening = false;
-    private bool _hasStartedWalking = false;
-    private bool _isExploding = false;
-
-    protected override void Start()
+    private void Start()
     {
-        base.Start();
-        _animator.SetBool("Open_Anim", false);
+        Momevent = null;
+        _animator = GetComponentInChildren<Animator>();
+        _agent=GetComponent<NavMeshAgent>();
+        _animator.SetBool("Open_Anim", false);  
         _animator.SetBool("Walk_Anim", false);
+        GetComponentInParent<RoomManager>().DetPlayer += SetActivation;
     }
 
-    protected override void Update()
+    private void Update()
     {
-        if (!_activate || _isExploding) return;
-
-        base.Update();
-
-        if (_hasStartedWalking)
-        {
-            float distance = Vector3.Distance(transform.position, GameManager.Instance.PlayerReference.transform.position);
-            if (distance <= _explodeDistance)
-            {
-                StartCoroutine(ExplodeAfterDelay());
-            }
-        }
+        if (Momevent != null)
+            Momevent();
     }
-
-    protected override void MoveFollowTarget()
+    public void SetActivation()
     {
-        _mode = 1;
-        _isMoving = true;
-        _isRunning = false;
-        _questionBool = false;
-        _agent.speed = _baseSpeed;
-
-        _nextPosition = GameManager.Instance.PlayerReference.transform.position;
-        transform.LookAt(_nextPosition);
-        _agent.destination = _nextPosition;
-    }
-
-    public override void SetActivate(bool state)
-    {
-        base.SetActivate(state);
-
-        if (state)
-        {
-            if (!_isOpening)
-            {
-                _isOpening = true;
-                StartCoroutine(OpenAndThenWalk());
-            }
-        }
-        else
-        {
-            SetMode(MoveIdle);
-        }
+        GetComponentInParent<RoomManager>().DetPlayer -= SetActivation;
+        StartCoroutine(OpenAndThenWalk());
     }
 
     private IEnumerator OpenAndThenWalk()
@@ -77,38 +43,24 @@ public class RoombaEnemy : AbstractEnemy
         yield return new WaitForSeconds(1.5f);
         _animator.SetBool("Open_Anim", false);
         _animator.SetBool("Walk_Anim", true);
-        SetMode(MoveFollowTarget);
-        _hasStartedWalking = true;
+        _agent.destination =GameManager.Instance.PlayerReference.transform.position;
+        Momevent = Moving;
     }
-
-    private void MoveIdle()
+    private void Moving()
     {
-        _mode = 0;
-        _isMoving = false;
-        _isRunning = false;
-        _questionBool = false;
-        _agent.speed = 0.0f;
-        _animator.SetBool("Walk_Anim", false);
-    }
-
-    protected override void OnCollisionEnter(Collision collision)
-    {
-        if (_isExploding) return;
-
-        if (collision.gameObject.GetComponent<PlayerManager>())
+        _agent.destination =GameManager.Instance.PlayerReference.transform.position;
+        if (_agent.remainingDistance <= _explodeDistance)
         {
-            _isExploding = true;
-
+            Momevent = null;
             _agent.isStopped = true;
             _animator.SetBool("Walk_Anim", false);
-            _hasStartedWalking = false;
+
             StartCoroutine(ExplodeAfterDelay());
         }
     }
 
     private IEnumerator ExplodeAfterDelay()
     {
-        _isExploding = true;
         yield return new WaitForSeconds(_timeBeforeExplosion);
         Explode();
     }
@@ -130,9 +82,9 @@ public class RoombaEnemy : AbstractEnemy
 
                 // la direccion que tira los sonidos (vertical)
                 Vector3 randomDir = Vector3.up + new Vector3(
-                    Random.Range(-_spread, _spread),
+                   UnityEngine.Random.Range(-_spread, _spread),
                     0f,
-                    Random.Range(-_spread, _spread)
+                   UnityEngine.Random.Range(-_spread, _spread)
                 ).normalized;
 
                 if (sound.TryGetComponent(out Rigidbody rb))
@@ -141,9 +93,6 @@ public class RoombaEnemy : AbstractEnemy
                 }
             }
         }
-        _roomManager.RemoveEnemy(this);
         Destroy(gameObject);
     }
-
-    protected override void MoveBasePath() { }
 }

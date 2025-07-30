@@ -169,7 +169,7 @@ public class CameraObstacleController : MonoBehaviour
         if (Physics.Raycast(ray, out hit, 500.0f, _layerMask, QueryTriggerInteraction.Ignore))
         {
             //Debug.Log($"Collided obj : {_intHit.collider.name}.");
-            if (hit.collider.GetComponent<PlayerManager>())
+            if (hit.collider.GetComponent<PlayerManager>() && !GameManager.Instance.PlayerReference.GetInvisible())
                 _checkingPlayer = true;
         }
         return hit;

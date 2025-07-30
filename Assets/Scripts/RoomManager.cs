@@ -78,13 +78,6 @@ public class RoomManager : MonoBehaviour
         }
     }
 
-    public void CallRobots()
-    {
-        foreach (var Roomba in _roomba)
-        {
-            Roomba.SetActivate(true);
-        }
-    }
     public void DetectPlayer()
     {
         if (DetPlayer != null)
