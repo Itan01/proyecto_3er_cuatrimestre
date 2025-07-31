@@ -4,24 +4,42 @@ using UnityEngine;
 
 public class PlayerDash
 {
-    private LayerMask _mask;
     private Transform _modelTransform;
-    private Ray _ray;
-    private RaycastHit _hits;
-    private float _distance=5.0f;
-    public PlayerDash(Transform ModelTransform)
+    private Vector3 _dir;
+    private float _force=10.0f, _cooldown;
+    private bool _canDash=true;
+    private Rigidbody _rb;
+    private PlayerManager _manager;
+    private Animator _animator;
+    public PlayerDash(Transform ModelTransform, Rigidbody rb, Animator animator)
     {
         _modelTransform=ModelTransform;
-        _mask = LayerManager.Instance.GetLayerMask(EnumLayers.ObstacleMask);
+        _rb=rb;
+        _animator=animator;
+        _manager = GameManager.Instance.PlayerReference;
     }
 
     public void Dash()
     {
-        _ray = new Ray(_modelTransform.position + new Vector3(0.0f,1.0f,0.0f),_modelTransform.forward);
-        if(Physics.Raycast(_ray,out _hits,_distance,_mask, QueryTriggerInteraction.Ignore))
+        if (!_canDash) return;
+        _dir= _modelTransform.forward;
+        _rb.useGravity=false;
+        _animator.SetTrigger("Dash");
+        _rb.velocity = _dir * _force;
+        _canDash=false; 
+        _cooldown = 2.0f;
+        _manager.SubtractTimer += Cooldown;
+
+    }
+    public void Cooldown()
+    {
+        _cooldown-= Time.deltaTime;
+        if (_cooldown < 0) 
         {
-            Debug.Log("HI");
-            GameManager.Instance.PlayerReference.transform.position = _hits.point;
+            _canDash = true;
+            _manager.SubtractTimer -= Cooldown;
+            _cooldown = 0.0f;
         }
+
     }
 }

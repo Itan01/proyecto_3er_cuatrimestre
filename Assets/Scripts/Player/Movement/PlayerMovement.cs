@@ -53,7 +53,7 @@ public class PlayerMovement
             _orientation = _cam.forward;
             _orientation.y = 0.0f;  
         }
-        _model.forward = Vector3.Slerp(_model.forward, _orientation.normalized, Time.fixedDeltaTime * _rotSpeed);
+        _transform.forward = Vector3.Slerp(_model.forward, _orientation.normalized, Time.fixedDeltaTime * _rotSpeed);
     }
     private void SetAnimation(float x, float z)
     {
@@ -79,8 +79,6 @@ public class PlayerMovement
 
         }
         _animator.SetBool("isCrouching", _isCrouching);
-        _animator.SetFloat("xAxis", x);
-        _animator.SetFloat("zAxis", z);
         _scriptCollider.SetSize(y);   
     }
 

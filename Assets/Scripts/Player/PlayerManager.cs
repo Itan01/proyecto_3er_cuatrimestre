@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+using System;
 public class PlayerManager : EntityMonobehaviour
 {
     private SetSizeCollider _scriptCollider;
@@ -26,6 +27,7 @@ public class PlayerManager : EntityMonobehaviour
    [SerializeField] private float _invisibleDuration=0.0f;
    [SerializeField] private bool _invisible = false;
    [SerializeField] private Color _basecolor;
+    public event Action SubtractTimer;
 
     protected override void Awake()
     {
@@ -46,6 +48,8 @@ public class PlayerManager : EntityMonobehaviour
         if (_isDeath) return;
         base.Update();
         CheckInputs();
+        if(SubtractTimer!= null)
+        SubtractTimer();
         GetStats();
     }
     protected override void FixedUpdate()
@@ -66,7 +70,7 @@ public class PlayerManager : EntityMonobehaviour
         _scriptCollider = new SetSizeCollider(_capsuleCollider, _boxCollider);
         _scriptShootingGun = new PlayerShootingGun(_megaphoneTransform, _camTransform, _modelTransform);
         _scriptInteractions = new PlayerInteractions(_animator);
-        _scriptDash = new PlayerDash(_modelTransform);
+        _scriptDash = new PlayerDash(_modelTransform,_rb,_animator);
         _scriptController = new PlayerController(_scriptShootingGun, _scriptInteractions, _scriptDash,_animator, _areaCatching, _inputReader);
         _scriptMovement = new PlayerMovement(transform, _rb, _camTransform, _modelTransform, _animator, _scriptCollider);   
     }

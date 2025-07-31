@@ -34,4 +34,8 @@ public class PlayerAvatar : MonoBehaviour
         _particles.PlayOnce();
     }
 
+    public void SetGravityTrue()
+    {
+        GetComponentInParent<Rigidbody>().useGravity = true;
+    }
 }
