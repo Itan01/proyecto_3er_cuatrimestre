@@ -59,11 +59,7 @@ public class PlayerManager : EntityMonobehaviour
     private void CheckInputs()
     {
         if (UIManager.Instance.IsMenuActive()) return; // bloquea inputs si el menú está activo
-
-        _isMoving = _scriptController.CheckMovementInputs(_scriptMovement);
-        _scriptController.CheckGunInputs();
-        _scriptController.CheckDash();
-        _scriptController.CheckInteractions();
+        _scriptController.Inputs();
     }
     protected override void GetScripts()
     {
@@ -71,8 +67,9 @@ public class PlayerManager : EntityMonobehaviour
         _scriptShootingGun = new PlayerShootingGun(_megaphoneTransform, _camTransform, _modelTransform);
         _scriptInteractions = new PlayerInteractions(_animator);
         _scriptDash = new PlayerDash(_modelTransform,_rb,_animator);
-        _scriptController = new PlayerController(_scriptShootingGun, _scriptInteractions, _scriptDash,_animator, _areaCatching, _inputReader);
-        _scriptMovement = new PlayerMovement(transform, _rb, _camTransform, _modelTransform, _animator, _scriptCollider);   
+        _scriptMovement = new PlayerMovement(transform, _rb, _camTransform, _modelTransform, _animator, _scriptCollider);
+        _scriptController = new PlayerController(_scriptShootingGun, _scriptInteractions, _scriptDash,_scriptMovement,_animator, _areaCatching);
+
     }
     public void SetSound(int Index)
     {

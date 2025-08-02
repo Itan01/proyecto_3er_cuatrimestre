@@ -24,6 +24,7 @@ public class PlayerDash
         if (!_canDash) return;
         _dir= _modelTransform.forward;
         _rb.useGravity=false;
+        AudioStorage.Instance.Dash();
         _animator.SetTrigger("Dash");
         _rb.velocity = _dir * _force;
         _canDash=false; 

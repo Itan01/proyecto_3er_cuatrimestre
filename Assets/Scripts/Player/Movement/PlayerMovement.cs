@@ -26,7 +26,7 @@ public class PlayerMovement
         _scriptCollider = ScriptCollider;
         _movement = BaseMovement;
     }
-    public bool CheckIfMoving(float x, float z, bool crouching)
+    public void InputsMoving(float x, float z, bool crouching)
     {
         _isCrouching = crouching;
         _dir = (_cam.forward * z + _cam.right * x).normalized;
@@ -42,7 +42,6 @@ public class PlayerMovement
 
         }
         _animator.SetBool("isMoving", _isMoving);
-        return _isMoving;
     }
     public void Move()
     {
@@ -53,7 +52,7 @@ public class PlayerMovement
             _orientation = _cam.forward;
             _orientation.y = 0.0f;  
         }
-        _transform.forward = Vector3.Slerp(_model.forward, _orientation.normalized, Time.fixedDeltaTime * _rotSpeed);
+        _model.forward = Vector3.Slerp(_model.forward, _orientation.normalized, Time.fixedDeltaTime * _rotSpeed);
     }
     private void SetAnimation(float x, float z)
     {

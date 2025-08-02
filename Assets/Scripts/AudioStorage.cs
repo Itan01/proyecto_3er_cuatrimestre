@@ -6,6 +6,7 @@ public class AudioStorage : MonoBehaviour
 {
     [SerializeField] private AudioClip _glassSound, _smokeTrapSound, _laserAlarm, _zapSound;
     [Header("<color=green>Player Sounds</color>")]
+    [SerializeField] private AudioClip _Dash;
     [SerializeField] private AudioClip _crashSound;
     [SerializeField] private AudioClip _shootingSound;
     [SerializeField] private AudioClip _grabbingSound;
@@ -39,6 +40,10 @@ public class AudioStorage : MonoBehaviour
     public void CrashSound()
     {
         AudioManager.Instance.PlaySFX(_crashSound, _soundVolume);
+    }
+    public void Dash()
+    {
+        AudioManager.Instance.PlaySFX(_Dash, _soundVolume);
     }
     public void LightSwitch()
     {
