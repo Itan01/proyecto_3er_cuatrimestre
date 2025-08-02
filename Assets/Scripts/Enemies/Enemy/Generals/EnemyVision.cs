@@ -13,8 +13,8 @@ public class EnemyVision : MonoBehaviour
     public int verticalRayCount = 30;
 
     [Header("Layer Masks")]
-    public LayerMask obstacleMask;
-    public LayerMask detectableMask;
+    private LayerMask obstacleMask;
+    private LayerMask detectableMask;
 
     [Header("References")]
     private AbstractEnemy _scriptManager;
@@ -35,6 +35,8 @@ public class EnemyVision : MonoBehaviour
 
     void Start()
     {
+        obstacleMask = LayerManager.Instance.GetLayerMask(EnumLayers.ObstacleMask);
+        detectableMask = LayerManager.Instance.GetLayerMask(EnumLayers.ObstacleWithPlayerMask);
         meshFilter = GetComponent<MeshFilter>();
         meshRenderer = GetComponent<MeshRenderer>();
         visionMesh = new Mesh { name = "Vision Mesh" };
