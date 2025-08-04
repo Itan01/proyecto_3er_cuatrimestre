@@ -75,6 +75,14 @@ public class GameManager : MonoBehaviour
 
     [SerializeField] private List<RoomManager> _actualsRoom;
 
+    public void AlertEnemies()
+    {
+        foreach (var item in _actualsRoom)
+        {
+            item.WatchPlayer();
+        }
+    }
+
     public void AddRoom(RoomManager Room)
     {
         Room.ActivateRoom();

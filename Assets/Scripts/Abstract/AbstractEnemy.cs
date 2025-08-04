@@ -34,6 +34,9 @@ public abstract class AbstractEnemy : EntityMonobehaviour, ISoundInteractions
     }
     protected override void Start()
     {
+        RoomManager Room = GetComponentInParent<RoomManager>();
+        Room.DetPlayer += MoveFollowToPlayerPosition;
+        Room.FindPlayer += MoveTimerTarget;
         base.Start();
         _questionMark = GetComponentInChildren<QuestionMarkManager>();
         SetMode(MoveBasePath);
@@ -104,6 +107,10 @@ public abstract class AbstractEnemy : EntityMonobehaviour, ISoundInteractions
         _agent.destination = _nextPosition;
         Debug.Log("Mirando Al Jugador");
     }
+    protected virtual void MoveTimerTarget() // Persigue al Jugador
+    {
+        SetMode(MoveFollowTarget);
+    }
     protected void ConditionMoveFollowTarget()
     {
         _nextPosition = GameManager.Instance.PlayerReference.transform.position;
@@ -119,15 +126,23 @@ public abstract class AbstractEnemy : EntityMonobehaviour, ISoundInteractions
         _questionIndex = 0;
         _mode = 2;
         _previousmovement = MoveFollowSound;
-        _movement = ConditionsMoveFollowSound;
+        _movement = ConditionToReachPosition;
         _nextmovement = MoveLooking;
         _agent.destination = _nextPosition;
         transform.LookAt(_nextPosition);
         Debug.Log("Yendo a donde escucho");
 
     }
+    protected void MoveFollowToPlayerPosition() // Persigue al lugar donde se genero el Sonido
+    {
+        if (_mode == 1) return;
+        _nextPosition= GameManager.Instance.PlayerReference.transform.position;
+        MoveFollowSound();
+        Debug.Log("Yendo a la posibleUbicacion del Player");
 
-    protected void ConditionsMoveFollowSound()
+    }
+
+    protected void ConditionToReachPosition()
     {
         if (_agent.remainingDistance < _shortDistance)
         {

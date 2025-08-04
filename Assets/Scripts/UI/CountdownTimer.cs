@@ -25,6 +25,7 @@ public class CountdownTimer : MonoBehaviour
             _timeLeft = 0;
             isRunning = false;
             UpdateTimerUI(_timeLeft);
+            GameManager.Instance.AlertEnemies();
         }
     }
 

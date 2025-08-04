@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: f3f020c479ccca54092d375d0dc8f640
+guid: 6ba8f4f11f9e853418f5fdaec0661369
 ModelImporter:
   serializedVersion: 22200
   internalIDToNameTable: []
@@ -12,22 +12,22 @@ ModelImporter:
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
-      name: BaseRotation
-    second: {fileID: 2100000, guid: fefb8286aa2e22f45be90c7b57fa9244, type: 2}
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: Face
+      name: Laser
     second: {fileID: 2100000, guid: 5bb727bc0cdd1384fac1107fb14968d0, type: 2}
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
-      name: Laser1
+      name: Light
     second: {fileID: 2100000, guid: 76fb813f3850c1a44be996d4d64cf4a5, type: 2}
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
-      name: Line
+      name: Rotation
+    second: {fileID: 2100000, guid: fefb8286aa2e22f45be90c7b57fa9244, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: View
     second: {fileID: 2100000, guid: 979c44d5c3d283d46907f874b1f718d1, type: 2}
   materials:
     materialImportMode: 2
@@ -60,7 +60,7 @@ ModelImporter:
     isReadable: 0
   meshes:
     lODScreenPercentages: []
-    globalScale: 0.25
+    globalScale: 1
     meshCompression: 0
     addColliders: 0
     useSRGBMaterialColor: 1
@@ -115,7 +115,7 @@ ModelImporter:
     armStretch: 0.05
     legStretch: 0.05
     feetSpacing: 0
-    globalScale: 0.25
+    globalScale: 1
     rootMotionBoneName: 
     hasTranslationDoF: 0
     hasExtraRoot: 0
