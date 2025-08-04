@@ -97,6 +97,12 @@ public class GameManager : MonoBehaviour
     {
         StartCoroutine(ResetTImer());
     }
+    private int _timeCaptured = 20;
+
+    public int TimeCaptured()
+    {
+        return _timeCaptured;
+    }
     private IEnumerator ResetTImer()
     {
         PlayerReference.SetDeath(true);
@@ -106,6 +112,7 @@ public class GameManager : MonoBehaviour
         {
             room.ResetRoom();
         }
+        _timeCaptured++;
         RespawnAllEnemies();
         PlayerReference.ResetHeldSound();
         PlayerReference.SetCaptured(false);

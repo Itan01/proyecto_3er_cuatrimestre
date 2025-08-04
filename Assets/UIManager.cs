@@ -69,6 +69,10 @@ public class UIManager : MonoBehaviour
 
 
     private int _score = 0;
+    public int GetScore()
+    {
+        return _score;
+    }
     [SerializeField] private TMP_Text _pointsUI, _popupPointsUI;
     [SerializeField] private GameObject _popupPoints;
 

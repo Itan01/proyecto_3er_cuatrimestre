@@ -24,6 +24,9 @@ public class AudioStorage : MonoBehaviour
     [SerializeField] private AudioClip _cameraDetection;
     [SerializeField] private AudioClip _cameraResetting;
     [SerializeField] private float _soundVolume = 1f;
+
+    [Header("<color=green>UI Sounds</color>")]
+    [SerializeField] private AudioClip _countPoints;
     public static AudioStorage Instance;
     public AudioClip EnemySound()
     {
@@ -104,6 +107,10 @@ public class AudioStorage : MonoBehaviour
     public void CameraResetting()
     {
         AudioManager.Instance.PlaySFX(_cameraResetting, _soundVolume - 0.3f);
+    }
+    public void CountPoints()
+    {
+        AudioManager.Instance.PlaySFX(_countPoints, _soundVolume - 0.3f);
     }
     #endregion
 }
