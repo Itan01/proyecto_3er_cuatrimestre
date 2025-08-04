@@ -80,7 +80,7 @@ public abstract class AbstractEnemy : EntityMonobehaviour, ISoundInteractions
         _gamemode();
         _questionMark.Setting(_questionBool, _questionIndex);
         _animator.SetBool("isMoving", _isMoving);
-        _animator.SetBool("_isRunning", _isRunning);
+        _animator.SetBool("isRunning", _isRunning);
     }
     protected override void GetScripts()
     {

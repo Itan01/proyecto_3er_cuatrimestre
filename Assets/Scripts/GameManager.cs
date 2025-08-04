@@ -97,7 +97,7 @@ public class GameManager : MonoBehaviour
     {
         StartCoroutine(ResetTImer());
     }
-    private int _timeCaptured = 20;
+    private int _timeCaptured = 0;
 
     public int TimeCaptured()
     {

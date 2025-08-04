@@ -8,13 +8,13 @@ public class VictoryMenu : MonoBehaviour
     private bool _anyButton = false;
     private int _time, _tries, _money;
     private Animator _animator;
+    [SerializeField] private VictorySetRank _setRank;
     [SerializeField] private GameObject _scoreScene;
     [SerializeField] private GameObject _CongratulationScene;
     [SerializeField] private GameObject _rank;
     Action NextBehaviour;
     private void Start()
     {
-        _rank.gameObject.SetActive(false);
         NextBehaviour = DoMaths;
         _animator=GetComponent<Animator>();
     }
@@ -34,11 +34,10 @@ public class VictoryMenu : MonoBehaviour
 
     private void DoMaths()
     {
-        _rank.gameObject.SetActive(true);
+        SetLetter();
         _animator.SetBool("Change", _anyButton);
         _animator.SetTrigger("ShowRank");
         _anyButton = false;
-        SetLetter();
         NextBehaviour = ShowCongratulations;
     }
 
@@ -57,7 +56,8 @@ public class VictoryMenu : MonoBehaviour
 
     private void SetLetter()
     {
-        int value = _money - ((_time/60) * 100)-_tries * 100;
-        GetComponentInChildren<VictorySetRank>().SetRank(value);
+        int value =Mathf.Clamp( _money - ((_time/60) * 100)-_tries * 100,0,10000);
+        Debug.Log(value);
+        _setRank.SetRank(value);
     }
 }

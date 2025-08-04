@@ -5,6 +5,7 @@ using UnityEngine;
 
 public class VictorySetRank : MonoBehaviour
 {
+    private int _value;
     private TextMeshProUGUI _text;
     private void Start()
     {
@@ -12,25 +13,26 @@ public class VictorySetRank : MonoBehaviour
     }
     public void SetRank(int Value)
     {
-        if (Value > 1000)
+        _value=Value;
+        if (_value > 1000)
         {
-            _text.text = "S";
+            _text.text = $"S";
         }
-        else if (Value > 500)
+        if (_value > 500)
         {
-            _text.text = "A";
+            _text.text = $"A";
         }
-        else if (Value > 250)
+        if (_value > 250)
         {
-            _text.text = "B";
+            _text.text = $"B";
         }
-        else if (Value > 100)
+        if (_value > 50)
         {
-            _text.text = "C";
+            _text.text = $"C";
         }
-        else
+        if (_value <= 50)
         {
-            _text.text = "D";
+            _text.text = $"D";
         }
     }
 }

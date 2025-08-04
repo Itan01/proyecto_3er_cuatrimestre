@@ -17,7 +17,6 @@ public class VictorySetValue : MonoBehaviour
         if (_index == 0)
         {
             _maxValue = UIManager.Instance.GetScore();
-            _maxValue += 10000;
             GetComponentInParent<VictoryMenu>().SetMoney(_maxValue);
         }
 
@@ -41,7 +40,6 @@ public class VictorySetValue : MonoBehaviour
             {
                 _playOnce = true;
                 AudioStorage.Instance.CountPoints();
-
             }
 
         }
