@@ -192,13 +192,13 @@ public abstract class AbstractEnemy : EntityMonobehaviour, ISoundInteractions
         _mode = 4;
         _timer = 2.5f;
         _previousmovement = MoveBasePath;
-        _movement = ConditionsMoveLooking;
+        _movement = ConditionToFinishTimer;
         _nextmovement = MoveBasePath;
         _animator.SetTrigger("isLooking");
         AudioStorage.Instance.EnemyConfusedSound();
         Debug.Log("Viendo alrededor");
     }
-    protected void ConditionsMoveLooking()
+    protected void ConditionToFinishTimer()
     {
         _timer -= Time.deltaTime;
         if (_timer < 0.0f)
@@ -218,17 +218,9 @@ public abstract class AbstractEnemy : EntityMonobehaviour, ISoundInteractions
         _animator.SetTrigger("isHearing");
         _mode = 5;
         _previousmovement = MoveBasePath;
-        _movement = ConditionMoveStartHearing;
+        _movement = ConditionToFinishTimer;
         _nextmovement = MoveFollowSound;
         AudioStorage.Instance.EnemyConfusedSound();
-    }
-    protected void ConditionMoveStartHearing()
-    {
-        _timer -= Time.deltaTime;
-        if (_timer < 0.0f)
-        {
-            SetMode(_nextmovement);
-        }
     }
     protected virtual void MoveStunned() // Persigue al Jugador
     {
@@ -240,18 +232,10 @@ public abstract class AbstractEnemy : EntityMonobehaviour, ISoundInteractions
         _mode = 6;
         _timer = 2.45f;
         _animator.SetTrigger("Stun");
-        _movement = ConditionStunned;
+        _movement = ConditionToFinishTimer;
         _nextmovement = MoveBasePath;
         AudioStorage.Instance.EnemyTensionSound();
         Debug.Log("Stunned");
-    }
-    protected void ConditionStunned()
-    {
-        _timer -= Time.deltaTime;
-        if (_timer < 0.0f)
-        {
-            SetMode(_nextmovement);
-        }
     }
     #endregion
     #region Set/Get Values

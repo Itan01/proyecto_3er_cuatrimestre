@@ -6,12 +6,13 @@ public class LaserManager : MonoBehaviour , ISoundInteractions
     private LineRenderer _lineRenderer;
     private Animation _animation;
     [SerializeField] private Vector3 _offset = new Vector3(0.0f, 0.15f,0.0f);
-    [SerializeField] private float _maxDistance = 100.0f;
+    private float _maxDistance = 100.0f;
     private LayerMask _ignoreMask;
     [SerializeField] private Transform _endPosition;
+    [SerializeField] private GameObject _explosion;
     private RaycastHit _onHit;
     private Ray _ray;
-    [SerializeField] private bool _touchPlayer=false;
+    private bool _touchPlayer=false;
 
 
     private void Start()
@@ -46,6 +47,12 @@ public class LaserManager : MonoBehaviour , ISoundInteractions
         _endPosition.position = _lineRenderer.GetPosition(1);
     }
 
+    public void IIteraction(bool ShootIt)
+    {
+        if(!ShootIt) return;
+        var explosion = Instantiate(_explosion,transform.position,Quaternion.identity);
+        Destroy(gameObject, 0.1f);
+    }
     //private void OnDrawGizmos()
     //{
     //    Gizmos.color = Color.yellow;
