@@ -15,7 +15,7 @@ public class LightingScript : MonoBehaviour
     }
     public void ActivateLights()
     {
-        AudioStorage.Instance.LightSwitch();
+        //AudioStorage.Instance.LightSwitch();
         _light.gameObject.SetActive(true);
     }
     public void DesActivateLights()

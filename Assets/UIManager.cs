@@ -236,4 +236,10 @@ public class UIManager : MonoBehaviour
         Cursor.visible = true;
     }
 
+    private float _finalTimer = 0f;
+    public float FinalTime
+    { 
+        get { return _finalTimer; }
+        set { _finalTimer = value; }
+    }
 }

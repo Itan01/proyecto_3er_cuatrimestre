@@ -49,7 +49,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ab303d69fba20e04696b81aa8d0774e5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _timeLeft: 2400
+  _timer: 0
   _timerText: {fileID: 6640883449670186150}
 --- !u!1 &1935279313787384011
 GameObject:
@@ -743,7 +743,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 40:00
+  m_text: 00:00
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 2474443b4cd5a9844960f1abc058286e, type: 2}
   m_sharedMaterial: {fileID: -1396114673547462729, guid: 2474443b4cd5a9844960f1abc058286e, type: 2}
