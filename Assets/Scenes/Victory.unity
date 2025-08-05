@@ -250,7 +250,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'Money Stole :  $000'
+  m_text: 'Money Stolen :  $000'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 420109d5ce8056b4ab52ee1c65c40981, type: 2}
   m_sharedMaterial: {fileID: -3205140723285291059, guid: 420109d5ce8056b4ab52ee1c65c40981, type: 2}
@@ -1833,6 +1833,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1218361127}
+  - component: {fileID: 1218361128}
   m_Layer: 5
   m_Name: Press Any Button To Continue
   m_TagString: Untagged
@@ -1860,6 +1861,20 @@ RectTransform:
   m_AnchoredPosition: {x: -840, y: -431}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &1218361128
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1218361126}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 578b9dfb2bdc6464986175f90c612695, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _pulseSpeed: 2
+  _pulseMagnitude: 0.025
 --- !u!1 &1225257989
 GameObject:
   m_ObjectHideFlags: 0
@@ -1921,8 +1936,8 @@ MonoBehaviour:
 
 '
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 2e498d1c8094910479dc3e1b768306a4, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 2e498d1c8094910479dc3e1b768306a4, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 2474443b4cd5a9844960f1abc058286e, type: 2}
+  m_sharedMaterial: {fileID: -1396114673547462729, guid: 2474443b4cd5a9844960f1abc058286e, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -1982,7 +1997,7 @@ MonoBehaviour:
   m_VertexBufferAutoSizeReduction: 0
   m_useMaxVisibleDescender: 1
   m_pageToDisplay: 1
-  m_margin: {x: 0, y: 0, z: -484.47418, w: -14.39032}
+  m_margin: {x: 0, y: 0, z: -792.08325, w: -14.39032}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_hasFontAssetChanged: 0
