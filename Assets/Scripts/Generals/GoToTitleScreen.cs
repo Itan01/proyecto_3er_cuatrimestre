@@ -13,6 +13,7 @@ public class GoToTitleScreen : MonoBehaviour
         if (Player.GetComponent<PlayerManager>())
         {
             _timerScript.StopTimerUI();
+            GameManager.Instance.ScoreValue = UIManager.Instance.GetScore();
             StartCoroutine(ChargeScene());
         }
     }

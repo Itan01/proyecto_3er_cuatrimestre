@@ -120,5 +120,20 @@ public class GameManager : MonoBehaviour
         UIManager.Instance.Transition.FadeOut();
         PlayerReference.transform.position = RespawnReference;
     }
+    [SerializeField] private int _time;
+
+    public int TimeOnlevel
+    {
+        get { return _time; }
+        set { _time = value; }
+    }
+
+    [SerializeField] private int _score;
+
+    public int ScoreValue
+    {
+        get { return _score; }
+        set { _score = value; }
+    }
+
 }
-    

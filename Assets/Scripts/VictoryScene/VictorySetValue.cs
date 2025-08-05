@@ -12,14 +12,15 @@ public class VictorySetValue : MonoBehaviour
     [SerializeField] private int _index;
     [SerializeField] private AudioSource _audioSource;
     [SerializeField] private AudioClip _audioClip;
-    [SerializeField] private VictoryMenu _menu;
+    private VictoryMenu _menu;
 
     private void Start()
     {
+        _menu= GetComponentInParent<VictoryMenu>();
         _text = GetComponent<TextMeshProUGUI>();
         if (_index == 0)
         {
-            _maxValue = UIManager.Instance.GetScore();
+            _maxValue = GameManager.Instance.ScoreValue;
             _menu.SetMoney(_maxValue);
         }
 

@@ -30,7 +30,7 @@ public class CountdownTimer : MonoBehaviour
     public void StopTimerUI() 
     { 
         _isRunning = false;
-        UIManager.Instance.FinalTime = _timer;
+        GameManager.Instance.TimeOnlevel = Mathf.FloorToInt(_timer);
     }
 
 }
