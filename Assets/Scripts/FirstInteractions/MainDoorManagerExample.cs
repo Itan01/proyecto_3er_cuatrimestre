@@ -5,6 +5,7 @@ using UnityEngine;
 public class MainDoorManagerExample : AbstracDoors, ISoundInteractions
 {
     [SerializeField] private AudioClip _buttonSound;
+    [SerializeField] private GameObject _uiExample;
     private float _soundVolume=1.0f;
     private ParticlesManager _particles;
     private Animation _animation;
@@ -36,6 +37,7 @@ public class MainDoorManagerExample : AbstracDoors, ISoundInteractions
     {
         if (PlayerShootIt)
         {
+            _uiExample.SetActive(false);
             CheckStatus();
             _particles.PlayOnce();
             AudioSource.PlayClipAtPoint(_buttonSound, transform.position, _soundVolume);
