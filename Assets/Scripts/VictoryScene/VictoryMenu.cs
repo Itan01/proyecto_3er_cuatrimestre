@@ -6,7 +6,7 @@ using UnityEngine;
 public class VictoryMenu : MonoBehaviour
 {
     private bool _anyButton = false;
-    private int _time, _tries, _money;
+    [SerializeField] private int _time, _tries, _money;
     private Animator _animator;
     [SerializeField] private VictorySetRank _setRank;
     [SerializeField] private GameObject _scoreScene;
@@ -56,7 +56,7 @@ public class VictoryMenu : MonoBehaviour
 
     private void SetLetter()
     {
-        int value =Mathf.Clamp( _money - ((_time/60) * 100)-_tries * 100,0,10000);
+        int value =( _money - ((_time/60) * 100)-_tries * 100);
         Debug.Log(value);
         _setRank.SetRank(value);
     }

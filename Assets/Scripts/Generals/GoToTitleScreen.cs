@@ -10,13 +10,19 @@ public class GoToTitleScreen : MonoBehaviour
 
     private void OnTriggerEnter(Collider Player)
     {
-        if (Player.gameObject.layer == 27)
+        if (Player.GetComponent<PlayerManager>())
         {
-            Debug.Log("HII");
             _timerScript.StopTimerUI();
-            SceneManager.LoadScene(_menuSceneName);
-            Cursor.lockState = CursorLockMode.None;
-            Cursor.visible = true;
+            StartCoroutine(ChargeScene());
         }
+    }
+
+    private IEnumerator ChargeScene()
+    {
+        yield return new WaitForSeconds(1.0f);
+        Cursor.lockState = CursorLockMode.None;
+        Cursor.visible = true;
+        SceneManager.LoadScene(_menuSceneName);
+
     }
 }

@@ -7,9 +7,12 @@ public class VictorySetValue : MonoBehaviour
 {
     private TextMeshProUGUI _text;
     private bool _playOnce = false;
-    private int _value = 0, _maxValue = 0;
+    [SerializeField] private int _value = 0, _maxValue = 0;
     [SerializeField] private string _showText = "Money Stole : $";
     [SerializeField] private int _index;
+    [SerializeField] private AudioSource _audioSource;
+    [SerializeField] private AudioClip _audioClip;
+    [SerializeField] private VictoryMenu _menu;
 
     private void Start()
     {
@@ -17,13 +20,13 @@ public class VictorySetValue : MonoBehaviour
         if (_index == 0)
         {
             _maxValue = UIManager.Instance.GetScore();
-            GetComponentInParent<VictoryMenu>().SetMoney(_maxValue);
+            _menu.SetMoney(_maxValue);
         }
 
         if (_index == 1)
         {
             _maxValue = GameManager.Instance.TimeCaptured();
-            GetComponentInParent<VictoryMenu>().SetTries(_maxValue);
+            _menu.SetTries(_maxValue);
         }
     }
     private void Update()
@@ -39,7 +42,7 @@ public class VictorySetValue : MonoBehaviour
             if (!_playOnce)
             {
                 _playOnce = true;
-                AudioStorage.Instance.CountPoints();
+                _audioSource.PlayOneShot(_audioClip);
             }
 
         }

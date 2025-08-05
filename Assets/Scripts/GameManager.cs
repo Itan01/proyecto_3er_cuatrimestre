@@ -97,7 +97,7 @@ public class GameManager : MonoBehaviour
     {
         StartCoroutine(ResetTImer());
     }
-    private int _timeCaptured = 0;
+    [SerializeField]private int _timeCaptured = 0;
 
     public int TimeCaptured()
     {

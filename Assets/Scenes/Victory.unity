@@ -339,8 +339,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4fb9545001080ff48baa8148e470a36d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _value: 0
+  _maxValue: 0
   _showText: 'Money Stole : $'
   _index: 0
+  _audioSource: {fileID: 1166356293}
+  _audioClip: {fileID: 8300000, guid: a64c3b0aaac500148a1df03a27e2ec5a, type: 3}
+  _menu: {fileID: 618104991}
 --- !u!1 &288559557
 GameObject:
   m_ObjectHideFlags: 0
@@ -875,6 +880,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b4c4d86a90f74b1478045e37c414b001, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _time: 0
+  _tries: 0
+  _money: 0
   _setRank: {fileID: 1141695772}
   _scoreScene: {fileID: 618104985}
   _CongratulationScene: {fileID: 538401237}
@@ -1066,10 +1074,6 @@ PrefabInstance:
     - target: {fileID: 4023137956514878102, guid: 11d58e6bb884b274098f054a037799f9, type: 3}
       propertyPath: m_Name
       value: GameManager
-      objectReference: {fileID: 0}
-    - target: {fileID: 5422770012088623848, guid: 11d58e6bb884b274098f054a037799f9, type: 3}
-      propertyPath: _score
-      value: 1000
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -1918,7 +1922,7 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 1691011786
+    rgba: 4291480266
   m_fontColor: {r: 0.7924528, g: 0.7924528, b: 0.7924528, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
@@ -2133,7 +2137,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d96d78662df14e34d83c0cc4fa7dfd0f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _value: 0
+  _maxValue: 0
   _showText: 'Time: '
+  _audioSource: {fileID: 1166356293}
+  _audioClip: {fileID: 8300000, guid: a64c3b0aaac500148a1df03a27e2ec5a, type: 3}
+  _menu: {fileID: 618104991}
 --- !u!1 &1464895039
 GameObject:
   m_ObjectHideFlags: 0
@@ -2845,8 +2854,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4fb9545001080ff48baa8148e470a36d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _value: 0
+  _maxValue: 0
   _showText: 'Captured : '
   _index: 1
+  _audioSource: {fileID: 1166356293}
+  _audioClip: {fileID: 8300000, guid: a64c3b0aaac500148a1df03a27e2ec5a, type: 3}
+  _menu: {fileID: 618104991}
 --- !u!1 &1845239473
 GameObject:
   m_ObjectHideFlags: 0

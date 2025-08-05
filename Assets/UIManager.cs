@@ -68,7 +68,7 @@ public class UIManager : MonoBehaviour
     }
 
 
-    private int _score = 0;
+    [SerializeField] private int _score = 0;
     public int GetScore()
     {
         return _score;
@@ -236,7 +236,7 @@ public class UIManager : MonoBehaviour
         Cursor.visible = true;
     }
 
-    private float _finalTimer = 0f;
+    [SerializeField] private float _finalTimer = 0f;
     public float FinalTime
     { 
         get { return _finalTimer; }
