@@ -50,7 +50,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 242d124eaecbdeb4fa6f7ec4cd3a9899, type: 3}
       propertyPath: m_Name
-      value: PressurePlate Variant
+      value: PressurePlate
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -58,18 +58,33 @@ PrefabInstance:
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: -8987411430748492759, guid: 242d124eaecbdeb4fa6f7ec4cd3a9899, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 1490056299392855610}
+      addedObject: {fileID: 3327934629200964912}
     - targetCorrespondingSourceObject: {fileID: -8987411430748492759, guid: 242d124eaecbdeb4fa6f7ec4cd3a9899, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 3327934629200964912}
+      addedObject: {fileID: 2120659975298573938}
   m_SourcePrefab: {fileID: 100100000, guid: 242d124eaecbdeb4fa6f7ec4cd3a9899, type: 3}
 --- !u!1 &8222866094491815822 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: -8987411430748492759, guid: 242d124eaecbdeb4fa6f7ec4cd3a9899, type: 3}
   m_PrefabInstance: {fileID: 8168177113191064487}
   m_PrefabAsset: {fileID: 0}
---- !u!64 &1490056299392855610
-MeshCollider:
+--- !u!114 &3327934629200964912
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8222866094491815822}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 076a848b9d8d6ca48ab5094e654c1f2a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  wallObject: {fileID: 0}
+  riseHeight: 7
+  riseSpeed: 3
+--- !u!65 &2120659975298573938
+BoxCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -86,22 +101,6 @@ MeshCollider:
   m_IsTrigger: 1
   m_ProvidesContacts: 0
   m_Enabled: 1
-  serializedVersion: 5
-  m_Convex: 1
-  m_CookingOptions: 30
-  m_Mesh: {fileID: -3478346933113688356, guid: 242d124eaecbdeb4fa6f7ec4cd3a9899, type: 3}
---- !u!114 &3327934629200964912
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8222866094491815822}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 076a848b9d8d6ca48ab5094e654c1f2a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  wallObject: {fileID: 0}
-  riseHeight: 7
-  riseSpeed: 3
+  serializedVersion: 3
+  m_Size: {x: 1.5, y: 1.5, z: 0.5}
+  m_Center: {x: 0, y: 0, z: 0}

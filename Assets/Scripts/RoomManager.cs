@@ -8,7 +8,7 @@ public class RoomManager : MonoBehaviour
     [SerializeField] private List<AbstractEnemy> _enemies;
     [SerializeField] private List<AbstractObjects> _objects;
     [SerializeField] private List<RoombaEnemy> _roomba;
-    [SerializeField] private GameObject _smoke;
+    private GameObject _smoke;
     private bool _doorBroken=false;
 
     public event Action DetPlayer, ResetDet, FindPlayer, DesActRoom, ActRoom;
@@ -79,6 +79,11 @@ public class RoomManager : MonoBehaviour
     {
         if (_smoke == null) return;
         _smoke.SetActive(true);
+        foreach (var item in _enemies) 
+        { 
+            item.gameObject.SetActive(false);
+        }
+
     }
     public void SetDoorDestroyed()
     {
