@@ -24,9 +24,13 @@ public class PlayerManager : EntityMonobehaviour
     [SerializeField] private Transform _hipsPosition;
     [SerializeField] private Transform _megaphoneTransform;
 
-   [SerializeField] private float _invisibleDuration=0.0f;
-   [SerializeField] private bool _invisible = false;
-   [SerializeField] private Color _basecolor;
+    private float _invisibleDuration=0.0f;
+    private bool _invisible = false;
+    [SerializeField] private GameObject _particlesInvisible;
+    [SerializeField] private GameObject _surfaceModel;
+    [SerializeField] private GameObject _joinModel;
+    [SerializeField] private Material[] _baseColorMaterial;
+   [SerializeField] private Material[] _JoinColorMaterial;
     public event Action SubtractTimer;
 
     protected override void Awake()
@@ -100,9 +104,11 @@ public class PlayerManager : EntityMonobehaviour
             _invisibleDuration -= Time.deltaTime;
             if (_invisibleDuration < 0.0f)
             {
+                _particlesInvisible.SetActive(false);
                 _invisibleDuration = 0.0f;
                 _invisible = false;
-                GetComponentInChildren<SkinnedMeshRenderer>().material.SetColor("_Color", _basecolor);
+                _surfaceModel.GetComponent<SkinnedMeshRenderer>().material = _baseColorMaterial[0];
+                _joinModel.GetComponent<SkinnedMeshRenderer>().material = _JoinColorMaterial[0];
             }
         }
     }
@@ -137,7 +143,10 @@ public class PlayerManager : EntityMonobehaviour
     }
     public void SetInvisiblePowerUp(float duration)
     {
+        _particlesInvisible.SetActive(true);
         _invisibleDuration =duration;
+        _surfaceModel.GetComponent<SkinnedMeshRenderer>().material= _baseColorMaterial[1];
+        _joinModel.GetComponent<SkinnedMeshRenderer>().material=_JoinColorMaterial[1];
         _invisible = true;  
     }
 
