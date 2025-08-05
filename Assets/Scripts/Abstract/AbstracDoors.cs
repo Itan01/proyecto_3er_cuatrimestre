@@ -45,5 +45,6 @@ public class AbstracDoors : MonoBehaviour, ISoundInteractions
             _scriptText[i].gameObject.SetActive(false);
         }
         _isDestroyed = true;
+
     }
 }

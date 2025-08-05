@@ -18,6 +18,7 @@ public class MainDoorManager : AbstracDoors, ISoundInteractions
     {
         _animator.SetBool("isOpen", true);
         base.OpenDoor();
+        GetComponentInParent<RoomManager>().SetDoorDestroyed();
         AudioStorage.Instance.OpenDoorSound();
     }
     public void IIteraction(bool PlayerShootIt)

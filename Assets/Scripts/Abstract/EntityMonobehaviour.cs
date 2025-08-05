@@ -100,6 +100,10 @@ public abstract class EntityMonobehaviour : MonoBehaviour
 
     public void CoughState(bool coughState)
     {
+        if (!coughState)
+        {
+            coughTimer = coughTimerReference;
+        }
         coughCondition = coughState;
 
     }
@@ -107,31 +111,10 @@ public abstract class EntityMonobehaviour : MonoBehaviour
     protected void CoughTimerSubstract()
     {
         coughTimer -= Time.deltaTime;
-        deathTimer -= Time.deltaTime;
         if (coughTimer <= 0)
         {
-            Vector3 RandomPosition = HeadReference.position + HeadReference.forward *1.1f;
-            //Debug.Log(RandomPosition);
-            Vector3 Orientation = RandomPosition - transform.position;
-            var Sound = Instantiate(_noise, RandomPosition, Quaternion.identity);
-            AbstractSound Script = Sound.GetComponent<AbstractSound>();
-            Script.SetDirection(Orientation + transform.up, 4.0f, 1.0f);
-            if (_summonedByPlayer)
-            {
-                Script.SetIfPlayerSummoned(true);
-            }
             coughTimer = coughTimerReference;
-        }
-        if (deathTimer <= 0)
-        {
-
             GameManager.Instance.ResetGameplay();
-            deathTimer = deathTimerReference;
         }
-    }
-
-    public void ResetDeathTimer()
-    {
-        deathTimer = deathTimerReference;
     }
 }

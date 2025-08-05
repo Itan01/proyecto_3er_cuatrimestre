@@ -8,6 +8,8 @@ public class RoomManager : MonoBehaviour
     [SerializeField] private List<AbstractEnemy> _enemies;
     [SerializeField] private List<AbstractObjects> _objects;
     [SerializeField] private List<RoombaEnemy> _roomba;
+    [SerializeField] private GameObject _smoke;
+    private bool _doorBroken=false;
 
     public event Action DetPlayer, ResetDet, FindPlayer, DesActRoom, ActRoom;
 
@@ -33,6 +35,8 @@ public class RoomManager : MonoBehaviour
     {
         if (Player.GetComponent<PlayerManager>())
         {
+            if (_doorBroken)
+                SummonSmoketrap();
             GameManager.Instance.RemoveRoom(this);
             foreach (var item in _objects)
             {
@@ -46,6 +50,11 @@ public class RoomManager : MonoBehaviour
                 item.SetActivate(false);
             }
         }
+    }
+
+    public void SetSmoke(GameObject smoke)
+    {
+        _smoke = smoke;
     }
     public void AddToList(AbstractEnemy Enemies)
     {
@@ -65,6 +74,15 @@ public class RoomManager : MonoBehaviour
         {
             item.Respawn();
         }
+    }
+    private void SummonSmoketrap()
+    {
+        if (_smoke == null) return;
+        _smoke.SetActive(true);
+    }
+    public void SetDoorDestroyed()
+    {
+        _doorBroken = true;
     }
     public List<AbstractEnemy> GetEnemies()
     {

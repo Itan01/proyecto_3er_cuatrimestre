@@ -4,12 +4,15 @@ using UnityEngine;
 
 public class SmokeDetector : MonoBehaviour
 {
-    [SerializeField] private GameObject SoundReference;
+    private void Start()
+    {
+        GetComponentInParent<RoomManager>().SetSmoke(gameObject);
+        gameObject.SetActive(false);
+    }
     void OnTriggerEnter(Collider Player)
     {
         if (Player.TryGetComponent(out EntityMonobehaviour Script))
         {
-            Script.GameObjectSoundInvoker(SoundReference);
             Script.CoughState(true);
             
         }
@@ -20,7 +23,6 @@ public class SmokeDetector : MonoBehaviour
     if (Player.TryGetComponent(out EntityMonobehaviour Script))
     {
         Script.CoughState(false);
-        Script.ResetDeathTimer();
     }
     }
 }
