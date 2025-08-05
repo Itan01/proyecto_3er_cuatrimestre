@@ -105,6 +105,7 @@ public abstract class AbstractEnemy : EntityMonobehaviour, ISoundInteractions
         _movement = ConditionMoveFollowTarget;
         _nextmovement = MoveFollowTarget;
         _agent.destination = _nextPosition;
+        AudioStorage.Instance.EnemyAlert();
         Debug.Log("Mirando Al Jugador");
     }
     protected virtual void MoveTimerTarget() // Persigue al Jugador
@@ -195,7 +196,7 @@ public abstract class AbstractEnemy : EntityMonobehaviour, ISoundInteractions
         _movement = ConditionToFinishTimer;
         _nextmovement = MoveBasePath;
         _animator.SetTrigger("isLooking");
-        AudioStorage.Instance.EnemyConfusedSound();
+        AudioStorage.Instance.EnemyHmm();
         Debug.Log("Viendo alrededor");
     }
     protected void ConditionToFinishTimer()
@@ -234,7 +235,7 @@ public abstract class AbstractEnemy : EntityMonobehaviour, ISoundInteractions
         _animator.SetTrigger("Stun");
         _movement = ConditionToFinishTimer;
         _nextmovement = MoveBasePath;
-        AudioStorage.Instance.EnemyTensionSound();
+        //AudioStorage.Instance.EnemyTensionSound();
         Debug.Log("Stunned");
     }
     #endregion

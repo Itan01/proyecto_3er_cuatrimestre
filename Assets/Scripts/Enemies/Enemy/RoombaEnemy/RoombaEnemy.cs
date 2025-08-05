@@ -67,6 +67,7 @@ public class RoombaEnemy : MonoBehaviour
 
     private void Explode()
     {
+        AudioStorage.Instance.RoombaExplosion();
         // particulas explosion
         if (_explosionParticlesPrefab)
         {

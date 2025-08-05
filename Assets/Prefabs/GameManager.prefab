@@ -192,6 +192,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _actualsRoom: []
+  _timeCaptured: 0
+  _time: 0
+  _score: 0
 --- !u!1 &5151357667521703558
 GameObject:
   m_ObjectHideFlags: 0
@@ -237,11 +240,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   pauseMenu: {fileID: 0}
+  _score: 0
   _pointsUI: {fileID: 0}
   _popupPointsUI: {fileID: 0}
   _popupPoints: {fileID: 0}
   transAnimation: LevelOneTrans
   animator: {fileID: 0}
+  _finalTimer: 0
 --- !u!1 &6086097062491530845
 GameObject:
   m_ObjectHideFlags: 0
@@ -289,18 +294,20 @@ MonoBehaviour:
   _glassSound: {fileID: 8300000, guid: 2437fda96e3d6f142aa4262d0132002b, type: 3}
   _smokeTrapSound: {fileID: 8300000, guid: b9750d4031fa6594cbc2178833d58718, type: 3}
   _laserAlarm: {fileID: 8300000, guid: aad4452201fb4654aa75068db337ed66, type: 3}
-  _zapSound: {fileID: 0}
-  _Dash: {fileID: 0}
-  _crashSound: {fileID: 0}
-  _shootingSound: {fileID: 8300000, guid: 99e8b5238b0db6849a472fb51e921e38, type: 3}
+  _zapSound: {fileID: 8300000, guid: 3e97a4f3636a3b145974d8414909a02a, type: 3}
+  _Dash: {fileID: 8300000, guid: a4b95f4a7e174fe4eb9cec1689e152a5, type: 3}
+  _crashSound: {fileID: 8300000, guid: 4936d17d66f8c4d4abff5196aef619d8, type: 3}
+  _shootingSound: {fileID: 8300000, guid: 2e7b005a19406a64b800ce43737bd76d, type: 3}
   _grabbingSound: {fileID: 8300000, guid: 826302dbc80ff924f9fa095d50af00e3, type: 3}
-  _LightSwitch: {fileID: 0}
+  _LightSwitch: {fileID: 8300000, guid: 41960df84562523408a946a2a18e0d14, type: 3}
+  _Roombaexplosion: {fileID: 8300000, guid: 2b077df648d11014d971fe4033f34cff, type: 3}
   _enemyConfusedSound: {fileID: 8300000, guid: 747df38c1c36d324b9e41aa7552caae0, type: 3}
-  _enemyTensionSound: {fileID: 0}
+  _enemyAlert: {fileID: 8300000, guid: bbe4de575b8bad54b9c449a7b0e125a6, type: 3}
+  _enemyHmm: {fileID: 8300000, guid: a87f26a5e12555e42beb37fc5d3b61e9, type: 3}
   _openDoorSound: {fileID: 8300000, guid: 1703a88ad72e2ba41805a3197303245f, type: 3}
   _closeDoorSound: {fileID: 8300000, guid: f7374ef3311af26419cb03872b940d72, type: 3}
-  _cameraDetection: {fileID: 0}
-  _cameraResetting: {fileID: 0}
+  _cameraDetection: {fileID: 8300000, guid: 15d60cf03cf615b4ebaf951c3098ca34, type: 3}
+  _cameraResetting: {fileID: 8300000, guid: 8f215783f544c5b47bc71043f7cc659c, type: 3}
   _soundVolume: 1
   _countPoints: {fileID: 8300000, guid: a64c3b0aaac500148a1df03a27e2ec5a, type: 3}
 --- !u!1 &6577951075657808662

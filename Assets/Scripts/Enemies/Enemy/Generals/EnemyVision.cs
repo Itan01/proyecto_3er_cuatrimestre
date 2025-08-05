@@ -78,10 +78,10 @@ public class EnemyVision : MonoBehaviour
             switch (_scriptManager.GetMode())
             {
                 case -1:
-                case 0: visionColor = new Color(0, 1, 0, 0.3f); break;
+                case 0: visionColor = new Color(0, 1, 0, 0.1f); break;
                 case 2:
-                case 3: visionColor = new Color(1, 1, 0, 0.3f); break;
-                case 1: visionColor = new Color(1, 0, 0, 0.3f); break;
+                case 3: visionColor = new Color(1, 1, 0, 0.1f); break;
+                case 1: visionColor = new Color(1, 0, 0, 0.1f); break;
             }
 
             meshRenderer.material.color = visionColor;

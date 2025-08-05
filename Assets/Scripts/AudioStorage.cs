@@ -13,10 +13,11 @@ public class AudioStorage : MonoBehaviour
     [Header("<color=green>Lights Sound </color>")]
     [SerializeField] private AudioClip _LightSwitch;
     [Header("<color=green>Roomba Sounds</color>")]
-
+    [SerializeField] private AudioClip _Roombaexplosion;
     [Header("<color=green>Enemy Sounds</color>")]
     [SerializeField] private AudioClip _enemyConfusedSound;
-    [SerializeField] private AudioClip _enemyTensionSound;
+    [SerializeField] private AudioClip _enemyAlert;
+    [SerializeField] private AudioClip _enemyHmm;
     [Header("<color=green>Door Sounds</color>")]
     [SerializeField] private AudioClip _openDoorSound;
     [SerializeField] private AudioClip _closeDoorSound;
@@ -84,9 +85,17 @@ public class AudioStorage : MonoBehaviour
     {
         AudioManager.Instance.PlaySFX(_enemyConfusedSound, _soundVolume - 0.5f);
     }
-    public void EnemyTensionSound()
+    public void EnemyAlert()
     {
-        AudioManager.Instance.PlaySFX(_enemyTensionSound, _soundVolume);
+        AudioManager.Instance.PlaySFX(_enemyAlert, _soundVolume);
+    }
+    public void EnemyHmm()
+    {
+        AudioManager.Instance.PlaySFX(_enemyHmm, _soundVolume);
+    }
+    public void RoombaExplosion()
+    {
+        AudioManager.Instance.PlaySFX(_Roombaexplosion, _soundVolume);
     }
 
     public void LaserAlarmSound()
