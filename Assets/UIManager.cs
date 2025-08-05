@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class UIManager : MonoBehaviour
 {
@@ -15,7 +16,13 @@ public class UIManager : MonoBehaviour
 
     #endregion
     private PlayerManager _player;
+    [SerializeField] private Image _cooldownCircleBar;
 
+    public Image CooldownCircleBar
+    {
+        get { return _cooldownCircleBar; }
+        set {  _cooldownCircleBar = value; }
+    }
     private void Start()
     {
         _player = GameManager.Instance.PlayerReference;

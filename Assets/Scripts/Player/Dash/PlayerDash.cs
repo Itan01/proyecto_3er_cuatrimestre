@@ -1,6 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
+
 
 public class PlayerDash
 {
@@ -11,8 +13,10 @@ public class PlayerDash
     private Rigidbody _rb;
     private PlayerManager _manager;
     private Animator _animator;
+    [SerializeField]private Image UIDashCooldown;
     public PlayerDash(Transform ModelTransform, Rigidbody rb, Animator animator)
     {
+        UIDashCooldown = UIManager.Instance.CooldownCircleBar;
         _modelTransform=ModelTransform;
         _rb=rb;
         _animator=animator;
@@ -35,12 +39,26 @@ public class PlayerDash
     public void Cooldown()
     {
         _cooldown-= Time.deltaTime;
+        
         if (_cooldown < 0) 
         {
             _canDash = true;
             _manager.SubtractTimer -= Cooldown;
             _cooldown = 0.0f;
         }
+        UIRefresh();
+    }
 
+    private void UIRefresh()
+    {
+        if (_canDash == false)
+        {
+            float fill = 1f - (_cooldown / _maxCooldown);
+            UIDashCooldown.fillAmount = fill;
+        }
+        else
+        {
+            UIDashCooldown.fillAmount = 1f;
+        }
     }
 }

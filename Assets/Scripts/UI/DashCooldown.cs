@@ -11,14 +11,6 @@ public class DashCooldown : MonoBehaviour
 
     void Update()
     {
-        if (_sprintScript.!_canDash)
-        {
-            float fill = 1f - (_sprintScript.Cooldown / _sprintScript.MaxCooldown);
-            _cooldownCircleBar.fillAmount = fill;
-        }
-        else
-        {
-            _cooldownCircleBar.fillAmount = 1f; // Full when not cooling down
-        }
+        
     }
 }
