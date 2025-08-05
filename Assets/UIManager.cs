@@ -213,7 +213,7 @@ public class UIManager : MonoBehaviour
     }
 
     private bool isMenuON;
-    private void Resume()
+    public void Resume()
     {
         pauseMenu.SetActive(false);
         Time.timeScale = 1f;
