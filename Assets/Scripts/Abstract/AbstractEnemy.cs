@@ -286,4 +286,11 @@ public abstract class AbstractEnemy : EntityMonobehaviour, ISoundInteractions
             SetMode(MoveStunned);
         }
     }
+    public void ForceRepath()
+    {
+        if (!_agent.enabled) return;
+        _agent.ResetPath(); 
+        _agent.SetDestination(_nextPosition); 
+    }
+
 }
