@@ -15,6 +15,7 @@ public class FuseBox : MonoBehaviour , ISoundInteractions
         if (PlayerShootIt)
         {
             _animator.SetTrigger("destroy");
+            AudioStorage.Instance.RoombaExplosion();
         }
     }
 }
