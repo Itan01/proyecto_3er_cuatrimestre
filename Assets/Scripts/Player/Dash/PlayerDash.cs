@@ -6,7 +6,7 @@ public class PlayerDash
 {
     private Transform _modelTransform;
     private Vector3 _dir;
-    private float _force=10.0f, _cooldown;
+    private float _force=10.0f, _cooldown, _maxCooldown = 2f;
     private bool _canDash=true;
     private Rigidbody _rb;
     private PlayerManager _manager;
@@ -28,7 +28,7 @@ public class PlayerDash
         _animator.SetTrigger("Dash");
         _rb.velocity = _dir * _force;
         _canDash=false; 
-        _cooldown = 2.0f;
+        _cooldown = _maxCooldown;
         _manager.SubtractTimer += Cooldown;
 
     }
