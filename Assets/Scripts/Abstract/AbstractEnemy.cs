@@ -70,8 +70,8 @@ public abstract class AbstractEnemy : EntityMonobehaviour, ISoundInteractions
     public void Respawn()
     {
         Debug.Log("Respawn");
+        _agent.Warp(_startPosition);
         SetMode(MoveBasePath);
-        transform.position = _startPosition;
     }
     #region InternalFunctions
     protected void SetMode(Setter TypeOfMovement)
