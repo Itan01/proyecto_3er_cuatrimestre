@@ -87,12 +87,26 @@ public class PlayerController
 
     public void Grabbing()
     {
-        _grabbing = Input.GetKey(KeyCode.Mouse1);
-        if(!_grabbing)
+        bool isRightClick = Input.GetKey(KeyCode.Mouse1);
+
+        if (isRightClick)
         {
-            _area.Desactivate();
+            // Activar de inmediato
+            if (!_grabbing)
+            {
+                _animator.SetBool("Grabbing", true);
+            }
         }
-        _animator.SetBool("Grabbing", _grabbing);
+        else
+        {
+            if (_grabbing)
+            {
+                _animator.SetBool("Grabbing", false);
+                _area.Desactivate();
+            }
+        }
+
+        _grabbing = isRightClick;
     }
 
     public void PlayerCanShootAgain(bool state)

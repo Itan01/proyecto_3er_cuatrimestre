@@ -13,7 +13,7 @@ public class PlayerAimIK : MonoBehaviour
     [Range(0f, 1f)]
     [SerializeField] private float bodyWeight = 0.6f; 
     [Range(0f, 1f)]
-    [SerializeField] private float headWeight = 1.0f;
+    [SerializeField] private float headWeight = 1.0f; 
     [Range(0f, 1f)]
     [SerializeField] private float eyesWeight = 1.0f; 
     [Range(0f, 1f)]
@@ -24,7 +24,7 @@ public class PlayerAimIK : MonoBehaviour
         bool shooting = animator.GetBool("StartShooting");
         bool grabbing = animator.GetBool("Grabbing");
 
-        if (shooting || grabbing)
+        if (shooting || grabbing )
         {
             // Usa la dirección de la cámara como punto de mira
             Vector3 aimPoint = Camera.main.transform.position + Camera.main.transform.forward * 100f;
