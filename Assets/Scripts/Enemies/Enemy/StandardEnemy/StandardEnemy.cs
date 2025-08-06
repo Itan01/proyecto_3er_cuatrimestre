@@ -41,6 +41,7 @@ public class StandardEnemy : AbstractEnemy
         _previousmovement = MoveBasePath;
         _movement = ConditionMoveBasePath;
         _nextmovement = MoveBasePath;
+        Debug.Log("Yendo a donde escucho");
     }
 
     protected void ConditionMoveBasePath()
