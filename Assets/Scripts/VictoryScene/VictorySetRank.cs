@@ -19,22 +19,22 @@ public class VictorySetRank : MonoBehaviour
         if (_value <= 50)
         {
             _text.text = $"D";
-            _audioSource.PlayOneShot(_ranks[0],10.0f);
+            _audioSource.PlayOneShot(_ranks[0],7.0f);
         }
         if (_value > 50)
         {
             _text.text = $"C";
-            _audioSource.PlayOneShot(_ranks[1], 8.0f);
+            _audioSource.PlayOneShot(_ranks[1], 7.0f);
         }
         if (_value > 250)
         {
             _text.text = $"B";
-            _audioSource.PlayOneShot(_ranks[2], 8.0f);
+            _audioSource.PlayOneShot(_ranks[2], 7.0f);
         }
         if (_value > 500)
         {
             _text.text = $"A";
-            _audioSource.PlayOneShot(_ranks[3], 8.0f);
+            _audioSource.PlayOneShot(_ranks[3], 7.0f);
         }
         if (_value > 1000)
         {
