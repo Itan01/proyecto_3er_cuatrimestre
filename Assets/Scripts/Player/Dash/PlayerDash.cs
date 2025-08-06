@@ -59,6 +59,7 @@ public class PlayerDash
         else
         {
             UIDashCooldown.fillAmount = 1f;
+            AudioStorage.Instance.LightSwitch();
         }
     }
 }

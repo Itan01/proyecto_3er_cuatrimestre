@@ -30,7 +30,7 @@ public class PressurePlate : MonoBehaviour
         targetWallPos = initialWallPos + Vector3.up * riseHeight;
 
         wallObject.transform.position = initialWallPos;
-        wallObject.SetActive(false);
+        //wallObject.SetActive(false);
 
         _room = GetComponentInParent<RoomManager>();
     }
@@ -87,7 +87,7 @@ public class PressurePlate : MonoBehaviour
 
         if (!activate)
         {
-            wallObject.SetActive(false);
+            //wallObject.SetActive(false);
         }
     }
 }
