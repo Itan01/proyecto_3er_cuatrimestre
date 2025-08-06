@@ -49,7 +49,7 @@ public class PlayerController
         _scriptShoot.Direction();
         if (Input.GetKeyUp(KeyCode.Mouse0))
             SetGrabing(true);
-        else if (Input.GetKeyUp(KeyCode.Mouse1))
+        else if (Input.GetKeyDown(KeyCode.Mouse1))
             SetGrabing(false);
     }
 
@@ -57,7 +57,7 @@ public class PlayerController
     {
         _canShoot = _scriptShoot.CheckSound();
         if (!_canShoot) return;
-        _aiming = Input.GetKey(KeyCode.Mouse0);
+        _aiming = Input.GetKeyDown(KeyCode.Mouse0);
         if (_aiming)
         {
             GameManager.Instance.CameraReference.GetComponent<CameraManager>().SetCameraDistance(2.0f);

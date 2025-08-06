@@ -57,6 +57,7 @@ public class PressurePlate : MonoBehaviour
     {
         isWallActive = !isWallActive;
 
+
         if (currentRoutine != null)
             StopCoroutine(currentRoutine);
 
@@ -73,6 +74,10 @@ public class PressurePlate : MonoBehaviour
 
     private IEnumerator MoveWall(bool activate)
     {
+        if(activate)
+            AudioStorage.Instance.OpenDoorSound();
+        else
+            AudioStorage.Instance.CloseDoorSound();
         wallObject.SetActive(true);
         float t = 0f;
         Vector3 startPos = wallObject.transform.position;

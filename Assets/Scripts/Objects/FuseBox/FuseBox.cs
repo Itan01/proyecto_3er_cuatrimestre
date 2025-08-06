@@ -5,6 +5,7 @@ using UnityEngine;
 public class FuseBox : MonoBehaviour , ISoundInteractions
 {
     private Animator _animator;
+    private bool _playOnce=false;
 
     private void Start()
     {
@@ -15,7 +16,12 @@ public class FuseBox : MonoBehaviour , ISoundInteractions
         if (PlayerShootIt)
         {
             _animator.SetTrigger("destroy");
-            AudioStorage.Instance.RoombaExplosion();
+            if (!_playOnce)
+            {
+                AudioStorage.Instance.RoombaExplosion();
+                _playOnce = true;
+            }
+
         }
     }
 }
