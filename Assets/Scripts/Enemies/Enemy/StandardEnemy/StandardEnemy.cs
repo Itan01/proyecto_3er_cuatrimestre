@@ -46,7 +46,7 @@ public class StandardEnemy : AbstractEnemy
 
     protected void ConditionMoveBasePath()
     {
-        if (_agent.remainingDistance <= 0.25f)
+        if (_agent.remainingDistance <= _shortDistance)
         {
             _index++;
             if (_index >= _positions.Length) _index = 0;

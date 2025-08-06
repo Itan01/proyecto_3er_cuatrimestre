@@ -99,10 +99,11 @@ public class PlayerController
         }
         else
         {
+            _area.Desactivate();
             if (_grabbing)
             {
                 _animator.SetBool("Grabbing", false);
-                _area.Desactivate();
+               
             }
         }
 
