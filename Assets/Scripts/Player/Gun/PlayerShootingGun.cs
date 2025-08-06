@@ -81,6 +81,10 @@ public class PlayerShootingGun
         _soundReference = null;
         UIManager.Instance.UISound.ClearSound();
     }
+    public Vector3 GetLastHitPoint()
+    {
+        return _hitPoint.point;
+    }
 
 }
 

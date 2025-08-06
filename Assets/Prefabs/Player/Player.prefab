@@ -142,20 +142,16 @@ MonoBehaviour:
   _soundMask:
     serializedVersion: 2
     m_Bits: 268435456
-  _enviormentMask:
-    serializedVersion: 2
-    m_Bits: 3980394496
-  _interactMask:
-    serializedVersion: 2
-    m_Bits: 4194304
-  _enviormentMaskWithOutPlayer:
-    serializedVersion: 2
-    m_Bits: 3854565376
   _camTransform: {fileID: 0}
   _modelTransform: {fileID: 7960441272055168766}
   _spawnProyectil: {fileID: 7472403954870710889}
   _hipsPosition: {fileID: 2461632698473160298}
   _megaphoneTransform: {fileID: 2215810273592987602}
+  _particlesInvisible: {fileID: 0}
+  _surfaceModel: {fileID: 0}
+  _joinModel: {fileID: 0}
+  _baseColorMaterial: []
+  _JoinColorMaterial: []
 --- !u!65 &7747024848938081973
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -12241,6 +12237,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: af4c61906f47c6d4a9d95bb0ead82e5c, type: 3}
       insertIndex: -1
       addedObject: {fileID: 8040371663833047293}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: af4c61906f47c6d4a9d95bb0ead82e5c, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 8340079474840154983}
   m_SourcePrefab: {fileID: 100100000, guid: af4c61906f47c6d4a9d95bb0ead82e5c, type: 3}
 --- !u!4 &2461632698473160298 stripped
 Transform:
@@ -12255,6 +12254,11 @@ Transform:
 --- !u!4 &4041340604694785149 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -3321919801592875672, guid: af4c61906f47c6d4a9d95bb0ead82e5c, type: 3}
+  m_PrefabInstance: {fileID: 7634606684316997909}
+  m_PrefabAsset: {fileID: 0}
+--- !u!95 &4078299723474740356 stripped
+Animator:
+  m_CorrespondingSourceObject: {fileID: 5866666021909216657, guid: af4c61906f47c6d4a9d95bb0ead82e5c, type: 3}
   m_PrefabInstance: {fileID: 7634606684316997909}
   m_PrefabAsset: {fileID: 0}
 --- !u!4 &4722639846596317117 stripped
@@ -12279,6 +12283,24 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5e9efd74065992a43b21bf8c288acd9f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &8340079474840154983
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7292167298511840324}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 91b7f366b420b7e43918be6fb5fced7c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  animator: {fileID: 4078299723474740356}
+  lookWeight: 1
+  bodyWeight: 0.6
+  headWeight: 1
+  eyesWeight: 1
+  clampWeight: 0.5
 --- !u!4 &7960441272055168766 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: af4c61906f47c6d4a9d95bb0ead82e5c, type: 3}
