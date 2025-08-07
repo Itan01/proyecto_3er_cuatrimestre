@@ -9,12 +9,14 @@ public class StandardEnemy : AbstractEnemy
     [SerializeField] protected int _index;
     protected override void Start()
     {
-        base.Start();
         for (int i = 0; i < _positions.Length; i++)
         {
             _positions[i] += transform.position;
         }
         _positions[0] = transform.position;
+        
+        base.Start();
+        _animator.SetBool("isMoving", true);
     }
     protected override void Update()
     {
@@ -41,12 +43,13 @@ public class StandardEnemy : AbstractEnemy
         _previousmovement = MoveBasePath;
         _movement = ConditionMoveBasePath;
         _nextmovement = MoveBasePath;
+
         Debug.Log("Yendo a donde escucho");
     }
 
     protected void ConditionMoveBasePath()
     {
-        if (_agent.remainingDistance <= _shortDistance)
+        if (_agent.remainingDistance <= 0.25f)
         {
             _index++;
             if (_index >= _positions.Length) _index = 0;
