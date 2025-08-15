@@ -1,8 +1,6 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
-using System.Runtime.InteropServices.WindowsRuntime;
-using System.Threading;
-using System.Timers;
 using UnityEngine;
 using UnityEngine.AI;
 public abstract class AbstractEnemy : EntityMonobehaviour, ISoundInteractions
@@ -20,13 +18,10 @@ public abstract class AbstractEnemy : EntityMonobehaviour, ISoundInteractions
     protected float _searchDuration = 20.0f; // El tiempo que busca al player luego de que este salga del RadiusToHear
     protected float _resetTimerRef = 1.0f;
     [SerializeField] protected bool _watchingPlayer = false;
-    protected bool _isRunning = false, _questionBool;
-    protected int _questionIndex;
-    public delegate void Setter();
-    protected Setter _movement;
-    protected Setter _previousmovement;
-    protected Setter _nextmovement;
-    protected Setter _gamemode;
+    protected bool _isRunning = false, _qMBool;
+    protected int _qMIndex;
+    protected Action Condition, PreMovement, NextMovement;
+    protected Action _gamemode;
     protected override void Awake()
     {
         GetComponentInParent<RoomManager>().AddToList(this);
@@ -35,11 +30,12 @@ public abstract class AbstractEnemy : EntityMonobehaviour, ISoundInteractions
     protected override void Start()
     {
         RoomManager Room = GetComponentInParent<RoomManager>();
-        Room.DetPlayer += MoveFollowToPlayerPosition;
+        Room.DetPlayer += CondToTargetPosition;
         Room.FindPlayer += MoveTimerTarget;
         base.Start();
+        GetScriptCompo();
         _questionMark = GetComponentInChildren<QuestionMarkManager>();
-        SetMode(MoveBasePath);
+        SetNewMode(MovPatrol);
     }
 
     // Update is called once per frame
@@ -47,7 +43,7 @@ public abstract class AbstractEnemy : EntityMonobehaviour, ISoundInteractions
     {
         if (!_activate) return;
         base.Update();
-        _movement();
+        Condition();
     }
     protected override void FixedUpdate()
     {
@@ -58,117 +54,123 @@ public abstract class AbstractEnemy : EntityMonobehaviour, ISoundInteractions
         if (Entity.gameObject.GetComponent<PlayerManager>())
         {
             GameManager.Instance.ResetGameplay();
-            SetMode(MoveResetPath);
+            SetNewMode(MoveResetPath);
             _nextPosition = _startPosition;
         }
     }
 
     public void EnterConfusedState()
     {
-        SetMode(MoveConfused);
+        SetNewMode(MovConfuse);
     }
     public void Respawn()
     {
         Debug.Log("Respawn");
         _agent.Warp(_startPosition);
-        SetMode(MoveBasePath);
+        SetNewMode(MovPatrol);
     }
     #region InternalFunctions
-    protected void SetMode(Setter TypeOfMovement)
+    protected void SetNewMode(Action NewMovement)
     {
-        _gamemode = TypeOfMovement;
+        _gamemode = NewMovement;
         _gamemode();
-        _questionMark.Setting(_questionBool, _questionIndex);
-        _animator.SetBool("isMoving", _isMoving);
-        _animator.SetBool("isRunning", _isRunning);
     }
-    protected override void GetScripts()
+    protected virtual void GetScriptCompo()
     {
-        _agent = GetComponent<NavMeshAgent>();
+    _agent = GetComponent<NavMeshAgent>();
         _startPosition = transform.position;
+    }
+
+    protected virtual void TreeNode()
+    {
+        var ChaseTarget = new EnemyAction(MovChaseTarget);
+        var FollowPosition = new EnemyAction(MovFollowPosition);
+        var Confused = new EnemyAction(MovConfuse);
+        var HearingNoise= new EnemyAction(MoveStartHearing);
+        var CheckZone = new EnemyAction(MoveLooking);
+
+        //var CheckWatchingPlayer();
     }
     #endregion
     #region TypeOfMovement
-    protected virtual void MoveResetPath()
-    {
+
+    public void SetBehaviourValues(bool isMoving,bool isRunning, bool QMState, int QMSprite, float speed, Action NewCondition) 
+    { 
+        _isMoving = isMoving;
+        _isRunning = isRunning;
+        _qMBool = QMState;
+        _qMIndex = QMSprite;
+        _agent.speed = speed;
+        Condition = NewCondition;
+        ApplyBehaviourValues();
     }
-    protected virtual void MoveFollowTarget() // Persigue al Jugador
+    public void ApplyBehaviourValues()
     {
-        _isMoving = true;
-        _isRunning = true;
-        _agent.speed = _runSpeed;
-        _questionBool = true;
-        _questionIndex = 1;
+        _animator.SetBool("isMoving", _isMoving);
+        _animator.SetBool("isRunning", _isRunning);
+        _questionMark.SetMark(_qMBool, _qMIndex);
+    }
+    protected virtual void MoveResetPath(){}
+    protected virtual void MovPatrol(){ } // patron normal (Esta en distintos scripts "StandEnemy""StandardEnemy")
+
+    protected virtual void MovChaseTarget() // Persigue al Jugador
+    {
+        SetBehaviourValues(true,true, true, 1, _baseSpeed, CondChaseTarget);
         _mode = 1;
-        transform.LookAt(_nextPosition);
-        _previousmovement = MoveFollowTarget;
-        _movement = ConditionMoveFollowTarget;
-        _nextmovement = MoveFollowTarget;
-        _agent.destination = _nextPosition;
+        PreMovement = MovChaseTarget;
+        Condition = CondChaseTarget;
+        NextMovement = MovChaseTarget;
+        _agent.SetDestination(_nextPosition);
         AudioStorage.Instance.EnemyAlert();
         Debug.Log("Mirando Al Jugador");
     }
     protected virtual void MoveTimerTarget() // Persigue al Jugador
     {
-        SetMode(MoveFollowTarget);
+        SetNewMode(MovChaseTarget);
     }
-    protected void ConditionMoveFollowTarget()
+    protected void CondChaseTarget()
     {
         _nextPosition = GameManager.Instance.PlayerReference.transform.position;
         _agent.destination = _nextPosition;
 
     }
-    protected void MoveFollowSound() // Persigue al lugar donde se genero el Sonido
+    protected void MovFollowPosition() // Camina a una posicion
     {
-        _isMoving = true;
-        _isRunning = false;
-        _agent.speed = _baseSpeed;
-        _questionBool = true;
-        _questionIndex = 0;
+        SetBehaviourValues(true, false, true, 0, _baseSpeed, CondReachPosition);
         _mode = 2;
-        _previousmovement = MoveFollowSound;
-        _movement = ConditionToReachPosition;
-        _nextmovement = MoveLooking;
-        _agent.destination = _nextPosition;
+        PreMovement = MovFollowPosition;
+        NextMovement = MoveLooking;
+        _agent.SetDestination(_nextPosition);
         transform.LookAt(_nextPosition);
         Debug.Log("Yendo a donde escucho");
-
     }
-    protected void MoveFollowToPlayerPosition() // Persigue al lugar donde se genero el Sonido
+    protected void CondToTargetPosition() // Persigue al lugar donde se genero el Sonido
     {
         if (_mode == 1) return;
         _nextPosition= GameManager.Instance.PlayerReference.transform.position;
-        MoveFollowSound();
-        Debug.Log("Yendo a la posibleUbicacion del Player");
-
+        MovFollowPosition();
+        Debug.Log("Yendo a la posible Ubicacion del Player");
     }
 
-    protected void ConditionToReachPosition()
+    protected void CondReachPosition()
     {
         if (_agent.remainingDistance < _shortDistance)
         {
-            SetMode(_nextmovement);
+            SetNewMode(NextMovement);
         }
     }
 
-    protected virtual void MoveBasePath() // patron normal (Esta en distintos scripts "StandEnemy""StandardEnemy")
+
+    protected void MovConfuse()// Confundido (ve al player) es decir, se queda quieto en el lugar pero NO LO BUSCA, esto es solo por vision, no por radiustohear
     {
-    }
-    protected void MoveConfused()// Confundido (ve al player) es decir, se queda quieto en el lugar pero NO LO BUSCA, esto es solo por vision, no por radiustohear
-    {
-        _isMoving = false;
-        _isRunning = false;
-        _agent.speed = 0.0f;
-        _questionBool = true;
-        _questionIndex = 0;
+        SetBehaviourValues(false, false, true, 0, 0.0f, CondTimerConfused);
         _mode = 3;
         _resetTimer = _resetTimerRef;
         _timer = _confusedDuration;
-        _movement = ConditionsMoveConfused;
         transform.LookAt(GameManager.Instance.PlayerReference.transform.position);
         AudioStorage.Instance.EnemyConfusedSound();
     }
-    protected void ConditionsMoveConfused()
+    protected void CondTimerConfused()
     {
         _timer -= Time.deltaTime;
        
@@ -176,65 +178,55 @@ public abstract class AbstractEnemy : EntityMonobehaviour, ISoundInteractions
         {
             _resetTimer -= Time.deltaTime;
             if (_resetTimer <0)
-                SetMode(_previousmovement);
+                SetNewMode(PreMovement);
         }
         if (_timer < 0.0f)
         {
-            SetMode(MoveFollowTarget);
+            SetNewMode(MovChaseTarget);
         }
     }
     protected void MoveLooking()
     {
-        _isMoving = false;
-        _isRunning = false;
-        _agent.speed = 0.0f;
-        _questionBool = true;
-        _questionIndex = 0;
         _mode = 4;
         _timer = 2.5f;
-        _previousmovement = MoveBasePath;
-        _movement = ConditionToFinishTimer;
-        _nextmovement = MoveBasePath;
+        SetBehaviourValues(false, false, true, 0, 0.0f, CondTimer);
+
+        PreMovement = MovPatrol;
+        NextMovement = MovPatrol;
         _animator.SetTrigger("isLooking");
         AudioStorage.Instance.EnemyHmm();
         Debug.Log("Viendo alrededor");
     }
-    protected void ConditionToFinishTimer()
+    protected void CondTimer()
     {
         _timer -= Time.deltaTime;
         if (_timer < 0.0f)
         {
-            SetMode(_nextmovement);
+            SetNewMode(NextMovement);
         }
     }
 
     protected void MoveStartHearing() // Persigue al Jugador
     {
-        _isMoving = false;
-        _isRunning = false;
-        _agent.speed = 0.0f;
-        _questionBool = true;
-        _questionIndex = 0;
         _timer = 2.1f;
-        _animator.SetTrigger("isHearing");
         _mode = 5;
-        _previousmovement = MoveBasePath;
-        _movement = ConditionToFinishTimer;
-        _nextmovement = MoveFollowSound;
+        SetBehaviourValues(false, false, true, 0, 0.0f, CondTimer);
+        _animator.SetTrigger("isHearing");
+        PreMovement = MovFollowPosition;
+        NextMovement = MovFollowPosition;
         AudioStorage.Instance.EnemyConfusedSound();
     }
-    protected virtual void MoveStunned() // Persigue al Jugador
+    protected void MovStunned() // Persigue al Jugador
     {
-        _isMoving = false;
-        _isRunning = false;
+        _questionMark.SetMark(false, 0);
+        _animator.SetBool("isMoving", false);
+        _animator.SetBool("isRunning", false);
         _agent.speed = 0.0f;
-        _questionBool = false;
-        _questionIndex = 0;
         _mode = 6;
         _timer = 2.45f;
         _animator.SetTrigger("Stun");
-        _movement = ConditionToFinishTimer;
-        _nextmovement = MoveBasePath;
+        Condition = CondTimer;
+        NextMovement = MovPatrol;
         //AudioStorage.Instance.EnemyTensionSound();
         Debug.Log("Stunned");
     }
@@ -248,13 +240,13 @@ public abstract class AbstractEnemy : EntityMonobehaviour, ISoundInteractions
     public void SetModeByIndex(int State)
     {
         if (State == 2)
-            SetMode(MoveFollowSound);
+            SetNewMode(MovFollowPosition);
         else if (State == 3)
-            SetMode(MoveConfused);
+            SetNewMode(MovConfuse);
         else if (State == 5)
-            SetMode(MoveStartHearing);
+            SetNewMode(MoveStartHearing);
         else
-            SetMode(MoveBasePath);
+            SetNewMode(MovPatrol);
     }
     public int GetMode()
     {
@@ -278,20 +270,21 @@ public abstract class AbstractEnemy : EntityMonobehaviour, ISoundInteractions
     {
         return _activate;
     }
-    #endregion
     public void IIteraction(bool PlayerShootIt)
     {
         if (PlayerShootIt)
         {
             Debug.Log("HIII");
-            SetMode(MoveStunned);
+            SetNewMode(MovStunned);
         }
     }
     public void ForceRepath()
     {
         if (!_agent.enabled) return;
-        _agent.ResetPath(); 
-        _agent.SetDestination(_nextPosition); 
+        _agent.ResetPath();
+        _agent.SetDestination(_nextPosition);
     }
+    #endregion
+
 
 }

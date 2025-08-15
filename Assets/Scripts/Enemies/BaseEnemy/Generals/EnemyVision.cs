@@ -1,16 +1,16 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-[ExecuteAlways]
+//[ExecuteAlways]
 [RequireComponent(typeof(MeshFilter), typeof(MeshRenderer))]
 public class EnemyVision : MonoBehaviour
 {
     [Header("FOV Settings")]
-    [Range(1, 360)] public float viewAngle = 90f;
-    [Range(1, 180)] public float verticalFOV = 60f;
-    public float viewRadius = 10f;
-    public int horizontalRayCount = 100;
-    public int verticalRayCount = 30;
+    [Range(1, 360)][SerializeField] private float viewAngle = 90f;
+    [Range(1, 180)][SerializeField] private float verticalFOV = 60f;
+    [SerializeField] private float viewRadius = 10f;
+    [SerializeField] private int horizontalRayCount = 100;
+    [SerializeField] private int verticalRayCount = 30;
 
     [Header("Layer Masks")]
     private LayerMask obstacleMask;

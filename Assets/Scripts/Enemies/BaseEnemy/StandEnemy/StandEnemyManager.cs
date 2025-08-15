@@ -12,7 +12,7 @@ public class StandEnemyManager : AbstractEnemy
     protected override void Start()
     {
         base.Start();
-        SetMode(MoveBasePath);
+        SetNewMode(MovPatrol);
     }
     protected override void Update()
     {
@@ -24,13 +24,13 @@ public class StandEnemyManager : AbstractEnemy
     {
     }
 
-    protected override void MoveBasePath() // patron normal (Esta en distintos scripts "StandEnemy""StandardEnemy")
+    protected override void MovPatrol() // patron normal (Esta en distintos scripts "StandEnemy""StandardEnemy")
     {
         _mode = 0;
         _isMoving = true;
         _isRunning = false;
-        _questionBool = false;
-        _questionIndex = 0;
+        _qMBool = false;
+        _qMIndex = 0;
         _agent.speed = _baseSpeed;
         _nextPosition = _startPosition;
         _agent.destination = _nextPosition;
@@ -40,8 +40,8 @@ public class StandEnemyManager : AbstractEnemy
         _mode = -1;
         _isMoving = false;
         _isRunning = false;
-        _questionBool = false;
-        _questionIndex = 1;
+        _qMBool = false;
+        _qMIndex = 1;
         _agent.speed = 0.0f;
         _nextPosition = _startPosition;
         _timer = -1f;

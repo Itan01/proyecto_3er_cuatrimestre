@@ -12,13 +12,11 @@ public abstract class EntityMonobehaviour : MonoBehaviour
     protected bool coughCondition = false;
     protected float coughTimer = 2f, coughTimerReference = 2f, deathTimer = 10f, deathTimerReference = 10f;
     [SerializeField] Transform HeadReference;
-    
-
     [SerializeField] protected bool _makeNoise, _summonedByPlayer = false;
     [SerializeField] protected float _noiseTimer = 0.5f, _noiseTimerRef = 0.5f;
-    [SerializeField] protected bool _isMoving = false;
+    protected bool _isMoving = false;
     protected bool _isDeath = false;
-    [SerializeField] protected bool _isCrouching = false;
+    protected bool _isCrouching = false;
     protected virtual void Awake()
     {
 
@@ -26,7 +24,6 @@ public abstract class EntityMonobehaviour : MonoBehaviour
     protected virtual void Start()
     {
         GetComponents();
-        GetScripts();
     }
     protected virtual void Update()
     {
@@ -50,10 +47,6 @@ public abstract class EntityMonobehaviour : MonoBehaviour
         _animator = GetComponentInChildren<Animator>();
         _capsuleCollider = GetComponent<CapsuleCollider>();
         _boxCollider = GetComponent<BoxCollider>();
-    }
-    protected virtual void GetScripts()
-    {
-
     }
     public void SetSoundInvoker(bool State)
     {

@@ -6,7 +6,7 @@ using UnityEngine;
 public class StandardEnemy : AbstractEnemy
 {
     [SerializeField] protected Vector3[] _positions;
-    [SerializeField] protected int _index;
+    [SerializeField] protected int _indexPosition;
     protected override void Start()
     {
         for (int i = 0; i < _positions.Length; i++)
@@ -27,33 +27,31 @@ public class StandardEnemy : AbstractEnemy
     }
     protected override void MoveResetPath() // patron normal (Esta en distintos scripts "StandEnemy""StandardEnemy")
     {
-        _index = 0;
-        SetMode(MoveBasePath);
+        _indexPosition = 0;
+        SetNewMode(MovPatrol);
     }
-    protected override void MoveBasePath() // patron normal (Esta en distintos scripts "StandEnemy""StandardEnemy")
+    protected override void MovPatrol() // patron normal (Esta en distintos scripts "StandEnemy""StandardEnemy")
     {
         _mode = 0;
-        _isMoving = true;
-        _isRunning = false;
-        _questionBool = false;
-        _questionIndex = 0;
+        _questionMark.SetMark(false, 0);
+        _animator.SetBool("isMoving", true);
+        _animator.SetBool("isRunning", false);
         _agent.speed = _baseSpeed;
-        _nextPosition = _positions[_index];
+        _nextPosition = _positions[_indexPosition];
         _agent.destination = _nextPosition;
-        _previousmovement = MoveBasePath;
-        _movement = ConditionMoveBasePath;
-        _nextmovement = MoveBasePath;
-
+        PreMovement = MovPatrol;
+        Condition = CondPatrol;
+        NextMovement = MovPatrol;
         Debug.Log("Yendo a donde escucho");
     }
 
-    protected void ConditionMoveBasePath()
+    protected void CondPatrol()
     {
-        if (_agent.remainingDistance <= 0.25f)
+        if (_agent.remainingDistance <= _shortDistance)
         {
-            _index++;
-            if (_index >= _positions.Length) _index = 0;
-            _nextPosition = _positions[_index];
+            _indexPosition++;
+            if (_indexPosition >= _positions.Length) _indexPosition = 0;
+            _nextPosition = _positions[_indexPosition];
             _agent.destination = _nextPosition;
         }
     }

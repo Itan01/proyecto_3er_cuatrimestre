@@ -65,8 +65,9 @@ public class PlayerManager : EntityMonobehaviour
         if (UIManager.Instance.IsMenuActive()) return; // bloquea inputs si el menú está activo
         _scriptController.Inputs();
     }
-    protected override void GetScripts()
+    protected override void GetComponents()
     {
+        base.GetComponents();
         _scriptCollider = new SetSizeCollider(_capsuleCollider, _boxCollider);
         _scriptShootingGun = new PlayerShootingGun(_megaphoneTransform, _camTransform, _modelTransform);
         _scriptInteractions = new PlayerInteractions(_animator);
