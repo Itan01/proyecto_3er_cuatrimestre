@@ -25,7 +25,7 @@ public class GameManager : MonoBehaviour
     private PlayerManager _player;
     private List<AbstractEnemy> _enemies = new List<AbstractEnemy>();
 
-    private bool _ShowComicEntry;
+    private bool _ShowComicEntry=true;
     public bool ShowComicEntry 
     {
         get { return _ShowComicEntry; }

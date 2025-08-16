@@ -50,7 +50,7 @@ public class PlayerManager : EntityMonobehaviour
 
     protected override void Update()
     {
-        if (_isDeath || _HasNoControl) return;
+        if (_isDeath || !_HasNoControl) return;
         base.Update();
         CheckInputs();
         if(SubtractTimer!= null)
