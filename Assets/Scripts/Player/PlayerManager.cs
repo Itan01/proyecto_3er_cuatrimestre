@@ -32,6 +32,7 @@ public class PlayerManager : EntityMonobehaviour
     [SerializeField] private Material[] _baseColorMaterial;
    [SerializeField] private Material[] _JoinColorMaterial;
     public event Action SubtractTimer;
+    private bool _HasNoControl=false;
 
     protected override void Awake()
     {
@@ -49,7 +50,7 @@ public class PlayerManager : EntityMonobehaviour
 
     protected override void Update()
     {
-        if (_isDeath) return;
+        if (_isDeath || _HasNoControl) return;
         base.Update();
         CheckInputs();
         if(SubtractTimer!= null)
@@ -124,6 +125,10 @@ public class PlayerManager : EntityMonobehaviour
     public bool GetInvisible()
     {
         return _invisible;
+    }
+    public void SetIfPlayerCanMove(bool state)
+    {
+        _HasNoControl = state;
     }
     public void PlayerCanShoot(bool State)
     {
