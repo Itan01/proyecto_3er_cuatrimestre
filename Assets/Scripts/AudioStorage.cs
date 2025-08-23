@@ -2,10 +2,20 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class AudioStorage : MonoBehaviour
+public class AudioStorage : MonoBehaviour 
 {
+    /*Son getters & setters, seria como una biblioteca
+    los otros scripts llaman a este para obtener el audio respecitvo
+
+    AudioStorage.Instance.(nombre del Getter&Setter)
+
+
+
+     */
+
     [SerializeField] private AudioClip _glassSound, _smokeTrapSound, _laserAlarm, _zapSound;
     [Header("<color=green>Player Sounds</color>")]
+    Dictionary<EnumAudioClips, AudioClip> _player;
     [SerializeField] private AudioClip _Dash;
     [SerializeField] private AudioClip _crashSound;
     [SerializeField] private AudioClip _shootingSound;
@@ -29,17 +39,24 @@ public class AudioStorage : MonoBehaviour
     [Header("<color=green>UI Sounds</color>")]
     [SerializeField] private AudioClip _countPoints;
     public static AudioStorage Instance;
+    private void Awake()
+    {
+        Instance = this;
+        
+    }
+    private void Start()
+    {
+        AddingPlayerAudios();
+    }
+
+    public AudioClip PlayerSound(EnumAudioClips clip)
+    {
+        return _player[clip];
+    }
     public AudioClip EnemySound()
     {
 
         return _enemyConfusedSound;
-    }
-
-
-    private void Awake()
-    {
-        Instance = this;
-
     }
     public void CrashSound()
     {
@@ -120,6 +137,13 @@ public class AudioStorage : MonoBehaviour
     public void CountPoints()
     {
         AudioManager.Instance.PlaySFX(_countPoints, _soundVolume - 0.3f);
+    }
+    #endregion
+
+    #region PlayerAudioss
+    public void AddingPlayerAudios()
+    {
+        _player.Add(EnumAudioClips.PlayerDash, _Dash);
     }
     #endregion
 }

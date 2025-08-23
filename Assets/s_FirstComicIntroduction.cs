@@ -28,6 +28,7 @@ public class s_FirstComicIntroduction : MonoBehaviour
 
     public void Desactivate() 
     {
+        GameManager.Instance.ShowComicEntry = false;
         StartCoroutine(FadeOut());
 
     }

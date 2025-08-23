@@ -12,7 +12,8 @@ public class UIManager : MonoBehaviour
     private void Awake()
     {
         Instance = this;
-    }
+       _menuPause= FindAnyObjectByType<s_pauseMenu>();
+    }       
 
     #endregion
     private PlayerManager _player;
@@ -28,8 +29,12 @@ public class UIManager : MonoBehaviour
         _player = GameManager.Instance.PlayerReference;
         StartCoroutine(PlayAnimationAfterLoad());
     }
-
-    public GameObject pauseMenu;
+    [SerializeField] private s_pauseMenu _menuPause;
+    public s_pauseMenu MenuPause
+    {
+        get { return _menuPause; }
+        set { _menuPause = value; }
+    }
     private void Update()
     {
         if (Input.GetKeyDown(KeyCode.Escape))
@@ -215,9 +220,9 @@ public class UIManager : MonoBehaviour
     private bool isMenuON;
     public void Resume()
     {
-        pauseMenu.SetActive(false);
-        Time.timeScale = 1f;
-        isMenuON = false;
+        _menuPause.SetActivate(false);
+        Time.timeScale = 1f; // Descongela La Pantalla
+        isMenuON = false; 
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
 
@@ -226,9 +231,9 @@ public class UIManager : MonoBehaviour
     }
     private void Pause()
     {
-        pauseMenu.SetActive(true);
+        _menuPause.SetActivate(true);
         StartCoroutine(EnableMenuSafely());
-        Time.timeScale = 0f;
+        Time.timeScale = 0f;         // Congela La Pantalla 
         isMenuON = true;
         Cursor.lockState = CursorLockMode.None;
         Cursor.visible = true;

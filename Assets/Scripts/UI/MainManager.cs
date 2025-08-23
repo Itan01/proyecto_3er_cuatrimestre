@@ -19,7 +19,24 @@ public class MainManager : MonoBehaviour
     [SerializeField] private bool _animationIsPlaying;
 
 
-    public void LoadSceneInMenu(string sceneName)
+    public void LoadScene(string sceneName)
+    {
+        if (!_isLoading)
+            StartCoroutine(LoadAsyn(sceneName));
+    }
+    private IEnumerator LoadAsyn(string sceneName)
+    {
+        _isLoading = true;
+        AsyncOperation asynOp = SceneManager.LoadSceneAsync(sceneName);
+        asynOp.allowSceneActivation = false;
+        while (asynOp.progress < 0.9f) // si la escena esta antes de que termine la animacion, que espere hasta que la misma termine
+        {
+            yield return null;
+        }
+        asynOp.allowSceneActivation = true;// la escena no se actualiza hasta que cambias a otra ventana
+        _isLoading = false;
+    }
+    public void LoadSceneWithAnimation(string sceneName)
     {
         if (!_isLoading)
             StartCoroutine(LoadAsynInMenu(sceneName));
