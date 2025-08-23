@@ -141,7 +141,7 @@ public class AudioStorage : MonoBehaviour
     #endregion
 
     #region PlayerAudioss
-    public void AddingPlayerAudios()
+    private void AddingPlayerAudios()
     {
         _player.Add(EnumAudioClips.PlayerDash, _Dash);
     }
