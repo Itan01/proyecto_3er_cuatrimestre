@@ -17,6 +17,7 @@ public class StandardEnemy : AbstractEnemy
         
         base.Start();
         _animator.SetBool("isMoving", true);
+        SetNewMode(MovPatrol);
     }
     protected override void Update()
     {

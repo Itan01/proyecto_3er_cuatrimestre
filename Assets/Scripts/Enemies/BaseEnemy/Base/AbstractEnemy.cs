@@ -33,10 +33,15 @@ public abstract class AbstractEnemy : EntityMonobehaviour, ISoundInteractions
         RoomManager Room = GetComponentInParent<RoomManager>();
         Room.DetPlayer += CondToTargetPosition;
         Room.FindPlayer += MoveTimerTarget;
+        Room.DesActRoom += DesActivation;
+        Room.ActRoom += Activation;
         base.Start();
         GetScriptCompo();
         _questionMark = GetComponentInChildren<QuestionMarkManager>();
-        SetNewMode(MovPatrol);
+        if (!Room.IsRoomActivate())
+        {
+           DesActivation();
+        }
     }
 
     // Update is called once per frame
@@ -92,6 +97,17 @@ public abstract class AbstractEnemy : EntityMonobehaviour, ISoundInteractions
 
         //var CheckWatchingPlayer();
     }
+
+    public void Activation()
+    {
+        gameObject.SetActive(true);
+        _activate = true;
+    }
+    public void DesActivation()
+    {
+        gameObject.SetActive(false);
+        _activate = false;
+    }
     #endregion
     #region TypeOfMovement
 
@@ -103,7 +119,8 @@ public abstract class AbstractEnemy : EntityMonobehaviour, ISoundInteractions
         _qMIndex = QMSprite;
         _agent.speed = speed;
         Condition = NewCondition;
-        _clip = clip;
+        if (clip != null)
+            _clip = clip;
         ApplyBehaviourValues();
     }
     public void ApplyBehaviourValues()
@@ -142,6 +159,7 @@ public abstract class AbstractEnemy : EntityMonobehaviour, ISoundInteractions
         SetBehaviourValues(true, false, true, 0, _baseSpeed, CondReachPosition, null);
         _mode = 2;
         PreMovement = MovFollowPosition;
+        Condition = CondReachPosition;
         NextMovement = MoveLooking;
         _agent.SetDestination(_nextPosition);
         transform.LookAt(_nextPosition);
@@ -281,6 +299,6 @@ public abstract class AbstractEnemy : EntityMonobehaviour, ISoundInteractions
         _agent.SetDestination(_nextPosition);
     }
     #endregion
-
+    
 
 }
