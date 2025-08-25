@@ -11,6 +11,7 @@ public class s_FirstComicIntroduction : MonoBehaviour
     {
         if (!GameManager.Instance.ShowComicEntry)
         {
+            GameManager.Instance.PlayerReference.SetIfPlayerCanMove(true);
             gameObject.SetActive(false);
         }
         else
@@ -21,7 +22,7 @@ public class s_FirstComicIntroduction : MonoBehaviour
 
     private void Update()
     {
-        if (Input.anyKeyDown && !_isTransitioning)
+        if (Input.anyKeyDown && !_isTransitioning && !Input.GetKey(KeyCode.Escape))
             Transition();
     }
     private void Transition()

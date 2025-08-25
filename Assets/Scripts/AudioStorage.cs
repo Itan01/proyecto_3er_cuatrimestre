@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class AudioStorage : MonoBehaviour 
+public class AudioStorage : MonoBehaviour
 {
     /*Son getters & setters, seria como una biblioteca
     los otros scripts llaman a este para obtener el audio respecitvo
@@ -14,69 +14,80 @@ public class AudioStorage : MonoBehaviour
      */
 
     [SerializeField] private AudioClip _glassSound, _smokeTrapSound, _laserAlarm, _zapSound;
+
     [Header("<color=green>Player Sounds</color>")]
-    Dictionary<EnumAudioClips, AudioClip> _player;
+
     [SerializeField] private AudioClip _Dash;
-    [SerializeField] private AudioClip _crashSound;
+    [SerializeField] private AudioClip _walking;
+    Dictionary<EnumAudios, AudioClip> _player = new Dictionary<EnumAudios, AudioClip>();
+
+    [Header("<color=green>PlayerGun Sounds</color>")]
     [SerializeField] private AudioClip _shootingSound;
     [SerializeField] private AudioClip _grabbingSound;
+    Dictionary<EnumAudios, AudioClip> _gun = new Dictionary<EnumAudios, AudioClip>();
+
     [Header("<color=green>Lights Sound </color>")]
     [SerializeField] private AudioClip _LightSwitch;
     [Header("<color=green>Roomba Sounds</color>")]
+    [SerializeField] private AudioClip _crashSound;
     [SerializeField] private AudioClip _Roombaexplosion;
+
+    Dictionary<EnumAudios, AudioClip> _soundsGameObjects = new Dictionary<EnumAudios, AudioClip>();
     [Header("<color=green>Enemy Sounds</color>")]
-    [SerializeField] private AudioClip _enemyConfusedSound;
+    [SerializeField] private AudioClip _enemyConfused;
     [SerializeField] private AudioClip _enemyAlert;
     [SerializeField] private AudioClip _enemyHmm;
+    [SerializeField] private AudioClip _enemyHurt;
+
+    Dictionary<EnumAudios, AudioClip> _standardEnemy = new Dictionary<EnumAudios, AudioClip>();
     [Header("<color=green>Door Sounds</color>")]
     [SerializeField] private AudioClip _openDoorSound;
     [SerializeField] private AudioClip _closeDoorSound;
     [Header("<color=green>Camera Sounds</color>")]
+
     [SerializeField] private AudioClip _cameraDetection;
     [SerializeField] private AudioClip _cameraResetting;
     [SerializeField] private float _soundVolume = 1f;
+    Dictionary<EnumAudios, AudioClip> _camera = new Dictionary<EnumAudios, AudioClip>();
 
     [Header("<color=green>UI Sounds</color>")]
     [SerializeField] private AudioClip _countPoints;
     public static AudioStorage Instance;
     private void Awake()
     {
+        if(!Instance)
         Instance = this;
-        
+        else
+            DontDestroyOnLoad(this);
+       
     }
     private void Start()
     {
-        AddingPlayerAudios();
+        LoadAudios();
     }
-
-    public AudioClip PlayerSound(EnumAudioClips clip)
+    public AudioClip PlayerSound(EnumAudios clip)
     {
         return _player[clip];
     }
-    public AudioClip EnemySound()
+    public AudioClip CameraSound(EnumAudios clip)
     {
-
-        return _enemyConfusedSound;
+        return _camera[clip];
     }
-    public void CrashSound()
+    public AudioClip GunSound(EnumAudios clip)
     {
-        AudioManager.Instance.PlaySFX(_crashSound, _soundVolume);
+        return _gun[clip];
     }
-    public void Dash()
+    public AudioClip StandardEnemySound(EnumAudios clip)
     {
-        AudioManager.Instance.PlaySFX(_Dash, _soundVolume);
+        return _standardEnemy[clip];
+    }
+    public AudioClip SoundsGameObject(EnumAudios clip)
+    {
+        return _soundsGameObjects[clip];
     }
     public void LightSwitch()
     {
         AudioManager.Instance.PlaySFX(_LightSwitch, _soundVolume);
-    }
-    public void ShootingSound()
-    {
-        AudioManager.Instance.PlaySFX(_shootingSound, _soundVolume);
-    }
-    public void GrabbingSound()
-    {
-        AudioManager.Instance.PlaySFX(_grabbingSound, _soundVolume);
     }
 
     public void GlassBrokenSound()
@@ -98,18 +109,6 @@ public class AudioStorage : MonoBehaviour
     {
         AudioManager.Instance.PlaySFX(_zapSound, _soundVolume);
     }
-    public void EnemyConfusedSound()
-    {
-        AudioManager.Instance.PlaySFX(_enemyConfusedSound, _soundVolume - 0.5f);
-    }
-    public void EnemyAlert()
-    {
-        AudioManager.Instance.PlaySFX(_enemyAlert, _soundVolume);
-    }
-    public void EnemyHmm()
-    {
-        AudioManager.Instance.PlaySFX(_enemyHmm, _soundVolume);
-    }
     public void RoombaExplosion()
     {
         AudioManager.Instance.PlaySFX(_Roombaexplosion, _soundVolume);
@@ -126,24 +125,25 @@ public class AudioStorage : MonoBehaviour
     }
 
     #region Camera
-    public void CameraDectection()
-    {
-        AudioManager.Instance.PlaySFX(_cameraDetection, _soundVolume - 0.3f);
-    }
-    public void CameraResetting()
-    {
-        AudioManager.Instance.PlaySFX(_cameraResetting, _soundVolume - 0.3f);
-    }
     public void CountPoints()
     {
         AudioManager.Instance.PlaySFX(_countPoints, _soundVolume - 0.3f);
     }
     #endregion
-
-    #region PlayerAudioss
-    private void AddingPlayerAudios()
+    private void LoadAudios()
     {
-        _player.Add(EnumAudioClips.PlayerDash, _Dash);
-    }
-    #endregion
+        _player.Add(EnumAudios.PlayerDash, _Dash);
+        _player.Add(EnumAudios.PlayerWalk, _walking);
+
+        _gun.Add(EnumAudios.GunShooting, _shootingSound);
+        _gun.Add(EnumAudios.GunGrabbing, _grabbingSound);
+
+        _standardEnemy.Add(EnumAudios.EnemyAlert, _enemyAlert);
+        _standardEnemy.Add(EnumAudios.EnemyChecking, _enemyHmm);
+        _standardEnemy.Add(EnumAudios.EnemyConfuse, _enemyConfused);
+        _standardEnemy.Add(EnumAudios.EnemyHurt, _enemyHurt);
+
+        _camera.Add(EnumAudios.CameraDetection, _cameraDetection);
+        _camera.Add(EnumAudios.CameraResetting, _cameraResetting);
+    } 
 }

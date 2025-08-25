@@ -32,7 +32,7 @@ public class PlayerManager : EntityMonobehaviour
     [SerializeField] private Material[] _baseColorMaterial;
    [SerializeField] private Material[] _JoinColorMaterial;
     public event Action SubtractTimer;
-    private bool _HasNoControl=false;
+    private bool _HasNoControl=true;
 
     protected override void Awake()
     {
@@ -42,7 +42,7 @@ public class PlayerManager : EntityMonobehaviour
     }
     protected override void Start()
     {
-        _summonedByPlayer = true;
+        _isThisPlayer = true;
         _areaCatching = GetComponentInChildren<GrabbingSound>();
         SetAreaCatching(false);
         base.Start();

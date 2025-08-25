@@ -16,7 +16,7 @@ public class PlayerShootingGun
     private float _maxdistance = 500f;
     private LayerMask _layerMask;
     private RaycastHit _hitPoint;
-    //[SerializeField] private AudioClip _crashSound;
+    private AudioClip _clip;
     //private float _soundVolume = 1.0f;
 
     public PlayerShootingGun(Transform SpawnProyectil, Transform Orientation, Transform Model)
@@ -25,6 +25,7 @@ public class PlayerShootingGun
         _orientation = Orientation;
         _model = Model;
         _layerMask = LayerManager.Instance.GetLayerMask(EnumLayers.ObstacleMask);
+        _clip = AudioStorage.Instance.GunSound(EnumAudios.GunShooting);
     }
     public void ThrowSound()
     {
@@ -51,11 +52,11 @@ public class PlayerShootingGun
 
     private void AvailableSound()
     {
+        AudioManager.Instance.PlaySFX(_clip, 1.0f);
         _hasASound = false;
         _model.forward = _direction;
         var NewSound = UnityEngine.Object.Instantiate(_soundReference, _spawn.position, _spawn.rotation);
         AbstractSound script = NewSound.GetComponent<AbstractSound>();
-        script.GetComponent<Rigidbody>().isKinematic = false;
         script.SetTarget(null, 0.0f);
         script.SetDirection(_direction, _speed, _size);
         script.FreezeObject(false);

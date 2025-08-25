@@ -6,8 +6,12 @@ public class PlayerAvatar : MonoBehaviour
 {
     private PlayerManager _scriptManager;
     private ParticlesManager _particles;
+    private AudioClip _audio_walk;
+    private AudioSource _audio;
     void Start()
     {
+        _audio=GetComponentInParent<AudioSource>();
+        _audio_walk = AudioStorage.Instance.PlayerSound(EnumAudios.PlayerWalk);
         _scriptManager = GetComponentInParent<PlayerManager>();
         _particles = GetComponentInChildren<ParticlesManager>();
     }
@@ -32,8 +36,13 @@ public class PlayerAvatar : MonoBehaviour
     public void PlayWalkParticles()
     {
         _particles.PlayOnce();
+        PlayWalkAudio();
     }
-
+    private void PlayWalkAudio()
+    {
+        _audio.pitch= Random.Range(0.9f,2.1f);
+        _audio.PlayOneShot(_audio_walk,0.1f);
+    }
     public void SetGravityTrue()
     {
         GetComponentInParent<Rigidbody>().useGravity = true;

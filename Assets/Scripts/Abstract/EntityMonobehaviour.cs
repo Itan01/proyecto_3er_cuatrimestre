@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -9,37 +10,27 @@ public abstract class EntityMonobehaviour : MonoBehaviour
     protected CapsuleCollider _capsuleCollider;
     protected BoxCollider _boxCollider;
     protected GameObject _noise;
-    protected bool coughCondition = false;
-    protected float coughTimer = 2f, coughTimerReference = 2f, deathTimer = 10f, deathTimerReference = 10f;
+    protected bool _isMakingNoise=false, _isCoughing = false;
+    protected float coughTimer, coughTimerReference = 2f, deathTimer = 10f, deathTimerReference = 10f, _noiseTimer, _noiseTimerRef = 0.5f;
     [SerializeField] Transform HeadReference;
-    [SerializeField] protected bool _makeNoise, _summonedByPlayer = false;
-    [SerializeField] protected float _noiseTimer = 0.5f, _noiseTimerRef = 0.5f;
+    protected bool  _isThisPlayer = false; 
     protected bool _isMoving = false;
     protected bool _isDeath = false;
     protected bool _isCrouching = false;
-    protected virtual void Awake()
-    {
-
-    }
+    protected AudioSource _audiosource;
+    protected AudioClip _clip;
+    Action VirtualUpdate;
+    protected abstract void Awake();
     protected virtual void Start()
     {
         GetComponents();
     }
     protected virtual void Update()
     {
-        if (_makeNoise && _isMoving && !_isCrouching)
-        {
-            MakeNoiseTimer();
-        }
-        if(coughCondition)
-        {
-            CoughTimerSubstract();
-        }
+        if (VirtualUpdate != null)
+        VirtualUpdate();
     }
-    protected virtual void FixedUpdate()
-    {
-
-    }
+    protected abstract void FixedUpdate();
     protected virtual void GetComponents()
     {
         _rb = GetComponent<Rigidbody>();
@@ -47,10 +38,15 @@ public abstract class EntityMonobehaviour : MonoBehaviour
         _animator = GetComponentInChildren<Animator>();
         _capsuleCollider = GetComponent<CapsuleCollider>();
         _boxCollider = GetComponent<BoxCollider>();
+        _audiosource=GetComponent<AudioSource>();
     }
     public void SetSoundInvoker(bool State)
     {
-        _makeNoise = State;
+        _isMakingNoise = State;
+        if (State)
+            VirtualUpdate += MakeNoiseTimer;
+        else
+            VirtualUpdate -= MakeNoiseTimer;
     }
     public void GameObjectSoundInvoker(GameObject Sound)
     {
@@ -59,21 +55,23 @@ public abstract class EntityMonobehaviour : MonoBehaviour
 
     protected virtual void MakeNoiseTimer()
     {
-        _noiseTimer -= Time.deltaTime;
-        if (_noiseTimer <= 0)
+        if(_isMoving && !_isCrouching)
         {
-            Vector3 RandomPosition = new Vector3(Random.Range(-2.0f, 1.0f + 1), 1.0f, Random.Range(-2.0f, 1.0f + 1)).normalized * 2;
-            //Debug.Log(RandomPosition);
-            RandomPosition += transform.position;
-            Vector3 Orientation = RandomPosition - transform.position;
-            var Sound = Instantiate(_noise, RandomPosition, Quaternion.identity);
-            AbstractSound Script = Sound.GetComponent<AbstractSound>();
-            Script.SetDirection(Orientation + transform.up, 4.0f, 1.0f);
-            if (_summonedByPlayer)
+            _noiseTimer -= Time.deltaTime;
+            if (_noiseTimer <= 0)
             {
-                Script.SetIfPlayerSummoned(true);
+                Vector3 RandomPosition = new Vector3(UnityEngine.Random.Range(-2.0f, 1.0f + 1), 1.0f, UnityEngine.Random.Range(-2.0f, 1.0f + 1)).normalized * 2;
+                RandomPosition += transform.position;
+                Vector3 Orientation = RandomPosition - transform.position;
+                var Sound = Instantiate(_noise, RandomPosition, Quaternion.identity);
+                AbstractSound Script = Sound.GetComponent<AbstractSound>();
+                Script.SetDirection(Orientation + transform.up, 4.0f, 1.0f);
+                if (_isThisPlayer)
+                {
+                    Script.SetIfPlayerSummoned(true);
+                }
+                _noiseTimer = _noiseTimerRef;
             }
-            _noiseTimer = _noiseTimerRef;
         }
     }
 
@@ -96,8 +94,10 @@ public abstract class EntityMonobehaviour : MonoBehaviour
         if (!coughState)
         {
             coughTimer = coughTimerReference;
+            VirtualUpdate -= CoughTimerSubstract;
         }
-        coughCondition = coughState;
+        else
+            VirtualUpdate += CoughTimerSubstract;
 
     }
 

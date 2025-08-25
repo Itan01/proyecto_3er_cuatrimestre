@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -13,26 +14,31 @@ public class CameraObstacleController : MonoBehaviour
     [SerializeField] private Color _baseColor;
     [SerializeField] private Color _detectorColor;
     private bool _seePlayer;
-    [SerializeField] private bool _checkingPlayer;
-    [SerializeField] private LayerMask _layerMask;
+   private bool _checkingPlayer;
+    private LayerMask _layerMask;
     private RaycastHit _intHit, _inHitFeet, _inHitHead;
     private Ray _hipPosition, _feetPosition, _headPosition;
     private Transform _camTransform;
     private bool _activateCam = false;
     [SerializeField] private Renderer _cameraLight;
     private RoomManager _room;
-    private AudioSource _audio;
-    public delegate void BaseMovement();
-    private BaseMovement Movement;
+    private AudioSource _audiosrc;
+    [SerializeField] private AudioClip _clip;
+    Action Movement;
 
     private void Start()
     {
-        _audio = GetComponent<AudioSource>();
+        _layerMask = LayerManager.Instance.GetLayerMask(EnumLayers.ObstacleWithPlayerMask);
+        _audiosrc = GetComponent<AudioSource>();
         _maxRotation = _rotation + _camTransform.transform.rotation.y;
         _minRotation = (_rotation * -1f) + _camTransform.transform.rotation.y;
         _room = GetComponentInParent<RoomManager>();
         _room.DesActRoom += Desactivate;
         _room.ActRoom += Activate;
+        if (!_room.IsRoomActivate())
+        {
+            Desactivate();
+        }
     }
 
     private void Update()
@@ -102,9 +108,10 @@ public class CameraObstacleController : MonoBehaviour
 
     private void SetReset()
     {
-        if (_audio.isPlaying)
-            _audio.Stop();
-        AudioStorage.Instance.CameraResetting();
+        if (_audiosrc.isPlaying)
+            _audiosrc.Stop();
+        _clip= AudioStorage.Instance.CameraSound(EnumAudios.CameraResetting);
+        _audiosrc.PlayOneShot(_clip);
         Movement = ResettingMovement;
         _detectingPlayer = false;
         _xRotation = _camRotation.x;
@@ -122,9 +129,10 @@ public class CameraObstacleController : MonoBehaviour
     }
     private void SetDetector()
     {
-        if(_audio.isPlaying)
-            _audio.Stop();
-        AudioStorage.Instance.CameraDectection();
+        if(_audiosrc.isPlaying)
+            _audiosrc.Stop();
+        _clip= AudioStorage.Instance.CameraSound(EnumAudios.CameraDetection);
+        _audiosrc.PlayOneShot(_clip);
         Movement = LookingMovement;
         _room.DetectPlayer();
         _detectingPlayer = true;
@@ -214,10 +222,11 @@ public class CameraObstacleController : MonoBehaviour
     {
         _activateCam = false;
         Movement = ResettingMovement;
+        gameObject.SetActive(false);
     }
     public void Activate()
     {
         _activateCam = true;
-        Movement = NormalMovement;
+        gameObject.SetActive(true);
     }
 }

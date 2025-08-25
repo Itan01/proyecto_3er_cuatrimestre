@@ -13,6 +13,7 @@ public class PlayerDash
     private Rigidbody _rb;
     private PlayerManager _manager;
     private Animator _animator;
+    private AudioClip _clip;
     [SerializeField]private Image UIDashCooldown;
     public PlayerDash(Transform ModelTransform, Rigidbody rb, Animator animator)
     {
@@ -20,6 +21,7 @@ public class PlayerDash
         _modelTransform=ModelTransform;
         _rb=rb;
         _animator=animator;
+        _clip = AudioStorage.Instance.PlayerSound(EnumAudios.PlayerDash);
         _manager = GameManager.Instance.PlayerReference;
     }
 
@@ -28,7 +30,7 @@ public class PlayerDash
         if (!_canDash) return;
         _dir= _modelTransform.forward;
         _rb.useGravity=false;
-        AudioStorage.Instance.Dash();
+        AudioManager.Instance.PlaySFX(_clip, 1.0f);
         _animator.SetTrigger("Dash");
         _rb.velocity = _dir * _force;
         _canDash=false; 

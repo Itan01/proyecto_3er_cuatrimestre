@@ -13,6 +13,7 @@ public class RoombaEnemy : MonoBehaviour
     [SerializeField] private int _amountOfSounds = 3;
     [SerializeField] private float _soundForce = 5f;
     [SerializeField] private float _spread = 1.5f;
+    private RoomManager _room;
     Action Momevent;
     private NavMeshAgent _agent;
 
@@ -23,7 +24,15 @@ public class RoombaEnemy : MonoBehaviour
         _agent=GetComponent<NavMeshAgent>();
         _animator.SetBool("Open_Anim", false);  
         _animator.SetBool("Walk_Anim", false);
-        GetComponentInParent<RoomManager>().DetPlayer += SetActivation;
+        _room=GetComponentInParent<RoomManager>();
+        _room.DetPlayer += SetActivation;
+        _room.ActRoom += Activation;
+        _room.DesActRoom += Desactivation;
+        if (!_room.IsRoomActivate()) 
+        {
+            Desactivation();
+        }
+
     }
 
     private void Update()
@@ -67,6 +76,9 @@ public class RoombaEnemy : MonoBehaviour
 
     private void Explode()
     {
+        GetComponentInParent<RoomManager>().DetPlayer -= SetActivation;
+        GetComponentInParent<RoomManager>().ActRoom -= Activation;
+        GetComponentInParent<RoomManager>().DesActRoom -= Desactivation;
         AudioStorage.Instance.RoombaExplosion();
         // particulas explosion
         if (_explosionParticlesPrefab)
@@ -95,5 +107,14 @@ public class RoombaEnemy : MonoBehaviour
             }
         }
         Destroy(gameObject);
+    }
+
+    public void Desactivation() 
+    {
+        gameObject.SetActive(false);
+    }
+    public void Activation()
+    {
+        gameObject.SetActive(true);
     }
 }

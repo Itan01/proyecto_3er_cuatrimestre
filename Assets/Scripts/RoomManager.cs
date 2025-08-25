@@ -7,9 +7,9 @@ public class RoomManager : MonoBehaviour
 {
     [SerializeField] private List<AbstractEnemy> _enemies;
     [SerializeField] private List<AbstractObjects> _objects;
-    [SerializeField] private List<RoombaEnemy> _roomba;
     private GameObject _smoke;
     private bool _doorBroken=false;
+    [SerializeField] private bool _isActivate;
 
     public event Action DetPlayer, ResetDet, FindPlayer, DesActRoom, ActRoom;
 
@@ -23,10 +23,8 @@ public class RoomManager : MonoBehaviour
         if (Player.GetComponent<PlayerManager>())
         {
             GameManager.Instance.AddRoom(this);
-            foreach (var item in _enemies)
-            {
-                item.SetActivate(true);
-            }
+            ActivateRoom();
+            _isActivate = true;
         }
 
     }
@@ -38,17 +36,8 @@ public class RoomManager : MonoBehaviour
             if (_doorBroken)
                 SummonSmoketrap();
             GameManager.Instance.RemoveRoom(this);
-            foreach (var item in _objects)
-            {
-                if (item.gameObject.activeSelf)
-                {
-                    _objects.Remove(item);
-                }
-            }
-            foreach (var item in _enemies)
-            {
-                item.SetActivate(false);
-            }
+            _isActivate = false;
+            DesactivateRoom();
         }
     }
 
@@ -126,5 +115,9 @@ public class RoomManager : MonoBehaviour
     {
         if (ActRoom != null)
             ActRoom();
+    }
+    public bool IsRoomActivate()
+    {
+        return _isActivate;
     }
 }

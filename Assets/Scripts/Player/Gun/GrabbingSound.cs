@@ -8,13 +8,18 @@ public class GrabbingSound : MonoBehaviour
     [SerializeField] private LayerMask _enviromentMask;
     private float _grabbingTimer = 3f;
     private float _sinceLastPlayed = 3f;
-    
+    private AudioClip _clip;
+
+    private void Start()
+    {
+        _clip = AudioStorage.Instance.GunSound(EnumAudios.GunGrabbing);
+    }
     private void Update()
     {
         transform.forward = Camera.main.transform.forward;
         if(_sinceLastPlayed >= _grabbingTimer) 
         {
-            AudioStorage.Instance.GrabbingSound();
+            AudioManager.Instance.PlaySFX(_clip,0.8f);
             _sinceLastPlayed = 0f;
         }
         else
