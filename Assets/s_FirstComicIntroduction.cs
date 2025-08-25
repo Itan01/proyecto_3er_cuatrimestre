@@ -1,10 +1,12 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
 public class s_FirstComicIntroduction : MonoBehaviour
 {
-    [SerializeField]private Image _image;
+    private s_UITextController _textScript;
+    private Animator _animator;
+    private bool _isTransitioning, _ending=false;
     private void Start()
     {
         if (!GameManager.Instance.ShowComicEntry)
@@ -13,41 +15,41 @@ public class s_FirstComicIntroduction : MonoBehaviour
         }
         else
             GameManager.Instance.PlayerReference.SetIfPlayerCanMove(false);
-        _image.GetComponent<Image>();
-    }
-    public void SetSprite( Sprite sprite)
-    {
-        _image.sprite= sprite;
-    }
-    public void FirstSprite(Sprite sprite)
-    {
-        _image.color=Color.white;
-        _image.sprite = sprite;
-    }
+        _animator=GetComponent<Animator>();
+        _textScript=GetComponentInChildren<s_UITextController>();
+     }
 
-
-    public void Desactivate() 
+    private void Update()
+    {
+        if (Input.anyKeyDown && !_isTransitioning)
+            Transition();
+    }
+    private void Transition()
+    {
+        if (_ending)
+        {
+            _animator.SetTrigger("Ending");
+        }
+        _isTransitioning = true;
+        _animator.SetTrigger("Transition");
+    }
+    public void StopTransition()
+    {
+        _isTransitioning = false;
+    }
+    public void SetNewText(string Text) 
+    {
+        _textScript.SetText(Text);
+    }
+    public void LastTransition()
+    {
+        _isTransitioning = false;
+        _ending = true;
+    }
+    public void Desactivate()
     {
         GameManager.Instance.ShowComicEntry = false;
-        StartCoroutine(FadeOut());
-
-    }
-
-    private IEnumerator FadeOut()
-    {
-        yield return new WaitForSeconds(0.25f);
-        Color opacty = _image.color;
-        while (opacty.a >0)
-        {
-            opacty.a -= Time.deltaTime;
-            _image.color = opacty;
-            if (Input.anyKeyDown)
-                opacty.a = 0.0f;
-            yield return null;
-        }
         GameManager.Instance.PlayerReference.SetIfPlayerCanMove(true);
-        yield return new WaitForSeconds(0.25f);
         gameObject.SetActive(false);
-
     }
 }

@@ -54,7 +54,7 @@ public class s_UI_comicImage : MonoBehaviour
                 opacty.a = 1.0f;
             yield return null;
         }
-        _mainScript.SetSprite(_sprites[_spriteIndex]);
+        //_mainScript.SetSprite(_sprites[_spriteIndex]);
         if (_spriteIndex  >= _sprites.Length - 1)
         {
             opacty.a = 0.0f;
@@ -74,7 +74,7 @@ public class s_UI_comicImage : MonoBehaviour
                 opacty.a = 1.0f;
             yield return null;
         }
-        _mainScript.FirstSprite(_sprites[_spriteIndex]);
+       // _mainScript.FirstSprite(_sprites[_spriteIndex]);
         _transition = false;
     }
 }
