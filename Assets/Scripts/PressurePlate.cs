@@ -62,14 +62,7 @@ public class PressurePlate : MonoBehaviour
             StopCoroutine(currentRoutine);
 
         currentRoutine = StartCoroutine(MoveWall(isWallActive));
-
-        if (_room != null)
-        {
-            foreach (var enemy in _room.GetEnemies())
-            {
-                enemy.ForceRepath();
-            }
-        }
+        _room.ResetPath();
     }
 
     private IEnumerator MoveWall(bool activate)

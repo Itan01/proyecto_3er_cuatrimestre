@@ -5,18 +5,10 @@ using UnityEngine;
 
 public class RoomManager : MonoBehaviour
 {
-    [SerializeField] private List<AbstractEnemy> _enemies;
-    [SerializeField] private List<AbstractObjects> _objects;
     private GameObject _smoke;
-    private bool _doorBroken=false;
+    private bool _doorBroken = false;
     [SerializeField] private bool _isActivate;
-
-    public event Action DetPlayer, ResetDet, FindPlayer, DesActRoom, ActRoom;
-
-    private void Awake()
-    {
-
-    }
+    public event Action DetPlayer, ResetDet, FindPlayer, DesActRoom, ActRoom, ResRoom, ResPath;
 
     private void OnTriggerEnter(Collider Player)
     {
@@ -45,77 +37,16 @@ public class RoomManager : MonoBehaviour
     {
         _smoke = smoke;
     }
-    public void AddToList(AbstractEnemy Enemies)
-    {
-        _enemies.Add(Enemies);
-    }
-    public void AddToList(AbstractObjects Object)
-    {
-        _objects.Add(Object);
-    }
-    public void ResetRoom()
-    {
-        //foreach(var item in _objects)
-        //{
-        //    item.gameObject.SetActive(true);
-        //}
-        foreach (var item in _enemies)
-        {
-            item.Respawn();
-        }
-    }
-    private void SummonSmoketrap()
-    {
-        if (_smoke == null) return;
-        _smoke.SetActive(true);
-        foreach (var item in _enemies) 
-        { 
-            item.gameObject.SetActive(false);
-        }
+    public void ResetRoom() => ResRoom?.Invoke(); // Es lo mismo que if solo que en una linea
 
-    }
-    public void SetDoorDestroyed()
-    {
-        _doorBroken = true;
-    }
-    public List<AbstractEnemy> GetEnemies()
-    {
-        return _enemies;
-    }
-    public void RemoveEnemy(AbstractEnemy enemy)
-    {
-        if (_enemies.Contains(enemy))
-        {
-            _enemies.Remove(enemy);
-        }
-    }
-
-    public void DetectPlayer()
-    {
-        if (DetPlayer != null)
-        DetPlayer();
-    }
-    public void ResetDetection()
-    {
-        if (ResetDet != null)
-            ResetDet();
-    }
-
-    public void WatchPlayer()
-    {
-        if (FindPlayer != null)
-            FindPlayer();
-    }
-    public void DesactivateRoom()
-    {
-        if (DesActRoom != null)
-            DesActRoom();
-    }
-    public void ActivateRoom()
-    {
-        if (ActRoom != null)
-            ActRoom();
-    }
+    private void SummonSmoketrap() => _smoke?.SetActive(true);
+    public void SetDoorDestroyed() => _doorBroken = true;
+    public void DetectPlayer() => DetPlayer?.Invoke();
+    public void ResetDetection() => ResetDet?.Invoke();
+    public void WatchPlayer() => FindPlayer?.Invoke();
+    public void DesactivateRoom() => DesActRoom?.Invoke();
+    public void ActivateRoom() => ActRoom?.Invoke();
+    public void ResetPath() => ResPath?.Invoke();
     public bool IsRoomActivate()
     {
         return _isActivate;

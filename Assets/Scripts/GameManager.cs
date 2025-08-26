@@ -23,7 +23,6 @@ public class GameManager : MonoBehaviour
     }
     #endregion
     private PlayerManager _player;
-    private List<AbstractEnemy> _enemies = new List<AbstractEnemy>();
 
     private bool _ShowComicEntry=true;
     public bool ShowComicEntry 
@@ -44,25 +43,11 @@ public class GameManager : MonoBehaviour
         get { return _soundRef; }
         set { _soundRef = value; }
     }
-
-    public void RegisterEnemy(AbstractEnemy enemy)
-    {
-        _enemies.Add(enemy);
-    }
-
     private Vector3 _positionToRespwan;
     public Vector3 RespawnReference
     {
         get { return _positionToRespwan; }
         set { _positionToRespwan = value; }
-    }
-
-    public void RespawnAllEnemies()
-    {
-        foreach (var enemy in _enemies)
-        {
-            enemy.Respawn();
-        }
     }
     private Transform _camera;
     public Transform CameraReference
@@ -104,6 +89,7 @@ public class GameManager : MonoBehaviour
     {
         StartCoroutine(ResetTImer());
     }
+
     [SerializeField]private int _timeCaptured = 0;
 
     public int TimeCaptured()
@@ -120,7 +106,6 @@ public class GameManager : MonoBehaviour
             room.ResetRoom();
         }
         _timeCaptured++;
-        RespawnAllEnemies();
         PlayerReference.ResetHeldSound();
         PlayerReference.SetCaptured(false);
         PlayerReference.SetDeath(false);

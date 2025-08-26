@@ -25,7 +25,6 @@ public abstract class AbstractEnemy : EntityMonobehaviour, ISoundInteractions
 
     protected override void Awake()
     {
-        GetComponentInParent<RoomManager>().AddToList(this);
         _confusedDuration = _confusedDurationRef;
     }
     protected override void Start()
@@ -35,6 +34,8 @@ public abstract class AbstractEnemy : EntityMonobehaviour, ISoundInteractions
         Room.FindPlayer += MoveTimerTarget;
         Room.DesActRoom += DesActivation;
         Room.ActRoom += Activation;
+        Room.ResRoom += Respawn;
+        Room.ResPath += ForceRepath;
         base.Start();
         GetScriptCompo();
         _questionMark = GetComponentInChildren<QuestionMarkManager>();
@@ -71,7 +72,7 @@ public abstract class AbstractEnemy : EntityMonobehaviour, ISoundInteractions
     }
     public void Respawn()
     {
-        Debug.Log("Respawn");
+       // Debug.Log("Respawn");
         _agent.Warp(_startPosition);
         SetNewMode(MovPatrol);
     }
