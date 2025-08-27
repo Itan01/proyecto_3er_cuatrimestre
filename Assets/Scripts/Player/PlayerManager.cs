@@ -27,8 +27,8 @@ public class PlayerManager : EntityMonobehaviour
     private float _invisibleDuration=0.0f;
     private bool _invisible = false;
     [SerializeField] private GameObject _particlesInvisible;
-    [SerializeField] private GameObject _surfaceModel;
-    [SerializeField] private GameObject _joinModel;
+    [SerializeField] private GameObject[] _skinModel;
+    [SerializeField] private GameObject[] _clothesModel;
     [SerializeField] private Material[] _baseColorMaterial;
    [SerializeField] private Material[] _JoinColorMaterial;
     public event Action SubtractTimer;
@@ -109,8 +109,14 @@ public class PlayerManager : EntityMonobehaviour
                 _particlesInvisible.SetActive(false);
                 _invisibleDuration = 0.0f;
                 _invisible = false;
-                _surfaceModel.GetComponent<SkinnedMeshRenderer>().material = _baseColorMaterial[0];
-                _joinModel.GetComponent<SkinnedMeshRenderer>().material = _JoinColorMaterial[0];
+                foreach (var item in _skinModel) 
+                {
+                    item.GetComponent<SkinnedMeshRenderer>().material = _baseColorMaterial[0];
+                }
+                foreach (var item in _clothesModel)
+                {
+                    item.GetComponent<SkinnedMeshRenderer>().material = _JoinColorMaterial[0];
+                }
             }
         }
     }
@@ -151,8 +157,14 @@ public class PlayerManager : EntityMonobehaviour
     {
         _particlesInvisible.SetActive(true);
         _invisibleDuration =duration;
-        _surfaceModel.GetComponent<SkinnedMeshRenderer>().material= _baseColorMaterial[1];
-        _joinModel.GetComponent<SkinnedMeshRenderer>().material=_JoinColorMaterial[1];
+        foreach (var item in _skinModel)
+        {
+            item.GetComponent<SkinnedMeshRenderer>().material = _baseColorMaterial[1];
+        }
+        foreach (var item in _clothesModel)
+        {
+            item.GetComponent<SkinnedMeshRenderer>().material = _JoinColorMaterial[1];
+        }
         _invisible = true;  
     }
 
