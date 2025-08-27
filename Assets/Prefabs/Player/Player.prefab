@@ -144,8 +144,8 @@ MonoBehaviour:
   _hipsPosition: {fileID: 2461632698473160298}
   _megaphoneTransform: {fileID: 2215810273592987602}
   _particlesInvisible: {fileID: 0}
-  _surfaceModel: {fileID: 0}
-  _joinModel: {fileID: 0}
+  _skinModel: []
+  _clothesModel: []
   _baseColorMaterial: []
   _JoinColorMaterial: []
 --- !u!65 &7747024848938081973
@@ -10309,9 +10309,6 @@ PrefabInstance:
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: a6977cdea5bc1f44cb7d12ade33703f8, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 1720120689563274092}
-    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: a6977cdea5bc1f44cb7d12ade33703f8, type: 3}
-      insertIndex: -1
       addedObject: {fileID: 1145544045278897940}
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: a6977cdea5bc1f44cb7d12ade33703f8, type: 3}
       insertIndex: -1
@@ -10322,27 +10319,6 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: a6977cdea5bc1f44cb7d12ade33703f8, type: 3}
   m_PrefabInstance: {fileID: 838458019065879346}
   m_PrefabAsset: {fileID: 0}
---- !u!95 &1720120689563274092
-Animator:
-  serializedVersion: 5
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 532450538729694819}
-  m_Enabled: 1
-  m_Avatar: {fileID: 9000000, guid: af4c61906f47c6d4a9d95bb0ead82e5c, type: 3}
-  m_Controller: {fileID: 9100000, guid: 2058367410abac6458385ca46079af0d, type: 2}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_StabilizeFeet: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorStateOnDisable: 0
-  m_WriteDefaultValuesOnDisable: 0
 --- !u!114 &1145544045278897940
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -10355,7 +10331,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 91b7f366b420b7e43918be6fb5fced7c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  animator: {fileID: 1720120689563274092}
+  animator: {fileID: 0}
   lookWeight: 1
   bodyWeight: 0.6
   headWeight: 1

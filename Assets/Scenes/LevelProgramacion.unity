@@ -46647,6 +46647,10 @@ PrefabInstance:
       propertyPath: m_LocalRotation.z
       value: -0.39768097
       objectReference: {fileID: 0}
+    - target: {fileID: 1145544045278897940, guid: 53397d0ce013c9d47b1e65d6bb5ecb09, type: 3}
+      propertyPath: animator
+      value: 
+      objectReference: {fileID: 0}
     - target: {fileID: 1147448219083982638, guid: 53397d0ce013c9d47b1e65d6bb5ecb09, type: 3}
       propertyPath: m_LocalRotation.y
       value: 0.0000007599591
@@ -47749,8 +47753,37 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 3092996438172981320, guid: 53397d0ce013c9d47b1e65d6bb5ecb09, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1660895632}
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 532450538729694819, guid: 53397d0ce013c9d47b1e65d6bb5ecb09, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1861128864}
   m_SourcePrefab: {fileID: 100100000, guid: 53397d0ce013c9d47b1e65d6bb5ecb09, type: 3}
+--- !u!1 &1861128863 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 532450538729694819, guid: 53397d0ce013c9d47b1e65d6bb5ecb09, type: 3}
+  m_PrefabInstance: {fileID: 1861128862}
+  m_PrefabAsset: {fileID: 0}
+--- !u!95 &1861128864
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1861128863}
+  m_Enabled: 1
+  m_Avatar: {fileID: 9000000, guid: a6977cdea5bc1f44cb7d12ade33703f8, type: 3}
+  m_Controller: {fileID: 9100000, guid: 2058367410abac6458385ca46079af0d, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &1874140900 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 321761353807948983, guid: 29aa5a78b96148c42bd3f92e5e037e89, type: 3}
@@ -53547,6 +53580,10 @@ PrefabInstance:
     - target: {fileID: 2123566909711734448, guid: 672eab43e4f3b3a448310dcf85060a67, type: 3}
       propertyPath: m_Name
       value: FinalRoom_FL
+      objectReference: {fileID: 0}
+    - target: {fileID: 3309273676945014583, guid: 672eab43e4f3b3a448310dcf85060a67, type: 3}
+      propertyPath: m_Size.x
+      value: 11
       objectReference: {fileID: 0}
     - target: {fileID: 8107595484718300012, guid: 672eab43e4f3b3a448310dcf85060a67, type: 3}
       propertyPath: m_LocalPosition.x
