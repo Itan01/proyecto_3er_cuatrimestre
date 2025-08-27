@@ -11,7 +11,7 @@ public abstract class EntityMonobehaviour : MonoBehaviour
     protected BoxCollider _boxCollider;
     protected GameObject _noise;
     protected bool _isMakingNoise=false, _isCoughing = false;
-    protected float coughTimer, coughTimerReference = 2f, deathTimer = 10f, deathTimerReference = 10f, _noiseTimer, _noiseTimerRef = 0.5f;
+    protected float coughTimer=2.0f, coughTimerReference = 2.0f, deathTimer = 10f, deathTimerReference = 10f, _noiseTimer=0.5f, _noiseTimerRef = 0.5f;
     [SerializeField] Transform HeadReference;
     protected bool  _isThisPlayer = false; 
     protected bool _isMoving = false;
@@ -43,10 +43,11 @@ public abstract class EntityMonobehaviour : MonoBehaviour
     public void SetSoundInvoker(bool State)
     {
         _isMakingNoise = State;
-        if (State)
+        if (_isMakingNoise)
             VirtualUpdate += MakeNoiseTimer;
         else
             VirtualUpdate -= MakeNoiseTimer;
+
     }
     public void GameObjectSoundInvoker(GameObject Sound)
     {
@@ -91,13 +92,17 @@ public abstract class EntityMonobehaviour : MonoBehaviour
 
     public void CoughState(bool coughState)
     {
-        if (!coughState)
+        if (coughState)
+        {
+            VirtualUpdate += CoughTimerSubstract;
+            coughTimer = coughTimerReference;
+        }
+        else
         {
             coughTimer = coughTimerReference;
             VirtualUpdate -= CoughTimerSubstract;
         }
-        else
-            VirtualUpdate += CoughTimerSubstract;
+
 
     }
 

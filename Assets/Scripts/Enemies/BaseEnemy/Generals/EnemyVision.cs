@@ -41,18 +41,12 @@ public class EnemyVision : MonoBehaviour
         meshRenderer = GetComponent<MeshRenderer>();
         visionMesh = new Mesh { name = "Vision Mesh" };
         meshFilter.mesh = visionMesh;
-
-        if (Application.isPlaying)
-        {
-            _scriptManager = GetComponentInParent<AbstractEnemy>();
+        _scriptManager = GetComponentInParent<AbstractEnemy>();
             _player = GameManager.Instance.PlayerReference;
-        }
     }
 
     void LateUpdate()
     {
-        if (!Application.isPlaying) return;
-
         _playerDeath = _player.IsPlayerDeath();
         DrawFieldOfView();
         _scriptManager.WatchingPlayer(_seePlayer);
@@ -64,16 +58,12 @@ public class EnemyVision : MonoBehaviour
 #if UNITY_EDITOR
     void Update()
     {
-        if (!Application.isPlaying)
-        {
             DrawFieldOfView();
-        }
     }
 #endif
-
     void DrawFieldOfView()
     {
-        if (meshRenderer != null && Application.isPlaying)
+        if (meshRenderer != null)
         {
             switch (_scriptManager.GetMode())
             {
@@ -112,8 +102,7 @@ public class EnemyVision : MonoBehaviour
                     debugPoints.Add((origin + dir * viewRadius, false));
                 }
 
-                if (Application.isPlaying &&
-                    Physics.Raycast(origin, dir, out hit, viewRadius, detectableMask,QueryTriggerInteraction.Ignore))
+                if (Physics.Raycast(origin, dir, out hit, viewRadius, detectableMask,QueryTriggerInteraction.Ignore))
                 {
                     if (hit.collider.TryGetComponent<PlayerManager>(out PlayerManager script))
                     {

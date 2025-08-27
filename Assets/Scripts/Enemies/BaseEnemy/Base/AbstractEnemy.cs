@@ -22,13 +22,14 @@ public abstract class AbstractEnemy : EntityMonobehaviour, ISoundInteractions
     protected int _qMIndex;
     protected Action Condition, PreMovement, NextMovement;
     protected Action _gamemode;
-
+    [SerializeField] protected EnemyVision _vision;
     protected override void Awake()
     {
         _confusedDuration = _confusedDurationRef;
     }
     protected override void Start()
     {
+        _vision = GetComponentInChildren<EnemyVision>();
         RoomManager Room = GetComponentInParent<RoomManager>();
         Room.DetPlayer += CondToTargetPosition;
         Room.FindPlayer += MoveTimerTarget;
@@ -37,6 +38,7 @@ public abstract class AbstractEnemy : EntityMonobehaviour, ISoundInteractions
         Room.ResRoom += Respawn;
         Room.ResPath += ForceRepath;
         base.Start();
+
         GetScriptCompo();
         _questionMark = GetComponentInChildren<QuestionMarkManager>();
         if (!Room.IsRoomActivate())
