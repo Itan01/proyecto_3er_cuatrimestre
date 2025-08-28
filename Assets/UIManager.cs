@@ -24,6 +24,14 @@ public class UIManager : MonoBehaviour
         get { return _cooldownCircleBar; }
         set {  _cooldownCircleBar = value; }
     }
+
+    private CountdownTimer _timer;
+    public CountdownTimer Timer
+    {
+        get { return _timer; }
+        set { _timer = value; }
+    }    
+    
     private void Start()
     {
         _player = GameManager.Instance.PlayerReference;
@@ -108,6 +116,14 @@ public class UIManager : MonoBehaviour
 
     private int _displayedScore = 0;
     private Coroutine _scoreCoroutine, _popupScoreCoroutine;
+
+    [SerializeField]private GameObject _finishLevelComic; 
+
+    public void FinishLevel()
+    {
+        _player.SetIfPlayerCanMove(false);
+        _finishLevelComic.SetActive(true);
+    }
 
     private IEnumerator ShowPopup(int amount)
     {
