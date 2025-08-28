@@ -16,13 +16,13 @@ public class Cons_Raycast
         _maxDistance = MaxDistance;
         _mask = Mask;
     }
-    public bool Checker<T>()
+    public bool CheckerComponent<T>() where T : Component
     {
         if (Physics.Raycast(_startPosition, _dir, out _hits, _maxDistance, _mask, QueryTriggerInteraction.Ignore))
         {
-            //if(_hits.collider.GetComponent<T>())
+            if (_hits.collider.GetComponent<T>())
                 return true;
         }
-            return false;         
+        return false;
     }
 }

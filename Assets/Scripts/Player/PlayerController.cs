@@ -56,7 +56,7 @@ public class PlayerController
     public void Shoot()
     {
         _canShoot = _scriptShoot.CheckSound();
-        if (!_canShoot) return;
+        if (!_canShoot || _grabbing) return;
         _aiming = Input.GetKeyDown(KeyCode.Mouse0);
         if (_aiming)
         {
@@ -89,24 +89,12 @@ public class PlayerController
     {
         bool isRightClick = Input.GetKey(KeyCode.Mouse1);
 
-        if (isRightClick)
-        {
-            // Activar de inmediato
-            if (!_grabbing)
-            {
-                _animator.SetBool("Grabbing", true);
-            }
-        }
-        else
+        if (_aiming) return;
+        if (!isRightClick)
         {
             _area.Desactivate();
-            if (_grabbing)
-            {
-                _animator.SetBool("Grabbing", false);
-               
-            }
         }
-
+        _animator.SetBool("Grabbing", isRightClick);
         _grabbing = isRightClick;
     }
 
