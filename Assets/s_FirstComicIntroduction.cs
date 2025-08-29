@@ -9,15 +9,20 @@ public class s_FirstComicIntroduction : MonoBehaviour
     private bool _isTransitioning, _ending=false;
     private void Start()
     {
+        _animator = GetComponent<Animator>();
+        _textScript = GetComponentInChildren<s_UITextController>();
         if (!GameManager.Instance.ShowComicEntry)
         {
             GameManager.Instance.PlayerReference.SetIfPlayerCanMove(true);
             gameObject.SetActive(false);
         }
         else
+        {
             GameManager.Instance.PlayerReference.SetIfPlayerCanMove(false);
-        _animator=GetComponent<Animator>();
-        _textScript=GetComponentInChildren<s_UITextController>();
+            GameManager.Instance.CameraReference.GetComponent<CameraManager>().FreezeCam(true);
+            UIManager.Instance.Timer.IsRunning(false);
+        }
+
      }
 
     private void Update()
@@ -51,6 +56,8 @@ public class s_FirstComicIntroduction : MonoBehaviour
     {
         GameManager.Instance.ShowComicEntry = false;
         GameManager.Instance.PlayerReference.SetIfPlayerCanMove(true);
+        GameManager.Instance.CameraReference.GetComponent<CameraManager>().FreezeCam(false);
+        UIManager.Instance.Timer.IsRunning(true);
         gameObject.SetActive(false);
     }
 }
