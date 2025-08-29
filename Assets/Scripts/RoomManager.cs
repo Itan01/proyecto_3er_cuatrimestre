@@ -8,7 +8,7 @@ public class RoomManager : MonoBehaviour
     private GameObject _smoke;
     private bool _doorBroken = false;
     [SerializeField] private bool _isActivate;
-    public event Action DetPlayer, ResetDet, FindPlayer, DesActRoom, ActRoom, ResRoom, ResPath;
+    public event Action DetPlayer, ResetDet, FindPlayer, DesActRoom, DestroyRoom,ActRoom, ResRoom, ResPath;
 
     private void OnTriggerEnter(Collider Player)
     {
@@ -39,7 +39,12 @@ public class RoomManager : MonoBehaviour
     }
     public void ResetRoom() => ResRoom?.Invoke(); // Es lo mismo que if solo que en una linea
 
-    private void SummonSmoketrap() => _smoke?.SetActive(true);
+    private void SummonSmoketrap()
+    {
+        _smoke?.SetActive(true);
+        DestroyRoom?.Invoke();
+    }
+
     public void SetDoorDestroyed() => _doorBroken = true;
     public void DetectPlayer() => DetPlayer?.Invoke();
     public void ResetDetection() => ResetDet?.Invoke();

@@ -88,8 +88,6 @@ public class PlayerController
     public void Grabbing()
     {
         bool isRightClick = Input.GetKey(KeyCode.Mouse1);
-
-        if (_aiming) return;
         if (!isRightClick)
         {
             _area.Desactivate();

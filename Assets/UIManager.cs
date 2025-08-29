@@ -117,12 +117,18 @@ public class UIManager : MonoBehaviour
     private int _displayedScore = 0;
     private Coroutine _scoreCoroutine, _popupScoreCoroutine;
 
-    [SerializeField]private GameObject _finishLevelComic; 
+    private s_UI_FinishLevel _finishLevelComic; 
+
+    public s_UI_FinishLevel FinishLevelComic
+    {
+        get { return _finishLevelComic; }
+        set { _finishLevelComic = value; }
+    }
 
     public void FinishLevel()
     {
         _player.SetIfPlayerCanMove(false);
-        _finishLevelComic.SetActive(true);
+        _finishLevelComic.gameObject.SetActive(true);
     }
 
     private IEnumerator ShowPopup(int amount)

@@ -2,9 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class s_FinishLevel : MonoBehaviour, IInteractableObject
+public class s_FinishLevel : MonoBehaviour
 {
-    public void OnInteract()
+    private void OnTriggerEnter(Collider other)
     {
         UIManager.Instance.FinishLevel();
     }

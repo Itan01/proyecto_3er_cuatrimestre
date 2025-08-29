@@ -1,6 +1,5 @@
 using System;
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class StandardEnemy : AbstractEnemy
@@ -9,14 +8,12 @@ public class StandardEnemy : AbstractEnemy
     [SerializeField] protected int _indexPosition;
     protected override void Start()
     {
+        base.Start();
         for (int i = 0; i < _positions.Length; i++)
         {
             _positions[i] += transform.position;
         }
         _positions[0] = transform.position;
-        
-        base.Start();
-        _animator.SetBool("isMoving", true);
         SetNewMode(MovPatrol);
     }
     protected override void Update()

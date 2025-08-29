@@ -3,12 +3,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
-public abstract class AbstractEnemy : EntityMonobehaviour, ISoundInteractions
+public abstract class  AbstractEnemy : EntityMonobehaviour, ISoundInteractions
 {
     protected NavMeshAgent _agent;
     [SerializeField] protected bool _activate;
     protected QuestionMarkManager _questionMark;
-    protected float _baseSpeed = 3.5f, _runSpeed = 7.0F, _shortDistance = 0.5f;
+    protected float _baseSpeed = 3.5f, _runSpeed = 10.0f, _shortDistance = 0.5f;
     [SerializeField] protected float _timer = 0.0f, _resetTimer=0.0f;
     [SerializeField] protected int _mode = 0;
     [SerializeField] protected Transform _facingStartPosition;
@@ -22,29 +22,27 @@ public abstract class AbstractEnemy : EntityMonobehaviour, ISoundInteractions
     protected int _qMIndex;
     protected Action Condition, PreMovement, NextMovement;
     protected Action _gamemode;
-    [SerializeField] protected EnemyVision _vision;
+    protected EnemyVision _vision;
     protected override void Awake()
     {
         _confusedDuration = _confusedDurationRef;
     }
     protected override void Start()
     {
-        _vision = GetComponentInChildren<EnemyVision>();
+
         RoomManager Room = GetComponentInParent<RoomManager>();
         Room.DetPlayer += CondToTargetPosition;
         Room.FindPlayer += MoveTimerTarget;
+        Room.DestroyRoom += Destroy;
         Room.DesActRoom += DesActivation;
         Room.ActRoom += Activation;
         Room.ResRoom += Respawn;
         Room.ResPath += ForceRepath;
         base.Start();
-
         GetScriptCompo();
         _questionMark = GetComponentInChildren<QuestionMarkManager>();
-        if (!Room.IsRoomActivate())
-        {
-           DesActivation();
-        }
+        _vision = GetComponentInChildren<EnemyVision>();
+
     }
 
     // Update is called once per frame
@@ -103,13 +101,23 @@ public abstract class AbstractEnemy : EntityMonobehaviour, ISoundInteractions
 
     public void Activation()
     {
-        gameObject.SetActive(true);
+        Debug.Log("ACtivando vision");
+        _vision.gameObject.SetActive(true);
         _activate = true;
     }
     public void DesActivation()
     {
-        gameObject.SetActive(false);
+        Debug.Log("i cant seee");
+        _vision.gameObject.SetActive(false);
         _activate = false;
+    }
+    public void Destroy()
+    {
+        RoomManager Room = GetComponentInParent<RoomManager>();
+        Room.ActRoom -= Activation;
+        Room.ResRoom -= Respawn;
+        _activate = false;
+        gameObject.SetActive(false);
     }
     #endregion
     #region TypeOfMovement
@@ -139,7 +147,7 @@ public abstract class AbstractEnemy : EntityMonobehaviour, ISoundInteractions
 
     protected virtual void MovChaseTarget() // Persigue al Jugador
     {
-        SetBehaviourValues(true,true, true, 1, _baseSpeed, CondChaseTarget, AudioStorage.Instance.StandardEnemySound(EnumAudios.EnemyAlert));
+        SetBehaviourValues(true,true, true, 1, _runSpeed, CondChaseTarget, AudioStorage.Instance.StandardEnemySound(EnumAudios.EnemyAlert));
         _mode = 1;
         PreMovement = MovChaseTarget;
         Condition = CondChaseTarget;

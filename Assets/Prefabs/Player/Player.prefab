@@ -5335,7 +5335,8 @@ Transform:
   m_LocalPosition: {x: -0.13447472, y: -0.097942084, z: 0.9600618}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 1163905906455080092}
   m_Father: {fileID: 3727673826018864714}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &6679729055390336615
@@ -10319,12 +10320,12 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8651325797245693084}
   serializedVersion: 2
-  m_LocalRotation: {x: -0.13009053, y: 0.3700544, z: -0.84714395, w: 0.35844573}
-  m_LocalPosition: {x: -0.0225474, y: 0.17431763, z: 0.025567845}
+  m_LocalRotation: {x: -0.9212961, y: -0.00000013411042, z: -0.00000010430811, w: 0.3888617}
+  m_LocalPosition: {x: -0.22899851, y: -0.94900084, z: 0.083001375}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 3727673826018864714}
+  m_Father: {fileID: 4356177118151636939}
   m_LocalEulerAnglesHint: {x: -134.233, y: 0, z: 0}
 --- !u!198 &6865448754841049724
 ParticleSystem:
@@ -15283,9 +15284,6 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 4042427859692680568, guid: a6977cdea5bc1f44cb7d12ade33703f8, type: 3}
       insertIndex: -1
       addedObject: {fileID: 4356177118151636939}
-    - targetCorrespondingSourceObject: {fileID: 4042427859692680568, guid: a6977cdea5bc1f44cb7d12ade33703f8, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 1163905906455080092}
     - targetCorrespondingSourceObject: {fileID: 2916570863362053800, guid: a6977cdea5bc1f44cb7d12ade33703f8, type: 3}
       insertIndex: -1
       addedObject: {fileID: 2712848011894827619}

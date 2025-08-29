@@ -4,10 +4,25 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public class s_UI_FinishLevel : MonoBehaviour
-{ 
+{
+    private Animator _animator;
+    private bool _isTransitioning=false;
+    private void Start()
+    {
+        _animator = GetComponent<Animator>();
+        SetValuesToGameManager();
+        UIManager.Instance.FinishLevelComic = this;
+        gameObject.SetActive(false);
+    }
+    private void Update()
+    {
+        if(Input.anyKey && !_isTransitioning)
+        {
+            NextTransition();
+        }
+    }
     public void SetNextScene()
     {
-        SetValuesToGameManager();
         StartCoroutine(TransitionsToPoints());
     }
     private IEnumerator TransitionsToPoints()
@@ -15,6 +30,10 @@ public class s_UI_FinishLevel : MonoBehaviour
       AsyncOperation async =  SceneManager.LoadSceneAsync("Victory");
         async.allowSceneActivation = false;
         while (async.progress <0.9f)
+        {
+            yield return null;
+        }
+        while (!Input.anyKey)
         {
             yield return null;
         }
@@ -28,5 +47,14 @@ public class s_UI_FinishLevel : MonoBehaviour
         GameManager.Instance.ScoreValue = UIManager.Instance.GetScore();
         //Veces caputarada ya estan en el mismo GameManager
         UIManager.Instance.Timer.StopTimerUI();
+    }
+    private void NextTransition()
+    {
+        _isTransitioning = true;
+        _animator.SetTrigger("Transition");
+    }
+    public void FinishTransition()
+    {
+        _isTransitioning=false;
     }
 }

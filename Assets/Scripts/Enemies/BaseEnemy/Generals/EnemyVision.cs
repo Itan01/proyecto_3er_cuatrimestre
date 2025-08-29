@@ -1,7 +1,6 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-//[ExecuteAlways]
 [RequireComponent(typeof(MeshFilter), typeof(MeshRenderer))]
 public class EnemyVision : MonoBehaviour
 {
@@ -29,23 +28,27 @@ public class EnemyVision : MonoBehaviour
     private Mesh visionMesh;
     private MeshFilter meshFilter;
     private MeshRenderer meshRenderer;
-    [SerializeField] private Transform _headReference;
+    private Transform _headReference;
+    private Cons_Raycast _raycast;
 
     private List<(Vector3 point, bool hitObstacle)> debugPoints = new();
 
-    void Start()
+    private void Start()
     {
+
         obstacleMask = LayerManager.Instance.GetLayerMask(EnumLayers.ObstacleMask);
         detectableMask = LayerManager.Instance.GetLayerMask(EnumLayers.ObstacleWithPlayerMask);
+        _raycast = new Cons_Raycast(500f, detectableMask);
         meshFilter = GetComponent<MeshFilter>();
         meshRenderer = GetComponent<MeshRenderer>();
         visionMesh = new Mesh { name = "Vision Mesh" };
         meshFilter.mesh = visionMesh;
         _scriptManager = GetComponentInParent<AbstractEnemy>();
-            _player = GameManager.Instance.PlayerReference;
+        _headReference = _scriptManager.GetHeadTransform();
+        _player = GameManager.Instance.PlayerReference;
     }
 
-    void LateUpdate()
+    private void LateUpdate()
     {
         _playerDeath = _player.IsPlayerDeath();
         DrawFieldOfView();
@@ -53,15 +56,17 @@ public class EnemyVision : MonoBehaviour
         _seePlayer = false;
         GameManager.Instance.PlayerReference.SetCaptured(false);
         transform.forward = _headReference.forward;
+        if (!GetComponentInParent<RoomManager>().IsRoomActivate())
+            gameObject.SetActive(false);
     }
 
-#if UNITY_EDITOR
-    void Update()
+    private void Update()
     {
             DrawFieldOfView();
+        if (_player.IsPlayerDeath() || _player.GetInvisible()) return;
+            CanSeePlayer();
     }
-#endif
-    void DrawFieldOfView()
+    private void DrawFieldOfView()
     {
         if (meshRenderer != null)
         {
@@ -106,7 +111,7 @@ public class EnemyVision : MonoBehaviour
                 {
                     if (hit.collider.TryGetComponent<PlayerManager>(out PlayerManager script))
                     {
-                        if (_playerDeath ||GameManager.Instance.PlayerReference.GetInvisible()) return;
+                        if (_playerDeath || GameManager.Instance.PlayerReference.GetInvisible()) return;
                         _seePlayer = true;
                         if (_scriptManager.GetMode() != 3 && _scriptManager.GetMode() != 1 && _scriptManager.GetMode() != 6)
                             _scriptManager.SetModeByIndex(3);
@@ -143,29 +148,56 @@ public class EnemyVision : MonoBehaviour
         visionMesh.RecalculateNormals();
     }
 
-    void OnDrawGizmos()
+    private void CanSeePlayer()
     {
-        if (!drawGizmos) return;
-
-        Gizmos.color = visionColor;
-        Gizmos.DrawWireSphere(transform.position, viewRadius);
-
-        Vector3 left = DirFromAngle(-viewAngle / 2, false);
-        Vector3 right = DirFromAngle(viewAngle / 2, false);
-
-        Gizmos.DrawLine(transform.position, transform.position + left * viewRadius);
-        Gizmos.DrawLine(transform.position, transform.position + right * viewRadius);
-
-#if UNITY_EDITOR
-        foreach (var (point, hit) in debugPoints)
-        {
-            Gizmos.color = hit ? Color.red : Color.green;
-            Gizmos.DrawSphere(point, 0.05f);
-        }
-#endif
+        Vector3 dir = (_player.transform.position - transform.position).normalized;
+        if (Vector3.Angle(transform.position, dir) < viewAngle)
+            CheckIfHasVIsion();
+        else
+            Debug.Log("No Estoy a Nadie");
     }
 
-    Vector3 DirFromAngle(float angleDegrees, bool global)
+    private void CheckIfHasVIsion()
+    {
+        _seePlayer = false;
+        Vector3 PlayerHead = (_player.GetHeadPosition() - _headReference.position).normalized;
+        Vector3 PlayerHips = (_player.GetHipsPosition() - _headReference.position).normalized;
+        Vector3 PlayerPosition = (_player.transform.position - _headReference.position).normalized;
+        if (_raycast.Checker<PlayerManager>(_headReference.position, PlayerHead) ||
+            _raycast.Checker<PlayerManager>(_headReference.position, PlayerHips) ||
+            _raycast.Checker<PlayerManager>(_headReference.position, PlayerPosition))
+        {
+            _seePlayer = true;
+            Debug.Log("Estoy Viendo Al Jugador");
+            if (_scriptManager.GetMode() != 3 && _scriptManager.GetMode() != 1 && _scriptManager.GetMode() != 6)
+                _scriptManager.SetModeByIndex(3);
+        }
+        _scriptManager.WatchingPlayer(_seePlayer);
+    }
+
+//    void OnDrawGizmos()
+//    {
+//        if (!drawGizmos) return;
+
+//        Gizmos.color = visionColor;
+//        Gizmos.DrawWireSphere(transform.position, viewRadius);
+
+//        Vector3 left = DirFromAngle(-viewAngle / 2, false);
+//        Vector3 right = DirFromAngle(viewAngle / 2, false);
+
+//        Gizmos.DrawLine(transform.position, transform.position + left * viewRadius);
+//        Gizmos.DrawLine(transform.position, transform.position + right * viewRadius);
+
+//#if UNITY_EDITOR
+//        foreach (var (point, hit) in debugPoints)
+//        {
+//            Gizmos.color = hit ? Color.red : Color.green;
+//            Gizmos.DrawSphere(point, 0.05f);
+//        }
+//#endif
+//    }
+
+Vector3 DirFromAngle(float angleDegrees, bool global)
     {
         if (!global)
             angleDegrees += transform.eulerAngles.y;

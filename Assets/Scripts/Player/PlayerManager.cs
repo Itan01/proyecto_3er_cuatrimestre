@@ -138,6 +138,7 @@ public class PlayerManager : EntityMonobehaviour
     public void SetIfPlayerCanMove(bool state)
     {
         _HasNoControl = state;
+        _scriptMovement.InputsMoving(0,0,false);
     }
     public void PlayerCanShoot(bool State)
     {

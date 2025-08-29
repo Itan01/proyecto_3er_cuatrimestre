@@ -9,7 +9,7 @@ public class CountdownTimer : MonoBehaviour
     [SerializeField] private float _timer = 0f;
     [SerializeField] private TextMeshProUGUI _timerText;
     private bool _isRunning = true;
-    private void Start()
+    private void Awake()
     {
         UIManager.Instance.Timer = this;
     }
@@ -32,9 +32,10 @@ public class CountdownTimer : MonoBehaviour
     }
 
     public void StopTimerUI() 
-    { 
-        _isRunning = false;
+    {
         GameManager.Instance.TimeOnlevel = Mathf.FloorToInt(_timer);
+        _isRunning = false;
+
     }
 
     public void IsRunning(bool state)

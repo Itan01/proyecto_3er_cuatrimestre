@@ -211,9 +211,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   viewAngle: 90
   verticalFOV: 60
-  viewRadius: 30
-  horizontalRayCount: 100
-  verticalRayCount: 30
+  viewRadius: 50
+  horizontalRayCount: 20
+  verticalRayCount: 20
   drawGizmos: 1
   visionColor: {r: 1, g: 1, b: 0, a: 0.3}
 --- !u!1 &1646691634781228761
@@ -539,7 +539,6 @@ MonoBehaviour:
   _facingStartPosition: {fileID: 3537782074150218625}
   _confusedDuration: 0
   _watchingPlayer: 0
-  _vision: {fileID: 8652263559875633187}
   _positions:
   - {x: 0, y: 0, z: 0}
   - {x: 0, y: 0, z: 5}

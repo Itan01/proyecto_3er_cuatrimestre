@@ -19,7 +19,6 @@ public class s_FirstComicIntroduction : MonoBehaviour
         else
         {
             GameManager.Instance.PlayerReference.SetIfPlayerCanMove(false);
-            GameManager.Instance.CameraReference.GetComponent<CameraManager>().FreezeCam(true);
             UIManager.Instance.Timer.IsRunning(false);
         }
 
@@ -56,7 +55,6 @@ public class s_FirstComicIntroduction : MonoBehaviour
     {
         GameManager.Instance.ShowComicEntry = false;
         GameManager.Instance.PlayerReference.SetIfPlayerCanMove(true);
-        GameManager.Instance.CameraReference.GetComponent<CameraManager>().FreezeCam(false);
         UIManager.Instance.Timer.IsRunning(true);
         gameObject.SetActive(false);
     }
