@@ -5,6 +5,7 @@ using UnityEngine;
 public class s_FirstComicIntroduction : MonoBehaviour
 {
     private s_UITextController _textScript;
+    [SerializeField]private GameObject _audioSource;
     private Animator _animator;
     private bool _isTransitioning, _ending=false;
     private void Start()
@@ -14,6 +15,7 @@ public class s_FirstComicIntroduction : MonoBehaviour
         if (!GameManager.Instance.ShowComicEntry)
         {
             GameManager.Instance.PlayerReference.SetIfPlayerCanMove(true);
+            _audioSource.SetActive(true);
             gameObject.SetActive(false);
         }
         else
@@ -53,6 +55,7 @@ public class s_FirstComicIntroduction : MonoBehaviour
     }
     public void Desactivate()
     {
+        _audioSource.SetActive(true);
         GameManager.Instance.ShowComicEntry = false;
         GameManager.Instance.PlayerReference.SetIfPlayerCanMove(true);
         UIManager.Instance.Timer.IsRunning(true);

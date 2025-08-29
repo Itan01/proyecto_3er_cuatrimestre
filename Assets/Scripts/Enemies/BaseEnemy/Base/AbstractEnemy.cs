@@ -29,7 +29,7 @@ public abstract class  AbstractEnemy : EntityMonobehaviour, ISoundInteractions
     }
     protected override void Start()
     {
-
+        _questionMark = GetComponentInChildren<QuestionMarkManager>();
         RoomManager Room = GetComponentInParent<RoomManager>();
         Room.DetPlayer += CondToTargetPosition;
         Room.FindPlayer += MoveTimerTarget;
@@ -40,7 +40,7 @@ public abstract class  AbstractEnemy : EntityMonobehaviour, ISoundInteractions
         Room.ResPath += ForceRepath;
         base.Start();
         GetScriptCompo();
-        _questionMark = GetComponentInChildren<QuestionMarkManager>();
+
         _vision = GetComponentInChildren<EnemyVision>();
 
     }

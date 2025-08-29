@@ -7,8 +7,10 @@ public class s_UI_FinishLevel : MonoBehaviour
 {
     private Animator _animator;
     private bool _isTransitioning=false;
+    private AudioClip _clipAlert;
     private void Start()
     {
+        _clipAlert = AudioStorage.Instance.StandardEnemySound(EnumAudios.EnemyAlert);
         _animator = GetComponent<Animator>();
         SetValuesToGameManager();
         UIManager.Instance.FinishLevelComic = this;
@@ -56,5 +58,9 @@ public class s_UI_FinishLevel : MonoBehaviour
     public void FinishTransition()
     {
         _isTransitioning=false;
+    }
+    public void playAlert() 
+    {
+        AudioManager.Instance.PlaySFX(_clipAlert, 1.0f);
     }
 }

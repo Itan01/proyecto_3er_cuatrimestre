@@ -10,6 +10,7 @@ public class QuestionMarkManager : MonoBehaviour
     private void Start()
     {
         _render = GetComponent<SpriteRenderer>();
+        SetMark(false, 0);
     }
 
     public void SetMark(bool State, int index) //true=ShowMark, false=HideMark / 0 = questionMark, 1 = ExclamationMark
