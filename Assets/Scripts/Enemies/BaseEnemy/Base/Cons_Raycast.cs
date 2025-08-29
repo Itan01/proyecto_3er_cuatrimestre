@@ -7,22 +7,23 @@ public class Cons_Raycast
     private LayerMask _mask;
     private float _maxDistance;
     private RaycastHit _hits;
-    private Vector3 _startPosition, _dir;
-    private Transform _player;
-    public Cons_Raycast(Vector3 StartPosition, Vector3 Direction, float MaxDistance, LayerMask Mask)
+    public Cons_Raycast(float MaxDistance, LayerMask Mask)
     {
-        _startPosition = StartPosition;
-        _dir = Direction;
         _maxDistance = MaxDistance;
         _mask = Mask;
     }
-    public bool CheckerComponent<T>() where T : Component
+    public bool Checker<T>( Vector3 StartPosition,Vector3 Direction) where T : Component
     {
-        if (Physics.Raycast(_startPosition, _dir, out _hits, _maxDistance, _mask, QueryTriggerInteraction.Ignore))
+        if (Physics.Raycast(StartPosition, Direction, out _hits, _maxDistance, _mask, QueryTriggerInteraction.Ignore))
         {
             if (_hits.collider.GetComponent<T>())
+            {
+                Debug.Log("Verdadero");
                 return true;
+            }
+
         }
+        Debug.Log("Falso");
         return false;
     }
 }

@@ -92,7 +92,10 @@ public class PlayerManager : EntityMonobehaviour
     {
         return _hipsPosition.position;
     }
-
+    public Vector3 GetHeadPosition()
+    {
+        return _headReference.position;
+    }
     public void SetAreaCatching(bool State)
     {
         _areaCatching.gameObject.SetActive(State);

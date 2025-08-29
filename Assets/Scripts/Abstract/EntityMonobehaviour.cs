@@ -12,7 +12,7 @@ public abstract class EntityMonobehaviour : MonoBehaviour
     protected GameObject _noise;
     protected bool _isMakingNoise=false, _isCoughing = false;
     protected float coughTimer=2.0f, coughTimerReference = 2.0f, deathTimer = 10f, deathTimerReference = 10f, _noiseTimer=0.5f, _noiseTimerRef = 0.5f;
-    [SerializeField] Transform HeadReference;
+    [SerializeField] protected Transform _headReference;
     protected bool  _isThisPlayer = false; 
     protected bool _isMoving = false;
     protected bool _isDeath = false;
@@ -88,6 +88,10 @@ public abstract class EntityMonobehaviour : MonoBehaviour
     public bool IsPlayerDeath()
     {
         return _isDeath;
+    }
+    public Transform GetHeadTransform()
+    {
+        return _headReference;
     }
 
     public void CoughState(bool coughState)

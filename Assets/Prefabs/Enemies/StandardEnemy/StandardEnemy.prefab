@@ -216,7 +216,6 @@ MonoBehaviour:
   verticalRayCount: 30
   drawGizmos: 1
   visionColor: {r: 1, g: 1, b: 0, a: 0.3}
-  _headReference: {fileID: 4858179767270483990}
 --- !u!1 &1646691634781228761
 GameObject:
   m_ObjectHideFlags: 0
@@ -532,7 +531,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 57062e89622177a499c8a39b898d8c74, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  HeadReference: {fileID: 4858179767270483990}
+  _headReference: {fileID: 4858179767270483990}
   _activate: 0
   _timer: 0
   _resetTimer: 0
