@@ -14,7 +14,9 @@ public class StandardEnemy : AbstractEnemy
             _positions[i] += transform.position;
         }
         _positions[0] = transform.position;
+        SetNewMode(CondPatrol);
         SetNewMode(MovPatrol);
+
     }
     protected override void Update()
     {

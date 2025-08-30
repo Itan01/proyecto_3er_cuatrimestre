@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class PlayerInteractions
 {
-    private float _interactRayDistance = 4.0f, _intRadius = 4.0f;
+    private float _interactRayDistance = 4.0f, _intRadius = 5.0f;
     private RaycastHit _intHit;
     private Transform _orientation;
     private LayerMask _interactMask;

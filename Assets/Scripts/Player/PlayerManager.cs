@@ -135,10 +135,11 @@ public class PlayerManager : EntityMonobehaviour
     {
         return _invisible;
     }
-    public void SetIfPlayerCanMove(bool state)
+    public void SetIfPlayerCanMove(bool state, bool FinishingLevel)
     {
         _HasNoControl = state;
-        //_scriptMovement.InputsMoving(0,0,false);
+        if(FinishingLevel)
+        _scriptMovement.InputsMoving(0,0,false);
     }
     public void PlayerCanShoot(bool State)
     {

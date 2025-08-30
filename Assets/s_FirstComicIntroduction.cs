@@ -14,13 +14,13 @@ public class s_FirstComicIntroduction : MonoBehaviour
         _textScript = GetComponentInChildren<s_UITextController>();
         if (!GameManager.Instance.ShowComicEntry)
         {
-            GameManager.Instance.PlayerReference.SetIfPlayerCanMove(true);
+            GameManager.Instance.PlayerReference.SetIfPlayerCanMove(true,false);
             _audioSource.SetActive(true);
             gameObject.SetActive(false);
         }
         else
         {
-            GameManager.Instance.PlayerReference.SetIfPlayerCanMove(false);
+            GameManager.Instance.PlayerReference.SetIfPlayerCanMove(false, false);
             UIManager.Instance.Timer.IsRunning(false);
         }
 
@@ -57,7 +57,7 @@ public class s_FirstComicIntroduction : MonoBehaviour
     {
         _audioSource.SetActive(true);
         GameManager.Instance.ShowComicEntry = false;
-        GameManager.Instance.PlayerReference.SetIfPlayerCanMove(true);
+        GameManager.Instance.PlayerReference.SetIfPlayerCanMove(true, false);
         UIManager.Instance.Timer.IsRunning(true);
         gameObject.SetActive(false);
     }

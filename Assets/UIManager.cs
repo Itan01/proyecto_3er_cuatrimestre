@@ -127,7 +127,7 @@ public class UIManager : MonoBehaviour
 
     public void FinishLevel()
     {
-        _player.SetIfPlayerCanMove(false);
+        _player.SetIfPlayerCanMove(false, true);
         _finishLevelComic.gameObject.SetActive(true);
     }
 
