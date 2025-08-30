@@ -19,6 +19,7 @@ public class EnemyVision : MonoBehaviour
     private AbstractEnemy _scriptManager;
     private PlayerManager _player;
     private bool _playerDeath = false;
+    [SerializeField] private bool _detectPlayer = false;
 
     [Header("Debug")]
     public bool drawGizmos = true;
@@ -64,7 +65,8 @@ public class EnemyVision : MonoBehaviour
     {
             DrawFieldOfView();
         if (_player.IsPlayerDeath() || _player.GetInvisible()) return;
-            CanSeePlayer();
+        if (_detectPlayer)
+            CheckIfHasVIsion();
     }
     private void DrawFieldOfView()
     {
@@ -109,13 +111,8 @@ public class EnemyVision : MonoBehaviour
 
                 if (Physics.Raycast(origin, dir, out hit, viewRadius, detectableMask,QueryTriggerInteraction.Ignore))
                 {
-                    if (hit.collider.TryGetComponent<PlayerManager>(out PlayerManager script))
-                    {
-                        if (_playerDeath || GameManager.Instance.PlayerReference.GetInvisible()) return;
-                        _seePlayer = true;
-                        if (_scriptManager.GetMode() != 3 && _scriptManager.GetMode() != 1 && _scriptManager.GetMode() != 6)
-                            _scriptManager.SetModeByIndex(3);
-                    }
+                    if(hit.collider.GetComponent<PlayerManager>())
+                    _detectPlayer = true;
                 }
             }
         }
@@ -148,18 +145,10 @@ public class EnemyVision : MonoBehaviour
         visionMesh.RecalculateNormals();
     }
 
-    private void CanSeePlayer()
-    {
-        Vector3 dir = (_player.transform.position - transform.position).normalized;
-        if (Vector3.Angle(transform.position, dir) < viewAngle)
-            CheckIfHasVIsion();
-        else
-            Debug.Log("No Estoy a Nadie");
-    }
-
     private void CheckIfHasVIsion()
     {
         _seePlayer = false;
+        _detectPlayer = false;
         Vector3 PlayerHead = (_player.GetHeadPosition() - _headReference.position).normalized;
         Vector3 PlayerHips = (_player.GetHipsPosition() - _headReference.position).normalized;
         Vector3 PlayerPosition = (_player.transform.position - _headReference.position).normalized;
@@ -167,6 +156,7 @@ public class EnemyVision : MonoBehaviour
             _raycast.Checker<PlayerManager>(_headReference.position, PlayerHips) ||
             _raycast.Checker<PlayerManager>(_headReference.position, PlayerPosition))
         {
+            _detectPlayer = true;
             _seePlayer = true;
             Debug.Log("Estoy Viendo Al Jugador");
             if (_scriptManager.GetMode() != 3 && _scriptManager.GetMode() != 1 && _scriptManager.GetMode() != 6)

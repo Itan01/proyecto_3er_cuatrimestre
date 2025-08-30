@@ -7,6 +7,7 @@ using UnityEngine.Rendering;
 public class StandardSound : AbstractSound
 {
     private ParticlesManager _particleManager;
+    private bool _explosion=false;
     [SerializeField] private GameObject _soundExplosion;
     [SerializeField] private AudioClip _crashSound;
     private float _soundVolume = 1.0f;
@@ -39,6 +40,8 @@ public class StandardSound : AbstractSound
 
     protected void SummonExplosion()
     {
+        if (_explosion) return;
+        _explosion = true;
         Instantiate(_soundExplosion,transform.position, Quaternion.identity);
     }
 }
