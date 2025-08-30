@@ -46,9 +46,15 @@ public class s_UI_FinishLevel : MonoBehaviour
     }
     private void SetValuesToGameManager()
     {
+
         GameManager.Instance.ScoreValue = UIManager.Instance.GetScore();
         //Veces caputarada ya estan en el mismo GameManager
         UIManager.Instance.Timer.StopTimerUI();
+        Debug.Log($"Valor de Score en GameManager:{GameManager.Instance.ScoreValue}");
+        Debug.Log($"Valor de Score en UI:{UIManager.Instance.GetScore()}");
+        Debug.Log($"Valor de Timer en GameManager:{GameManager.Instance.TimeOnlevel}");
+        Debug.Log($"Valor de Timer en UI:{UIManager.Instance.Timer}");
+        Debug.Log($"Valor de Captured en GameManager:{GameManager.Instance.TimeCaptured()}");
     }
     private void NextTransition()
     {
