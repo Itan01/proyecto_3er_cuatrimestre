@@ -9,7 +9,18 @@ public class EnemyAction : MonoBehaviour, IEnemyTreeNode
     {
         _action = action;
     }
-    public void Behaviour()
+
+    public void Condition()
+    {
+        throw new NotImplementedException();
+    }
+
+    public void Movement()
+    {
+        throw new NotImplementedException();
+    }
+
+    public void SetBehaviour()
     {
         _action();
     }

@@ -7,7 +7,7 @@ public abstract class  AbstractEnemy : EntityMonobehaviour, ISoundInteractions
 {
     protected NavMeshAgent _agent;
     [SerializeField] protected bool _activate;
-    protected QuestionMarkManager _questionMark;
+    [SerializeField] protected QuestionMarkManager _questionMark;
     protected float _baseSpeed = 3.5f, _runSpeed = 10.0f, _shortDistance = 0.5f;
     [SerializeField] protected float _timer = 0.0f, _resetTimer=0.0f;
     [SerializeField] protected int _mode = 0;
@@ -20,8 +20,8 @@ public abstract class  AbstractEnemy : EntityMonobehaviour, ISoundInteractions
     [SerializeField] protected bool _watchingPlayer = false;
     protected bool _isRunning = false, _qMBool;
     protected int _qMIndex;
-    protected Action Condition, PreMovement, NextMovement;
-    protected Action _gamemode;
+    protected Action Condition=null, PreMovement = null, NextMovement = null;
+    protected Action _gamemode = null;
     protected EnemyVision _vision;
     protected override void Awake()
     {
@@ -61,7 +61,6 @@ public abstract class  AbstractEnemy : EntityMonobehaviour, ISoundInteractions
         if (Entity.gameObject.GetComponent<PlayerManager>())
         {
             GameManager.Instance.ResetGameplay();
-            SetNewMode(MoveResetPath);
             _nextPosition = _startPosition;
         }
     }
@@ -114,8 +113,13 @@ public abstract class  AbstractEnemy : EntityMonobehaviour, ISoundInteractions
     public void Destroy()
     {
         RoomManager Room = GetComponentInParent<RoomManager>();
+        Room.DetPlayer -= CondToTargetPosition;
+        Room.FindPlayer -= MoveTimerTarget;
+        Room.DestroyRoom -= Destroy;
+        Room.DesActRoom -= DesActivation;
         Room.ActRoom -= Activation;
         Room.ResRoom -= Respawn;
+        Room.ResPath -= ForceRepath;
         _activate = false;
         gameObject.SetActive(false);
     }
@@ -126,6 +130,8 @@ public abstract class  AbstractEnemy : EntityMonobehaviour, ISoundInteractions
     { 
         _isMoving = isMoving;
         _isRunning = isRunning;
+        if (_questionMark == null)
+         _questionMark = GetComponentInChildren<QuestionMarkManager>();
         _qMBool = QMState;
         _qMIndex = QMSprite;
         _agent.speed = speed;
@@ -163,7 +169,6 @@ public abstract class  AbstractEnemy : EntityMonobehaviour, ISoundInteractions
     {
         _nextPosition = GameManager.Instance.PlayerReference.transform.position;
         _agent.destination = _nextPosition;
-
     }
     protected void MovFollowPosition() // Camina a una posicion
     {

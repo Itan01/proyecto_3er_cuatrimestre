@@ -2,7 +2,9 @@
 
 public interface IEnemyTreeNode
 {
-    public void Behaviour()
-    {
-    }
+    public void SetBehaviour();
+    public void Condition();
+
+    public void Movement();
+
 }

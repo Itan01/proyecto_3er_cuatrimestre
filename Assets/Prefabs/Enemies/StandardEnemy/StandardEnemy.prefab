@@ -141,7 +141,7 @@ Transform:
   m_GameObject: {fileID: 1412391032791012497}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 1.65, z: 0}
+  m_LocalPosition: {x: 0, y: 2.4, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -533,6 +533,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _headReference: {fileID: 4858179767270483990}
   _activate: 0
+  _questionMark: {fileID: 0}
   _timer: 0
   _resetTimer: 0
   _mode: 0
@@ -541,9 +542,10 @@ MonoBehaviour:
   _watchingPlayer: 0
   _positions:
   - {x: 0, y: 0, z: 0}
-  - {x: 0, y: 0, z: 5}
-  - {x: -7, y: 0, z: 5}
-  - {x: -7, y: 0, z: 0}
+  - {x: 10, y: 0, z: 15}
+  - {x: 18, y: 0, z: 15}
+  - {x: 10, y: 0, z: 15}
+  - {x: 0, y: 0, z: 0}
   _indexPosition: 0
 --- !u!82 &2028671208790613842
 AudioSource:

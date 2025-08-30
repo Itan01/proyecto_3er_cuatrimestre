@@ -14,8 +14,7 @@ public class StandardEnemy : AbstractEnemy
             _positions[i] += transform.position;
         }
         _positions[0] = transform.position;
-        SetNewMode(CondPatrol);
-        SetNewMode(MovPatrol);
+        MoveResetPath();
 
     }
     protected override void Update()
@@ -33,14 +32,10 @@ public class StandardEnemy : AbstractEnemy
     protected override void MovPatrol() // patron normal (Esta en distintos scripts "StandEnemy""StandardEnemy")
     {
         _mode = 0;
-        _questionMark.SetMark(false, 0);
-        _animator.SetBool("isMoving", true);
-        _animator.SetBool("isRunning", false);
-        _agent.speed = _baseSpeed;
+        SetBehaviourValues(true, false, false, 0, _baseSpeed, CondPatrol,null);
         _nextPosition = _positions[_indexPosition];
         _agent.destination = _nextPosition;
         PreMovement = MovPatrol;
-        Condition = CondPatrol;
         NextMovement = MovPatrol;
         Debug.Log("Yendo a donde escucho");
     }

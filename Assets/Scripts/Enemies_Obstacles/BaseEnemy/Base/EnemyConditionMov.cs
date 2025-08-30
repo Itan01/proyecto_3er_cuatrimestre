@@ -16,7 +16,7 @@ public class EnemyConditionMov
     {
         if (_distance<= _minDistance)
         {
-            _nextMov.Behaviour();
+            _nextMov.SetBehaviour();
         }
     }
 }
