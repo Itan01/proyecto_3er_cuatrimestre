@@ -12,6 +12,24 @@ public class AudioStorage : MonoBehaviour
 
 
      */
+    //Nuevos
+    [Header("<color=green>News</color>")]
+    [SerializeField] private AudioSource _objFragPlayerNear;
+    [SerializeField] private AudioSource _objValuablePlayerNear;
+    [SerializeField] private AudioSource _destroyValuableObj;
+    [SerializeField] private AudioSource _destoyObjFrag;
+    [SerializeField] private AudioSource _grabObj;
+    [SerializeField] private AudioSource _timer;
+    [SerializeField] private AudioSource _fuseBoxGeneratesSounds;
+    [SerializeField] private AudioSource _stunnedEnemy;
+    [SerializeField] private AudioSource _walkEnemy;
+    [SerializeField] private AudioSource _walkRoomba;
+    [SerializeField] private AudioSource _uiGun;
+    [SerializeField] private AudioSource _soundPath;
+    [SerializeField] private AudioSource _cadenzaDead;
+    [SerializeField] private AudioSource _spawnRoomba;
+    //
+    [Header("<color=green>Rooms</color>")]
 
     [SerializeField] private AudioClip _glassSound, _smokeTrapSound, _laserAlarm, _zapSound;
 
