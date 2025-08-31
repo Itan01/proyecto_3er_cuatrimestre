@@ -29,7 +29,6 @@ public abstract class  AbstractEnemy : EntityMonobehaviour, ISoundInteractions
     }
     protected override void Start()
     {
-        _questionMark = GetComponentInChildren<QuestionMarkManager>();
         RoomManager Room = GetComponentInParent<RoomManager>();
         Room.DetPlayer += CondToTargetPosition;
         Room.FindPlayer += MoveTimerTarget;
@@ -78,7 +77,9 @@ public abstract class  AbstractEnemy : EntityMonobehaviour, ISoundInteractions
     #region InternalFunctions
     protected void SetNewMode(Action NewMovement)
     {
-        _gamemode = NewMovement;
+        if (NewMovement == null) return;
+            _gamemode = NewMovement;
+
         _gamemode();
     }
     protected virtual void GetScriptCompo()
@@ -126,12 +127,10 @@ public abstract class  AbstractEnemy : EntityMonobehaviour, ISoundInteractions
     #endregion
     #region TypeOfMovement
 
-    public void SetBehaviourValues(bool isMoving,bool isRunning, bool QMState, int QMSprite, float speed, Action NewCondition, AudioClip clip) 
+    protected void SetBehaviourValues(bool isMoving,bool isRunning, bool QMState, int QMSprite, float speed, Action NewCondition, AudioClip clip) 
     { 
         _isMoving = isMoving;
         _isRunning = isRunning;
-        if (_questionMark == null)
-         _questionMark = GetComponentInChildren<QuestionMarkManager>();
         _qMBool = QMState;
         _qMIndex = QMSprite;
         _agent.speed = speed;
