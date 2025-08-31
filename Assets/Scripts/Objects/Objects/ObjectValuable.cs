@@ -23,7 +23,8 @@ public class ObjectValuable : AbstractObjects, IInteractableObject
 
         if (_pickupSound != null)
         {
-            AudioManager.Instance.PlaySFX(_pickupSound, _soundVolume);
+            //AudioManager.Instance.PlaySFX(_pickupSound, _soundVolume);
+            AudioStorage.Instance.SoundsGameObject(EnumAudios.GrabObject);
         }
 
         DesactivateObject();

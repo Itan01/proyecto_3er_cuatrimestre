@@ -43,6 +43,7 @@ public class RoombaEnemy : MonoBehaviour
     public void SetActivation()
     {
         GetComponentInParent<RoomManager>().DetPlayer -= SetActivation;
+        AudioStorage.Instance.RoombaSound(EnumAudios.RoombaSpwan);
         StartCoroutine(OpenAndThenWalk());
     }
 

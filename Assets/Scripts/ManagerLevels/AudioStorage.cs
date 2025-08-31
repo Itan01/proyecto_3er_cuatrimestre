@@ -13,56 +13,58 @@ public class AudioStorage : MonoBehaviour
 
      */
     //Nuevos
-    [Header("<color=green>News</color>")]
-    [SerializeField] private AudioSource _objFragPlayerNear;
-    [SerializeField] private AudioSource _objValuablePlayerNear;
-    [SerializeField] private AudioSource _destroyValuableObj;
-    [SerializeField] private AudioSource _destoyObjFrag;
-    [SerializeField] private AudioSource _grabObj;
-    [SerializeField] private AudioSource _timer;
-    [SerializeField] private AudioSource _fuseBoxGeneratesSounds;
-    [SerializeField] private AudioSource _stunnedEnemy;
-    [SerializeField] private AudioSource _walkEnemy;
-    [SerializeField] private AudioSource _walkRoomba;
-    [SerializeField] private AudioSource _uiGun;
-    [SerializeField] private AudioSource _soundPath;
-    [SerializeField] private AudioSource _cadenzaDead;
-    [SerializeField] private AudioSource _spawnRoomba;
-    //
+    [Header("<color=green>Objects</color>")]
+    [SerializeField] private AudioClip _objFragPlayerNear;
+    [SerializeField] private AudioClip _objValuablePlayerNear;
+    [SerializeField] private AudioClip _destroyValuableObj;
+    [SerializeField] private AudioClip _destoyObjFrag;
+    [SerializeField] private AudioClip _grabObj;
+    [SerializeField] private AudioClip _fuseBoxGeneratesSounds;
+    
     [Header("<color=green>Rooms</color>")]
 
-    [SerializeField] private AudioClip _glassSound, _smokeTrapSound, _laserAlarm, _zapSound;
+    [SerializeField] private AudioClip _glassSound;
+    [SerializeField] private AudioClip _smokeTrapSound;
+    [SerializeField] private AudioClip _laserAlarm;
+    [SerializeField] private AudioClip _zapSound;
+
 
     [Header("<color=green>Player Sounds</color>")]
 
     [SerializeField] private AudioClip _Dash;
-    [SerializeField] private AudioClip _walking;
+    [SerializeField] private AudioClip _walking; 
+    [SerializeField] private AudioClip _cadenzaDead;
     Dictionary<EnumAudios, AudioClip> _player = new Dictionary<EnumAudios, AudioClip>();
 
     [Header("<color=green>PlayerGun Sounds</color>")]
     [SerializeField] private AudioClip _shootingSound;
     [SerializeField] private AudioClip _grabbingSound;
+    [SerializeField] private AudioClip _crashSound;
+    [SerializeField] private AudioClip _soundPath;
     Dictionary<EnumAudios, AudioClip> _gun = new Dictionary<EnumAudios, AudioClip>();
 
     [Header("<color=green>Lights Sound </color>")]
     [SerializeField] private AudioClip _LightSwitch;
-    [Header("<color=green>Roomba Sounds</color>")]
-    [SerializeField] private AudioClip _crashSound;
-    [SerializeField] private AudioClip _Roombaexplosion;
 
-    Dictionary<EnumAudios, AudioClip> _soundsGameObjects = new Dictionary<EnumAudios, AudioClip>();
+    [Header("<color=green>Roomba Sounds</color>")]
+    [SerializeField] private AudioClip _Roombaexplosion;
+    [SerializeField] private AudioClip _spawnRoomba;
+    [SerializeField] private AudioClip _walkRoomba;
+    Dictionary<EnumAudios, AudioClip> _roomba = new Dictionary<EnumAudios, AudioClip>();
+
     [Header("<color=green>Enemy Sounds</color>")]
     [SerializeField] private AudioClip _enemyConfused;
     [SerializeField] private AudioClip _enemyAlert;
     [SerializeField] private AudioClip _enemyHmm;
     [SerializeField] private AudioClip _enemyHurt;
+    [SerializeField] private AudioClip _stunnedEnemy;
+     Dictionary<EnumAudios, AudioClip> _standardEnemy = new Dictionary<EnumAudios, AudioClip>();
 
-    Dictionary<EnumAudios, AudioClip> _standardEnemy = new Dictionary<EnumAudios, AudioClip>();
     [Header("<color=green>Door Sounds</color>")]
     [SerializeField] private AudioClip _openDoorSound;
     [SerializeField] private AudioClip _closeDoorSound;
-    [Header("<color=green>Camera Sounds</color>")]
 
+    [Header("<color=green>Camera Sounds</color>")]
     [SerializeField] private AudioClip _cameraDetection;
     [SerializeField] private AudioClip _cameraResetting;
     [SerializeField] private float _soundVolume = 1f;
@@ -70,6 +72,10 @@ public class AudioStorage : MonoBehaviour
 
     [Header("<color=green>UI Sounds</color>")]
     [SerializeField] private AudioClip _countPoints;
+    [SerializeField] private AudioClip _uiGun;
+    [SerializeField] private AudioClip _timer;
+    Dictionary<EnumAudios, AudioClip> _ui = new Dictionary<EnumAudios, AudioClip>();
+
     public static AudioStorage Instance;
     private void Awake()
     {
@@ -99,9 +105,17 @@ public class AudioStorage : MonoBehaviour
     {
         return _standardEnemy[clip];
     }
+    public AudioClip RoombaSound(EnumAudios clip)
+    {
+        return _roomba[clip];
+    }
     public AudioClip SoundsGameObject(EnumAudios clip)
     {
-        return _soundsGameObjects[clip];
+        return _roomba[clip];
+    }
+    public AudioClip UiSound(EnumAudios clip)
+    {
+        return _ui[clip];
     }
     public void LightSwitch()
     {
@@ -152,6 +166,9 @@ public class AudioStorage : MonoBehaviour
     {
         _player.Add(EnumAudios.PlayerDash, _Dash);
         _player.Add(EnumAudios.PlayerWalk, _walking);
+        _player.Add(EnumAudios.PlayerDeath, _cadenzaDead);
+
+        //AudioStorage.Intance.(Tipo)Player(EnumAudios.PlayerDead);
 
         _gun.Add(EnumAudios.GunShooting, _shootingSound);
         _gun.Add(EnumAudios.GunGrabbing, _grabbingSound);

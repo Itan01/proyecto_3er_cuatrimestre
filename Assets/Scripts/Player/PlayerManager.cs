@@ -86,6 +86,7 @@ public class PlayerManager : EntityMonobehaviour
     {
         _isDeath = State;
         _animator.SetBool("isDeath", _isDeath);
+        AudioStorage.Instance.PlayerSound(EnumAudios.PlayerDeath);
         _scriptMovement.SetMoveZero();
     }
     public Vector3 GetHipsPosition()

@@ -15,7 +15,12 @@ public enum EnumAudios
     EnemyConfuse,
     EnemyHurt,
 
+    RoombaSpwan,
+    RoombaWalk,
 
     CameraDetection,
-    CameraResetting
+    CameraResetting,
+
+    GrabObject,
+    Timer
 }

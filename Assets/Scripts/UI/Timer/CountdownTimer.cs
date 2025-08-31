@@ -14,6 +14,10 @@ public class CountdownTimer : MonoBehaviour
         UIManager.Instance.Timer = this;
     }
 
+    private void Start()
+    {
+        AudioStorage.Instance.UiSound(EnumAudios.Timer);
+    }
     void Update()
     {
         if (!_isRunning) return;
