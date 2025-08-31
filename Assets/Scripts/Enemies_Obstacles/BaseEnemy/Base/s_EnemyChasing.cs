@@ -11,20 +11,20 @@ public class s_EnemyChasing : MonoBehaviour, IEnemyTreeNode
     public s_EnemyChasing(s_AbstractEnemy ScriptEnemy)
     {
         _scriptParent = ScriptEnemy;
-        _target = GameManager.Instance.PlayerReference.transform;
+        _player = GameManager.Instance.PlayerReference;
+        _target = _player.transform;
     }
     public void SetBehaviour()
     {
-        _scriptParent.SetBehaviourValues(true, true, true, 1, _speed, Movement);
-        _scriptParent.SetConditionAndMovement(Condition, Movement);
+        _scriptParent.SetBehaviourValues(true, true, true, 1, _speed);
         Debug.Log("Persiguiendo Al Jugador");
-    }
-    public void Condition()
-    {
-
     }
     public void Movement()
     {
-        _scriptParent.SetAgentDestination(_target.position);
+        if (_player.IsPlayerDeath())
+        {
+            _scriptParent.NewMode();
+        }
+         _scriptParent.SetAgentDestination(_target.position);
     }
 }

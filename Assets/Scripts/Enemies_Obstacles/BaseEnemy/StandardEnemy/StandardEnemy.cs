@@ -32,12 +32,12 @@ public class StandardEnemy : AbstractEnemy
     protected override void MovPatrol() // patron normal (Esta en distintos scripts "StandEnemy""StandardEnemy")
     {
         _mode = 0;
-        SetBehaviourValues(true, false, false, 0, _baseSpeed, CondPatrol,null);
+        SetBehaviourValues(true, false, false, 0, _baseSpeed, CondPatrol);
         _nextPosition = _positions[_indexPosition];
         _agent.destination = _nextPosition;
         PreMovement = MovPatrol;
         NextMovement = MovPatrol;
-        Debug.Log("Yendo a donde escucho");
+        Debug.Log("Patrullando");
     }
 
     protected void CondPatrol()

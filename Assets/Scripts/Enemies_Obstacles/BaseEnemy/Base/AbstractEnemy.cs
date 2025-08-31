@@ -3,16 +3,16 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
-public abstract class  AbstractEnemy : EntityMonobehaviour, ISoundInteractions
+public abstract class AbstractEnemy : EntityMonobehaviour, ISoundInteractions
 {
     protected NavMeshAgent _agent;
     [SerializeField] protected bool _activate;
     [SerializeField] protected QuestionMarkManager _questionMark;
     protected float _baseSpeed = 3.5f, _runSpeed = 10.0f, _shortDistance = 0.5f;
-    [SerializeField] protected float _timer = 0.0f, _resetTimer=0.0f;
+    [SerializeField] protected float _timer = 0.0f, _resetTimer = 0.0f;
     [SerializeField] protected int _mode = 0;
     [SerializeField] protected Transform _facingStartPosition;
-    protected Vector3 _nextPosition, _startPosition;
+    protected Vector3 _nextPosition,_startPosition;
     [SerializeField] protected float _confusedDuration;
     protected float _confusedDurationRef = 5.0f; // Este es el tiempo de confusión donde cree haber visto al player
     protected float _searchDuration = 20.0f; // El tiempo que busca al player luego de que este salga del RadiusToHear
@@ -20,7 +20,7 @@ public abstract class  AbstractEnemy : EntityMonobehaviour, ISoundInteractions
     [SerializeField] protected bool _watchingPlayer = false;
     protected bool _isRunning = false, _qMBool;
     protected int _qMIndex;
-    protected Action Condition=null, PreMovement = null, NextMovement = null;
+    protected Action Condition = null, PreMovement = null, NextMovement = null;
     protected Action _gamemode = null;
     protected EnemyVision _vision;
     protected override void Awake()
@@ -70,7 +70,7 @@ public abstract class  AbstractEnemy : EntityMonobehaviour, ISoundInteractions
     }
     public void Respawn()
     {
-       // Debug.Log("Respawn");
+        // Debug.Log("Respawn");
         _agent.Warp(_startPosition);
         SetNewMode(MovPatrol);
     }
@@ -78,13 +78,13 @@ public abstract class  AbstractEnemy : EntityMonobehaviour, ISoundInteractions
     protected void SetNewMode(Action NewMovement)
     {
         if (NewMovement == null) return;
-            _gamemode = NewMovement;
+        _gamemode = NewMovement;
 
         _gamemode();
     }
     protected virtual void GetScriptCompo()
     {
-    _agent = GetComponent<NavMeshAgent>();
+        _agent = GetComponent<NavMeshAgent>();
         _startPosition = transform.position;
     }
 
@@ -93,7 +93,7 @@ public abstract class  AbstractEnemy : EntityMonobehaviour, ISoundInteractions
         var ChaseTarget = new EnemyAction(MovChaseTarget);
         var FollowPosition = new EnemyAction(MovFollowPosition);
         var Confused = new EnemyAction(MovConfuse);
-        var HearingNoise= new EnemyAction(MoveStartHearing);
+        var HearingNoise = new EnemyAction(MoveStartHearing);
         var CheckZone = new EnemyAction(MoveLooking);
 
         //var CheckWatchingPlayer();
@@ -101,13 +101,11 @@ public abstract class  AbstractEnemy : EntityMonobehaviour, ISoundInteractions
 
     public void Activation()
     {
-        Debug.Log("ACtivando vision");
         _vision.gameObject.SetActive(true);
         _activate = true;
     }
     public void DesActivation()
     {
-        Debug.Log("i cant seee");
         _vision.gameObject.SetActive(false);
         _activate = false;
     }
@@ -127,16 +125,15 @@ public abstract class  AbstractEnemy : EntityMonobehaviour, ISoundInteractions
     #endregion
     #region TypeOfMovement
 
-    protected void SetBehaviourValues(bool isMoving,bool isRunning, bool QMState, int QMSprite, float speed, Action NewCondition, AudioClip clip) 
-    { 
+    protected void SetBehaviourValues(bool isMoving, bool isRunning, bool QMState, int QMSprite, float speed, Action NewCondition)
+    {
         _isMoving = isMoving;
         _isRunning = isRunning;
         _qMBool = QMState;
         _qMIndex = QMSprite;
         _agent.speed = speed;
         Condition = NewCondition;
-        if (clip != null)
-            _clip = clip;
+
         ApplyBehaviourValues();
     }
     public void ApplyBehaviourValues()
@@ -144,21 +141,21 @@ public abstract class  AbstractEnemy : EntityMonobehaviour, ISoundInteractions
         _animator.SetBool("isMoving", _isMoving);
         _animator.SetBool("isRunning", _isRunning);
         _questionMark.SetMark(_qMBool, _qMIndex);
-        if(_clip !=null)
-        _audiosource.PlayOneShot(_clip, 1.0f);
     }
-    protected virtual void MoveResetPath(){}
-    protected virtual void MovPatrol(){ } // patron normal (Esta en distintos scripts "StandEnemy""StandardEnemy")
+    protected virtual void MoveResetPath() { }
+    protected virtual void MovPatrol() { } // patron normal (Esta en distintos scripts "StandEnemy""StandardEnemy")
 
     protected virtual void MovChaseTarget() // Persigue al Jugador
     {
-        SetBehaviourValues(true,true, true, 1, _runSpeed, CondChaseTarget, AudioStorage.Instance.StandardEnemySound(EnumAudios.EnemyAlert));
+        SetBehaviourValues(true, true, true, 1, _runSpeed, CondChaseTarget);
+        _clip = AudioStorage.Instance.StandardEnemySound(EnumAudios.EnemyAlert);
+        _audiosource.PlayOneShot(_clip, 1.0f);
         _mode = 1;
         PreMovement = MovChaseTarget;
         Condition = CondChaseTarget;
         NextMovement = MovChaseTarget;
         _agent.SetDestination(_nextPosition);
-    Debug.Log("Mirando Al Jugador");
+        Debug.Log("Mirando Al Jugador");
     }
     protected virtual void MoveTimerTarget() // Persigue al Jugador
     {
@@ -171,10 +168,9 @@ public abstract class  AbstractEnemy : EntityMonobehaviour, ISoundInteractions
     }
     protected void MovFollowPosition() // Camina a una posicion
     {
-        SetBehaviourValues(true, false, true, 0, _baseSpeed, CondReachPosition, null);
+        SetBehaviourValues(true, false, true, 0, _baseSpeed, CondReachPosition);
         _mode = 2;
         PreMovement = MovFollowPosition;
-        Condition = CondReachPosition;
         NextMovement = MoveLooking;
         _agent.SetDestination(_nextPosition);
         transform.LookAt(_nextPosition);
@@ -183,7 +179,7 @@ public abstract class  AbstractEnemy : EntityMonobehaviour, ISoundInteractions
     protected void CondToTargetPosition() // Persigue al lugar donde se genero el Sonido
     {
         if (_mode == 1) return;
-        _nextPosition= GameManager.Instance.PlayerReference.transform.position;
+        _nextPosition = GameManager.Instance.PlayerReference.transform.position;
         MovFollowPosition();
         Debug.Log("Yendo a la posible Ubicacion del Player");
     }
@@ -198,21 +194,24 @@ public abstract class  AbstractEnemy : EntityMonobehaviour, ISoundInteractions
 
     protected void MovConfuse()// Confundido (ve al player) es decir, se queda quieto en el lugar pero NO LO BUSCA, esto es solo por vision, no por radiustohear
     {
-        SetBehaviourValues(false, false, true, 0, 0.0f, CondTimerConfused, AudioStorage.Instance.StandardEnemySound(EnumAudios.EnemyConfuse));
+        SetBehaviourValues(false, false, true, 0, 0.0f, CondTimerConfused);
+        _clip = AudioStorage.Instance.StandardEnemySound(EnumAudios.EnemyConfuse);
+        _audiosource.PlayOneShot(_clip, 1.0f);
         _mode = 3;
         _resetTimer = _resetTimerRef;
         _timer = _confusedDuration;
         transform.LookAt(GameManager.Instance.PlayerReference.transform.position);
+        Debug.Log("Acabo de ver al Jugador");
 
     }
     protected void CondTimerConfused()
     {
         _timer -= Time.deltaTime;
-       
+
         if (!_watchingPlayer)
         {
             _resetTimer -= Time.deltaTime;
-            if (_resetTimer <0)
+            if (_resetTimer < 0)
                 SetNewMode(PreMovement);
         }
         if (_timer < 0.0f)
@@ -224,7 +223,9 @@ public abstract class  AbstractEnemy : EntityMonobehaviour, ISoundInteractions
     {
         _mode = 4;
         _timer = 2.5f;
-        SetBehaviourValues(false, false, true, 0, 0.0f, CondTimer, AudioStorage.Instance.StandardEnemySound(EnumAudios.EnemyChecking));
+        SetBehaviourValues(false, false, true, 0, 0.0f, CondTimer);
+        _clip = AudioStorage.Instance.StandardEnemySound(EnumAudios.EnemyChecking);
+        _audiosource.PlayOneShot(_clip, 1.0f);
         PreMovement = MovPatrol;
         NextMovement = MovPatrol;
         _animator.SetTrigger("isLooking");
@@ -241,16 +242,23 @@ public abstract class  AbstractEnemy : EntityMonobehaviour, ISoundInteractions
 
     protected void MoveStartHearing() // Persigue al Jugador
     {
+        SetBehaviourValues(false, false, true, 0, 0.0f, CondTimer);
+        _clip = AudioStorage.Instance.StandardEnemySound(EnumAudios.EnemyConfuse);
+        _audiosource.PlayOneShot(_clip, 1.0f);
         _timer = 2.1f;
         _mode = 5;
-        SetBehaviourValues(false, false, true, 0, 0.0f, CondTimer, AudioStorage.Instance.StandardEnemySound(EnumAudios.EnemyConfuse));
         _animator.SetTrigger("isHearing");
+        _agent.SetDestination(_nextPosition);
+        transform.LookAt(_nextPosition);
         PreMovement = MovFollowPosition;
         NextMovement = MovFollowPosition;
+     Debug.Log("Escuche algo");
     }
     protected void MovStunned() // Persigue al Jugador
     {
-        SetBehaviourValues(false, false, false, 0, 0.0f, CondTimer, AudioStorage.Instance.StandardEnemySound(EnumAudios.EnemyHurt));
+        SetBehaviourValues(false, false, false, 0, 0.0f, CondTimer);
+        _clip = AudioStorage.Instance.StandardEnemySound(EnumAudios.EnemyHurt);
+        _audiosource.PlayOneShot(_clip, 1.0f);
         _agent.speed = 0.0f;
         _mode = 6;
         _timer = 2.45f;
@@ -314,6 +322,6 @@ public abstract class  AbstractEnemy : EntityMonobehaviour, ISoundInteractions
         _agent.SetDestination(_nextPosition);
     }
     #endregion
-    
+
 
 }
