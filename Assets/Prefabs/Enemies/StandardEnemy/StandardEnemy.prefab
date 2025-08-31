@@ -141,11 +141,11 @@ Transform:
   m_GameObject: {fileID: 1412391032791012497}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 2.4, z: 0}
+  m_LocalPosition: {x: 0, y: 2.4000006, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 1515226207294110357}
+  m_Father: {fileID: 5637110867359792417}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!33 &5584287419759393791
 MeshFilter:
@@ -214,6 +214,7 @@ MonoBehaviour:
   viewRadius: 50
   horizontalRayCount: 20
   verticalRayCount: 20
+  _detectPlayer: 0
   drawGizmos: 1
   visionColor: {r: 1, g: 1, b: 0, a: 0.3}
 --- !u!1 &1646691634781228761
@@ -278,7 +279,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 7915189896937243444}
-  m_Father: {fileID: 1515226207294110357}
+  m_Father: {fileID: 5637110867359792417}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &7782646780677482729
 MonoBehaviour:
@@ -445,6 +446,8 @@ Transform:
   m_Children:
   - {fileID: 1515226207294110357}
   - {fileID: 162141142404220856}
+  - {fileID: 8658655783493019145}
+  - {fileID: 792770383336669830}
   m_Father: {fileID: 8673125701619779254}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!54 &3223415234713129493
@@ -533,7 +536,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _headReference: {fileID: 4858179767270483990}
   _activate: 0
-  _questionMark: {fileID: 0}
+  _questionMark: {fileID: 8707855237099066444}
   _timer: 0
   _resetTimer: 0
   _mode: 0
@@ -542,9 +545,9 @@ MonoBehaviour:
   _watchingPlayer: 0
   _positions:
   - {x: 0, y: 0, z: 0}
-  - {x: 10, y: 0, z: 15}
-  - {x: 18, y: 0, z: 15}
-  - {x: 10, y: 0, z: 15}
+  - {x: 25, y: 0, z: 0}
+  - {x: 25, y: 0, z: -10}
+  - {x: 0, y: 0, z: -10}
   - {x: 0, y: 0, z: 0}
   _indexPosition: 0
 --- !u!82 &2028671208790613842
@@ -753,13 +756,7 @@ PrefabInstance:
       objectReference: {fileID: 2100000, guid: cf819d4597c0f784f88a04dd925cac19, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
-    m_AddedGameObjects:
-    - targetCorrespondingSourceObject: {fileID: -8679921383154817045, guid: 6b1a6bd49f0588c42bcf43c8a67c559d, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 8658655783493019145}
-    - targetCorrespondingSourceObject: {fileID: -8679921383154817045, guid: 6b1a6bd49f0588c42bcf43c8a67c559d, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 792770383336669830}
+    m_AddedGameObjects: []
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 6b1a6bd49f0588c42bcf43c8a67c559d, type: 3}
       insertIndex: -1

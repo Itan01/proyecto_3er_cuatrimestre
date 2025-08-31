@@ -4,13 +4,12 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
-public class s_AbstractEnemy : EntityMonobehaviour
+public abstract class s_AbstractEnemy : EntityMonobehaviour
 {
-    private s_EnemyChasing _scriptChasing;
     private QuestionMarkManager _scriptQM;
     private NavMeshAgent _agent;
-
-    private Action VirtualConditionUpdate, VirtualMovementUpdate;
+    private Vector3 _nextPosition;
+    Action VirtualMovementUpdate;
     protected override void Awake()
     {
         throw new System.NotImplementedException();
@@ -20,33 +19,45 @@ public class s_AbstractEnemy : EntityMonobehaviour
         base.Start();
         _agent = GetComponent<NavMeshAgent>();
         _scriptQM =GetComponentInChildren<QuestionMarkManager>();
-        _scriptChasing = new s_EnemyChasing(this);
     }
     protected override void Update()
     {
         base.Update();
-        VirtualConditionUpdate();
-
+        VirtualMovementUpdate();
     }
 
     protected override void FixedUpdate()
     {
-        VirtualMovementUpdate();
+
     }
 
-    public void SetBehaviourValues(bool isMoving, bool isRunning, bool QMState, int QMindex, float Speed, Action NewMovement)
+    public void SetBehaviourValues(bool isMoving, bool isRunning, bool QMState, int QMindex, float Speed)
     {
         _animator.SetBool("isMoving", isMoving);
         _animator.SetBool("isRunning", isRunning);
+        _scriptQM.SetMark(QMState,QMindex);
         _agent.speed= Speed;
     }
-    public void SetConditionAndMovement(Action NewCondition, Action Movement)
+    public void SetMovement(Action Movement)
+    {
+
+    }
+    public void NewMode()
     {
 
     }
     public void SetAgentDestination(Vector3 Destination) 
     {
         _agent.SetDestination(Destination);
+    }
+    public NavMeshAgent GetAgent()
+    {
+        return _agent;
+    }
+
+    public Vector3 GetNextPosition()
+    {
+        return _nextPosition;
     }
 
 }

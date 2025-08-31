@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class QuestionMarkManager : MonoBehaviour
 {
-    [SerializeField] private Sprite[] _spritesStates;
+    [SerializeField] private Sprite[] _spritesStates= new Sprite[2];
     private SpriteRenderer _render;
 
     private void Start()
