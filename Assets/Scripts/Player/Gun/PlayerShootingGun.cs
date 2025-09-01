@@ -35,7 +35,7 @@ public class PlayerShootingGun
 
         UIManager.Instance.UISound.Shooting();
 
-        GameManager.Instance.CameraReference.GetComponent<CameraManager>().TriggerRecoil();
+        GameManager.Instance.CameraReference.GetComponent<CameraManager>().TriggerRecoil(0.2f, 0.15f, 0.2f);
 
     }
 
