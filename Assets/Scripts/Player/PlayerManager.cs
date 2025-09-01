@@ -31,6 +31,8 @@ public class PlayerManager : EntityMonobehaviour
     [SerializeField] private GameObject[] _clothesModel;
     [SerializeField] private Material[] _baseColorMaterial;
    [SerializeField] private Material[] _JoinColorMaterial;
+
+    [SerializeField] private AudioClip _cadenzaDead;
     public event Action SubtractTimer;
     private bool _HasNoControl=true;
 
@@ -45,6 +47,7 @@ public class PlayerManager : EntityMonobehaviour
         _isThisPlayer = true;
         _areaCatching = GetComponentInChildren<GrabbingSound>();
         SetAreaCatching(false);
+        _cadenzaDead = AudioStorage.Instance.PlayerSound(EnumAudios.PlayerDeath);
         base.Start();
     }
 
@@ -86,7 +89,8 @@ public class PlayerManager : EntityMonobehaviour
     {
         _isDeath = State;
         _animator.SetBool("isDeath", _isDeath);
-        AudioStorage.Instance.PlayerSound(EnumAudios.PlayerDeath);
+        //AudioStorage.Instance.PlayerSound(EnumAudios.PlayerDeath);
+        AudioManager.Instance.PlaySFX(_cadenzaDead, 1f);
         _scriptMovement.SetMoveZero();
     }
     public Vector3 GetHipsPosition()

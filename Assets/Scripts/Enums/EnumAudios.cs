@@ -11,6 +11,7 @@ public enum EnumAudios
     GunGrabbing,
 
     EnemyAlert,
+    EnemyWalk,
     EnemyChecking,
     EnemyConfuse,
     EnemyHurt,

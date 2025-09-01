@@ -23,6 +23,7 @@ public abstract class AbstractEnemy : EntityMonobehaviour, ISoundInteractions
     protected Action Condition = null, PreMovement = null, NextMovement = null;
     protected Action _gamemode = null;
     protected EnemyVision _vision;
+    [SerializeField] protected AudioClip _enemyWalk;
     protected override void Awake()
     {
         _confusedDuration = _confusedDurationRef;
@@ -40,6 +41,7 @@ public abstract class AbstractEnemy : EntityMonobehaviour, ISoundInteractions
         base.Start();
         GetScriptCompo();
 
+        _enemyWalk = AudioStorage.Instance.StandardEnemySound(EnumAudios.EnemyWalk);
         _vision = GetComponentInChildren<EnemyVision>();
 
     }
@@ -174,6 +176,7 @@ public abstract class AbstractEnemy : EntityMonobehaviour, ISoundInteractions
         NextMovement = MoveLooking;
         _agent.SetDestination(_nextPosition);
         transform.LookAt(_nextPosition);
+        AudioManager.Instance.PlaySFX(_enemyWalk, 1f);
         Debug.Log("Yendo a donde escucho");
     }
     protected void CondToTargetPosition() // Persigue al lugar donde se genero el Sonido

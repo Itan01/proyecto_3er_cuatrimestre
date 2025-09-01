@@ -58,6 +58,7 @@ public class AudioStorage : MonoBehaviour
     [SerializeField] private AudioClip _enemyAlert;
     [SerializeField] private AudioClip _enemyHmm;
     [SerializeField] private AudioClip _enemyHurt;
+    [SerializeField] private AudioClip _enemyWalk;
     [SerializeField] private AudioClip _stunnedEnemy;
      Dictionary<EnumAudios, AudioClip> _standardEnemy = new Dictionary<EnumAudios, AudioClip>();
 
@@ -178,6 +179,7 @@ public class AudioStorage : MonoBehaviour
         _standardEnemy.Add(EnumAudios.EnemyChecking, _enemyHmm);
         _standardEnemy.Add(EnumAudios.EnemyConfuse, _enemyConfused);
         _standardEnemy.Add(EnumAudios.EnemyHurt, _enemyHurt);
+        _standardEnemy.Add(EnumAudios.EnemyWalk, _enemyWalk);
 
         _camera.Add(EnumAudios.CameraDetection, _cameraDetection);
         _camera.Add(EnumAudios.CameraResetting, _cameraResetting);
