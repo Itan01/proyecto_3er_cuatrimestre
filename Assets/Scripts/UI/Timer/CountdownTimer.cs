@@ -8,6 +8,8 @@ public class CountdownTimer : MonoBehaviour
 
     [SerializeField] private float _timer = 0f;
     [SerializeField] private TextMeshProUGUI _timerText;
+    private AudioClip _timerEffect;
+    private float _timerWait;
     private bool _isRunning = true;
     private void Awake()
     {
@@ -16,13 +18,19 @@ public class CountdownTimer : MonoBehaviour
 
     private void Start()
     {
-        AudioStorage.Instance.UiSound(EnumAudios.Timer);
+        _timerEffect = AudioStorage.Instance.UiSound(EnumAudios.Timer);
     }
     void Update()
     {
         if (!_isRunning) return;
 
         _timer += Time.deltaTime;
+        _timerWait += Time.deltaTime;
+        if (_timerWait > 2)
+        {
+            AudioManager.Instance.PlaySFX(_timerEffect, 1f);
+            _timerWait = 0f;
+        }
         UpdateTimerUI(_timer);
 
     }
@@ -34,7 +42,6 @@ public class CountdownTimer : MonoBehaviour
         //int milliseconds = Mathf.FloorToInt((time * 1000f) % 1000f);
         _timerText.text = $"{minutes:00}:{seconds:00}";
     }
-
     public void StopTimerUI() 
     {
         GameManager.Instance.TimeOnlevel = Mathf.FloorToInt(_timer);

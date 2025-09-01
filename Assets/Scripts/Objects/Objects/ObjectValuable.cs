@@ -5,12 +5,15 @@ using UnityEngine;
 public class ObjectValuable : AbstractObjects, IInteractableObject
 {
     [SerializeField] private int _value;
-    [SerializeField] private AudioClip _pickupSound; 
+    [SerializeField] private AudioClip _pickUpValueSound;
+    [SerializeField] private AudioClip _pickUpFragSound;
     [SerializeField] private float _soundVolume = 0.80f;
 
     protected override void Start()
     { 
         base.Start();
+        _pickUpFragSound = AudioStorage.Instance.SoundsGameObject(EnumAudios.GrabObject);
+        _pickUpValueSound = AudioStorage.Instance.SoundsGameObject(EnumAudios.GrabObject);
     }
 
     protected override void Update()
@@ -21,10 +24,11 @@ public class ObjectValuable : AbstractObjects, IInteractableObject
     {
         UIManager.Instance.AddScore(_value);
 
-        if (_pickupSound != null)
+        if (_pickUpValueSound != null || _pickUpFragSound != null) 
         {
             //AudioManager.Instance.PlaySFX(_pickupSound, _soundVolume);
-            AudioStorage.Instance.SoundsGameObject(EnumAudios.GrabObject);
+            AudioManager.Instance.PlaySFX(_pickUpFragSound, _soundVolume);
+            AudioManager.Instance.PlaySFX(_pickUpValueSound, _soundVolume);
         }
 
         DesactivateObject();

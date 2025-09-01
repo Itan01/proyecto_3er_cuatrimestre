@@ -22,5 +22,6 @@ public enum EnumAudios
     CameraResetting,
 
     GrabObject,
+    FuseBox,
     Timer
 }

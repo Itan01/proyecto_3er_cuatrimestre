@@ -180,5 +180,7 @@ public class AudioStorage : MonoBehaviour
 
         _camera.Add(EnumAudios.CameraDetection, _cameraDetection);
         _camera.Add(EnumAudios.CameraResetting, _cameraResetting);
+
+        _ui.Add(EnumAudios.Timer, _timer);
     } 
 }
