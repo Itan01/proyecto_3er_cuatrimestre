@@ -1,4 +1,4 @@
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -35,16 +35,18 @@ public class CameraManager : MonoBehaviour
     private Vector3 _dir = new(), _dirTest = new(), _camPos = new(), _camLookAt = new(), _camDir = new();
 
     private Camera _cam;
-
     private Ray _camRay;
     private RaycastHit _camHit;
 
     private Coroutine _cameraShakeCoroutine;
+    private Vector3 _shakeOffset = Vector3.zero;
+    private Quaternion _shakeRotation = Quaternion.identity;
 
     private void Awake()
     {
         GameManager.Instance.CameraReference = transform;
     }
+
     private void Start()
     {
         _maxDistanceRef = _maxDistance;
@@ -89,15 +91,12 @@ public class CameraManager : MonoBehaviour
             _mouseX += x * _mouseSensitivity * Time.deltaTime;
 
             if (_mouseX > 360.0f || _mouseX < -360.0f)
-            {
                 _mouseX -= 360.0f * Mathf.Sign(_mouseX);
-            }
         }
 
         if (y != 0.0f)
         {
             _mouseY += y * _mouseSensitivity * Time.deltaTime;
-
             _mouseY = Mathf.Clamp(_mouseY, _minRotation, _maxRotation);
         }
 
@@ -114,13 +113,10 @@ public class CameraManager : MonoBehaviour
             _dirTest = (_camHit.point - transform.position) + (_camHit.normal * _hitOffset);
 
             if (_dirTest.sqrMagnitude <= _minDistance * _minDistance)
-            {
                 _camPos = transform.position + _dir * _minDistance;
-            }
             else
-            {
                 _camPos = transform.position + _dirTest;
-            }
+
             _camLookAt = _target.transform.position;
         }
         else
@@ -138,14 +134,15 @@ public class CameraManager : MonoBehaviour
             }
         }
 
-        _cam.transform.position = _camPos + _offSetTarget;
-        _cam.transform.LookAt(_camLookAt + _offSetTarget);
+        _cam.transform.position = _camPos + _offSetTarget + _shakeOffset;
+        _cam.transform.rotation = Quaternion.LookRotation((_camLookAt + _offSetTarget) - _cam.transform.position) * _shakeRotation;
     }
+
     private bool CheckIfEnviroment()
     {
-        bool aux = Physics.SphereCast(_camRay, _detectionRadius, out _camHit, _maxDistance, Enviroment, QueryTriggerInteraction.Ignore);
-        return aux;
+        return Physics.SphereCast(_camRay, _detectionRadius, out _camHit, _maxDistance, Enviroment, QueryTriggerInteraction.Ignore);
     }
+
     private void ChangeDistance()
     {
         _maxDistance -= Time.deltaTime * 25.0f;
@@ -156,6 +153,7 @@ public class CameraManager : MonoBehaviour
             _offsetValue = 0.5f;
         }
     }
+
     private void ResetDistance()
     {
         _maxDistance += Time.deltaTime * 50.0f;
@@ -166,18 +164,21 @@ public class CameraManager : MonoBehaviour
             _offsetValue = 0.0f;
         }
     }
+
     public void SetCameraDistance(float MaxDistance)
     {
         _offsetValue = 0.75f;
         _maxAuxDistance = MaxDistance;
         _setCamDis = true;
     }
+
     public void ResetCameraDistance()
     {
         _maxAuxDistance = _maxDistanceRef;
         _resetCamDis = true;
     }
-    public void TriggerRecoil(float intensity = 0.1f, float duration = 0.15f, float kickbackStrength = 0.15f)
+
+    public void TriggerRecoil(float intensity = 0.2f, float duration = 0.1f, float kickbackStrength = 0.2f)
     {
         if (_cameraShakeCoroutine != null)
             StopCoroutine(_cameraShakeCoroutine);
@@ -186,40 +187,27 @@ public class CameraManager : MonoBehaviour
 
     private IEnumerator CameraRecoil(float intensity, float duration, float kickbackStrength)
     {
-        Vector3 originalPos = _cam.transform.localPosition;
         float elapsed = 0f;
 
-        Vector3 kickbackPos = originalPos - transform.forward * kickbackStrength;
-
-        _cam.transform.localPosition = kickbackPos;
+        _shakeOffset = -transform.forward * kickbackStrength + Vector3.up * (kickbackStrength * 0.5f);
+        _shakeRotation = Quaternion.Euler(-kickbackStrength * 30f, 0, 0); // pitch inicial hacia arriba
 
         while (elapsed < duration)
         {
-            float recoilX = Random.Range(-intensity, intensity);
-            float recoilY = Random.Range(-intensity, intensity);
-            float recoilZ = Random.Range(-intensity, intensity);
-
-            _cam.transform.localPosition = kickbackPos + new Vector3(recoilX, recoilY, recoilZ);
+            float t = elapsed / duration;
+            _shakeOffset = Vector3.Lerp(_shakeOffset, Vector3.zero, t);
+            _shakeRotation = Quaternion.Slerp(_shakeRotation, Quaternion.identity, t);
 
             elapsed += Time.deltaTime;
             yield return null;
         }
-        float returnDuration = 0.15f;
-        elapsed = 0f;
-        Vector3 startPos = _cam.transform.localPosition;
 
-        while (elapsed < returnDuration)
-        {
-            _cam.transform.localPosition = Vector3.Lerp(startPos, originalPos, elapsed / returnDuration);
-            elapsed += Time.deltaTime;
-            yield return null;
-        }
-
-        _cam.transform.localPosition = originalPos;
+        _shakeOffset = Vector3.zero;
+        _shakeRotation = Quaternion.identity;
     }
+
     public void FreezeCam(bool state)
     {
         _frezeeCam = state;
     }
 }
-
