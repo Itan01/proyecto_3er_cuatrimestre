@@ -19,6 +19,7 @@ public class CountdownTimer : MonoBehaviour
     private void Start()
     {
         _timerEffect = AudioStorage.Instance.UiSound(EnumAudios.Timer);
+        // AudioManager.Instance.PlaySFX(_timerEffect, 1f);
     }
     void Update()
     {
@@ -26,7 +27,7 @@ public class CountdownTimer : MonoBehaviour
 
         _timer += Time.deltaTime;
         _timerWait += Time.deltaTime;
-        if (_timerWait > 2)
+        if (_timerWait > 1000)
         {
             AudioManager.Instance.PlaySFX(_timerEffect, 1f);
             _timerWait = 0f;

@@ -20,14 +20,15 @@ public class AudioStorage : MonoBehaviour
     [SerializeField] private AudioClip _destoyObjFrag;
     [SerializeField] private AudioClip _grabObj;
     [SerializeField] private AudioClip _fuseBoxGeneratesSounds;
-    
+    Dictionary<EnumAudios, AudioClip> _objects = new Dictionary<EnumAudios, AudioClip>();
+
     [Header("<color=green>Rooms</color>")]
 
     [SerializeField] private AudioClip _glassSound;
     [SerializeField] private AudioClip _smokeTrapSound;
     [SerializeField] private AudioClip _laserAlarm;
     [SerializeField] private AudioClip _zapSound;
-
+    Dictionary<EnumAudios, AudioClip> _rooms = new Dictionary<EnumAudios, AudioClip>();
 
     [Header("<color=green>Player Sounds</color>")]
 
@@ -111,7 +112,7 @@ public class AudioStorage : MonoBehaviour
     }
     public AudioClip SoundsGameObject(EnumAudios clip)
     {
-        return _roomba[clip];
+        return _objects[clip];
     }
     public AudioClip UiSound(EnumAudios clip)
     {
@@ -182,5 +183,6 @@ public class AudioStorage : MonoBehaviour
         _camera.Add(EnumAudios.CameraResetting, _cameraResetting);
 
         _ui.Add(EnumAudios.Timer, _timer);
+        _objects.Add(EnumAudios.GrabObject, _grabObj);
     } 
 }
