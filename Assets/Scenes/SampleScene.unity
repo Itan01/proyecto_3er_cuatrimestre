@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 0.18028378, g: 0.22571412, b: 0.30692285, a: 1}
+  m_IndirectSpecularColor: {r: 0, g: 0, b: 0, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -4238,6 +4238,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7311463387569806562, guid: d97c59d3cc84d8d4ea479152511e6b85, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: e823cd5b5d27c0f4b8256e7c12ee3e6d, type: 2}
     - target: {fileID: 7900192745537698518, guid: d97c59d3cc84d8d4ea479152511e6b85, type: 3}
       propertyPath: m_Name
       value: GenericObject (2)
@@ -9157,6 +9161,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7311463387569806562, guid: d97c59d3cc84d8d4ea479152511e6b85, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: e823cd5b5d27c0f4b8256e7c12ee3e6d, type: 2}
     - target: {fileID: 7900192745537698518, guid: d97c59d3cc84d8d4ea479152511e6b85, type: 3}
       propertyPath: m_Name
       value: GenericObject (1)
@@ -9178,6 +9186,10 @@ PrefabInstance:
       propertyPath: m_Mass
       value: 5
       objectReference: {fileID: 0}
+    - target: {fileID: 892826744198221660, guid: 6b9500da9338c7447984575d6e7f3c42, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 9dfc825aed78fcd4ba02077103263b40, type: 2}
     - target: {fileID: 4689495681500191136, guid: 6b9500da9338c7447984575d6e7f3c42, type: 3}
       propertyPath: m_LocalScale.x
       value: 1
@@ -9238,6 +9250,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: SoundMessage (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 5862237698550535527, guid: 6b9500da9338c7447984575d6e7f3c42, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 9dfc825aed78fcd4ba02077103263b40, type: 2}
     - target: {fileID: 6661656455944397659, guid: 6b9500da9338c7447984575d6e7f3c42, type: 3}
       propertyPath: m_Layer
       value: 28
@@ -9845,7 +9861,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: adac1dee99e42904a9b6c62ecedc689c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _textFirstTime: {fileID: 0}
+  _actualsRoom: []
+  _timeCaptured: 0
+  _time: 0
+  _score: 0
 --- !u!43 &1159684411
 Mesh:
   m_ObjectHideFlags: 0
@@ -14427,6 +14446,10 @@ PrefabInstance:
       propertyPath: m_LocalRotation.z
       value: 0.000000089406946
       objectReference: {fileID: 0}
+    - target: {fileID: 2869679526492367794, guid: fc3bc7fa81fe1a940bae1c5e85c29833, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 9dfc825aed78fcd4ba02077103263b40, type: 2}
     - target: {fileID: 3308256757893819398, guid: fc3bc7fa81fe1a940bae1c5e85c29833, type: 3}
       propertyPath: m_LocalPosition.x
       value: -15
@@ -16352,6 +16375,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: GenericObject
       objectReference: {fileID: 0}
+    - target: {fileID: 4421273067642735684, guid: 1bd770d5eca773b45b5bfc28d872da30, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: e823cd5b5d27c0f4b8256e7c12ee3e6d, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -23526,6 +23553,10 @@ PrefabInstance:
       propertyPath: m_Mass
       value: 5
       objectReference: {fileID: 0}
+    - target: {fileID: 892826744198221660, guid: 6b9500da9338c7447984575d6e7f3c42, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 9dfc825aed78fcd4ba02077103263b40, type: 2}
     - target: {fileID: 4689495681500191136, guid: 6b9500da9338c7447984575d6e7f3c42, type: 3}
       propertyPath: m_LocalScale.x
       value: 1
@@ -23586,6 +23617,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: SoundMessage
       objectReference: {fileID: 0}
+    - target: {fileID: 5862237698550535527, guid: 6b9500da9338c7447984575d6e7f3c42, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 9dfc825aed78fcd4ba02077103263b40, type: 2}
     - target: {fileID: 7936486619980905495, guid: 6b9500da9338c7447984575d6e7f3c42, type: 3}
       propertyPath: _size
       value: 1

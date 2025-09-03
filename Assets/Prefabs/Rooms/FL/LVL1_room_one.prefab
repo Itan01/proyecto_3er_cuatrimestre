@@ -1693,8 +1693,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c86ba8ed2c96b8d4c975f8d17eb2468b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _enemies: []
-  _objects: []
   _isActivate: 0
 --- !u!65 &173748647033405576
 BoxCollider:
@@ -5079,10 +5077,30 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1212762529970225161}
     m_Modifications:
+    - target: {fileID: 1389073846835875688, guid: a1ba37ecbecaed74e88564e1c54f0d26, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 9dfc825aed78fcd4ba02077103263b40, type: 2}
+    - target: {fileID: 1389073846835875688, guid: a1ba37ecbecaed74e88564e1c54f0d26, type: 3}
+      propertyPath: m_Materials.Array.data[1]
+      value: 
+      objectReference: {fileID: 2100000, guid: 9dfc825aed78fcd4ba02077103263b40, type: 2}
     - target: {fileID: 1426178706504371202, guid: a1ba37ecbecaed74e88564e1c54f0d26, type: 3}
       propertyPath: m_Name
       value: Invisible PowerUp
       objectReference: {fileID: 0}
+    - target: {fileID: 3925704858856364246, guid: a1ba37ecbecaed74e88564e1c54f0d26, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 9dfc825aed78fcd4ba02077103263b40, type: 2}
+    - target: {fileID: 5181814792290951138, guid: a1ba37ecbecaed74e88564e1c54f0d26, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 9dfc825aed78fcd4ba02077103263b40, type: 2}
+    - target: {fileID: 6576051502834085965, guid: a1ba37ecbecaed74e88564e1c54f0d26, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 9dfc825aed78fcd4ba02077103263b40, type: 2}
     - target: {fileID: 7294208152697659269, guid: a1ba37ecbecaed74e88564e1c54f0d26, type: 3}
       propertyPath: m_LocalPosition.x
       value: -50.056396
@@ -5123,6 +5141,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8158442627365418533, guid: a1ba37ecbecaed74e88564e1c54f0d26, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 9dfc825aed78fcd4ba02077103263b40, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -8474,6 +8496,10 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 17
       objectReference: {fileID: 0}
+    - target: {fileID: 2869679526492367794, guid: fc3bc7fa81fe1a940bae1c5e85c29833, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 9dfc825aed78fcd4ba02077103263b40, type: 2}
     - target: {fileID: 2887432485217679156, guid: fc3bc7fa81fe1a940bae1c5e85c29833, type: 3}
       propertyPath: m_Layer
       value: 17

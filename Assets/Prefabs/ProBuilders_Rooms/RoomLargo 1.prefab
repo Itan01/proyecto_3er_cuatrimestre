@@ -899,9 +899,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c86ba8ed2c96b8d4c975f8d17eb2468b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _enemies: []
-  _objects: []
-  _roomba: []
+  _isActivate: 0
 --- !u!1 &2144510786891200773
 GameObject:
   m_ObjectHideFlags: 0
@@ -3891,10 +3889,30 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 2329493282334132902}
     m_Modifications:
+    - target: {fileID: 1389073846835875688, guid: a1ba37ecbecaed74e88564e1c54f0d26, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 9dfc825aed78fcd4ba02077103263b40, type: 2}
+    - target: {fileID: 1389073846835875688, guid: a1ba37ecbecaed74e88564e1c54f0d26, type: 3}
+      propertyPath: m_Materials.Array.data[1]
+      value: 
+      objectReference: {fileID: 2100000, guid: 9dfc825aed78fcd4ba02077103263b40, type: 2}
     - target: {fileID: 1426178706504371202, guid: a1ba37ecbecaed74e88564e1c54f0d26, type: 3}
       propertyPath: m_Name
       value: Invisible PowerUp (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 3925704858856364246, guid: a1ba37ecbecaed74e88564e1c54f0d26, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 9dfc825aed78fcd4ba02077103263b40, type: 2}
+    - target: {fileID: 5181814792290951138, guid: a1ba37ecbecaed74e88564e1c54f0d26, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 9dfc825aed78fcd4ba02077103263b40, type: 2}
+    - target: {fileID: 6576051502834085965, guid: a1ba37ecbecaed74e88564e1c54f0d26, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 9dfc825aed78fcd4ba02077103263b40, type: 2}
     - target: {fileID: 7294208152697659269, guid: a1ba37ecbecaed74e88564e1c54f0d26, type: 3}
       propertyPath: m_LocalPosition.x
       value: -52.759323
@@ -3935,6 +3953,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8158442627365418533, guid: a1ba37ecbecaed74e88564e1c54f0d26, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 9dfc825aed78fcd4ba02077103263b40, type: 2}
     - target: {fileID: 8895507355910785957, guid: a1ba37ecbecaed74e88564e1c54f0d26, type: 3}
       propertyPath: m_LocalScale.x
       value: 0.35
