@@ -27,7 +27,6 @@ public class AudioStorage : MonoBehaviour
     [SerializeField] private AudioClip _glassSound;
     [SerializeField] private AudioClip _smokeTrapSound;
     [SerializeField] private AudioClip _laserAlarm;
-    [SerializeField] private AudioClip _zapSound;
     Dictionary<EnumAudios, AudioClip> _rooms = new Dictionary<EnumAudios, AudioClip>();
 
     [Header("<color=green>Player Sounds</color>")]
@@ -139,10 +138,6 @@ public class AudioStorage : MonoBehaviour
         AudioManager.Instance.PlaySFX(_closeDoorSound, _soundVolume);
     }
 
-    public void ZapSound()
-    {
-        AudioManager.Instance.PlaySFX(_zapSound, _soundVolume);
-    }
     public void RoombaExplosion()
     {
         AudioManager.Instance.PlaySFX(_Roombaexplosion, _soundVolume);
