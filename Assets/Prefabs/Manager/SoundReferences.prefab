@@ -1,0 +1,59 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &2242348170813545405
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4839866221510411617}
+  - component: {fileID: 2874326339187844919}
+  m_Layer: 0
+  m_Name: SoundReferences
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4839866221510411617
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2242348170813545405}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2874326339187844919
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2242348170813545405}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 26bb2a26bf929904982f687c42a9979d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _soundComponents:
+  - _sound: {fileID: 6372071291580569302, guid: 8ddbe5c7d66751e4abe35b6712dc69f8, type: 3}
+    _spriteUi: {fileID: 21300000, guid: 9521800946cd2ea438d86bc09f7e5824, type: 3}
+    _index: 0
+    _color: {r: 0.31719473, g: 0.6792453, b: 0.3566912, a: 0}
+  - _sound: {fileID: 8906569069889883939, guid: 9800151b8affc8d4d98fe1f157f7dd76, type: 3}
+    _spriteUi: {fileID: 21300000, guid: e4d674a454374624e97b9bd1303bedf5, type: 3}
+    _index: 1
+    _color: {r: 0.15218942, g: 0.6323636, b: 0.7169812, a: 0}
+  - _sound: {fileID: 5062001592128818629, guid: 6b9500da9338c7447984575d6e7f3c42, type: 3}
+    _spriteUi: {fileID: 21300000, guid: fc469a3c4d7c3494f8297919b80c8367, type: 3}
+    _index: 2
+    _color: {r: 0.6685285, g: 0.18600929, b: 0.7169812, a: 0}

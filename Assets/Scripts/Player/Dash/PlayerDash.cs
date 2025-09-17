@@ -14,7 +14,7 @@ public class PlayerDash
     private PlayerManager _manager;
     private Animator _animator;
     private AudioClip _clip;
-    [SerializeField]private Image UIDashCooldown;
+   private Image UIDashCooldown;
     public PlayerDash(Transform ModelTransform, Rigidbody rb, Animator animator)
     {
         UIDashCooldown = UIManager.Instance.CooldownCircleBar;

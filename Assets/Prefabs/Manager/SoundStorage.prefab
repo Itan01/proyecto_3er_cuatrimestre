@@ -1,0 +1,80 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &6318142089111255352
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 9215858068889238165}
+  - component: {fileID: 7414096792725979812}
+  m_Layer: 0
+  m_Name: SoundStorage
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &9215858068889238165
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6318142089111255352}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &7414096792725979812
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6318142089111255352}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7af8ea5aadd348f43b727eb77d579c63, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _objFragPlayerNear: {fileID: 8300000, guid: 5ffa053182b08464d87dcb9bd9b3372b, type: 3}
+  _objValuablePlayerNear: {fileID: 8300000, guid: 68581d7b7f0073947bfa16577369e550, type: 3}
+  _destroyValuableObj: {fileID: 8300000, guid: fe54a24939c0e064e8e479195eae661b, type: 3}
+  _destoyObjFrag: {fileID: 8300000, guid: fca37bde0082e4c489731a1cd13023c2, type: 3}
+  _grabObj: {fileID: 8300000, guid: 99de6d2aebef7384eb5e41b5b6861ac6, type: 3}
+  _fuseBoxGeneratesSounds: {fileID: 8300000, guid: c378737bb4ebdcc40bdff294880d3154, type: 3}
+  _glassSound: {fileID: 8300000, guid: 2437fda96e3d6f142aa4262d0132002b, type: 3}
+  _smokeTrapSound: {fileID: 8300000, guid: b9750d4031fa6594cbc2178833d58718, type: 3}
+  _laserAlarm: {fileID: 8300000, guid: aad4452201fb4654aa75068db337ed66, type: 3}
+  _Dash: {fileID: 8300000, guid: a4b95f4a7e174fe4eb9cec1689e152a5, type: 3}
+  _walking: {fileID: 8300000, guid: 2d2f036aaec5b3643a744ef5696c556e, type: 3}
+  _cadenzaDead: {fileID: 8300000, guid: 24cb6a354c7fbdc4f9dd6c1387d8397b, type: 3}
+  _shootingSound: {fileID: 8300000, guid: 2e7b005a19406a64b800ce43737bd76d, type: 3}
+  _grabbingSound: {fileID: 8300000, guid: 826302dbc80ff924f9fa095d50af00e3, type: 3}
+  _crashSound: {fileID: 8300000, guid: 4936d17d66f8c4d4abff5196aef619d8, type: 3}
+  _soundPath: {fileID: 8300000, guid: b210e8103fae1bd43ab0c96f207a3fd5, type: 3}
+  _LightSwitch: {fileID: 8300000, guid: 41960df84562523408a946a2a18e0d14, type: 3}
+  _Roombaexplosion: {fileID: 8300000, guid: 2b077df648d11014d971fe4033f34cff, type: 3}
+  _spawnRoomba: {fileID: 8300000, guid: 2cfe1e02b65c28a44ad021a312f45a99, type: 3}
+  _walkRoomba: {fileID: 8300000, guid: a3ff5ecae2301014386280750daac7c1, type: 3}
+  _enemyConfused: {fileID: 8300000, guid: 747df38c1c36d324b9e41aa7552caae0, type: 3}
+  _enemyAlert: {fileID: 8300000, guid: bbe4de575b8bad54b9c449a7b0e125a6, type: 3}
+  _enemyHmm: {fileID: 8300000, guid: a87f26a5e12555e42beb37fc5d3b61e9, type: 3}
+  _enemyHurt: {fileID: 8300000, guid: 6a3ca8874b8e1bb438cf9e680e6f9325, type: 3}
+  _enemyWalk: {fileID: 0}
+  _stunnedEnemy: {fileID: 8300000, guid: 7dd0eaf95ec3be742ab499e0a7936201, type: 3}
+  _openDoorSound: {fileID: 8300000, guid: 1703a88ad72e2ba41805a3197303245f, type: 3}
+  _closeDoorSound: {fileID: 8300000, guid: f7374ef3311af26419cb03872b940d72, type: 3}
+  _cameraDetection: {fileID: 8300000, guid: 15d60cf03cf615b4ebaf951c3098ca34, type: 3}
+  _cameraResetting: {fileID: 8300000, guid: 8f215783f544c5b47bc71043f7cc659c, type: 3}
+  _soundVolume: 1
+  _countPoints: {fileID: 8300000, guid: a64c3b0aaac500148a1df03a27e2ec5a, type: 3}
+  _uiGun: {fileID: 8300000, guid: 0a085d66dd1a03c4a8d429803205e78d, type: 3}
+  _timer: {fileID: 8300000, guid: cb8874c65cd89fc499445a3da78b7aa7, type: 3}
