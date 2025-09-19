@@ -117,7 +117,7 @@ public class CameraObstacleController : MonoBehaviour
         _xRotation = _camRotation.x;
         _yRotation = _camRotation.y;
         _zRotation = _camRotation.z;
-        SetCameraColor(_baseColor, 1f);
+        SetCameraColor(_baseColor, 9999f);
         _room.ResetDetection();
     }
     private void SetBase()
@@ -125,7 +125,7 @@ public class CameraObstacleController : MonoBehaviour
         _rotationRef = 0.0f;
         Movement = NormalMovement;
         _detectingPlayer = false;
-        SetCameraColor(_baseColor, 3f);
+        SetCameraColor(_baseColor, 9999f);
     }
     private void SetDetector()
     {
@@ -136,7 +136,7 @@ public class CameraObstacleController : MonoBehaviour
         Movement = LookingMovement;
         _room.DetectPlayer();
         _detectingPlayer = true;
-        SetCameraColor(_detectorColor, 6f);
+        SetCameraColor(_detectorColor, 9999f);
 
     }
 
