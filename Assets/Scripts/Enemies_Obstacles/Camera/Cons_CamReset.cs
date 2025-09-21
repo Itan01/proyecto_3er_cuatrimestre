@@ -33,8 +33,8 @@ public class Cons_CamReset : ICamMovement
         }
         else
         {
-            if (_room.IsRoomActivate())
-               _script.BaseCam();
+            //if (_room.IsRoomActivate())
+            //   _script.BaseCam();
         }
 
     }

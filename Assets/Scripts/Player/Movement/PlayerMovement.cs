@@ -67,7 +67,7 @@ public class PlayerMovement
             if(CheckifcanStand())
             {
                 _movement = BaseMovement;
-                y = 1.5f;
+                y = 2.0f;
             }
             else
             {

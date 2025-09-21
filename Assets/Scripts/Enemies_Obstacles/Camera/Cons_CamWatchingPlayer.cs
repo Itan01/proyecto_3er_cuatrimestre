@@ -48,7 +48,7 @@ public class Cons_CamWatchingPlayer : ICamMovement
     {
         if (GameManager.Instance.PlayerReference.GetInvisible()) 
         {
-            _script.ResetCam();
+           // _script.ResetCam();
             return;
         }
         _checkingPlayer = false;
@@ -66,8 +66,8 @@ public class Cons_CamWatchingPlayer : ICamMovement
         }
         else
         {
-            if (_detectingPlayer)
-                _script.ResetCam();
+            //if (_detectingPlayer)
+            //    _script.ResetCam();
         }
     }
 }
