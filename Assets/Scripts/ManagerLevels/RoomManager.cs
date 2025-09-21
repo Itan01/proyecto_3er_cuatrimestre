@@ -8,7 +8,13 @@ public class RoomManager : MonoBehaviour
     private GameObject _smoke;
     private bool _doorBroken = false;
     [SerializeField] private bool _isActivate;
-    public event Action DetPlayer = null, ResetDet = null, FindPlayer = null, DesActRoom = null, DestroyRoom = null, ActRoom = null, ResRoom = null, ResPath = null;
+    public event Action DetPlayer, ResetDet, FindPlayer, DesActRoom, DestroyRoom, ActRoom, ResRoom, ResPath;
+
+    private void Start()
+    {
+        if(!_isActivate)
+            DesactivateRoom();
+    }
 
     private void OnTriggerEnter(Collider Player)
     {

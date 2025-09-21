@@ -265,6 +265,7 @@ public abstract class AbstractEnemy : EntityMonobehaviour, ISoundInteractions
         _agent.speed = 0.0f;
         _mode = 6;
         _timer = 2.45f;
+
         _animator.SetTrigger("Stun");
         Condition = CondTimer;
         NextMovement = MovPatrol;

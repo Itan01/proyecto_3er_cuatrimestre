@@ -16,7 +16,8 @@ public enum EnumAudios
     EnemyConfuse,
     EnemyHurt,
 
-    RoombaSpwan,
+    RoombaSpawn,
+    RoombaExplosion,
     RoombaWalk,
 
     CameraDetection,

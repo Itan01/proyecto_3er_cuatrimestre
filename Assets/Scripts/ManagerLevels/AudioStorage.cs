@@ -179,6 +179,10 @@ public class AudioStorage : MonoBehaviour
         _camera.Add(EnumAudios.CameraDetection, _cameraDetection);
         _camera.Add(EnumAudios.CameraResetting, _cameraResetting);
 
+        _roomba.Add(EnumAudios.RoombaWalk, _walkRoomba);
+        _roomba.Add(EnumAudios.RoombaExplosion,_Roombaexplosion);
+        _roomba.Add(EnumAudios.RoombaSpawn,_spawnRoomba);
+
         _ui.Add(EnumAudios.Timer, _timer);
         _objects.Add(EnumAudios.GrabObject, _grabObj);
     } 

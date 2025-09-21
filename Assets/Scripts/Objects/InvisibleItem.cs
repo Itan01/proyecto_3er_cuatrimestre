@@ -13,7 +13,6 @@ public class InvisibleItem : MonoBehaviour, IInteractableObject
 
     public void OnInteract()
     {
-        Debug.Log("HI");
         GameManager.Instance.PlayerReference.SetInvisiblePowerUp(_duration);
         AudioClip _clip = AudioStorage.Instance.GunSound(EnumAudios.GunShooting);
         AudioManager.Instance.PlaySFX(_clip,1.0f);
