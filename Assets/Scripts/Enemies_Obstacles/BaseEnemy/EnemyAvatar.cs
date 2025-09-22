@@ -24,4 +24,8 @@ public class EnemyAvatar : MonoBehaviour
     {
         _enemyScript.SetModeByIndex(1);
     }
+    public void PlayAudioWalk()
+    {
+        _enemyScript.PlayAudioWalk();
+    }
 }

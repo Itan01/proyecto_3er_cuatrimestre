@@ -23,25 +23,23 @@ public abstract class AbstractEnemy : EntityMonobehaviour, ISoundInteractions
     protected Action Condition = null, PreMovement = null, NextMovement = null;
     protected Action _gamemode = null;
     protected EnemyVision _vision;
-    [SerializeField] protected AudioClip _enemyWalk;
+    protected RoomManager _room;
     protected override void Awake()
     {
         _confusedDuration = _confusedDurationRef;
     }
     protected override void Start()
     {
-        RoomManager Room = GetComponentInParent<RoomManager>();
-        Room.DetPlayer += CondToTargetPosition;
-        Room.FindPlayer += MoveTimerTarget;
-        Room.DestroyRoom += Destroy;
-        Room.DesActRoom += DesActivation;
-        Room.ActRoom += Activation;
-        Room.ResRoom += Respawn;
-        Room.ResPath += ForceRepath;
+        _room = GetComponentInParent<RoomManager>();
+        _room.DetPlayer += CondToTargetPosition;
+        _room.FindPlayer += MoveTimerTarget;
+        _room.DestroyRoom += Destroy;
+        _room.DesActRoom += DesActivation;
+        _room.ActRoom += Activation;
+        _room.ResRoom += Respawn;
+        _room.ResPath += ForceRepath;
         base.Start();
         GetScriptCompo();
-
-        _enemyWalk = AudioStorage.Instance.StandardEnemySound(EnumAudios.EnemyWalk);
         _vision = GetComponentInChildren<EnemyVision>();
 
     }
@@ -176,7 +174,6 @@ public abstract class AbstractEnemy : EntityMonobehaviour, ISoundInteractions
         NextMovement = MoveLooking;
         _agent.SetDestination(_nextPosition);
         transform.LookAt(_nextPosition);
-        AudioManager.Instance.PlaySFX(_enemyWalk, 1f);
         Debug.Log("Yendo a donde escucho");
     }
     protected void CondToTargetPosition() // Persigue al lugar donde se genero el Sonido
@@ -273,7 +270,12 @@ public abstract class AbstractEnemy : EntityMonobehaviour, ISoundInteractions
     }
     #endregion
     #region Set/Get Values
-
+    public void PlayAudioWalk()
+    {
+        if (!_room.IsRoomActivate()) return;
+        _clip = AudioStorage.Instance.StandardEnemySound(EnumAudios.EnemyWalk);
+        _audiosource.PlayOneShot(_clip, 0.025f);
+    }
     public void SetSpeed(float Speed)
     {
         _agent.speed = Speed;

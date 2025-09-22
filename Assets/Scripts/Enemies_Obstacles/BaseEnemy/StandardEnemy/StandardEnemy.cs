@@ -27,7 +27,6 @@ public class StandardEnemy : AbstractEnemy
     protected override void MoveResetPath() // patron normal (Esta en distintos scripts "StandEnemy""StandardEnemy")
     {
         _indexPosition = 0;
-        AudioManager.Instance.PlaySFX(_enemyWalk, 1f);
         SetNewMode(MovPatrol);
     }
     protected override void MovPatrol() // patron normal (Esta en distintos scripts "StandEnemy""StandardEnemy")
@@ -38,7 +37,6 @@ public class StandardEnemy : AbstractEnemy
         _agent.destination = _nextPosition;
         PreMovement = MovPatrol;
         NextMovement = MovPatrol;
-        AudioManager.Instance.PlaySFX(_enemyWalk, 1f);
         Debug.Log("Patrullando");
     }
 
