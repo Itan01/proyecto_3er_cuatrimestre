@@ -7,8 +7,8 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: M_Transparent_Water
-  m_Shader: {fileID: -6465566751694194690, guid: 0e6b958052a7cde499fc4aae25c5fbb7, type: 3}
+  m_Name: Camouflage
+  m_Shader: {fileID: -6465566751694194690, guid: e42374d40af712c4db753fca7704fb53, type: 3}
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
   m_ValidKeywords: []
@@ -16,17 +16,13 @@ Material:
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 0
-  m_CustomRenderQueue: 3000
+  m_CustomRenderQueue: -1
   stringTagMap: {}
   disabledShaderPasses: []
   m_LockedProperties: 
   m_SavedProperties:
     serializedVersion: 3
     m_TexEnvs:
-    - _OutlineTexture:
-        m_Texture: {fileID: 0}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
     - unity_Lightmaps:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
@@ -41,20 +37,15 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
-    - _Depth_Fade_Distance: 0.65
-    - _HorizonDistance: 3
-    - _QueueControl: 1
+    - _Noise_Size: 20
+    - _Noise_Strength: 0.5
+    - _QueueControl: 0
     - _QueueOffset: 0
-    - _Refraction_Scale: 7.91
-    - _Refraction_Speed: 0.05
-    - _Refraction_Strength: 0.01
+    - _Time_Speed: 1.24
     m_Colors:
-    - _DeepWater: {r: 0.004004982, g: 0.09433953, b: 0.008705402, a: 0.9647059}
-    - _HorizonColor: {r: 0.39398372, g: 0.46226418, b: 0.31181028, a: 0}
-    - _ShallowWater: {r: 0.36470583, g: 0.83137256, b: 0.66758776, a: 0.8352941}
-    - _UV: {r: 0, g: 0, b: 0, a: 0}
+    - _Base_Color: {r: 0.4339621, g: 0, b: 0, a: 0.6509804}
   m_BuildTextureStacks: []
---- !u!114 &3937150803987308790
+--- !u!114 &6224762420728729160
 MonoBehaviour:
   m_ObjectHideFlags: 11
   m_CorrespondingSourceObject: {fileID: 0}
