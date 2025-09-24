@@ -177,5 +177,8 @@ public class PlayerManager : EntityMonobehaviour
         }
         _invisible = true;  
     }
-
+    public void CanUseMegaphone(bool State)
+    {
+        _scriptController.CanUseGun(State);
+    }
 }

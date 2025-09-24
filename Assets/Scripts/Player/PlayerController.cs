@@ -15,6 +15,7 @@ public class PlayerController
     public event Action CheckInputs;
     private float _x, _z;
     private bool  _crouch;
+    private bool _canUseGun = true;
 
     private bool _grabbing = false,_aiming=false;
     public PlayerController(PlayerShootingGun scriptShoot, PlayerInteractions scriptInteract, PlayerDash scriptDash,PlayerMovement scriptMovement, Animator animator, GrabbingSound area)
@@ -55,6 +56,7 @@ public class PlayerController
 
     public void Shoot()
     {
+        if (!_canUseGun) return;
         _canShoot = _scriptShoot.CheckSound();
         if (!_canShoot || _grabbing) return;
         _aiming = Input.GetKeyDown(KeyCode.Mouse0);
@@ -71,7 +73,7 @@ public class PlayerController
 
     public void Interactions()
     {
-        if (Input.GetKey(KeyCode.E))
+        if (Input.GetKeyDown(KeyCode.E))
         {
             _scriptInteract.Interact();
         }
@@ -87,6 +89,7 @@ public class PlayerController
 
     public void Grabbing()
     {
+        if (!_canUseGun) return;
         bool isRightClick = Input.GetKey(KeyCode.Mouse1);
         if (!isRightClick)
         {
@@ -114,5 +117,9 @@ public class PlayerController
         _animator.SetBool("StartShooting", false);
         GameManager.Instance.CameraReference.GetComponent<CameraManager>().ResetCameraDistance();
         UIManager.Instance.AimUI.UITrigger(false);
+    }
+    public void CanUseGun(bool State)
+    {
+        _canUseGun = State;
     }
 }
