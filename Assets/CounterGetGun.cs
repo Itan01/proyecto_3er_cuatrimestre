@@ -22,7 +22,7 @@ public class CounterGetGun : MonoBehaviour
     }
     private IEnumerator Setter()
     {
-        yield return new WaitForSeconds(1);
+        yield return new WaitForSeconds(0.1f);
         _player.CanUseMegaphone(false);
     }
 }
