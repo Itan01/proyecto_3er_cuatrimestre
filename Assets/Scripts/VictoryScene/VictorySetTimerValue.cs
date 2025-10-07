@@ -17,7 +17,7 @@ public class VictorySetTimerValue : MonoBehaviour
     private void Start()
     {
         _text = GetComponent<TextMeshProUGUI>();
-        _maxValue=Mathf.FloorToInt(GameManager.Instance.TimeOnlevel);
+        _maxValue=Mathf.FloorToInt(GameManager.Instance.FinalTimeOnLVL);
         _menu.SetTime(_maxValue);
     }
 

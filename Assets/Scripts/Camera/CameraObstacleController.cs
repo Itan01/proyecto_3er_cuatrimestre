@@ -2,7 +2,6 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using static CameraObstacleController;
 
 public class CameraObstacleController : MonoBehaviour
 {
@@ -14,8 +13,8 @@ public class CameraObstacleController : MonoBehaviour
     [SerializeField] private Color _baseColor;
     [SerializeField] private Color _detectorColor;
     private bool _seePlayer;
-   private bool _checkingPlayer;
-    private LayerMask _layerMask;
+    private bool _checkingPlayer;
+    private SO_Layers _layer;
     private RaycastHit _intHit, _inHitFeet, _inHitHead;
     private Ray _hipPosition, _feetPosition, _headPosition;
     private Transform _camTransform;
@@ -28,7 +27,6 @@ public class CameraObstacleController : MonoBehaviour
 
     private void Start()
     {
-        _layerMask = LayerManager.Instance.GetLayerMask(EnumLayers.ObstacleWithPlayerMask);
         _audiosrc = GetComponent<AudioSource>();
         _maxRotation = _rotation + _camTransform.transform.rotation.y;
         _minRotation = (_rotation * -1f) + _camTransform.transform.rotation.y;
@@ -110,7 +108,7 @@ public class CameraObstacleController : MonoBehaviour
     {
         if (_audiosrc.isPlaying)
             _audiosrc.Stop();
-        _clip= AudioStorage.Instance.CameraSound(EnumAudios.CameraResetting);
+        _clip= AudioStorage.Instance.CameraSound(EAudios.CameraResetting);
         _audiosrc.PlayOneShot(_clip);
         Movement = ResettingMovement;
         _detectingPlayer = false;
@@ -131,7 +129,7 @@ public class CameraObstacleController : MonoBehaviour
     {
         if(_audiosrc.isPlaying)
             _audiosrc.Stop();
-        _clip= AudioStorage.Instance.CameraSound(EnumAudios.CameraDetection);
+        _clip= AudioStorage.Instance.CameraSound(EAudios.CameraDetection);
         _audiosrc.PlayOneShot(_clip);
         Movement = LookingMovement;
         _room.DetectPlayer();
@@ -174,7 +172,7 @@ public class CameraObstacleController : MonoBehaviour
 
     private RaycastHit CheckRayCast(Ray ray, RaycastHit hit)
     {
-        if (Physics.Raycast(ray, out hit, 500.0f, _layerMask, QueryTriggerInteraction.Ignore))
+        if (Physics.Raycast(ray, out hit, 500.0f, _layer._everything, QueryTriggerInteraction.Ignore))
         {
             //Debug.Log($"Collided obj : {_intHit.collider.name}.");
             if (hit.collider.GetComponent<PlayerManager>() && !GameManager.Instance.PlayerReference.GetInvisible())
@@ -185,7 +183,7 @@ public class CameraObstacleController : MonoBehaviour
     private void CheckTarget()
     {
         _checkingPlayer = false;
-        _targetHips = GameManager.Instance.PlayerReference.GetHipsPosition();
+        _targetHips = GameManager.Instance.PlayerReference.GetHipsPosition().position;
         _target = GameManager.Instance.PlayerReference.transform.position;
         _hipPosition = new Ray(transform.position, (_targetHips - transform.position) * 500.0f);
         _intHit = CheckRayCast(_hipPosition, _intHit);

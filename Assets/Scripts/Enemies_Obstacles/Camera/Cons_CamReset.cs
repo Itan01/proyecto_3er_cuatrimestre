@@ -43,7 +43,7 @@ public class Cons_CamReset : ICamMovement
     {
         if (_audio.isPlaying)
             _audio.Stop();
-        _clip = AudioStorage.Instance.CameraSound(EnumAudios.CameraResetting);
+        _clip = AudioStorage.Instance.CameraSound(EAudios.CameraResetting);
         _audio.PlayOneShot(_clip);
         _camRotation = _camTransform.localEulerAngles;
         _xRotation = _camRotation.x;

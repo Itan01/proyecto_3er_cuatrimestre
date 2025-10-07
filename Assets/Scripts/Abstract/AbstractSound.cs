@@ -1,8 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
-using System.Runtime.InteropServices.WindowsRuntime;
 using UnityEngine;
-using static UnityEngine.ParticleSystem;
 [RequireComponent(typeof(Rigidbody))]
 
 public abstract class AbstractSound : MonoBehaviour // Sonidos Genericos,Movimiento Base
@@ -49,45 +47,45 @@ public abstract class AbstractSound : MonoBehaviour // Sonidos Genericos,Movimie
 
     protected virtual void Move()
     {
-        if (_isRejected)
-        {
-            _rb.MovePosition(transform.position + _dir.normalized * _speed * Time.fixedDeltaTime);
-            return;
-        }
+        //if (_isRejected)
+        //{
+        //    _rb.MovePosition(transform.position + _dir.normalized * _speed * Time.fixedDeltaTime);
+        //    return;
+        //}
 
-        if (_target != null)
-        {
-            Vector3 toTarget = (_target.position + new Vector3(0, 0.3f, 0)) - transform.position;
-            float distance = toTarget.magnitude;
+        //if (_target != null)
+        //{
+        //    Vector3 toTarget = (_target.position + new Vector3(0, 0.3f, 0)) - transform.position;
+        //    float distance = toTarget.magnitude;
 
-            if (distance < 0.3f)
-            {
-                if (_canCatch)
-                {
-                    PlayerManager player = GameManager.Instance.PlayerReference;
-                    if (player != null)
-                    {
-                        if (!player.PlayerHasSound())
-                        {
-                            player.SetSound(_index);
-                            Destroy(gameObject);
-                        }
-                        else
-                        {
-                            BounceBackFromMegaphone(); 
-                        }
-                    }
-                }
-                return;
-            }
+        //    if (distance < 0.3f)
+        //    {
+        //        if (_canCatch)
+        //        {
+        //            PlayerManager player = GameManager.Instance.PlayerReference;
+        //            if (player != null)
+        //            {
+        //                if (!player.PlayerHasSound())
+        //                {
+        //                    player.SetSound(_index);
+        //                    Destroy(gameObject);
+        //                }
+        //                else
+        //                {
+        //                    BounceBackFromMegaphone(); 
+        //                }
+        //            }
+        //        }
+        //        return;
+        //    }
 
-            _dir = toTarget.normalized;
-            _rb.MovePosition(transform.position + _dir * _speed * Time.fixedDeltaTime);
-        }
-        else
-        {
-            _rb.MovePosition(transform.position + _dir.normalized * _speed * Time.fixedDeltaTime);
-        }
+        //    _dir = toTarget.normalized;
+        //    _rb.MovePosition(transform.position + _dir * _speed * Time.fixedDeltaTime);
+        //}
+        //else
+        //{
+        //    _rb.MovePosition(transform.position + _dir.normalized * _speed * Time.fixedDeltaTime);
+        //}
     }
 
 

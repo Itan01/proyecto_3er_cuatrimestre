@@ -20,13 +20,13 @@ public class VictorySetValue : MonoBehaviour
         _text = GetComponent<TextMeshProUGUI>();
         if (_index == 0)
         {
-            _maxValue = GameManager.Instance.ScoreValue;
+            _maxValue = GameManager.Instance.FinalScore;
             _menu.SetMoney(_maxValue);
         }
 
         if (_index == 1)
         {
-            _maxValue = GameManager.Instance.TimeCaptured();
+            _maxValue = GameManager.Instance.TimesCaptured;
             _menu.SetTries(_maxValue);
         }
     }

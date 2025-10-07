@@ -9,6 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7740707606285615944}
+  - component: {fileID: 190258252767534348}
   m_Layer: 0
   m_Name: Particles
   m_TagString: Untagged
@@ -35,6 +36,18 @@ Transform:
   - {fileID: 7483360433383468471}
   m_Father: {fileID: 3116911911213293296}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &190258252767534348
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 158710690806627725}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 062afb966bb72c74fa95883e59262206, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1150517564696284355
 GameObject:
   m_ObjectHideFlags: 0
@@ -19360,8 +19373,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3116911911213293296}
-  - component: {fileID: 7441380769456348116}
-  - component: {fileID: 7487835651188610215}
+  - component: {fileID: 7327800113286422429}
+  - component: {fileID: 2628267295542905840}
   m_Layer: 0
   m_Name: AreaToCatch
   m_TagString: Untagged
@@ -19385,8 +19398,24 @@ Transform:
   - {fileID: 7740707606285615944}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!136 &7441380769456348116
-CapsuleCollider:
+--- !u!114 &7327800113286422429
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5513978918407130319}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d59c3854e0af18540a717788421122bd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _useLeftClick: 0
+  _useRightClick: 0
+  _hasBullet: 0
+  _factory: {fileID: 0}
+--- !u!135 &2628267295542905840
+SphereCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -19403,23 +19432,6 @@ CapsuleCollider:
   m_IsTrigger: 1
   m_ProvidesContacts: 0
   m_Enabled: 1
-  serializedVersion: 2
-  m_Radius: 3
-  m_Height: 20
-  m_Direction: 2
-  m_Center: {x: 0, y: 0, z: 10}
---- !u!114 &7487835651188610215
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5513978918407130319}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f0dd8a26b8715304db8081294617f3d7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _enviromentMask:
-    serializedVersion: 2
-    m_Bits: 3984588800
+  serializedVersion: 3
+  m_Radius: 0.5
+  m_Center: {x: 0, y: 0, z: 0}

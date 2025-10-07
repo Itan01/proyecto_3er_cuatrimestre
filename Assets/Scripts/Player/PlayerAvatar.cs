@@ -8,10 +8,12 @@ public class PlayerAvatar : MonoBehaviour
     private ParticlesManager _particles;
     private AudioClip _audio_walk;
     private AudioSource _audio;
+    private Rigidbody _rb;
     void Start()
     {
-        _audio=GetComponentInParent<AudioSource>();
-        _audio_walk = AudioStorage.Instance.PlayerSound(EnumAudios.PlayerWalk);
+        _rb=GetComponentInParent<Rigidbody>();
+        _audio =GetComponentInParent<AudioSource>();
+        _audio_walk = AudioStorage.Instance.PlayerSound(EAudios.PlayerWalk);
         _scriptManager = GetComponentInParent<PlayerManager>();
         _particles = GetComponentInChildren<ParticlesManager>();
     }
@@ -27,11 +29,11 @@ public class PlayerAvatar : MonoBehaviour
     }
     public void PlayerCanNotShoot()
     {
-        _scriptManager.PlayerCanShoot(false);
+        //_scriptManager.PlayerCanShoot(false);
     }
     public void PlayerCanShoot()
     {
-        _scriptManager.PlayerCanShoot(true);
+       // _scriptManager.PlayerCanShoot(true);
     }
     public void PlayWalkParticles()
     {
@@ -45,6 +47,10 @@ public class PlayerAvatar : MonoBehaviour
     }
     public void SetGravityTrue()
     {
-        GetComponentInParent<Rigidbody>().useGravity = true;
+        _rb.useGravity = true;
+    }
+    public void SetGravityFalse()
+    {
+        _rb.useGravity = false;
     }
 }

@@ -10,15 +10,15 @@ public class SummonSoundFromWalking : MonoBehaviour
         if (Entity.TryGetComponent<EntityMonobehaviour>(out EntityMonobehaviour ScriptEntity))
         {
             //Debug.Log(Entity.name);
-            ScriptEntity.SetSoundInvoker(true);
-            ScriptEntity.GameObjectSoundInvoker(_sound);
+            //ScriptEntity.SetSoundInvoker(true);
+           // ScriptEntity.GameObjectSoundInvoker(_sound);
         }
     }
     private void OnTriggerExit(Collider Entity)
     {
         if (Entity.TryGetComponent<EntityMonobehaviour>(out EntityMonobehaviour ScriptEntity))
         {
-            ScriptEntity.SetSoundInvoker(false);
+           // ScriptEntity.SetSoundInvoker(false);
         }
     }
 }

@@ -21,7 +21,7 @@ public class s_EnemyChasing : MonoBehaviour, IEnemyTreeNode
     }
     public void Movement()
     {
-        if (_player.IsPlayerDeath())
+        if (_player.IsDeath())
         {
             _scriptParent.NewMode();
         }

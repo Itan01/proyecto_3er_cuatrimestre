@@ -11,10 +11,6 @@ public class EnemyVision : MonoBehaviour
     [SerializeField] private int horizontalRayCount = 100;
     [SerializeField] private int verticalRayCount = 30;
 
-    [Header("Layer Masks")]
-    private LayerMask obstacleMask;
-    private LayerMask detectableMask;
-
     [Header("References")]
     private AbstractEnemy _scriptManager;
     private PlayerManager _player;
@@ -27,6 +23,7 @@ public class EnemyVision : MonoBehaviour
     private bool _seePlayer = false;
 
     private Mesh visionMesh;
+    private SO_Layers _layer;
     private MeshFilter meshFilter;
     private MeshRenderer meshRenderer;
     private Transform _headReference;
@@ -36,22 +33,19 @@ public class EnemyVision : MonoBehaviour
 
     private void Start()
     {
-
-        obstacleMask = LayerManager.Instance.GetLayerMask(EnumLayers.ObstacleMask);
-        detectableMask = LayerManager.Instance.GetLayerMask(EnumLayers.ObstacleWithPlayerMask);
-        _raycast = new Cons_Raycast(500f, detectableMask);
+        _raycast = new Cons_Raycast(500f, _layer._everything);
         meshFilter = GetComponent<MeshFilter>();
         meshRenderer = GetComponent<MeshRenderer>();
         visionMesh = new Mesh { name = "Vision Mesh" };
         meshFilter.mesh = visionMesh;
         _scriptManager = GetComponentInParent<AbstractEnemy>();
-        _headReference = _scriptManager.GetHeadTransform();
+        _headReference = _scriptManager.transform;
         _player = GameManager.Instance.PlayerReference;
     }
 
     private void LateUpdate()
     {
-        _playerDeath = _player.IsPlayerDeath();
+        _playerDeath = _player.IsDeath();
         DrawFieldOfView();
         _scriptManager.WatchingPlayer(_seePlayer);
         _seePlayer = false;
@@ -64,7 +58,7 @@ public class EnemyVision : MonoBehaviour
     private void Update()
     {
             DrawFieldOfView();
-        if (_player.IsPlayerDeath() || _player.GetInvisible()) return;
+        if (_player.IsDeath() || _player.GetInvisible()) return;
         if (_detectPlayer)
             CheckIfHasVIsion();
     }
@@ -100,7 +94,7 @@ public class EnemyVision : MonoBehaviour
                 Quaternion rot = Quaternion.Euler(pitch, yaw, 0);
                 Vector3 dir = _headReference.rotation * (rot * Vector3.forward);
 
-                if (Physics.Raycast(origin, dir, out RaycastHit hit, viewRadius, obstacleMask, QueryTriggerInteraction.Ignore))
+                if (Physics.Raycast(origin, dir, out RaycastHit hit, viewRadius, _layer._obstacles, QueryTriggerInteraction.Ignore))
                 {
                     debugPoints.Add((hit.point, true));
                 }
@@ -109,7 +103,7 @@ public class EnemyVision : MonoBehaviour
                     debugPoints.Add((origin + dir * viewRadius, false));
                 }
 
-                if (Physics.Raycast(origin, dir, out hit, viewRadius, detectableMask,QueryTriggerInteraction.Ignore))
+                if (Physics.Raycast(origin, dir, out hit, viewRadius, _layer._everything, QueryTriggerInteraction.Ignore))
                 {
                     if(hit.collider.GetComponent<PlayerManager>())
                     _detectPlayer = true;
@@ -149,8 +143,8 @@ public class EnemyVision : MonoBehaviour
     {
         _seePlayer = false;
         _detectPlayer = false;
-        Vector3 PlayerHead = (_player.GetHeadPosition() - _headReference.position).normalized;
-        Vector3 PlayerHips = (_player.GetHipsPosition() - _headReference.position).normalized;
+        Vector3 PlayerHead = (_player.GetHeadPosition().position - _headReference.position).normalized;
+        Vector3 PlayerHips = (_player.GetHipsPosition().position - _headReference.position).normalized;
         Vector3 PlayerPosition = (_player.transform.position - _headReference.position).normalized;
         if (_raycast.Checker<PlayerManager>(_headReference.position, PlayerHead) ||
             _raycast.Checker<PlayerManager>(_headReference.position, PlayerHips) ||
@@ -205,7 +199,7 @@ Vector3 DirFromAngle(float angleDegrees, bool global)
 
         if (Vector3.Angle(transform.forward, dirToPlayer) < viewAngle / 2 && dstToPlayer < viewRadius)
         {
-            if (!Physics.Raycast(transform.position, dirToPlayer, dstToPlayer, obstacleMask))
+            if (!Physics.Raycast(transform.position, dirToPlayer, dstToPlayer, _layer._obstacles))
             {
                 return true;
             }

@@ -7,7 +7,7 @@ public class LaserManager : MonoBehaviour , ISoundInteractions
     private Animation _animation;
     [SerializeField] private Vector3 _offset = new Vector3(0.0f, 0.15f,0.0f);
     private float _maxDistance = 100.0f;
-    private LayerMask _ignoreMask;
+    private SO_Layers _layer;
     [SerializeField] private Transform _endPosition;
     [SerializeField] private GameObject _explosion;
     private RaycastHit _onHit;
@@ -17,7 +17,6 @@ public class LaserManager : MonoBehaviour , ISoundInteractions
 
     private void Start()
     {
-        _ignoreMask = LayerManager.Instance.GetLayerMask(EnumLayers.ObstacleWithPlayerMask);
         _lineRenderer = GetComponent<LineRenderer>();
         _lineRenderer.positionCount = 2;
         _animation=GetComponent<Animation>();
@@ -26,7 +25,7 @@ public class LaserManager : MonoBehaviour , ISoundInteractions
     private void Update()
     {
         _ray = new Ray(transform.position + _offset, transform.forward);
-        if (Physics.Raycast(_ray, out _onHit, _maxDistance, _ignoreMask, QueryTriggerInteraction.Ignore))
+        if (Physics.Raycast(_ray, out _onHit, _maxDistance, _layer._everything, QueryTriggerInteraction.Ignore))
         {
             _lineRenderer.SetPosition(1, _onHit.point);
             if (_onHit.collider.GetComponent<PlayerManager>())
@@ -53,11 +52,4 @@ public class LaserManager : MonoBehaviour , ISoundInteractions
         var explosion = Instantiate(_explosion,transform.position,Quaternion.identity);
         Destroy(gameObject, 0.1f);
     }
-    //private void OnDrawGizmos()
-    //{
-    //    Gizmos.color = Color.yellow;
-    //    Gizmos.DrawRay(transform.position, transform.forward * _maxDistance);
-    //    Gizmos.color= Color.green;
-    //    Gizmos.DrawWireSphere(_onHit.point, 0.25f);
-    //}
 }

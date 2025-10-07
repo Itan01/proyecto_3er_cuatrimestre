@@ -16,7 +16,7 @@ public class CollisionToHear : MonoBehaviour
 
     private void Update()
     {
-        if (_player.IsPlayerDeath() || !_player.IsPlayerMoving() || _player.IsPlayerCrouching()) return;
+        if (_player.IsDeath() || !_player.IsMoving() || _player.IsCrouching()) return;
         if ((_player.transform.position - transform.position).magnitude <= _distance)
         {
             if (_scriptManager.GetMode() <= 0 && _scriptManager.GetMode() != 1)

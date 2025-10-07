@@ -18,7 +18,7 @@ public class CountdownTimer : MonoBehaviour
 
     private void Start()
     {
-        _timerEffect = AudioStorage.Instance.UiSound(EnumAudios.Timer);
+        _timerEffect = AudioStorage.Instance.UiSound(EAudios.Timer);
         // AudioManager.Instance.PlaySFX(_timerEffect, 1f);
     }
     void Update()
@@ -45,7 +45,7 @@ public class CountdownTimer : MonoBehaviour
     }
     public void StopTimerUI() 
     {
-        GameManager.Instance.TimeOnlevel = Mathf.FloorToInt(_timer);
+        GameManager.Instance.FinalTimeOnLVL = Mathf.FloorToInt(_timer);
         _isRunning = false;
 
     }

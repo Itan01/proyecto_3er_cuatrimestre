@@ -19,7 +19,7 @@ public class FuseBox : MonoBehaviour , ISoundInteractions
             if (!_playOnce)
             {
                 //AudioStorage.Instance.RoombaExplosion();
-                AudioStorage.Instance.SoundsGameObject(EnumAudios.FuseBox);
+                AudioStorage.Instance.SoundsGameObject(EAudios.FuseBox);
                 _playOnce = true;
             }
 

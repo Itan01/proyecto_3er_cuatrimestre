@@ -12,6 +12,7 @@ public class Cons_CamWatchingPlayer : ICamMovement
     private Vector3 _target;
     private Cons_CamColorLight _colorLight;
     private Cons_Raycast _Raycast;
+    private SO_Layers _layer;
     private RoomManager _room;
     private bool _detectingPlayer, _checkingPlayer;
     private CameraObstacleController _script;
@@ -23,13 +24,13 @@ public class Cons_CamWatchingPlayer : ICamMovement
         _camTransform = CamTransform;
         _room = Room;
         _colorLight = new Cons_CamColorLight(Render, Light, Color);
-        _Raycast = new Cons_Raycast(500f, LayerManager.Instance.GetLayerMask(EnumLayers.ObstacleWithPlayerMask));
+        _Raycast = new Cons_Raycast(500f, _layer._everything);
 
     }
 
     public void Move()
     {
-        _target = GameManager.Instance.PlayerReference.GetHipsPosition();
+        //_target = GameManager.Instance.PlayerReference.GetHipsPosition();
         _camTransform.LookAt(_target);
         CheckTarget();
     }
@@ -37,7 +38,7 @@ public class Cons_CamWatchingPlayer : ICamMovement
     {
         if (_audio.isPlaying)
             _audio.Stop();
-        _clip = AudioStorage.Instance.CameraSound(EnumAudios.CameraDetection);
+        _clip = AudioStorage.Instance.CameraSound(EAudios.CameraDetection);
         _audio.PlayOneShot(_clip);
         _room.DetectPlayer();
         _detectingPlayer = true;
@@ -52,9 +53,9 @@ public class Cons_CamWatchingPlayer : ICamMovement
             return;
         }
         _checkingPlayer = false;
-            Vector3 TargetHips = (GameManager.Instance.PlayerReference.GetHipsPosition() - _camTransform.position).normalized;
+            Vector3 TargetHips = (GameManager.Instance.PlayerReference.GetHipsPosition().position - _camTransform.position).normalized;
             Vector3 TargetFeet = (GameManager.Instance.PlayerReference.transform.position - _camTransform.position).normalized;
-            Vector3 TargetHead = (GameManager.Instance.PlayerReference.GetHeadPosition() - _camTransform.position).normalized;
+            Vector3 TargetHead = (GameManager.Instance.PlayerReference.GetHeadPosition().position - _camTransform.position).normalized;
             if (_Raycast.Checker<PlayerManager>(_camTransform.position, TargetHips) ||
                 _Raycast.Checker<PlayerManager>(_camTransform.position, TargetFeet) ||
                 _Raycast.Checker<PlayerManager>(_camTransform.position, TargetHead))

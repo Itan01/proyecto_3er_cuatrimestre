@@ -20,7 +20,7 @@ public class RoomManager : MonoBehaviour
     {
         if (Player.GetComponent<PlayerManager>())
         {
-            GameManager.Instance.AddRoom(this);
+            LVLManager.Instance.AddRoom(this);
             ActivateRoom();
             _isActivate = true;
         }
@@ -33,7 +33,7 @@ public class RoomManager : MonoBehaviour
         {
             if (_doorBroken)
                 SummonSmoketrap();
-            GameManager.Instance.RemoveRoom(this);
+            LVLManager.Instance.RemoveRoom(this);
             _isActivate = false;
             DesactivateRoom();
         }

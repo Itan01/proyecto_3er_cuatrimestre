@@ -24,6 +24,8 @@ public abstract class AbstractEnemy : EntityMonobehaviour, ISoundInteractions
     protected Action _gamemode = null;
     protected EnemyVision _vision;
     protected RoomManager _room;
+    protected AudioClip _clip;
+    protected AudioSource _audiosource;
     protected override void Awake()
     {
         _confusedDuration = _confusedDurationRef;
@@ -59,7 +61,7 @@ public abstract class AbstractEnemy : EntityMonobehaviour, ISoundInteractions
     {
         if (Entity.gameObject.GetComponent<PlayerManager>())
         {
-            GameManager.Instance.ResetGameplay();
+            EventManager.Trigger(EEvents.Reset);
             _nextPosition = _startPosition;
         }
     }
@@ -148,7 +150,7 @@ public abstract class AbstractEnemy : EntityMonobehaviour, ISoundInteractions
     protected virtual void MovChaseTarget() // Persigue al Jugador
     {
         SetBehaviourValues(true, true, true, 1, _runSpeed, CondChaseTarget);
-        _clip = AudioStorage.Instance.StandardEnemySound(EnumAudios.EnemyAlert);
+        _clip = AudioStorage.Instance.StandardEnemySound(EAudios.EnemyAlert);
         _audiosource.PlayOneShot(_clip, 1.0f);
         _mode = 1;
         PreMovement = MovChaseTarget;
@@ -195,7 +197,7 @@ public abstract class AbstractEnemy : EntityMonobehaviour, ISoundInteractions
     protected void MovConfuse()// Confundido (ve al player) es decir, se queda quieto en el lugar pero NO LO BUSCA, esto es solo por vision, no por radiustohear
     {
         SetBehaviourValues(false, false, true, 0, 0.0f, CondTimerConfused);
-        _clip = AudioStorage.Instance.StandardEnemySound(EnumAudios.EnemyConfuse);
+        _clip = AudioStorage.Instance.StandardEnemySound(EAudios.EnemyConfuse);
         _audiosource.PlayOneShot(_clip, 1.0f);
         _mode = 3;
         _resetTimer = _resetTimerRef;
@@ -224,7 +226,7 @@ public abstract class AbstractEnemy : EntityMonobehaviour, ISoundInteractions
         _mode = 4;
         _timer = 2.5f;
         SetBehaviourValues(false, false, true, 0, 0.0f, CondTimer);
-        _clip = AudioStorage.Instance.StandardEnemySound(EnumAudios.EnemyChecking);
+        _clip = AudioStorage.Instance.StandardEnemySound(EAudios.EnemyChecking);
         _audiosource.PlayOneShot(_clip, 1.0f);
         PreMovement = MovPatrol;
         NextMovement = MovPatrol;
@@ -243,7 +245,7 @@ public abstract class AbstractEnemy : EntityMonobehaviour, ISoundInteractions
     protected void MoveStartHearing() // Persigue al Jugador
     {
         SetBehaviourValues(false, false, true, 0, 0.0f, CondTimer);
-        _clip = AudioStorage.Instance.StandardEnemySound(EnumAudios.EnemyConfuse);
+        _clip = AudioStorage.Instance.StandardEnemySound(EAudios.EnemyConfuse);
         _audiosource.PlayOneShot(_clip, 1.0f);
         _timer = 2.1f;
         _mode = 5;
@@ -257,7 +259,7 @@ public abstract class AbstractEnemy : EntityMonobehaviour, ISoundInteractions
     protected void MovStunned() // Persigue al Jugador
     {
         SetBehaviourValues(false, false, false, 0, 0.0f, CondTimer);
-        _clip = AudioStorage.Instance.StandardEnemySound(EnumAudios.EnemyHurt);
+        _clip = AudioStorage.Instance.StandardEnemySound(EAudios.EnemyHurt);
         _audiosource.PlayOneShot(_clip, 1.0f);
         _agent.speed = 0.0f;
         _mode = 6;
@@ -273,7 +275,7 @@ public abstract class AbstractEnemy : EntityMonobehaviour, ISoundInteractions
     public void PlayAudioWalk()
     {
         if (!_room.IsRoomActivate()) return;
-        _clip = AudioStorage.Instance.StandardEnemySound(EnumAudios.EnemyWalk);
+        _clip = AudioStorage.Instance.StandardEnemySound(EAudios.EnemyWalk);
         _audiosource.PlayOneShot(_clip, 0.025f);
     }
     public void SetSpeed(float Speed)

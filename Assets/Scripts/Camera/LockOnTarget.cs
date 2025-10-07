@@ -1,12 +1,10 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using static UnityEngine.GraphicsBuffer;
 
 public class LockOnTarget : MonoBehaviour
 {
     private Transform _target;
-    private Vector3 _view;
 
     private void Start()
     {

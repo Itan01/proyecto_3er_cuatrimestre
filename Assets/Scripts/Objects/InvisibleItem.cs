@@ -14,7 +14,7 @@ public class InvisibleItem : MonoBehaviour, IInteractableObject
     public void OnInteract()
     {
         GameManager.Instance.PlayerReference.SetInvisiblePowerUp(_duration);
-        AudioClip _clip = AudioStorage.Instance.GunSound(EnumAudios.GunShooting);
+        AudioClip _clip = AudioStorage.Instance.GunSound(EAudios.GunShooting);
         AudioManager.Instance.PlaySFX(_clip,1.0f);
         Material _material = GameManager.Instance.PlayerReference.GetComponentInChildren<SkinnedMeshRenderer>().material;
         _material.SetColor("_Color", _color);

@@ -2,9 +2,11 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using static UnityEngine.Rendering.DebugUI;
 
 public class GameManager : MonoBehaviour
 {
+    /*Variable Globales que se necesita entre Escenas*/
     #region Sigleton
     public static GameManager Instance;
 
@@ -24,11 +26,11 @@ public class GameManager : MonoBehaviour
     #endregion
     private PlayerManager _player;
 
-    private bool _ShowComicEntry=true;
-    public bool ShowComicEntry 
+    private bool _firstTimePlaying=true;
+    public bool FirstTimePlay 
     {
-        get { return _ShowComicEntry; }
-        set { _ShowComicEntry = value; }
+        get { return _firstTimePlaying; }
+        set { _firstTimePlaying = value; }
     }
 
     public PlayerManager PlayerReference
@@ -42,12 +44,6 @@ public class GameManager : MonoBehaviour
     {
         get { return _soundRef; }
         set { _soundRef = value; }
-    }
-    private Vector3 _positionToRespwan;
-    public Vector3 RespawnReference
-    {
-        get { return _positionToRespwan; }
-        set { _positionToRespwan = value; }
     }
     private Transform _camera;
     public Transform CameraReference
@@ -63,50 +59,25 @@ public class GameManager : MonoBehaviour
         get { return _textFirstTime; }
         set { _textFirstTime = value; }
     }
-
-
-    [SerializeField] private List<RoomManager> _actualsRoom;
-
-    public void AddRoom(RoomManager Room)
-    {
-        Room.ActivateRoom();
-        _actualsRoom.Add(Room);
-    }
-    public void RemoveRoom(RoomManager Room)
-    {
-        Room.DesactivateRoom();
-        _actualsRoom.Remove(Room);
-    }
-    public void ResetGameplay()
-    {
-        StartCoroutine(ResetTImer());
-    }
-
-    [SerializeField]private int _timeCaptured = 0;
-
-    public int TimeCaptured()
-    {
-        return _timeCaptured;
-    }
-    private IEnumerator ResetTImer()
-    {
-        PlayerReference.SetDeath(true);
-        UIManager.Instance.Transition.ShowBlackScreen();
-        yield return new WaitForSeconds(1.0f);
-        foreach (var room in _actualsRoom)
-        {
-            room.ResetRoom();
-        }
-        _timeCaptured++;
-        PlayerReference.ResetHeldSound();
-        PlayerReference.SetCaptured(false);
-        PlayerReference.SetDeath(false);
-        UIManager.Instance.Transition.FadeOut();
-        PlayerReference.transform.position = RespawnReference;
-    }
+    //private IEnumerator ResetTImer()
+    //{
+    //    PlayerReference.SetDeath(true);
+    //    UIManager.Instance.Transition.ShowBlackScreen();
+    //    yield return new WaitForSeconds(1.0f);
+    //    foreach (var room in _actualsRoom)
+    //    {
+    //        room.ResetRoom();
+    //    }
+    //    _timeCaptured++;
+    //    PlayerReference.ResetHeldSound();
+    //    PlayerReference.SetCaptured(false);
+    //    PlayerReference.SetDeath(false);
+    //    UIManager.Instance.Transition.FadeOut();
+    //    PlayerReference.transform.position = Respawn;
+    //}
     [SerializeField] private int _time;
 
-    public int TimeOnlevel
+    public int FinalTimeOnLVL
     {
         get { return _time; }
         set { _time = value; }
@@ -114,10 +85,18 @@ public class GameManager : MonoBehaviour
 
     [SerializeField] private int _score;
 
-    public int ScoreValue
+    public int FinalScore
     {
         get { return _score; }
         set { _score = value; }
+    }
+
+    [SerializeField] private int _timeCaptured = 0;
+
+    public int TimesCaptured
+    {
+        get { return _timeCaptured; }
+        set { _timeCaptured = value; }
     }
 
 }

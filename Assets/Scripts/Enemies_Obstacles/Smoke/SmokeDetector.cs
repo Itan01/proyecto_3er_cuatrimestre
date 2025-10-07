@@ -13,7 +13,7 @@ public class SmokeDetector : MonoBehaviour
     {
         if (Player.TryGetComponent(out EntityMonobehaviour Script))
         {
-            Script.CoughState(true);
+            //Script.CoughState(true);
             
         }
     }
@@ -22,7 +22,7 @@ public class SmokeDetector : MonoBehaviour
     {
     if (Player.TryGetComponent(out EntityMonobehaviour Script))
     {
-        Script.CoughState(false);
+        //Script.CoughState(false);
     }
     }
 }

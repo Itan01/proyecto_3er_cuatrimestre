@@ -12,8 +12,8 @@ public class ObjectValuable : AbstractObjects, IInteractableObject
     protected override void Start()
     { 
         base.Start();
-        _pickUpFragSound = AudioStorage.Instance.SoundsGameObject(EnumAudios.GrabObject);
-        _pickUpValueSound = AudioStorage.Instance.SoundsGameObject(EnumAudios.GrabObject);
+        _pickUpFragSound = AudioStorage.Instance.SoundsGameObject(EAudios.GrabObject);
+        _pickUpValueSound = AudioStorage.Instance.SoundsGameObject(EAudios.GrabObject);
     }
 
     protected override void Update()

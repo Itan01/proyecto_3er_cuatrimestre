@@ -10,7 +10,7 @@ public class s_UI_FinishLevel : MonoBehaviour
     private AudioClip _clipAlert;
     private void Start()
     {
-        _clipAlert = AudioStorage.Instance.StandardEnemySound(EnumAudios.EnemyAlert);
+        _clipAlert = AudioStorage.Instance.StandardEnemySound(EAudios.EnemyAlert);
         _animator = GetComponent<Animator>();
         UIManager.Instance.FinishLevelComic = this;
         gameObject.SetActive(false);
@@ -45,7 +45,7 @@ public class s_UI_FinishLevel : MonoBehaviour
     }
     private void SetValuesToGameManager()
     {
-        GameManager.Instance.ScoreValue = UIManager.Instance.GetScore();
+        GameManager.Instance.FinalScore = UIManager.Instance.GetScore();
         //Veces caputarada ya estan en el mismo GameManager
         UIManager.Instance.Timer.StopTimerUI();
     }

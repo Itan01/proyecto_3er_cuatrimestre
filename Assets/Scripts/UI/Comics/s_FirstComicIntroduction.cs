@@ -12,7 +12,7 @@ public class s_FirstComicIntroduction : MonoBehaviour
     {
         _animator = GetComponent<Animator>();
         _textScript = GetComponentInChildren<s_UITextController>();
-        if (!GameManager.Instance.ShowComicEntry)
+        if (!GameManager.Instance.FirstTimePlay)
         {
             GameManager.Instance.PlayerReference.SetIfPlayerCanMove(true,false);
             _audioSource.SetActive(true);
@@ -56,7 +56,7 @@ public class s_FirstComicIntroduction : MonoBehaviour
     public void Desactivate()
     {
         _audioSource.SetActive(true);
-        GameManager.Instance.ShowComicEntry = false;
+GameManager.Instance.FirstTimePlay=false;
         GameManager.Instance.PlayerReference.SetIfPlayerCanMove(true, false);
         UIManager.Instance.Timer.IsRunning(true);
         gameObject.SetActive(false);

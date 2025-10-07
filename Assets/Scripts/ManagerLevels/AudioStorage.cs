@@ -20,28 +20,28 @@ public class AudioStorage : MonoBehaviour
     [SerializeField] private AudioClip _destoyObjFrag;
     [SerializeField] private AudioClip _grabObj;
     [SerializeField] private AudioClip _fuseBoxGeneratesSounds;
-    Dictionary<EnumAudios, AudioClip> _objects = new Dictionary<EnumAudios, AudioClip>();
+    Dictionary<EAudios, AudioClip> _objects = new Dictionary<EAudios, AudioClip>();
 
     [Header("<color=green>Rooms</color>")]
 
     [SerializeField] private AudioClip _glassSound;
     [SerializeField] private AudioClip _smokeTrapSound;
     [SerializeField] private AudioClip _laserAlarm;
-    Dictionary<EnumAudios, AudioClip> _rooms = new Dictionary<EnumAudios, AudioClip>();
+    Dictionary<EAudios, AudioClip> _rooms = new Dictionary<EAudios, AudioClip>();
 
     [Header("<color=green>Player Sounds</color>")]
 
     [SerializeField] private AudioClip _Dash;
     [SerializeField] private AudioClip _walking; 
     [SerializeField] private AudioClip _cadenzaDead;
-    Dictionary<EnumAudios, AudioClip> _player = new Dictionary<EnumAudios, AudioClip>();
+    Dictionary<EAudios, AudioClip> _player = new Dictionary<EAudios, AudioClip>();
 
     [Header("<color=green>PlayerGun Sounds</color>")]
     [SerializeField] private AudioClip _shootingSound;
     [SerializeField] private AudioClip _grabbingSound;
     [SerializeField] private AudioClip _crashSound;
     [SerializeField] private AudioClip _soundPath;
-    Dictionary<EnumAudios, AudioClip> _gun = new Dictionary<EnumAudios, AudioClip>();
+    Dictionary<EAudios, AudioClip> _gun = new Dictionary<EAudios, AudioClip>();
 
     [Header("<color=green>Lights Sound </color>")]
     [SerializeField] private AudioClip _LightSwitch;
@@ -50,7 +50,7 @@ public class AudioStorage : MonoBehaviour
     [SerializeField] private AudioClip _Roombaexplosion;
     [SerializeField] private AudioClip _spawnRoomba;
     [SerializeField] private AudioClip _walkRoomba;
-    Dictionary<EnumAudios, AudioClip> _roomba = new Dictionary<EnumAudios, AudioClip>();
+    Dictionary<EAudios, AudioClip> _roomba = new Dictionary<EAudios, AudioClip>();
 
     [Header("<color=green>Enemy Sounds</color>")]
     [SerializeField] private AudioClip _enemyConfused;
@@ -59,7 +59,7 @@ public class AudioStorage : MonoBehaviour
     [SerializeField] private AudioClip _enemyHurt;
     [SerializeField] private AudioClip _enemyWalk;
     [SerializeField] private AudioClip _stunnedEnemy;
-     Dictionary<EnumAudios, AudioClip> _standardEnemy = new Dictionary<EnumAudios, AudioClip>();
+     Dictionary<EAudios, AudioClip> _standardEnemy = new Dictionary<EAudios, AudioClip>();
 
     [Header("<color=green>Door Sounds</color>")]
     [SerializeField] private AudioClip _openDoorSound;
@@ -69,13 +69,13 @@ public class AudioStorage : MonoBehaviour
     [SerializeField] private AudioClip _cameraDetection;
     [SerializeField] private AudioClip _cameraResetting;
     [SerializeField] private float _soundVolume = 1f;
-    Dictionary<EnumAudios, AudioClip> _camera = new Dictionary<EnumAudios, AudioClip>();
+    Dictionary<EAudios, AudioClip> _camera = new Dictionary<EAudios, AudioClip>();
 
     [Header("<color=green>UI Sounds</color>")]
     [SerializeField] private AudioClip _countPoints;
     [SerializeField] private AudioClip _uiGun;
     [SerializeField] private AudioClip _timer;
-    Dictionary<EnumAudios, AudioClip> _ui = new Dictionary<EnumAudios, AudioClip>();
+    Dictionary<EAudios, AudioClip> _ui = new Dictionary<EAudios, AudioClip>();
 
     public static AudioStorage Instance;
     private void Awake()
@@ -90,31 +90,31 @@ public class AudioStorage : MonoBehaviour
     {
         LoadAudios();
     }
-    public AudioClip PlayerSound(EnumAudios clip)
+    public AudioClip PlayerSound(EAudios clip)
     {
         return _player[clip];
     }
-    public AudioClip CameraSound(EnumAudios clip)
+    public AudioClip CameraSound(EAudios clip)
     {
         return _camera[clip];
     }
-    public AudioClip GunSound(EnumAudios clip)
+    public AudioClip GunSound(EAudios clip)
     {
         return _gun[clip];
     }
-    public AudioClip StandardEnemySound(EnumAudios clip)
+    public AudioClip StandardEnemySound(EAudios clip)
     {
         return _standardEnemy[clip];
     }
-    public AudioClip RoombaSound(EnumAudios clip)
+    public AudioClip RoombaSound(EAudios clip)
     {
         return _roomba[clip];
     }
-    public AudioClip SoundsGameObject(EnumAudios clip)
+    public AudioClip SoundsGameObject(EAudios clip)
     {
         return _objects[clip];
     }
-    public AudioClip UiSound(EnumAudios clip)
+    public AudioClip UiSound(EAudios clip)
     {
         return _ui[clip];
     }
@@ -161,29 +161,29 @@ public class AudioStorage : MonoBehaviour
     #endregion
     private void LoadAudios()
     {
-        _player.Add(EnumAudios.PlayerDash, _Dash);
-        _player.Add(EnumAudios.PlayerWalk, _walking);
-        _player.Add(EnumAudios.PlayerDeath, _cadenzaDead);
+        _player.Add(EAudios.PlayerDash, _Dash);
+        _player.Add(EAudios.PlayerWalk, _walking);
+        _player.Add(EAudios.PlayerDeath, _cadenzaDead);
 
         //AudioStorage.Intance.(Tipo)Player(EnumAudios.PlayerDead);
 
-        _gun.Add(EnumAudios.GunShooting, _shootingSound);
-        _gun.Add(EnumAudios.GunGrabbing, _grabbingSound);
+        _gun.Add(EAudios.GunShooting, _shootingSound);
+        _gun.Add(EAudios.GunGrabbing, _grabbingSound);
 
-        _standardEnemy.Add(EnumAudios.EnemyAlert, _enemyAlert);
-        _standardEnemy.Add(EnumAudios.EnemyChecking, _enemyHmm);
-        _standardEnemy.Add(EnumAudios.EnemyConfuse, _enemyConfused);
-        _standardEnemy.Add(EnumAudios.EnemyHurt, _enemyHurt);
-        _standardEnemy.Add(EnumAudios.EnemyWalk, _enemyWalk);
+        _standardEnemy.Add(EAudios.EnemyAlert, _enemyAlert);
+        _standardEnemy.Add(EAudios.EnemyChecking, _enemyHmm);
+        _standardEnemy.Add(EAudios.EnemyConfuse, _enemyConfused);
+        _standardEnemy.Add(EAudios.EnemyHurt, _enemyHurt);
+        _standardEnemy.Add(EAudios.EnemyWalk, _enemyWalk);
 
-        _camera.Add(EnumAudios.CameraDetection, _cameraDetection);
-        _camera.Add(EnumAudios.CameraResetting, _cameraResetting);
+        _camera.Add(EAudios.CameraDetection, _cameraDetection);
+        _camera.Add(EAudios.CameraResetting, _cameraResetting);
 
-        _roomba.Add(EnumAudios.RoombaWalk, _walkRoomba);
-        _roomba.Add(EnumAudios.RoombaExplosion,_Roombaexplosion);
-        _roomba.Add(EnumAudios.RoombaSpawn,_spawnRoomba);
+        _roomba.Add(EAudios.RoombaWalk, _walkRoomba);
+        _roomba.Add(EAudios.RoombaExplosion,_Roombaexplosion);
+        _roomba.Add(EAudios.RoombaSpawn,_spawnRoomba);
 
-        _ui.Add(EnumAudios.Timer, _timer);
-        _objects.Add(EnumAudios.GrabObject, _grabObj);
+        _ui.Add(EAudios.Timer, _timer);
+        _objects.Add(EAudios.GrabObject, _grabObj);
     } 
 }

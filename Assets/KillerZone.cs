@@ -8,7 +8,7 @@ public class KillerZone : MonoBehaviour
     {
         if (other.GetComponent<PlayerManager>())
         {
-            GameManager.Instance.ResetGameplay();
+            EventManager.Trigger(EEvents.Reset);
         }
     }
 }
