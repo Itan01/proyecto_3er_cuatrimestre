@@ -8,6 +8,7 @@ public class Sound_Crash : Abstract_Sound
     protected override void Start()
     {
         base.Start();
+        _indexRef = ESounds.Crash;
     }
 
     // Update is called once per frame
@@ -25,7 +26,7 @@ public class Sound_Crash : Abstract_Sound
     }
     protected override void FixedUpdate()
     {
-        transform.position += _velocity.normalized * _speed * Time.fixedDeltaTime;
+        base.FixedUpdate();
     }
     protected override void LateUpdate()
     {

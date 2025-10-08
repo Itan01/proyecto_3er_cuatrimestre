@@ -13,7 +13,7 @@ public class Model_Player
         _move= (Model_Move)new Model_Move().Speed(6.0f).Transform(Player.transform).ModelTransform(Player.ModelTransform()).RB(Player.GetRb());
         _dash= (Model_Dash)new Model_Dash().RB(Player.GetRb()).ModelTransform(Player.ModelTransform()).Transform(Player.transform);
         _crouch = new Model_Crouch(_move);
-        gun = new Model_Gun(Player.Gun);
+        gun = new Model_Gun(Player.Weapon);
     }
 
     public void Move()

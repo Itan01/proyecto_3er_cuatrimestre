@@ -70,8 +70,8 @@ public class UIManager : MonoBehaviour
         set { _scriptTransition = value; }
     }
 
-    private UISetSound _soundUI;
-    public UISetSound UISound
+    private UI_Sound _soundUI;
+    public UI_Sound UISound
     {
         get { return _soundUI; }
         set { _soundUI = value; }

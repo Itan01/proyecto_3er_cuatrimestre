@@ -1,13 +1,14 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using static UnityEditor.Experimental.GraphView.GraphView;
 public class LaserManager : MonoBehaviour , ISoundInteractions
 {
     private LineRenderer _lineRenderer;
     private Animation _animation;
     [SerializeField] private Vector3 _offset = new Vector3(0.0f, 0.15f,0.0f);
     private float _maxDistance = 100.0f;
-    private SO_Layers _layer;
+    [SerializeField]private SO_Layers _layer;
     [SerializeField] private Transform _endPosition;
     [SerializeField] private GameObject _explosion;
     private RaycastHit _onHit;

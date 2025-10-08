@@ -17,16 +17,6 @@ public class PlayerAvatar : MonoBehaviour
         _scriptManager = GetComponentInParent<PlayerManager>();
         _particles = GetComponentInChildren<ParticlesManager>();
     }
-    public void ActivateAreaSound()
-    {
-        _scriptManager.SetAreaCatching(true);
-    }
-
-    public void DesactivateAreaSound()
-    {
-        _scriptManager.SetAreaCatching(false);
-      
-    }
     public void PlayerCanNotShoot()
     {
         //_scriptManager.PlayerCanShoot(false);

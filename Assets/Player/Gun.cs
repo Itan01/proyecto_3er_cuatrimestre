@@ -2,28 +2,51 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Gun : Abstract_Weapon, IObservableShoot, IObservableGrabSound
+public class Gun : Abstract_Weapon
 {
-    private bool _aiming=false;
-    [SerializeField]private Factory<Sound_Crash> _factory;
-    private SO_Layers _data;
+    [SerializeField] private bool _aiming=false;
+    [SerializeField] private Factory<Sound_Crash> _factory;
+    [SerializeField] private SO_Layers _data;
+
     private RaycastHit _hit;
-    private void Start()
+    private void Awake()
     {
         LVLManager.Instance.Gun = this;
     }
 
     public void Update()
     {
-        if (UseRightClick) // Catch Sound
-        {
-            PrimaryFire();
-        }
-        else if (UseLeftClick) // Throw Sound
-        {
-            SecondaryFire();
-        }
         transform.forward = Camera.main.transform.forward;
+        if (_aiming)
+        {
+            if (!UseLeftClick) // Throw
+            {
+                Shoot();
+            }
+            if (UseRightClick) // Cancel
+            {
+                _aiming=false;
+            }
+            return;
+        }
+        else
+        {
+            if (UseRightClick) // Grabbing Sound
+            {
+                PrimaryFire();
+                return;
+            }
+            if (UseLeftClick) // Aim
+            {
+                SecondaryFire();
+            }
+            if (_obs == null) return;
+            foreach (var Obs in _obs)
+            {
+                Obs.Grabbing(UseRightClick);
+            }
+        }
+
     }
     private void PrimaryFire()
     {
@@ -32,7 +55,7 @@ public class Gun : Abstract_Weapon, IObservableShoot, IObservableGrabSound
         {
             if(_hit.collider.gameObject.TryGetComponent<Abstract_Sound>(out Abstract_Sound Sound))
             {
-                Cons_Raycast ray = new Cons_Raycast(500.0f, _data._obstacles);
+                Cons_Raycast ray = new Cons_Raycast(500.0f, _data._everything);
                 if (ray.Checker<Abstract_Sound>(transform.position, transform.forward))
                 {
                     Sound.CanCatch = true;
@@ -45,12 +68,32 @@ public class Gun : Abstract_Weapon, IObservableShoot, IObservableGrabSound
     private void SecondaryFire()
     {
         if (!_hasBullet) return;
-        _hasBullet =false;
+        _aiming = true;
+        Aiming();
+        if (_obs == null) return;
+            foreach (var Obs in _obs)
+        {
+            Obs.Grabbing(false);
+        }
+
+    }
+    private void Shoot()
+    {
+        _hasBullet = false;
+        _aiming = false;
         var x = _factory.Create();
         x.transform.position = transform.position;
         x.ForceDirection(Camera.main.transform.forward);
         x.Speed(10.0f);
         x.Size(1.0f);
+        foreach (var Obs in _obs)
+        {
+            Obs.SetSound(ESounds.none);
+        }
+    }
+    private void Aiming()
+    {
+
     }
     //[SerializeField] private LayerMask _enviromentMask;
     //private float _grabbingTimer = 3f;
@@ -97,6 +140,10 @@ public class Gun : Abstract_Weapon, IObservableShoot, IObservableGrabSound
         {
             if(Sound.Atractted && Sound.CanCatch)
             {
+                foreach (var Obs in _obs)
+                {
+                    Obs.SetSound(Sound.IndexRef);
+                }
                 _hasBullet = true;
                 Sound.Atractted = false;
                 Sound.CanCatch=false;
@@ -109,24 +156,5 @@ public class Gun : Abstract_Weapon, IObservableShoot, IObservableGrabSound
         Gizmos.color= Color.yellow;
         Gizmos.DrawLine(transform.position, _hit.point.magnitude *transform.forward);
         Gizmos.DrawWireSphere(_hit.point,2.0f);
-    }
-    public void AddObsShoot(IObserverShoot Obj)
-    {
-        throw new System.NotImplementedException();
-    }
-
-    public void RemoveObsShoot(IObserverShoot Obj)
-    {
-        throw new System.NotImplementedException();
-    }
-
-    public void AddObsGrab(IObserverGrabSound Obj)
-    {
-        throw new System.NotImplementedException();
-    }
-
-    public void RemoveObsGrab(IObserverGrabSound Obj)
-    {
-        throw new System.NotImplementedException();
     }
 }

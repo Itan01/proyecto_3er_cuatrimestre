@@ -2,7 +2,6 @@ using System;
 using UnityEngine;
 public class PlayerManager : AbstractPlayer
 {
-    //private Control_GrabbingSound _areaCatching;
     private PlayerInputReader _inputReader;
 
     private Model_Player _model;
@@ -10,26 +9,18 @@ public class PlayerManager : AbstractPlayer
     private View_Player _view;
 
     [SerializeField] private bool _onCaptured = false;
-    [Header("<color=green>LayersMask</color>")]
-    [SerializeField] private LayerMask _soundMask;
     [Header("<color=red>Transform</color>")]
-    [SerializeField] private Transform _spawnProyectil;
     [SerializeField] private Transform _megaphoneTransform;
-
     private float _invisibleDuration=0.0f;
     private bool _invisible = false;
-    [SerializeField] private GameObject _particlesInvisible;
     [SerializeField] private GameObject[] _skinModel;
     [SerializeField] private GameObject[] _clothesModel;
     [SerializeField] private Material[] _baseColorMaterial;
    [SerializeField] private Material[] _JoinColorMaterial;
-
-    [SerializeField] private AudioClip _cadenzaDead;
     protected override void Awake()
     {
         GameManager.Instance.PlayerReference = this;
         LVLManager.Instance.Respawn = transform.position;
-
         _inputReader = GetComponent<PlayerInputReader>();
     }
     protected override void Start()
@@ -38,8 +29,6 @@ public class PlayerManager : AbstractPlayer
         _view = new View_Player(this);
         _model = new Model_Player(this);
         _controller = new PL_Control(_model, _view);
-        //_areaCatching = GetComponentInChildren<Control_GrabbingSound>();
-        SetAreaCatching(false);
     }
 
     protected override void Update()
@@ -53,14 +42,6 @@ public class PlayerManager : AbstractPlayer
         if (!_canControl) return;
         _controller.FixedExecute();
     }
-    public void SetSound(int Index)
-    {
-        SoundStruct aux = GameManager.Instance.SoundsReferences.GetSoundComponents(Index);
-    }
-    public void SetAreaCatching(bool State)
-    {
-        //_areaCatching.gameObject.SetActive(State);
-    }
     private void GetStats()
     {
         if (_invisibleDuration > 0.0f)
@@ -68,7 +49,6 @@ public class PlayerManager : AbstractPlayer
             _invisibleDuration -= Time.deltaTime;
             if (_invisibleDuration < 0.0f)
             {
-                _particlesInvisible.SetActive(false);
                 _invisibleDuration = 0.0f;
                 _invisible = false;
                 foreach (var item in _skinModel) 
@@ -100,7 +80,6 @@ public class PlayerManager : AbstractPlayer
     }
     public void SetInvisiblePowerUp(float duration)
     {
-        _particlesInvisible.SetActive(true);
         _invisibleDuration =duration;
         foreach (var item in _skinModel)
         {

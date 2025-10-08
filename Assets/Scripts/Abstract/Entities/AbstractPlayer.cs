@@ -4,7 +4,7 @@ public class AbstractPlayer : EntityMonobehaviour, IEntity
 {
     protected bool _canControl=false;
     protected bool _isDeath=false;
-    [SerializeField] protected Abstract_Weapon _gun;
+    [SerializeField] protected Abstract_Weapon _weapon;
     [SerializeField]protected Transform _headTransform, _hipsTransform, _modelTransform;
     protected override void Start()
     {
@@ -24,10 +24,10 @@ public class AbstractPlayer : EntityMonobehaviour, IEntity
     {
         return _rb;
     }
-    public Abstract_Weapon Gun
+    public Abstract_Weapon Weapon
     {
-        get { return _gun; }
-        set { _gun = value; }
+        get { return _weapon; }
+        set { _weapon = value; }
     }
 
     public Transform GetTransform()

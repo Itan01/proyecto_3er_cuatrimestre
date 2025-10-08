@@ -14,10 +14,6 @@ public class ParticlesManager : MonoBehaviour
     {
         _listParticles.Add(particles);
     }
-    public bool IsAnimating()
-    {
-        return _animating;
-    }
     public void StartLoop()
     {
         foreach (ParticleSystem particle in _listParticles)

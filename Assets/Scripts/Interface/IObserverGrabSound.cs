@@ -1,5 +1,5 @@
 public interface IObserverGrabSound
 {
-    public abstract void Subscribe();
-    public abstract void Unsubscribe();
+    public abstract void Execute();
+    public abstract void Stop();
 }

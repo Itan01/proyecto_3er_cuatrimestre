@@ -38,13 +38,6 @@ public class GameManager : MonoBehaviour
         get { return _player; }
         set { _player = value; }
     }
-
-    private SoundReferences _soundRef;
-    public SoundReferences SoundsReferences
-    {
-        get { return _soundRef; }
-        set { _soundRef = value; }
-    }
     private Transform _camera;
     public Transform CameraReference
     {

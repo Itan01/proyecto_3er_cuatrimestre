@@ -10,6 +10,12 @@ public class Control_Interact :Abstract_Control
         _steer = Camera.main.transform;
         Controller.AddAction(Execute);
     }
+
+    public Control_Interact Layer(SO_Layers Data)
+    {
+        _layer= Data;
+        return this;
+    }
     public Control_Interact SetEntity(Transform Transform)
     { 
         _player= Transform;

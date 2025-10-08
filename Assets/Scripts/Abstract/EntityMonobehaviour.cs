@@ -8,6 +8,7 @@ public abstract class EntityMonobehaviour : MonoBehaviour
     protected bool _isMoving = false, _isCrouching=false;
     protected float _speed;
     protected Action VirtualUpdate;
+    [SerializeField] protected SO_Layers _layer;
     protected virtual void Awake() { }
     protected virtual void Start()
     {
@@ -31,6 +32,10 @@ public abstract class EntityMonobehaviour : MonoBehaviour
     public bool IsCrouching()
     {
         return _isCrouching;
+    }
+    public SO_Layers Layers()
+    {
+        return _layer;
     }
     public void AddNoiser(INoise Behaviour)
     {

@@ -2,17 +2,28 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Gun_grabbing_particles : MonoBehaviour
+public class Gun_grabbing_particles : MonoBehaviour, IObserverMegaphone
 {
-    // Start is called before the first frame update
-    void Start()
+    [SerializeField] private Particles_script[] _scripts;
+    private void Awake()
     {
-        
+        GetComponentInParent<Gun>().AddObs(this);
     }
 
-    // Update is called once per frame
-    void Update()
+    public void Aiming()
     {
-        
+        throw new System.NotImplementedException();
+    }
+    public void StartShooting()
+    {
+        throw new System.NotImplementedException();
+    }
+
+    public void Grabbing(bool State)
+    {
+        foreach (var script in _scripts) 
+        {
+            script.PlayOnLoop(State);
+        }
     }
 }

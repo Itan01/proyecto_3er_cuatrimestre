@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 7740707606285615944}
   - component: {fileID: 190258252767534348}
   m_Layer: 0
-  m_Name: Particles
+  m_Name: Particles_Grabbing
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -48,6 +48,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 062afb966bb72c74fa95883e59262206, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _scripts:
+  - {fileID: 4948388597329607033}
+  - {fileID: 2656563015668981474}
+  - {fileID: 7500101422377286214}
+  - {fileID: 5622170036901838164}
 --- !u!1 &1150517564696284355
 GameObject:
   m_ObjectHideFlags: 0
@@ -59,6 +64,7 @@ GameObject:
   - component: {fileID: 7483360433383468471}
   - component: {fileID: 5973680390332809185}
   - component: {fileID: 8433452474358925844}
+  - component: {fileID: 5622170036901838164}
   m_Layer: 0
   m_Name: Particles (3)
   m_TagString: Untagged
@@ -4877,6 +4883,18 @@ ParticleSystemRenderer:
   m_MeshWeighting2: 1
   m_MeshWeighting3: 1
   m_MaskInteraction: 0
+--- !u!114 &5622170036901838164
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1150517564696284355}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1d03aa4e0fedd6b4283ea8059708775e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1217046320764776922
 GameObject:
   m_ObjectHideFlags: 0
@@ -4888,6 +4906,7 @@ GameObject:
   - component: {fileID: 678867046193390464}
   - component: {fileID: 6699001426345719720}
   - component: {fileID: 4041989186543053919}
+  - component: {fileID: 2656563015668981474}
   m_Layer: 0
   m_Name: Particles (1)
   m_TagString: Untagged
@@ -9706,6 +9725,18 @@ ParticleSystemRenderer:
   m_MeshWeighting2: 1
   m_MeshWeighting3: 1
   m_MaskInteraction: 0
+--- !u!114 &2656563015668981474
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1217046320764776922}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1d03aa4e0fedd6b4283ea8059708775e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1662126383271754122
 GameObject:
   m_ObjectHideFlags: 0
@@ -9717,6 +9748,7 @@ GameObject:
   - component: {fileID: 8465006481400273320}
   - component: {fileID: 2506263030236765763}
   - component: {fileID: 1009011864511608000}
+  - component: {fileID: 4948388597329607033}
   m_Layer: 0
   m_Name: Particles
   m_TagString: Untagged
@@ -14535,6 +14567,18 @@ ParticleSystemRenderer:
   m_MeshWeighting2: 1
   m_MeshWeighting3: 1
   m_MaskInteraction: 0
+--- !u!114 &4948388597329607033
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1662126383271754122}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1d03aa4e0fedd6b4283ea8059708775e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1726723637567707737
 GameObject:
   m_ObjectHideFlags: 0
@@ -14546,6 +14590,7 @@ GameObject:
   - component: {fileID: 8739399778456752324}
   - component: {fileID: 3652470355061901042}
   - component: {fileID: 1100914294436677227}
+  - component: {fileID: 7500101422377286214}
   m_Layer: 0
   m_Name: Particles (2)
   m_TagString: Untagged
@@ -19364,6 +19409,18 @@ ParticleSystemRenderer:
   m_MeshWeighting2: 1
   m_MeshWeighting3: 1
   m_MaskInteraction: 0
+--- !u!114 &7500101422377286214
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1726723637567707737}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1d03aa4e0fedd6b4283ea8059708775e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &5513978918407130319
 GameObject:
   m_ObjectHideFlags: 0
@@ -19414,6 +19471,7 @@ MonoBehaviour:
   _useRightClick: 0
   _hasBullet: 0
   _factory: {fileID: 0}
+  _data: {fileID: 0}
 --- !u!135 &2628267295542905840
 SphereCollider:
   m_ObjectHideFlags: 0

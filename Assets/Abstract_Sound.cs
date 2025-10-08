@@ -3,8 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 public abstract class Abstract_Sound: MonoBehaviour , ICanCatch
 {
-    [SerializeField]protected bool _atractted = false, _playerShooted=false, _canCatch=false;
-   [SerializeField] protected float _speed = 1.0f, _size = 1.0f;
+    [SerializeField] protected bool _atractted = false, _playerShooted=false, _canCatch=false;
+    [SerializeField] protected ESounds _indexRef=ESounds.none;
+    [SerializeField] protected float _speed = 1.0f, _size = 1.0f;
     protected Vector3 _velocity;
     protected Rigidbody _rb;
     protected Cons_LockOnTarget _lock;
@@ -20,7 +21,7 @@ public abstract class Abstract_Sound: MonoBehaviour , ICanCatch
     }
     protected virtual void FixedUpdate()
     {
-
+        transform.position += _speed * Time.fixedDeltaTime * _velocity.normalized;
     }
     protected virtual void LateUpdate()
     {
@@ -51,6 +52,11 @@ public abstract class Abstract_Sound: MonoBehaviour , ICanCatch
     {
         get { return _canCatch; }
         set { _canCatch = value; }
+    }
+    public ESounds IndexRef
+    {
+        get { return _indexRef; }
+        set { _indexRef = value; }
     }
 
 

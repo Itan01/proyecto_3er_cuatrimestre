@@ -152,10 +152,6 @@ public abstract class AbstractSound : MonoBehaviour // Sonidos Genericos,Movimie
         {
             script.IIteraction(_playerShooted);
         }
-        if (Entity.TryGetComponent(out PlayerManager player) && _canCatch)
-        {
-            player.SetSound(_index);
-        }
     }
     public bool HasLineOfVision(LayerMask mask, Vector3 EntityPosition)
     {
