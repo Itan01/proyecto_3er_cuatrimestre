@@ -59,6 +59,8 @@ public class CameraManager : MonoBehaviour
 
         _mouseX = transform.eulerAngles.y;
         _mouseY = transform.eulerAngles.x;
+
+        EventPlayer.Subscribe(EPlayer.aim, SetCamDistance);
     }
 
     private void FixedUpdate()
@@ -163,6 +165,14 @@ public class CameraManager : MonoBehaviour
             _resetCamDis = false;
             _offsetValue = 0.0f;
         }
+    }
+    public void SetCamDistance(params object[] Parameters)
+    {
+        bool State = (bool)Parameters[0];
+        if (State)
+            SetCameraDistance(2.0f);
+        else
+            ResetCameraDistance();
     }
 
     public void SetCameraDistance(float MaxDistance)

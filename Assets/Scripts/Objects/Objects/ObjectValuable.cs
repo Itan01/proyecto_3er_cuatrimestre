@@ -22,8 +22,7 @@ public class ObjectValuable : AbstractObjects, IInteractableObject
     }
     public void OnInteract()
     {
-        UIManager.Instance.AddScore(_value);
-
+        EventPlayer.Trigger(EPlayer.steal, (float)_value);
         if (_pickUpValueSound != null || _pickUpFragSound != null) 
         {
             //AudioManager.Instance.PlaySFX(_pickupSound, _soundVolume);

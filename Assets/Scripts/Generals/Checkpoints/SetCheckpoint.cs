@@ -9,7 +9,7 @@ public class SetCheckpoint : MonoBehaviour
     {
         if (Player.TryGetComponent<PlayerManager>(out PlayerManager script))
         {
-            if(script.GetCaptured()) return;
+            if(script.IsCaptured) return;
             LVLManager.Instance.Respawn=transform.position;
         }
     }

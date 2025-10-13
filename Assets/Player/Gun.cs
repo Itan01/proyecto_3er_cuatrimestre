@@ -11,21 +11,25 @@ public class Gun : Abstract_Weapon
     private RaycastHit _hit;
     private void Awake()
     {
+        GetComponentInParent<PlayerManager>().Weapon = this;
         LVLManager.Instance.Gun = this;
     }
 
-    public void Update()
+    protected override void Update()
     {
+        base.Update();
         transform.forward = Camera.main.transform.forward;
         if (_aiming)
         {
             if (!UseLeftClick) // Throw
             {
                 Shoot();
+                EventPlayer.Trigger(EPlayer.aim, false);
             }
             if (UseRightClick) // Cancel
             {
                 _aiming=false;
+                EventPlayer.Trigger(EPlayer.aim, false);
             }
             return;
         }
@@ -68,10 +72,15 @@ public class Gun : Abstract_Weapon
     private void SecondaryFire()
     {
         if (!_hasBullet) return;
-        _aiming = true;
+        if (!_aiming)
+        {
+            _aiming = true;
+            EventPlayer.Trigger(EPlayer.aim, true);
+        }
+
         Aiming();
         if (_obs == null) return;
-            foreach (var Obs in _obs)
+        foreach (var Obs in _obs)
         {
             Obs.Grabbing(false);
         }
@@ -95,39 +104,6 @@ public class Gun : Abstract_Weapon
     {
 
     }
-    //[SerializeField] private LayerMask _enviromentMask;
-    //private float _grabbingTimer = 3f;
-    //private float _sinceLastPlayed = 3f;
-    //private AudioClip _clip;
-
-    //private void Start()
-    //{
-    //    _clip = AudioStorage.Instance.GunSound(EAudios.GunGrabbing);
-    //}
-    //private void Update()
-    //{
-    //    transform.forward = Camera.main.transform.forward;
-    //    if (_sinceLastPlayed >= _grabbingTimer)
-    //    {
-    //        AudioManager.Instance.PlaySFX(_clip, 0.8f);
-    //        _sinceLastPlayed = 0f;
-    //    }
-    //    else
-    //    {
-    //        _sinceLastPlayed += Time.deltaTime;
-    //    }
-    //}
-    //public void Desactivate()
-    //{
-    //    if (gameObject.activeSelf)
-    //        StartCoroutine(SetActivateFalse());
-    //    _sinceLastPlayed = 2.9f;
-    //}
-    //private IEnumerator SetActivateFalse()
-    //{
-    //    yield return new WaitForSeconds(0.5f);
-    //    gameObject.SetActive(false);
-    //}
 
     public Factory<Sound_Crash> Factory
     {

@@ -7,6 +7,8 @@ public abstract class EntityMonobehaviour : MonoBehaviour
     protected Animator _animator;
     protected bool _isMoving = false, _isCrouching=false;
     protected float _speed;
+    protected BoxCollider _collider;
+    protected Vector3 _posCol,_sizeCol;
     protected Action VirtualUpdate;
     [SerializeField] protected SO_Layers _layer;
     protected virtual void Awake() { }
@@ -14,6 +16,9 @@ public abstract class EntityMonobehaviour : MonoBehaviour
     {
         _rb = GetComponent<Rigidbody>();
         _animator = GetComponentInChildren<Animator>();
+        _collider= GetComponent<BoxCollider>();
+        _sizeCol = _collider.size;
+        _posCol = _collider.center;
     }
     protected virtual void Update()
     {
@@ -24,7 +29,10 @@ public abstract class EntityMonobehaviour : MonoBehaviour
     {
 
     }
-
+    public BoxCollider Collider()
+    {
+        return _collider;
+    }
     public bool IsMoving()
     {
         return _isMoving;
@@ -45,5 +53,10 @@ public abstract class EntityMonobehaviour : MonoBehaviour
     public void RemoveNoiser(INoise Behaviour)
     {
         VirtualUpdate -= Behaviour.Noiser;
+    }
+    public void ResetCollider()
+    {
+        _collider.size = _sizeCol;
+        _collider.center = _posCol;
     }
 }

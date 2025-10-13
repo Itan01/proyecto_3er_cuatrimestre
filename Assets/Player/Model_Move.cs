@@ -5,8 +5,10 @@ using UnityEngine;
 public class Model_Move : Abstract_Model
 {
     private float _speed, _refSpeed, _rotSpeed;
-    private Vector3 _orientation;
+    private bool _aiming;
+    private Vector3 _steer;
     private Transform _dir;
+    private Model_Orientation _orientation;
     public Model_Move()
     {
         _rotSpeed = 10.0f;
@@ -15,23 +17,35 @@ public class Model_Move : Abstract_Model
         _rb =null;
         _transform=null;
         _dir=Camera.main.transform;
+        _orientation = null;
     }
     public Model_Move Speed(float Speed)
     {
         _speed = Speed;
         return this;
     }
+    public Model_Move Orientation(Model_Orientation Orientation)
+    {
+        _orientation = Orientation;
+        return this;
+    }
     public void ResetSpeed()
     {
         _speed=_refSpeed;
+    }
+    public void Aiming(params object[] Parameters)
+    {
+        _aiming = (bool)Parameters[0];
     }
     public override void Execute()
     {
         float x = Input.GetAxis("Horizontal");
         float z = Input.GetAxis("Vertical");
-        _orientation = (_dir.forward * z+ _dir.right * x).normalized;
-        _orientation.y = 0.0f;
-        _rb.MovePosition(_transform.position + (_speed * Time.fixedDeltaTime * _orientation));
-        _modelTransform.forward= Vector3.Slerp(_modelTransform.forward, _orientation, Time.fixedDeltaTime * _rotSpeed);
+        _steer = (_dir.forward * z + _dir.right * x).normalized;
+        _steer.y = 0.0f;
+        var Orientation = Vector3.Slerp(_modelTransform.forward, _steer, Time.fixedDeltaTime * _rotSpeed);
+        _orientation.Set(Orientation);
+        _rb.MovePosition(_transform.position + (_speed * Time.fixedDeltaTime * _steer));
+
     }
 }

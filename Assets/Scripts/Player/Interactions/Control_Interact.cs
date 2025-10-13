@@ -1,7 +1,9 @@
+using Unity.Mathematics;
 using UnityEngine;
 public class Control_Interact :Abstract_Control
 {
     private float _distance = 6.0f, _radius = 4.0f;
+    private Vector3 _boxCastSize = new Vector3(10.0f, 10.0f, 0.1f);
     private SO_Layers _layer;
     private Transform _player, _steer;
     public Control_Interact(PL_Control Controller)
@@ -31,8 +33,7 @@ public class Control_Interact :Abstract_Control
 
     public void Check()
     {
-        Ray Ray = new Ray(_player.position,_steer.position);
-        if (Physics.SphereCast(Ray, _radius, out RaycastHit Hit, _distance, _layer._interact, QueryTriggerInteraction.Ignore))
+        if (Physics.BoxCast(_player.position, _boxCastSize , _steer.forward, out RaycastHit Hit, quaternion.identity, _distance, _layer._interact, QueryTriggerInteraction.Ignore))
         {
             if (Hit.collider.TryGetComponent(out IInteractableObject interactable))
             {

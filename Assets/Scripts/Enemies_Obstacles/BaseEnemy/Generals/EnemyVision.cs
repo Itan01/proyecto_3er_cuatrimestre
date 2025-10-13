@@ -49,7 +49,7 @@ public class EnemyVision : MonoBehaviour
         DrawFieldOfView();
         _scriptManager.WatchingPlayer(_seePlayer);
         _seePlayer = false;
-        GameManager.Instance.PlayerReference.SetCaptured(false);
+        GameManager.Instance.PlayerReference.IsCaptured =false;
         transform.forward = _headReference.forward;
         if (!GetComponentInParent<RoomManager>().IsRoomActivate())
             gameObject.SetActive(false);

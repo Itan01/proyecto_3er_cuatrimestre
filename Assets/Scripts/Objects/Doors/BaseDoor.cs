@@ -22,7 +22,7 @@ public class BaseDoor : MonoBehaviour
         {
             if(_doorOpen) return;
             if (Entity.TryGetComponent<PlayerManager>(out var script))
-                if (script.GetCaptured()) return;
+                if (script.IsCaptured) return;
             _doorOpen = true;
             _animator.SetBool("isOpen", _doorOpen);
             _count++;

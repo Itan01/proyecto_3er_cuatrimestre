@@ -62,13 +62,11 @@ public class PlayerManager : AbstractPlayer
             }
         }
     }
-    public void SetCaptured(bool State)
+    public bool IsCaptured
     {
-        _onCaptured = State;
-    }
-    public bool GetCaptured()
-    {
-        return _onCaptured;
+        get { return _onCaptured; }
+        set { _onCaptured = value; }
+        
     }
     public bool GetInvisible()
     {
@@ -91,4 +89,5 @@ public class PlayerManager : AbstractPlayer
         }
         _invisible = true;  
     }
+
 }

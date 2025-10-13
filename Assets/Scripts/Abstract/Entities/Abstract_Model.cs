@@ -7,15 +7,22 @@ public abstract class Abstract_Model
 {
     protected Rigidbody _rb;
     protected Transform _modelTransform, _transform;
+    protected Collider _collider;
     public Abstract_Model()
     {
         _rb = null;
         _modelTransform = null;
-        _transform = null;  
+        _transform = null;
+        _collider= null;
     }
     public Abstract_Model RB(Rigidbody Rb)
     {
         _rb = Rb;
+        return this;
+    }
+    public Abstract_Model Collider(Collider Collider)
+    {
+        _collider = Collider;
         return this;
     }
 

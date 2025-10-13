@@ -6,8 +6,14 @@ public abstract class Abstract_Weapon : MonoBehaviour, IObservableMegaphone
 {
     [SerializeField]protected bool _useLeftClick=false;
     [SerializeField] protected bool _useRightClick=false;
+    protected bool _usingGun;
     [SerializeField] protected bool _hasBullet;
     [SerializeField] protected List<IObserverMegaphone> _obs = new List<IObserverMegaphone>();
+
+    protected virtual void Update()
+    {
+        UsingWeapon();
+    }
 
     public bool UseRightClick
     {
@@ -34,4 +40,17 @@ public abstract class Abstract_Weapon : MonoBehaviour, IObservableMegaphone
             _obs.Remove(Obj);
         }
     }
+    private void UsingWeapon()
+    {
+         if(_useRightClick  || _useLeftClick)
+        {
+            _usingGun=true;
+        }
+        else
+        {
+            _usingGun=false;
+        }
+    }
+    public bool IsUsing()
+    {  return _usingGun; }
 }

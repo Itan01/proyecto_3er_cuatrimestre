@@ -1,21 +1,23 @@
 using UnityEngine;
-using UnityEngine.UIElements;
 
 public class Model_Dash : Abstract_Model
 {
     private float _force;
-    public Model_Dash(float Force=10.0f)
+    public Model_Dash()
     {
+        _force = 0.0f;
+        _rb = null;
+        _transform = null;
     }
-    public Abstract_Model Force(float Force)
+    public Model_Dash Force(float Force)
     {
         _force = Force;
         return this;
     }
     public override void Execute()
     {
-        _transform.position += _transform.up * 0.3f;
         Vector3 Dir= _modelTransform.forward;
-        _rb.velocity=Dir * _force;
+        _rb.useGravity = false;
+        _rb.AddForce((Dir * _force) +(_transform.up *0.1f), ForceMode.Impulse);
     }
 }

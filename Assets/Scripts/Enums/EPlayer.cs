@@ -4,6 +4,8 @@ public enum EPlayer
     move,
     dash,
     shoot,
+    steal,
     aim,
-    grab
+    grab,
+    UseGun
 }
