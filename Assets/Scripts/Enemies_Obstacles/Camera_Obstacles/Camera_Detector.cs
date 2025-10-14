@@ -23,7 +23,6 @@ public class Camera_Detector : MonoBehaviour
     {
         if (Entity.GetComponent<PlayerManager>())
         {
-            Debug.Log("EnterPlayer");
             VirtualUpdate = CheckView;
         }
     }
@@ -32,23 +31,12 @@ public class Camera_Detector : MonoBehaviour
     {
         if (Entity.GetComponent<PlayerManager>())
         {
-            Debug.Log("ExitPlayer");
             VirtualUpdate = null;
-            _camera.SetTarget = false;
         }
     }
     private void CheckView()
     {
-        if (GameManager.Instance.PlayerReference.GetInvisible()) return;
-        bool SeePlayer= false;
-        Transform HipPosition= GameManager.Instance.PlayerReference.HipsTransform();
-        Transform HeadPosition= GameManager.Instance.PlayerReference.HeadTransform();
-        Transform FeetPosition= GameManager.Instance.PlayerReference.transform;
-        if (_rayCast.Checker<PlayerManager>(transform.position, (HipPosition.position - transform.position)) ||
-           _rayCast.Checker<PlayerManager>(transform.position, (HeadPosition.position - transform.position)) ||
-           _rayCast.Checker<PlayerManager>(transform.position, (FeetPosition.position - transform.position)))
-            SeePlayer = true;
-        _camera.SetTarget = SeePlayer;
-
+        Transform HipPosition= GameManager.Instance.PlayerReference.GetHipsPosition();
+        Transform HeadPosition= GameManager.Instance.PlayerReference.GetHeadPosition();
     }
 }

@@ -40,7 +40,6 @@ public class Cons_CamWatchingPlayer : ICamMovement
             _audio.Stop();
         _clip = AudioStorage.Instance.CameraSound(EAudios.CameraDetection);
         _audio.PlayOneShot(_clip);
-        _room.DetectPlayer();
         _detectingPlayer = true;
         _colorLight.SetCameraColor();
     }
@@ -53,9 +52,9 @@ public class Cons_CamWatchingPlayer : ICamMovement
             return;
         }
         _checkingPlayer = false;
-            Vector3 TargetHips = (GameManager.Instance.PlayerReference.HipsTransform().position - _camTransform.position).normalized;
+            Vector3 TargetHips = (GameManager.Instance.PlayerReference.GetHipsPosition().position - _camTransform.position).normalized;
             Vector3 TargetFeet = (GameManager.Instance.PlayerReference.transform.position - _camTransform.position).normalized;
-            Vector3 TargetHead = (GameManager.Instance.PlayerReference.HeadTransform().position - _camTransform.position).normalized;
+            Vector3 TargetHead = (GameManager.Instance.PlayerReference.GetHeadPosition().position - _camTransform.position).normalized;
             if (_Raycast.Checker<PlayerManager>(_camTransform.position, TargetHips) ||
                 _Raycast.Checker<PlayerManager>(_camTransform.position, TargetFeet) ||
                 _Raycast.Checker<PlayerManager>(_camTransform.position, TargetHead))

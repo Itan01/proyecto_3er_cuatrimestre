@@ -8,7 +8,7 @@ public class RoomManager : MonoBehaviour
     private GameObject _smoke;
     private bool _doorBroken = false;
     [SerializeField] private bool _isActivate;
-    public event Action DetPlayer, ResetDet, FindPlayer, DesActRoom, DestroyRoom, ActRoom, ResRoom, ResPath;
+    public event Action DesActRoom, DestroyRoom, ActRoom;
 
     private void Start()
     {
@@ -22,7 +22,7 @@ public class RoomManager : MonoBehaviour
         {
             LVLManager.Instance.AddRoom(this);
             ActivateRoom();
-            _isActivate = true;
+            IsRoomActivate = true;
         }
 
     }
@@ -34,7 +34,7 @@ public class RoomManager : MonoBehaviour
             if (_doorBroken)
                 SummonSmoketrap();
             LVLManager.Instance.RemoveRoom(this);
-            _isActivate = false;
+            IsRoomActivate = false;
             DesactivateRoom();
         }
     }
@@ -43,7 +43,6 @@ public class RoomManager : MonoBehaviour
     {
         _smoke = smoke;
     }
-    public void ResetRoom() => ResRoom?.Invoke(); // Es lo mismo que if solo que en una linea
 
     private void SummonSmoketrap()
     {
@@ -52,14 +51,11 @@ public class RoomManager : MonoBehaviour
     }
 
     public void SetDoorDestroyed() => _doorBroken = true;
-    public void DetectPlayer() => DetPlayer?.Invoke();
-    public void ResetDetection() => ResetDet?.Invoke();
-    public void WatchPlayer() => FindPlayer?.Invoke();
-    public void DesactivateRoom() => DesActRoom?.Invoke();
+    public void DesactivateRoom() => DesActRoom?.Invoke();// Es lo mismo que if solo que en una linea
     public void ActivateRoom() => ActRoom?.Invoke();
-    public void ResetPath() => ResPath?.Invoke();
-    public bool IsRoomActivate()
+    public bool IsRoomActivate
     {
-        return _isActivate;
+        get { return _isActivate; }
+        set { _isActivate = value; }
     }
 }

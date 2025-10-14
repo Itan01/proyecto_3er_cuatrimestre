@@ -51,8 +51,6 @@ public class EnemyVision : MonoBehaviour
         _seePlayer = false;
         GameManager.Instance.PlayerReference.IsCaptured =false;
         transform.forward = _headReference.forward;
-        if (!GetComponentInParent<RoomManager>().IsRoomActivate())
-            gameObject.SetActive(false);
     }
 
     private void Update()
@@ -143,8 +141,8 @@ public class EnemyVision : MonoBehaviour
     {
         _seePlayer = false;
         _detectPlayer = false;
-        Vector3 PlayerHead = (_player.HeadTransform().position - _headReference.position).normalized;
-        Vector3 PlayerHips = (_player.HipsTransform().position - _headReference.position).normalized;
+        Vector3 PlayerHead = (_player.GetHeadPosition().position - _headReference.position).normalized;
+        Vector3 PlayerHips = (_player.GetHipsPosition().position - _headReference.position).normalized;
         Vector3 PlayerPosition = (_player.transform.position - _headReference.position).normalized;
         if (_raycast.Checker<PlayerManager>(_headReference.position, PlayerHead) ||
             _raycast.Checker<PlayerManager>(_headReference.position, PlayerHips) ||

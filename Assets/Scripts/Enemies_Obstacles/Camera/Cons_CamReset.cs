@@ -50,8 +50,7 @@ public class Cons_CamReset : ICamMovement
         _yRotation = _camRotation.y;
         _zRotation = _camRotation.z;
         _camColorLight.SetCameraColor();
-        _room.ResetDetection();
-}
+    }
     private void ResetRotation()
     {
         _isResseted = true;

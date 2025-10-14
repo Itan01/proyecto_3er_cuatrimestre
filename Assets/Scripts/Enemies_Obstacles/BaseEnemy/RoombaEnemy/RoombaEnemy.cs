@@ -25,14 +25,8 @@ public class RoombaEnemy : MonoBehaviour
         _animator.SetBool("Open_Anim", false);  
         _animator.SetBool("Walk_Anim", false);
         _room=GetComponentInParent<RoomManager>();
-        _room.DetPlayer += SetActivation;
         _room.ActRoom += Activation;
         _room.DesActRoom += Desactivation;
-        if (!_room.IsRoomActivate()) 
-        {
-            Desactivation();
-        }
-
     }
 
     private void Update()
@@ -42,7 +36,6 @@ public class RoombaEnemy : MonoBehaviour
     }
     public void SetActivation()
     {
-        GetComponentInParent<RoomManager>().DetPlayer -= SetActivation;
         AudioStorage.Instance.RoombaSound(EAudios.RoombaSpawn);
         StartCoroutine(OpenAndThenWalk());
     }
@@ -77,7 +70,6 @@ public class RoombaEnemy : MonoBehaviour
 
     private void Explode()
     {
-        GetComponentInParent<RoomManager>().DetPlayer -= SetActivation;
         GetComponentInParent<RoomManager>().ActRoom -= Activation;
         GetComponentInParent<RoomManager>().DesActRoom -= Desactivation;
         AudioStorage.Instance.RoombaExplosion();

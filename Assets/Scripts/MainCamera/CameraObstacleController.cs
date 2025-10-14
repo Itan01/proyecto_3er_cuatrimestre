@@ -33,10 +33,7 @@ public class CameraObstacleController : MonoBehaviour
         _room = GetComponentInParent<RoomManager>();
         _room.DesActRoom += Desactivate;
         _room.ActRoom += Activate;
-        if (!_room.IsRoomActivate())
-        {
-            Desactivate();
-        }
+
     }
 
     private void Update()
@@ -116,7 +113,6 @@ public class CameraObstacleController : MonoBehaviour
         _yRotation = _camRotation.y;
         _zRotation = _camRotation.z;
         SetCameraColor(_baseColor, 9999f);
-        _room.ResetDetection();
     }
     private void SetBase()
     {
@@ -132,7 +128,6 @@ public class CameraObstacleController : MonoBehaviour
         _clip= AudioStorage.Instance.CameraSound(EAudios.CameraDetection);
         _audiosrc.PlayOneShot(_clip);
         Movement = LookingMovement;
-        _room.DetectPlayer();
         _detectingPlayer = true;
         SetCameraColor(_detectorColor, 9999f);
 
@@ -183,7 +178,7 @@ public class CameraObstacleController : MonoBehaviour
     private void CheckTarget()
     {
         _checkingPlayer = false;
-        _targetHips = GameManager.Instance.PlayerReference.HipsTransform().position;
+        _targetHips = GameManager.Instance.PlayerReference.GetHipsPosition().position;
         _target = GameManager.Instance.PlayerReference.transform.position;
         _hipPosition = new Ray(transform.position, (_targetHips - transform.position) * 500.0f);
         _intHit = CheckRayCast(_hipPosition, _intHit);

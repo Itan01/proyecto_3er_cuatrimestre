@@ -15,7 +15,7 @@ public class PL_Control: IMVC
         _gun = (Control_Gun)new Control_Gun(this).View(View).Key(KeyCode.Mouse1);
         _gun=_gun.Gun(GameManager.Instance.PlayerReference.Weapon).ShootKey(KeyCode.Mouse0);
         _interact = (Control_Interact)new Control_Interact(this).View(View).Key(KeyCode.E);
-        _interact = _interact.Layer(GameManager.Instance.PlayerReference.Layers()).SetEntity(GameManager.Instance.PlayerReference.HipsTransform());
+        _interact = _interact.Layer(GameManager.Instance.PlayerReference.Layers()).SetEntity(GameManager.Instance.PlayerReference.GetHipsPosition());
         _movement = (Control_Mov)new Control_Mov(this).Model(Model).View(View);
         _dash = (Control_Dash)new Control_Dash(this).Model(Model).View(View).Key(KeyCode.LeftShift);
         _crouch = (Control_Crouch)new Control_Crouch(this).Model(Model).View(View).Key(KeyCode.LeftControl).AltKey(KeyCode.C);

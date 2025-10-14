@@ -33,13 +33,9 @@ public abstract class AbstractEnemy : EntityMonobehaviour, ISoundInteractions
     protected override void Start()
     {
         _room = GetComponentInParent<RoomManager>();
-        _room.DetPlayer += CondToTargetPosition;
-        _room.FindPlayer += MoveTimerTarget;
         _room.DestroyRoom += Destroy;
         _room.DesActRoom += DesActivation;
         _room.ActRoom += Activation;
-        _room.ResRoom += Respawn;
-        _room.ResPath += ForceRepath;
         base.Start();
         GetScriptCompo();
         _vision = GetComponentInChildren<EnemyVision>();
@@ -114,13 +110,9 @@ public abstract class AbstractEnemy : EntityMonobehaviour, ISoundInteractions
     public void Destroy()
     {
         RoomManager Room = GetComponentInParent<RoomManager>();
-        Room.DetPlayer -= CondToTargetPosition;
-        Room.FindPlayer -= MoveTimerTarget;
         Room.DestroyRoom -= Destroy;
         Room.DesActRoom -= DesActivation;
         Room.ActRoom -= Activation;
-        Room.ResRoom -= Respawn;
-        Room.ResPath -= ForceRepath;
         _activate = false;
         gameObject.SetActive(false);
     }
@@ -274,7 +266,6 @@ public abstract class AbstractEnemy : EntityMonobehaviour, ISoundInteractions
     #region Set/Get Values
     public void PlayAudioWalk()
     {
-        if (!_room.IsRoomActivate()) return;
         _clip = AudioStorage.Instance.StandardEnemySound(EAudios.EnemyWalk);
         _audiosource.PlayOneShot(_clip, 0.025f);
     }

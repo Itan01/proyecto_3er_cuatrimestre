@@ -1,14 +1,15 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
 public class Camera_Obstacle : MonoBehaviour
 {
     private Fsm_Camera _fsm;
     private Camera_BaseMovement _base;
     private Camera_WatchingEntity _watching;
+    private RoomManager _room;
     [SerializeField] private Transform _camTransform;
     private bool _seeTarget;
+    private bool _isRunning=false;
     private Light _light;
     [SerializeField] private Color _baseColor;
     [SerializeField] private Color _detectorColor;
@@ -16,7 +17,8 @@ public class Camera_Obstacle : MonoBehaviour
     [SerializeField] private SO_Layers _layer;
     private void Start()
     {
-        _light=GetComponentInChildren<Light>();
+        _room=GetComponentInParent<RoomManager>();
+        _light =GetComponentInChildren<Light>();
         _fsm = new Fsm_Camera();
         _base = (Camera_BaseMovement)new Camera_BaseMovement(_fsm).Camera(this).CamTransform(_camTransform).Color(_baseColor);
         _base = _base.Speed(10.0f).Rotation(35.0f);
@@ -28,10 +30,13 @@ public class Camera_Obstacle : MonoBehaviour
     }
     private void Update()
     {
+        if (!_isRunning) return;
+        if (!_isRunning) return;
         _fsm.VirtualUpdate();
     }
     private void FixedUpdate()
     {
+        if (!_isRunning) return;
         _fsm.VirtualFixedUpdate();
     }
 
