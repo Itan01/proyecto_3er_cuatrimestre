@@ -12,9 +12,9 @@ public class CameraObstacleController : MonoBehaviour
     private float _maxRotation, _minRotation, _rotationRef;
     [SerializeField] private Color _baseColor;
     [SerializeField] private Color _detectorColor;
-    private bool _seePlayer;
+    [SerializeField] private bool _seePlayer=false;
     private bool _checkingPlayer;
-    private SO_Layers _layer;
+    [SerializeField] private SO_Layers _layer;
     private RaycastHit _intHit, _inHitFeet, _inHitHead;
     private Ray _hipPosition, _feetPosition, _headPosition;
     private Transform _camTransform;
@@ -174,8 +174,8 @@ public class CameraObstacleController : MonoBehaviour
     {
         if (Physics.Raycast(ray, out hit, 500.0f, _layer._everything, QueryTriggerInteraction.Ignore))
         {
-            //Debug.Log($"Collided obj : {_intHit.collider.name}.");
-            if (hit.collider.GetComponent<PlayerManager>() && !GameManager.Instance.PlayerReference.GetInvisible())
+            Debug.Log($"Collided obj : {_intHit.collider.name}.");
+            if (hit.collider.GetComponent<PlayerManager>())
                 _checkingPlayer = true;
         }
         return hit;

@@ -7,17 +7,14 @@ public class CountdownTimer : MonoBehaviour
 { 
 
     [SerializeField] private float _timer = 0f;
-    [SerializeField] private TextMeshProUGUI _timerText;
+    private TextMeshProUGUI _timerText;
     private AudioClip _timerEffect;
     private float _timerWait;
     private bool _isRunning = true;
-    private void Awake()
-    {
-        UIManager.Instance.Timer = this;
-    }
 
     private void Start()
     {
+        _timerText=GetComponentInChildren<TextMeshProUGUI>();
         _timerEffect = AudioStorage.Instance.UiSound(EAudios.Timer);
         // AudioManager.Instance.PlaySFX(_timerEffect, 1f);
     }
@@ -25,8 +22,8 @@ public class CountdownTimer : MonoBehaviour
     {
         if (!_isRunning) return;
 
-        _timer += Time.deltaTime;
-        _timerWait += Time.deltaTime;
+        _timer -= Time.deltaTime;
+        _timerWait -= Time.deltaTime;
         if (_timerWait > 1000)
         {
             AudioManager.Instance.PlaySFX(_timerEffect, 1f);

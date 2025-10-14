@@ -1,7 +1,6 @@
 using UnityEngine;
 public class Control_Shoot : Abstract_Control, IButton
 {
-    private bool _noSound=true;
     public Control_Shoot(PL_Control Controller)
     {;
         Controller.AddAction(Execute);

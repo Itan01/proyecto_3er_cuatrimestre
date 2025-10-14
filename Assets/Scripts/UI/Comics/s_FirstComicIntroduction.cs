@@ -21,7 +21,6 @@ public class s_FirstComicIntroduction : MonoBehaviour
         else
         {
             GameManager.Instance.PlayerReference.SetIfPlayerCanMove(false, false);
-            UIManager.Instance.Timer.IsRunning(false);
         }
 
      }

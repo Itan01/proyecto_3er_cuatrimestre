@@ -19,12 +19,6 @@ public class UIManager : MonoBehaviour
     private PlayerManager _player;
     [SerializeField] private Image _cooldownCircleBar;
 
-    public Image CooldownCircleBar
-    {
-        get { return _cooldownCircleBar; }
-        set {  _cooldownCircleBar = value; }
-    }
-
     private CountdownTimer _timer;
     public CountdownTimer Timer
     {
@@ -77,8 +71,6 @@ public class UIManager : MonoBehaviour
         set { _soundUI = value; }
     }
 
-
-
     private UI_Aim _aimUI;
 
     public UI_Aim AimUI
@@ -94,7 +86,6 @@ public class UIManager : MonoBehaviour
         return _score;
     }
     [SerializeField] private GameObject _popupPoints;
-    private int _displayedScore = 0;
 
     private s_UI_FinishLevel _finishLevelComic; 
 

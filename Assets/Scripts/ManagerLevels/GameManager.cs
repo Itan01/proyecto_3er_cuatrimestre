@@ -24,7 +24,7 @@ public class GameManager : MonoBehaviour
 
     }
     #endregion
-    private PlayerManager _player;
+    [SerializeField]private PlayerManager _player;
 
     private bool _firstTimePlaying=true;
     public bool FirstTimePlay 

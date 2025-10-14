@@ -2,26 +2,8 @@ using System;
 using UnityEngine;
 public class PlayerController
 {
-    private Control_Shoot _scriptShoot;
-    private Control_Interact _scriptInteract;
-    private Control_Mov _scriptMovement;
-    private bool _canShoot = false;
-    private Animator _animator;
-    private Control_Gun _area;
-    private PlayerInputReader _input;
-    private Control_Dash _scriptDash;
-    public event Action CheckInputs;
-    private float _x, _z;
-    private bool  _crouch;
-    private bool _canUseGun = true;
-
-    private bool _grabbing = false,_aiming=false;
     public PlayerController()
     {
-    }
-    public void Inputs()
-    {
-        CheckInputs?.Invoke();
     }
     //public void Movement()
     //{

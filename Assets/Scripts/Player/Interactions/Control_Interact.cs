@@ -2,7 +2,7 @@ using Unity.Mathematics;
 using UnityEngine;
 public class Control_Interact :Abstract_Control
 {
-    private float _distance = 6.0f, _radius = 4.0f;
+    private float _distance = 6.0f;
     private Vector3 _boxCastSize = new Vector3(10.0f, 10.0f, 0.1f);
     private SO_Layers _layer;
     private Transform _player, _steer;

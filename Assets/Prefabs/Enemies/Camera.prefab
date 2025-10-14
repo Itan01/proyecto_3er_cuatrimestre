@@ -10,7 +10,6 @@ GameObject:
   m_Component:
   - component: {fileID: 2821441198348161401}
   - component: {fileID: 4267574573033060717}
-  - component: {fileID: 5187780842289692517}
   - component: {fileID: 8285807168850446917}
   m_Layer: 0
   m_Name: Light
@@ -96,27 +95,6 @@ Light:
   m_UseViewFrustumForShadowCasterCull: 1
   m_ShadowRadius: 0
   m_ShadowAngle: 0
---- !u!65 &5187780842289692517
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2985665357054922883}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 1
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 4, y: 4, z: 20}
-  m_Center: {x: 0, y: 0, z: 10}
 --- !u!114 &8285807168850446917
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -149,7 +127,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5779694499154752809}
-  - component: {fileID: 7354013965472382373}
   - component: {fileID: 691256755585815982}
   - component: {fileID: 3922756849366758987}
   m_Layer: 0
@@ -175,24 +152,6 @@ Transform:
   - {fileID: 6866897272673736993}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &7354013965472382373
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6819587708451980363}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 71c254bd6b1b98f49bf7ab2158b2220b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _rotation: 35
-  _speedRotation: 10
-  _baseColor: {r: 0.8584906, g: 0.8353464, b: 0.16602883, a: 0}
-  _detectorColor: {r: 0.6792453, g: 0, b: 0, a: 0}
-  _cameraLight: {fileID: 2705164630077255773}
-  _clip: {fileID: 0}
 --- !u!65 &691256755585815982
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -404,11 +363,6 @@ PrefabInstance:
       insertIndex: -1
       addedObject: {fileID: 5983514647275473828}
   m_SourcePrefab: {fileID: 100100000, guid: 59f85ed73fd90be4c91ff3c760bcc655, type: 3}
---- !u!23 &2705164630077255773 stripped
-MeshRenderer:
-  m_CorrespondingSourceObject: {fileID: -194768363319669097, guid: 59f85ed73fd90be4c91ff3c760bcc655, type: 3}
-  m_PrefabInstance: {fileID: 6396984843668586186}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &6354521627662739622 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 65702495048144492, guid: 59f85ed73fd90be4c91ff3c760bcc655, type: 3}
@@ -426,7 +380,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4aea3dd71939f3e48b375461efc52824, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _enemies: []
 --- !u!65 &5983514647275473828
 BoxCollider:
   m_ObjectHideFlags: 0
