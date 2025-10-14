@@ -25,13 +25,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 56758852056666652}
   serializedVersion: 2
-  m_LocalRotation: {x: -0.29818544, y: -0.34008497, z: -0.017190933, w: 0.8917019}
-  m_LocalPosition: {x: -0.12978391, y: -0.47685245, z: 0.30834094}
+  m_LocalRotation: {x: -0.27898946, y: -0.054184053, z: -0.10665339, w: 0.95281374}
+  m_LocalPosition: {x: 0.14999913, y: -0.34000036, z: -0.079999685}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 4645505422060215373}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: -32.902, y: -2.987, z: -11.892}
 --- !u!96 &719275950772449339
 TrailRenderer:
   serializedVersion: 3
@@ -242,7 +242,7 @@ Rigidbody:
   m_IsKinematic: 0
   m_Interpolate: 0
   m_Constraints: 80
-  m_CollisionDetection: 1
+  m_CollisionDetection: 0
 --- !u!114 &5580997404840228424
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -293,8 +293,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 1, y: 1.5, z: 1}
-  m_Center: {x: 0, y: 0.82, z: 0}
+  m_Size: {x: 1, y: 2, z: 1}
+  m_Center: {x: 0, y: 1, z: 0}
 --- !u!114 &2897273597604712124
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5277,7 +5277,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _listParticles: []
-  _animating: 0
 --- !u!1 &3411263183735808917
 GameObject:
   m_ObjectHideFlags: 0
@@ -5324,7 +5323,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _listParticles: []
-  _animating: 0
 --- !u!1 &5228056838392567352
 GameObject:
   m_ObjectHideFlags: 0
@@ -5350,7 +5348,7 @@ Transform:
   m_GameObject: {fileID: 5228056838392567352}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: 0.000000014901161, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 1.5, z: 0}
+  m_LocalPosition: {x: 0, y: 2, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -15715,13 +15713,21 @@ PrefabInstance:
       propertyPath: ColorModule.gradient.maxGradient.m_ColorSpace
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7327800113286422429, guid: 1d8d47af0ab4b374dade2ec8e4d74105, type: 3}
+      propertyPath: _data
+      value: 
+      objectReference: {fileID: 11400000, guid: 31cee878b4c24c347932895be40074bc, type: 2}
     - target: {fileID: 7487835651188610215, guid: 1d8d47af0ab4b374dade2ec8e4d74105, type: 3}
       propertyPath: _soundMask.m_Bits
       value: 268435456
       objectReference: {fileID: 0}
     - target: {fileID: 7740707606285615944, guid: 1d8d47af0ab4b374dade2ec8e4d74105, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -0.159
+      value: 0.4
+      objectReference: {fileID: 0}
+    - target: {fileID: 7740707606285615944, guid: 1d8d47af0ab4b374dade2ec8e4d74105, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.6
       objectReference: {fileID: 0}
     - target: {fileID: 7740707606285615944, guid: 1d8d47af0ab4b374dade2ec8e4d74105, type: 3}
       propertyPath: m_LocalPosition.z

@@ -52,11 +52,11 @@ public class AbstractPlayer : EntityMonobehaviour, IEntity
     {
         return _isDeath;
     }
-    public Transform GetHipsPosition()
+    public Transform HipsTransform()
     {
         return _hipsTransform;
     }
-    public Transform GetHeadPosition()
+    public Transform HeadTransform()
     {
         return _headTransform;
     }

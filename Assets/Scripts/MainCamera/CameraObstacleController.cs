@@ -183,7 +183,7 @@ public class CameraObstacleController : MonoBehaviour
     private void CheckTarget()
     {
         _checkingPlayer = false;
-        _targetHips = GameManager.Instance.PlayerReference.GetHipsPosition().position;
+        _targetHips = GameManager.Instance.PlayerReference.HipsTransform().position;
         _target = GameManager.Instance.PlayerReference.transform.position;
         _hipPosition = new Ray(transform.position, (_targetHips - transform.position) * 500.0f);
         _intHit = CheckRayCast(_hipPosition, _intHit);

@@ -7,7 +7,7 @@ public class Camera_Obstacle : MonoBehaviour
     private Fsm_Camera _fsm;
     private Camera_BaseMovement _base;
     private Camera_WatchingEntity _watching;
-    private Transform _camTransform;
+    [SerializeField] private Transform _camTransform;
     private bool _seeTarget;
     private Light _light;
     [SerializeField] private Color _baseColor;
@@ -16,9 +16,12 @@ public class Camera_Obstacle : MonoBehaviour
     [SerializeField] private SO_Layers _layer;
     private void Start()
     {
+        _light=GetComponentInChildren<Light>();
+        _fsm = new Fsm_Camera();
         _base = (Camera_BaseMovement)new Camera_BaseMovement(_fsm).Camera(this).CamTransform(_camTransform).Color(_baseColor);
         _base = _base.Speed(10.0f).Rotation(35.0f);
-        _watching = new Camera_WatchingEntity(_fsm);
+        _watching= (Camera_WatchingEntity)new Camera_WatchingEntity(_fsm).Camera(this).CamTransform(_camTransform).Color(_detectorColor);
+        _watching = _watching.Target(GameManager.Instance.PlayerReference.transform);   
         _base.AddBehaviour(ECameraBehaviours.watchingEntity, _watching);
         _watching.AddBehaviour(ECameraBehaviours.Base, _base);
         _fsm.SetStartBehaviour(_base);
@@ -43,9 +46,5 @@ public class Camera_Obstacle : MonoBehaviour
         _cameraLight.material.SetColor("_EmissionColor", color);
         _light.color = color;
         _light.intensity = intensity;
-    }
-    public void SetCamera(Transform Transform)
-    {
-        _camTransform = transform;
     }
 }

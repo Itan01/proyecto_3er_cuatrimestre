@@ -33,9 +33,8 @@ public class Camera_BaseMovement : Cons_CameraObstacle
     {
 
         if (_camera.SetTarget)
-        {
-            Debug.Log("SeePlayer"); 
-            //_fsm.SetNewBehaviour(ECameraBehaviours.watchingEntity);
+        { 
+            _fsm.SetNewBehaviour(ECameraBehaviours.watchingEntity);
         }
         Vector3 CamRotation = _camTransform.localEulerAngles;
         if (_rotateToMax)

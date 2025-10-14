@@ -129,6 +129,7 @@ GameObject:
   - component: {fileID: 5779694499154752809}
   - component: {fileID: 691256755585815982}
   - component: {fileID: 3922756849366758987}
+  - component: {fileID: 6554233739513982723}
   m_Layer: 0
   m_Name: Camera
   m_TagString: Untagged
@@ -269,6 +270,23 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &6554233739513982723
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6819587708451980363}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b6ee31d3913878140817f201c66f1a5a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _camTransform: {fileID: 4266583859298035331}
+  _baseColor: {r: 1, g: 1, b: 0, a: 1}
+  _detectorColor: {r: 1, g: 0, b: 0, a: 1}
+  _cameraLight: {fileID: 2705164630077255773}
+  _layer: {fileID: 11400000, guid: 31cee878b4c24c347932895be40074bc, type: 2}
 --- !u!1001 &6396984843668586186
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -363,6 +381,16 @@ PrefabInstance:
       insertIndex: -1
       addedObject: {fileID: 5983514647275473828}
   m_SourcePrefab: {fileID: 100100000, guid: 59f85ed73fd90be4c91ff3c760bcc655, type: 3}
+--- !u!23 &2705164630077255773 stripped
+MeshRenderer:
+  m_CorrespondingSourceObject: {fileID: -194768363319669097, guid: 59f85ed73fd90be4c91ff3c760bcc655, type: 3}
+  m_PrefabInstance: {fileID: 6396984843668586186}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &4266583859298035331 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: -2021178655527167927, guid: 59f85ed73fd90be4c91ff3c760bcc655, type: 3}
+  m_PrefabInstance: {fileID: 6396984843668586186}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &6354521627662739622 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 65702495048144492, guid: 59f85ed73fd90be4c91ff3c760bcc655, type: 3}
@@ -380,6 +408,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4aea3dd71939f3e48b375461efc52824, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _layers: {fileID: 11400000, guid: 31cee878b4c24c347932895be40074bc, type: 2}
 --- !u!65 &5983514647275473828
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -399,7 +428,7 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 4, y: 4, z: 20}
+  m_Size: {x: 3, y: 8, z: 20}
   m_Center: {x: 0, y: 0, z: 10}
 --- !u!4 &6866897272673736993 stripped
 Transform:

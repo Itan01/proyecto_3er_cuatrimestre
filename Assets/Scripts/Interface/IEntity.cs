@@ -7,7 +7,7 @@ public interface IEntity
     public abstract Transform GetTransform();
     public abstract void SetSpeed(float Speed);
     public abstract void Control(bool State);
-    public abstract Transform GetHipsPosition();
-    public abstract Transform GetHeadPosition();
+    public abstract Transform HipsTransform();
+    public abstract Transform HeadTransform();
 
 }
