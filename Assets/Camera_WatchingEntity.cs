@@ -14,6 +14,7 @@ public class Camera_WatchingEntity : Cons_CameraObstacle
     }
     public override void Enter()
     {
+        Debug.Log("Enter To WatchMode");
         _camera.SetColor(_color,9999f);
         EventManager.Trigger(EEvents.DetectPlayer, _targetTransform);
     }
