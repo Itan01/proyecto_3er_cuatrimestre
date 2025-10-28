@@ -31,7 +31,7 @@ public class GlassNavMesh : AbstractObjects, ISoundInteractions
     public void IIteraction(bool PlayerShootIt)
     {
         var Sound = Instantiate(_sound, transform.position, Quaternion.identity);
-        Sound.GetComponent<SoundRadiusTrigger>().SetMultiplier(GetSize());
+        Sound.GetComponent<Sound_Crash_Radius>().SetMultiplier(GetSize());
         AudioStorage.Instance.GlassBrokenSound();
         DesactivateObject();
 

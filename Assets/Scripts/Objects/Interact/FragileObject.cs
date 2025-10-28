@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class FragileObject : AbstractObjects, ISoundInteractions
 {
-    [SerializeField] private GameObject _sound;
     [SerializeField] private float _sizeMultiplier;
     private bool _destroyed=false;
     protected override void Start()
@@ -17,10 +16,6 @@ public class FragileObject : AbstractObjects, ISoundInteractions
 
         base.Update();
     }
-    public float GetSize()
-    {
-        return _sizeMultiplier;
-    }
 
     protected override void SetFeedback(bool State)
     {
@@ -29,8 +24,8 @@ public class FragileObject : AbstractObjects, ISoundInteractions
     }
     public void IIteraction(bool PlayerShootIt)
     {
-        var Sound = Instantiate(_sound, transform.position, Quaternion.identity);
-        Sound.GetComponent<SoundRadiusTrigger>().SetMultiplier(GetSize());
+        var Sound = Factory_Explosion_Crash_Sound.Instance.Create();
+        Sound.GetComponent<Sound_Crash_Radius>().SetMultiplier(_sizeMultiplier);
         AudioStorage.Instance.GlassBrokenSound();
         DesactivateObject();
         _destroyed=true;

@@ -9724,12 +9724,10 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3644834851447298918}
-  - component: {fileID: 1298311802578905265}
   - component: {fileID: 5734245598825694004}
   - component: {fileID: 6428153055782859859}
   - component: {fileID: 3834998449687551039}
-  - component: {fileID: 654484765685970500}
-  - component: {fileID: 725253747656370645}
+  - component: {fileID: 5827829073063566708}
   m_Layer: 21
   m_Name: ExplosionStandardRadius
   m_TagString: Untagged
@@ -9754,19 +9752,6 @@ Transform:
   - {fileID: 5002368906879767664}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1298311802578905265
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8565270419349600205}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 30af7bd5af5da2347b90aaa7c614a0b7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _timeToDestroy: 1
 --- !u!95 &5734245598825694004
 Animator:
   serializedVersion: 5
@@ -9838,28 +9823,7 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8565270419349600205}
   m_Mesh: {fileID: 2540817853737639666, guid: 366a92e4bfab825499aa04e2069273f3, type: 3}
---- !u!135 &654484765685970500
-SphereCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8565270419349600205}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 1
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Radius: 1.0000002
-  m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &725253747656370645
+--- !u!114 &5827829073063566708
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -9868,6 +9832,6 @@ MonoBehaviour:
   m_GameObject: {fileID: 8565270419349600205}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f116f914618928a45b62d7b7a6fbdc96, type: 3}
+  m_Script: {fileID: 11500000, guid: 2d67fa6b6bd3fba4c96ad14b883bd730, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 

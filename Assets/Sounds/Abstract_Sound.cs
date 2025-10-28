@@ -53,6 +53,11 @@ public abstract class Abstract_Sound: MonoBehaviour , ICanCatch
         get { return _canCatch; }
         set { _canCatch = value; }
     }
+    public bool ShootByPlayer
+    {
+        get { return _playerShooted; }
+        set { _playerShooted = value; }
+    }
     public ESounds IndexRef
     {
         get { return _indexRef; }

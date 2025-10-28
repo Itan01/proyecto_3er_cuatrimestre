@@ -9,15 +9,16 @@ public class SoundSummoner : MonoBehaviour
     private float _timerRef;
     private int _amount;
     [Range(1, 5)][SerializeField] private int _amountRef;
-    [SerializeField] float _startRotationY=0;
-    [SerializeField] private Transform _spawnPosition;
-    [SerializeField] private GameObject _sound;
+    private RoomManager _room;
     Action Behaviour;
+     private float _distance=1.5f;
+    [SerializeField] private Transform _dir;
     private ParticlesManager _particlesManager;
     private void Start()
     {
-        GetComponentInParent<RoomManager>().ActRoom +=Activate;
-        GetComponentInParent<RoomManager>().DesActRoom += DesActivate;
+        _room = GetComponentInParent<RoomManager>();
+        _room.ActRoom +=Activate;
+        _room.DesActRoom += DesActivate;
         _particlesManager = GetComponentInChildren<ParticlesManager>();
         _timerRef = _timer;
         _amount = _amountRef;
@@ -30,10 +31,14 @@ public class SoundSummoner : MonoBehaviour
     }
     private void SummonSound()
     {
-        _spawnPosition.rotation= Quaternion.Euler(UnityEngine.Random.Range(-45.0f, 45.0f + 1), _startRotationY+ UnityEngine.Random.Range(45.0f, 135.0f + 1), 0);
-        var Sound = Instantiate(_sound, _spawnPosition.position, Quaternion.identity);
-        AbstractSound script = Sound.GetComponent<AbstractSound>();
-        script.SetDirection(_spawnPosition.forward, 5.0f, 1.0f);
+        //_spawnPosition.rotation= Quaternion.Euler(UnityEngine.Random.Range(-45.0f, 45.0f + 1), _startRotationY+ UnityEngine.Random.Range(45.0f, 135.0f + 1), 0);
+        var Sound = Factory_CrashSound.Instance.Create();
+        Sound.transform.position = transform.position + (_dir.position- transform.position).normalized * _distance;
+        var script = Sound.GetComponent<Abstract_Sound>();
+        Vector3 Dir = _dir.position + new Vector3(UnityEngine.Random.Range(-1.1f, 1.1f + 1), UnityEngine.Random.Range(-1.1f, 1.1f + 1), 0);
+        Vector3 NewDir = (Dir - transform.position).normalized;
+        script.ForceDirection(NewDir);
+        script.Speed(5.0f);
         _particlesManager.PlayOnce();
         //AudioStorage.Instance.ZapSound();
     }
@@ -64,6 +69,11 @@ public class SoundSummoner : MonoBehaviour
             }
 
         }
+    }
+    private void OnDestroy()
+    {
+        _room.ActRoom -= Activate;
+        _room.DesActRoom -= DesActivate;
     }
 }
 

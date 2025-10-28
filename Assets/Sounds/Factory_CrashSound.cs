@@ -1,12 +1,21 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+[RequireComponent(typeof(Factory_Explosion_Crash_Sound))]
 public class Factory_CrashSound : Factory<Sound_Crash>
 {
+    public static Factory_CrashSound Instance;
     protected override void Awake()
     {
         base.Awake();
+        if (!Instance)
+        {
+            Instance = this;
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
     }
     public override Sound_Crash Create()
     {

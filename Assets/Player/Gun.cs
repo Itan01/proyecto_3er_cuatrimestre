@@ -65,6 +65,7 @@ public class Gun : Abstract_Weapon
                     Sound.CanCatch = true;
                     Sound.Atractted = true;
                     Sound.ForceDirection(transform.position - Sound.transform.position);
+                    Sound.Speed(25.0f);
                 }
             }
         }
@@ -91,10 +92,11 @@ public class Gun : Abstract_Weapon
         _hasBullet = false;
         _aiming = false;
         var x = _factory.Create();
-        x.transform.position = transform.position;
+        x.transform.position = transform.position + transform.forward * 0.25f;
         x.ForceDirection(Camera.main.transform.forward);
         x.Speed(10.0f);
         x.Size(1.0f);
+        x.ShootByPlayer=true;   
         foreach (var Obs in _obs)
         {
             Obs.SetSound(ESounds.none);

@@ -22,7 +22,6 @@ public class Camera_ResetPosition : Cons_CameraObstacle
     }
     public override void Enter()
     {
-        Debug.Log("Enter To ResetMode");
         _camera.SetColor(_color, 500f);
         _x = _camTransform.localEulerAngles.x;
         _y = _camTransform.localEulerAngles.y;
@@ -54,7 +53,6 @@ public class Camera_ResetPosition : Cons_CameraObstacle
         if (number< -359.75f || number < 0.25f)
         {
             number = 0.0f;
-            Debug.Log("ValueIsZero");
             return number;
 
         }
@@ -62,13 +60,11 @@ public class Camera_ResetPosition : Cons_CameraObstacle
 
         if (number >0 && number <180)
         {
-            Debug.Log("addingValue");
             number -= _speed * Time.deltaTime;
             _isResetted = false;
         }
         else if(number > 180 && number < 360)
         {
-            Debug.Log("removingValue");
             number += _speed * Time.deltaTime; 
             _isResetted = false;
 
