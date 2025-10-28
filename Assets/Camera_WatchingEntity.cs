@@ -23,7 +23,7 @@ public class Camera_WatchingEntity : Cons_CameraObstacle
         _camTransform.LookAt(_targetTransform);
         if(_camera.SetTarget== false)
         {
-            _fsm.SetNewBehaviour(ECameraBehaviours.Base);
+            _fsm.SetNewBehaviour(ECameraBehaviours.Reset);
         }
     }
     public override void FixedExecute()

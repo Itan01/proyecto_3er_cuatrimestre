@@ -1246,9 +1246,6 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 2045480857111249101, guid: 1f519c0563895c24abfe62f0efdf2f51, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1995643467}
-    - targetCorrespondingSourceObject: {fileID: 3518838763069953767, guid: 1f519c0563895c24abfe62f0efdf2f51, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 1591167492}
     - targetCorrespondingSourceObject: {fileID: 5124622517897298479, guid: 1f519c0563895c24abfe62f0efdf2f51, type: 3}
       insertIndex: -1
       addedObject: {fileID: 94326922}
@@ -31009,28 +31006,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 1588430087563306345, guid: b862eb6e0ff889b4da99958191b99eff, type: 3}
   m_PrefabInstance: {fileID: 1587117850}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &1591167488 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 3518838763069953767, guid: 1f519c0563895c24abfe62f0efdf2f51, type: 3}
-  m_PrefabInstance: {fileID: 94326914}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &1591167492
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1591167488}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b6ee31d3913878140817f201c66f1a5a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _camTransform: {fileID: 0}
-  _baseColor: {r: 0, g: 0, b: 0, a: 0}
-  _detectorColor: {r: 0, g: 0, b: 0, a: 0}
-  _cameraLight: {fileID: 0}
-  _layer: {fileID: 0}
 --- !u!1 &1594578634
 GameObject:
   m_ObjectHideFlags: 0

@@ -6,6 +6,7 @@ public class Camera_Obstacle : MonoBehaviour
     private Fsm_Camera _fsm;
     private Camera_BaseMovement _base;
     private Camera_WatchingEntity _watching;
+    private Camera_ResetPosition _reset;
     private RoomManager _room;
     [SerializeField] private Transform _camTransform;
     [SerializeField] private bool _seeTarget;
@@ -25,9 +26,14 @@ public class Camera_Obstacle : MonoBehaviour
         _base = (Camera_BaseMovement)new Camera_BaseMovement(_fsm).Camera(this).CamTransform(_camTransform).Color(_baseColor);
         _base = _base.Speed(10.0f).Rotation(35.0f);
         _watching= (Camera_WatchingEntity)new Camera_WatchingEntity(_fsm).Camera(this).CamTransform(_camTransform).Color(_detectorColor);
-        _watching = _watching.Target(GameManager.Instance.PlayerReference.transform);   
+        _watching = _watching.Target(GameManager.Instance.PlayerReference.transform);
+        _reset = (Camera_ResetPosition)new Camera_ResetPosition(_fsm).Camera(this).CamTransform(_camTransform).Color(_baseColor);
+        _reset = _reset.Speed(12.5f);
         _base.AddBehaviour(ECameraBehaviours.watchingEntity, _watching);
-        _watching.AddBehaviour(ECameraBehaviours.Base, _base);
+        _watching.AddBehaviour(ECameraBehaviours.Reset, _reset);
+        _reset.AddBehaviour(ECameraBehaviours.Base,_base);
+        _reset.AddBehaviour(ECameraBehaviours.watchingEntity, _watching);
+
     }
     private void Update()
     {

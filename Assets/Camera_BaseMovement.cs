@@ -29,6 +29,7 @@ public class Camera_BaseMovement : Cons_CameraObstacle
     {
         Debug.Log("Enter To BaseMode");
         _camera.SetColor(_color,9999f);
+        _rotate = 0.0f;
     }
     public override void Execute()
     {
