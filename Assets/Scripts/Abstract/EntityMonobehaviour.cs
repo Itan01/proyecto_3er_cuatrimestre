@@ -45,14 +45,14 @@ public abstract class EntityMonobehaviour : MonoBehaviour
     {
         return _layer;
     }
-    public void AddNoiser(INoise Behaviour)
+    public void AddBehaviour(Action Behaviour)
     {
-        VirtualUpdate += Behaviour.Noiser;
+        VirtualUpdate += Behaviour;
     }
 
-    public void RemoveNoiser(INoise Behaviour)
+    public void RemoveBehaviour(Action Behaviour)
     {
-        VirtualUpdate -= Behaviour.Noiser;
+        VirtualUpdate -= Behaviour;
     }
     public void ResetCollider()
     {
