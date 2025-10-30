@@ -8,7 +8,7 @@ public class Model_Orientation : Abstract_Model
     private Abstract_Weapon _weapon;
     public Model_Orientation()
     {
-        _orientation= Vector3.zero;
+        _orientation= Camera.main.transform.forward;
         _weapon= null;
     }
     public Model_Orientation Weapon( Abstract_Weapon Weapon)

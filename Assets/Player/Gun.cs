@@ -95,7 +95,7 @@ public class Gun : Abstract_Weapon
         _hasBullet = false;
         _aiming = false;
         var x = _factory.Create();
-        x.transform.position = transform.position + transform.forward * 0.25f;
+        x.transform.position = transform.position + transform.forward * 1.25f;
         x.ForceDirection(Camera.main.transform.forward);
         x.Speed(10.0f);
         x.Size(1.0f);
