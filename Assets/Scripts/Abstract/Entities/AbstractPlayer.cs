@@ -5,7 +5,7 @@ public class AbstractPlayer : EntityMonobehaviour, IEntity
     protected bool _canControl=false;
     protected bool _isDeath=false;
     protected Abstract_Weapon _weapon;
-    [SerializeField]protected Transform _headTransform, _hipsTransform, _modelTransform;
+    [SerializeField]protected Transform _headTransform, _hipsTransform;
     protected override void Start()
     {
         base.Start();

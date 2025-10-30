@@ -27,6 +27,11 @@ public class Model_Player
     public void Move()
     {
         _move.Execute();
+        _move.IsMoving = true;
+    }
+    public void DontMove()
+    {
+        _move.IsMoving = false; 
     }
     public void Dash()
     {
@@ -35,6 +40,14 @@ public class Model_Player
     public void Crouch()
     {
         _crouch.Execute();
+    }
+    public bool GetIsMoving()
+    {
+        return _move.IsMoving;
+    }
+    public bool GetIsCrouching()
+    {
+        return _crouch.GetIsCrouching();
     }
 }
 

@@ -7,12 +7,15 @@ public class Gun : Abstract_Weapon
     [SerializeField] private bool _aiming=false;
     [SerializeField] private Factory<Sound_Crash> _factory;
     [SerializeField] private SO_Layers _data;
+    private float _boxSizeValue = 5.0f;
+    private Vector3 _boxSize=Vector3.zero;
 
     private RaycastHit _hit;
     private void Awake()
     {
         GetComponentInParent<PlayerManager>().Weapon = this;
         LVLManager.Instance.Gun = this;
+        _boxSize = new Vector3(_boxSizeValue, _boxSizeValue, 0.1f);
     }
 
     protected override void Update()
@@ -55,12 +58,12 @@ public class Gun : Abstract_Weapon
     private void PrimaryFire()
     {
         if (_aiming) return;
-        if (Physics.SphereCast(transform.position, 2.0f, transform.forward, out _hit, 10.0f, _data._sounds))
+        if (Physics.BoxCast(transform.position, _boxSize, transform.forward, out _hit, Quaternion.LookRotation(transform.forward), 10.0f, _data._sounds))
         {
             if(_hit.collider.gameObject.TryGetComponent<Abstract_Sound>(out Abstract_Sound Sound))
             {
                 Cons_Raycast ray = new Cons_Raycast(500.0f, _data._everything);
-                if (ray.Checker<Abstract_Sound>(transform.position, transform.forward))
+                if (ray.Checker<Abstract_Sound>(transform.position, Sound.transform.position - transform.position))
                 {
                     Sound.CanCatch = true;
                     Sound.Atractted = true;
@@ -133,6 +136,6 @@ public class Gun : Abstract_Weapon
     {
         Gizmos.color= Color.yellow;
         Gizmos.DrawLine(transform.position, _hit.point.magnitude *transform.forward);
-        Gizmos.DrawWireSphere(_hit.point,2.0f);
+        Gizmos.DrawWireCube(_hit.point,_boxSize);
     }
 }

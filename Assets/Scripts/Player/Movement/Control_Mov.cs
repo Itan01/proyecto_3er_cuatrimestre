@@ -16,6 +16,7 @@ public class Control_Mov : Abstract_Control, IButton
         }
         else
         {
+            _model.DontMove();
             _view.DontMove();
         }
     }

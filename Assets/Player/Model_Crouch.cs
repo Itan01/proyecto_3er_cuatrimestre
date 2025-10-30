@@ -45,4 +45,8 @@ public class Model_Crouch : Abstract_Model
         }
 
     }
+    public bool GetIsCrouching()
+    {
+        return _isCrouching;
+    }
 }

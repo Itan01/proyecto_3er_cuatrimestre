@@ -33,6 +33,7 @@ public class PlayerManager : AbstractPlayer
 
     protected override void Update()
     {
+        GetStats();
         if (!_canControl) return;
         base.Update();
         _controller.Execute();
@@ -44,23 +45,25 @@ public class PlayerManager : AbstractPlayer
     }
     private void GetStats()
     {
-        if (_invisibleDuration > 0.0f)
-        {
-            _invisibleDuration -= Time.deltaTime;
-            if (_invisibleDuration < 0.0f)
-            {
-                _invisibleDuration = 0.0f;
-                _invisible = false;
-                foreach (var item in _skinModel) 
-                {
-                    item.GetComponent<SkinnedMeshRenderer>().material = _baseColorMaterial[0];
-                }
-                foreach (var item in _clothesModel)
-                {
-                    item.GetComponent<SkinnedMeshRenderer>().material = _JoinColorMaterial[0];
-                }
-            }
-        }
+        //if (_invisibleDuration > 0.0f)
+        //{
+        //    _invisibleDuration -= Time.deltaTime;
+        //    if (_invisibleDuration < 0.0f)
+        //    {
+        //        _invisibleDuration = 0.0f;
+        //        _invisible = false;
+        //        foreach (var item in _skinModel) 
+        //        {
+        //            item.GetComponent<SkinnedMeshRenderer>().material = _baseColorMaterial[0];
+        //        }
+        //        foreach (var item in _clothesModel)
+        //        {
+        //            item.GetComponent<SkinnedMeshRenderer>().material = _JoinColorMaterial[0];
+        //        }
+        //    }
+        //}
+        _isMoving = _model.GetIsMoving();
+        _isCrouching =_model.GetIsCrouching();
     }
     public bool IsCaptured
     {

@@ -35,7 +35,10 @@ public class Sound_Crash : Abstract_Sound
     }
     private void OnCollisionEnter(Collision Entity)
     {
-
+        if(Entity.gameObject.TryGetComponent<ISoundInteractions>(out var Script))
+        {
+            Script.IIteraction(_playerShooted);
+        }
         if (_playerShooted)
         {
             var x = Factory_Explosion_Crash_Sound.Instance.Create();

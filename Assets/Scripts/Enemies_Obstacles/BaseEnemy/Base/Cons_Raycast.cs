@@ -12,9 +12,9 @@ public class Cons_Raycast
         _maxDistance = MaxDistance;
         _mask = Mask;
     }
-    public bool Checker<T>( Vector3 StartPosition,Vector3 FinalPos) where T : Component
+    public bool Checker<T>( Vector3 StartPosition,Vector3 Direction) where T : Component
     {
-        if (Physics.Raycast(StartPosition, FinalPos, out _hits, _maxDistance, _mask, QueryTriggerInteraction.Ignore))
+        if (Physics.Raycast(StartPosition, Direction, out _hits, _maxDistance, _mask, QueryTriggerInteraction.Ignore))
         {
             if (_hits.collider.GetComponent<T>())
             {

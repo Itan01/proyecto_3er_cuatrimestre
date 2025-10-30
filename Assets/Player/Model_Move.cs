@@ -6,6 +6,7 @@ public class Model_Move : Abstract_Model
 {
     private float _speed, _refSpeed, _rotSpeed;
     private bool _aiming;
+    private bool _isMoving;
     private Vector3 _steer;
     private Transform _dir;
     private Model_Orientation _orientation;
@@ -47,5 +48,12 @@ public class Model_Move : Abstract_Model
         _orientation.Set(Orientation);
         _rb.MovePosition(_transform.position + (_speed * Time.fixedDeltaTime * _steer));
 
+
     }
+    public bool IsMoving
+    {
+        get {return _isMoving; }
+        set { _isMoving = value; }
+    }
+
 }

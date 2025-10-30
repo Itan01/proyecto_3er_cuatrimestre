@@ -72,11 +72,6 @@ public abstract class Abstract_Sound: MonoBehaviour , ICanCatch
         {
             script.IIteraction(_playerShooted);
         }
-        //if (Entity.TryGetComponent(out PlayerManager player) && _canCatch)
-        //{
-        //   // Pasar el factory al que debe llamar
-        //   //LVLManager.Instance.Gun.Bullet = this;
-        //}
     }
 
 }
