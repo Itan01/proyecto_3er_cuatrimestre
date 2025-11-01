@@ -15,8 +15,8 @@ public class Model_Player
         _move = _move.Orientation(_Orientation);
         _dash= (Model_Dash)new Model_Dash().RB(Player.GetRb()).ModelTransform(Player.ModelTransform()).Transform(Player.transform);
         _dash = _dash.Force(10.0f);
-        _crouch = (Model_Crouch)new Model_Crouch().Collider(Player.Collider()).Speed(3.5f);
-        _crouch = _crouch.Move(_move).Speed(3.5f);
+        _crouch = (Model_Crouch)new Model_Crouch().Collider(Player.Collider()).Speed(3.5f).Transform(Player.transform);
+        _crouch = _crouch.Move(_move).Speed(3.5f).Layer(Player.Layers()._everything);
 
     }
 

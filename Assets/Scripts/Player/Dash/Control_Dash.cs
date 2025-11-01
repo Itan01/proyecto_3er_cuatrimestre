@@ -8,7 +8,7 @@ public class Control_Dash : Abstract_Control
     {
         Controller.AddAction(Execute);
         _maxCD= DashCooldown;
-        _cd= DashCooldown;
+        _cd = 0.0f;
     }
     public override void Execute()
     {

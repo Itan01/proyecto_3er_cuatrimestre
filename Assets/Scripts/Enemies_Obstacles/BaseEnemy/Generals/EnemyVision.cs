@@ -144,9 +144,9 @@ public class EnemyVision : MonoBehaviour
         Vector3 PlayerHead = (_player.GetHeadPosition().position - _headReference.position).normalized;
         Vector3 PlayerHips = (_player.GetHipsPosition().position - _headReference.position).normalized;
         Vector3 PlayerPosition = (_player.transform.position - _headReference.position).normalized;
-        if (_raycast.Checker<PlayerManager>(_headReference.position, PlayerHead) ||
-            _raycast.Checker<PlayerManager>(_headReference.position, PlayerHips) ||
-            _raycast.Checker<PlayerManager>(_headReference.position, PlayerPosition))
+        if (_raycast.CheckerComponent<PlayerManager>(_headReference.position, PlayerHead) ||
+            _raycast.CheckerComponent<PlayerManager>(_headReference.position, PlayerHips) ||
+            _raycast.CheckerComponent<PlayerManager>(_headReference.position, PlayerPosition))
         {
             _detectPlayer = true;
             _seePlayer = true;

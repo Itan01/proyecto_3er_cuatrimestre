@@ -63,7 +63,7 @@ public class Gun : Abstract_Weapon
             if(_hit.collider.gameObject.TryGetComponent<Abstract_Sound>(out Abstract_Sound Sound))
             {
                 Cons_Raycast ray = new Cons_Raycast(500.0f, _data._everything);
-                if (ray.Checker<Abstract_Sound>(transform.position, Sound.transform.position - transform.position))
+                if (ray.CheckerComponent<Abstract_Sound>(transform.position, Sound.transform.position - transform.position))
                 {
                     Sound.CanCatch = true;
                     Sound.Atractted = true;

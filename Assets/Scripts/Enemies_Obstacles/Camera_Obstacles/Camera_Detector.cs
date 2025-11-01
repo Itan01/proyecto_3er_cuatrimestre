@@ -41,9 +41,9 @@ public class Camera_Detector : MonoBehaviour
         Transform HipPosition = GameManager.Instance.PlayerReference.GetHipsPosition();
         Transform HeadPosition = GameManager.Instance.PlayerReference.GetHeadPosition();
         Transform FeetPosition = GameManager.Instance.PlayerReference.transform;
-        if (_rayCast.Checker<PlayerManager>(transform.position, (HipPosition.position - transform.position)) ||
-           _rayCast.Checker<PlayerManager>(transform.position, (HeadPosition.position - transform.position)) ||
-           _rayCast.Checker<PlayerManager>(transform.position, (FeetPosition.position - transform.position)))
+        if (_rayCast.CheckerComponent<PlayerManager>(transform.position, (HipPosition.position - transform.position)) ||
+           _rayCast.CheckerComponent<PlayerManager>(transform.position, (HeadPosition.position - transform.position)) ||
+           _rayCast.CheckerComponent<PlayerManager>(transform.position, (FeetPosition.position - transform.position)))
             SeePlayer = true;
         _camera.SetTarget = SeePlayer;
     }

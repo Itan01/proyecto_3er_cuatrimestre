@@ -13,6 +13,7 @@ public class View_Player
         _interact = (View_Interact)new View_Interact().Animator(Player.GetAnimator());
         _dash = (View_Dash)new View_Dash().Animator(Player.GetAnimator());
         _crouch= (View_Crouch)new View_Crouch().Animator(Player.GetAnimator());
+        _crouch= _crouch.Transform(Player.transform).Layer(Player.Layers()._everything);
         _gun= (View_Gun)new View_Gun().Animator(Player.GetAnimator());
     }
     public void Interact()
