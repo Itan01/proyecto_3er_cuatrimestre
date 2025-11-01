@@ -13,7 +13,7 @@ public class RoombaEnemy : MonoBehaviour
     [SerializeField] private int _amountOfSounds = 3;
     [SerializeField] private float _soundForce = 5f;
     [SerializeField] private float _spread = 1.5f;
-    private RoomManager _room;
+    private bool _isActivate=false;
     Action Momevent;
     private NavMeshAgent _agent;
 
@@ -22,36 +22,40 @@ public class RoombaEnemy : MonoBehaviour
         Momevent = null;
         _animator = GetComponentInChildren<Animator>();
         _agent=GetComponent<NavMeshAgent>();
+        EventManager.Subscribe(EEvents.DetectPlayer, DetectPlayer);
         _animator.SetBool("Open_Anim", false);  
         _animator.SetBool("Walk_Anim", false);
-        _room=GetComponentInParent<RoomManager>();
-        _room.ActRoom += Activation;
-        _room.DesActRoom += Desactivation;
+        _agent.isStopped = true;
     }
 
     private void Update()
     {
-        if (Momevent != null)
-            Momevent();
+        if (!_isActivate) return;
+        Momevent?.Invoke();
     }
-    public void SetActivation()
+    private void DetectPlayer(params object[] Parameters)
     {
+
+        EventManager.Unsubscribe(EEvents.DetectPlayer, DetectPlayer);
+        Transform Pos= (Transform)Parameters[0];
+        _agent.destination = Pos.position;
+
         AudioStorage.Instance.RoombaSound(EAudios.RoombaSpawn);
         StartCoroutine(OpenAndThenWalk());
+        _isActivate = true;
     }
 
     private IEnumerator OpenAndThenWalk()
     {
         _animator.SetBool("Open_Anim", true);
-        yield return new WaitForSeconds(1.5f);
+        yield return new WaitForSeconds(3.0f);
         _animator.SetBool("Open_Anim", false);
+        _agent.isStopped = false;
         _animator.SetBool("Walk_Anim", true);
-        _agent.destination =GameManager.Instance.PlayerReference.transform.position;
         Momevent = Moving;
     }
     private void Moving()
-    {
-        _agent.destination =GameManager.Instance.PlayerReference.transform.position;
+    {   
         if (_agent.remainingDistance <= _explodeDistance)
         {
             Momevent = null;
@@ -60,6 +64,8 @@ public class RoombaEnemy : MonoBehaviour
 
             StartCoroutine(ExplodeAfterDelay());
         }
+        if (GameManager.Instance.PlayerReference.GetInvisible()) return;
+        _agent.destination = GameManager.Instance.PlayerReference.transform.position;
     }
 
     private IEnumerator ExplodeAfterDelay()
@@ -76,7 +82,8 @@ public class RoombaEnemy : MonoBehaviour
         // particulas explosion
         if (_explosionParticlesPrefab)
         {
-            Instantiate(_explosionParticlesPrefab, transform.position, Quaternion.identity);
+            var x = Factory_CrashSound.Instance.Create();
+            x.transform.position = transform.position;
         }
 
         // tirar sonido 
@@ -104,10 +111,13 @@ public class RoombaEnemy : MonoBehaviour
 
     public void Desactivation() 
     {
+        EventManager.Unsubscribe(EEvents.DetectPlayer, DetectPlayer);
         gameObject.SetActive(false);
     }
     public void Activation()
     {
+        if (_isActivate) return;
+        EventManager.Subscribe(EEvents.DetectPlayer, DetectPlayer);
         gameObject.SetActive(true);
     }
 }
