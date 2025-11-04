@@ -75,7 +75,7 @@ public class PlayerManager : AbstractPlayer
     {
         return _invisible;
     }
-    public void SetIfPlayerCanMove(bool state, bool FinishingLevel)
+    public void SetIfPlayerCanMove(bool state)
     {
         _canControl = state;
     }

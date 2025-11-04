@@ -12,10 +12,15 @@ public class CountdownTimer : MonoBehaviour
     private float _timerWait;
     private bool _isRunning = true;
 
+    private void Awake()
+    {
+        UIManager.Instance.Timer = this;
+    }
     private void Start()
     {
         _timerText=GetComponentInChildren<TextMeshProUGUI>();
         _timerEffect = AudioStorage.Instance.UiSound(EAudios.Timer);
+        UIManager.Instance.Timer = this;
         // AudioManager.Instance.PlaySFX(_timerEffect, 1f);
     }
     void Update()

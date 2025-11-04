@@ -34,7 +34,7 @@ public class Control_Gun : Abstract_Control
             _view.GunPrimary(false);
             _gun.UseRightClick = false;
         }
-        if (Input.GetKey(_shootKey))
+        if (Input.GetKey(_shootKey) && _gun.HasBullet)
         {
             _view.GunSecondary(true);
             _gun.UseLeftClick = true;

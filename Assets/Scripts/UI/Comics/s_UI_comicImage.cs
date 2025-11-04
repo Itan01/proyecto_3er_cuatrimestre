@@ -25,7 +25,7 @@ public class s_UI_comicImage : MonoBehaviour
         }
     }
 
-    private void ShowNextImage()
+    public void ShowNextImage()
     {
         if(_spriteIndex +1 < _sprites.Length)
         {
@@ -36,7 +36,6 @@ public class s_UI_comicImage : MonoBehaviour
         else
         {
             _transition = true;
-            _mainScript.Desactivate();
         }
     }
     private IEnumerator FadeIN()

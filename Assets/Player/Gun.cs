@@ -5,11 +5,9 @@ using UnityEngine;
 public class Gun : Abstract_Weapon
 {
     [SerializeField] private bool _aiming=false;
-    [SerializeField] private Factory<Sound_Crash> _factory;
     [SerializeField] private SO_Layers _data;
     private float _boxSizeValue = 5.0f;
     private Vector3 _boxSize=Vector3.zero;
-
     private RaycastHit _hit;
     private void Awake()
     {
@@ -38,6 +36,11 @@ public class Gun : Abstract_Weapon
         }
         else
         {
+            if (_obs == null) return;
+            foreach (var Obs in _obs)
+            {
+                Obs.Grabbing(UseRightClick);
+            }
             if (UseRightClick) // Grabbing Sound
             {
                 PrimaryFire();
@@ -46,13 +49,12 @@ public class Gun : Abstract_Weapon
             if (UseLeftClick) // Aim
             {
                 SecondaryFire();
+
+
             }
-            if (_obs == null) return;
-            foreach (var Obs in _obs)
-            {
-                Obs.Grabbing(UseRightClick);
-            }
+ 
         }
+
 
     }
     private void PrimaryFire()
@@ -78,23 +80,24 @@ public class Gun : Abstract_Weapon
         if (!_hasBullet) return;
         if (!_aiming)
         {
+            Debug.Log("A");
             _aiming = true;
             EventPlayer.Trigger(EPlayer.aim, true);
+            if (_obs == null) return;
+            foreach (var Obs in _obs)
+            {
+                Obs.Grabbing(false);
+            }
         }
 
         Aiming();
-        if (_obs == null) return;
-        foreach (var Obs in _obs)
-        {
-            Obs.Grabbing(false);
-        }
 
     }
     private void Shoot()
     {
         _hasBullet = false;
         _aiming = false;
-        var x = _factory.Create();
+        var x = Factory_CrashSound.Instance.Create();
         x.transform.position = transform.position + transform.forward * 1.25f;
         x.ForceDirection(Camera.main.transform.forward);
         x.Speed(10.0f);
@@ -108,12 +111,6 @@ public class Gun : Abstract_Weapon
     private void Aiming()
     {
 
-    }
-
-    public Factory<Sound_Crash> Factory
-    {
-        get { return _factory; }
-        set { _factory = value; }
     }
     private void OnTriggerEnter(Collider other)
     {

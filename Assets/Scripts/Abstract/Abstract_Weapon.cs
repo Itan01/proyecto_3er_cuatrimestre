@@ -25,7 +25,11 @@ public abstract class Abstract_Weapon : MonoBehaviour, IObservableMegaphone
         get { return _useLeftClick; }
         set { _useLeftClick = value; }
     }
-
+    public bool HasBullet
+    {
+        get { return _hasBullet; }
+        set { _hasBullet = value; }
+    }
     public void AddObs(IObserverMegaphone Obj)
     {
         if (!_obs.Contains(Obj))

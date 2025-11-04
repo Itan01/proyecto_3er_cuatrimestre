@@ -39,14 +39,12 @@ public class Model_Crouch : Abstract_Model
     {
         if (_isCrouching)
         {
-            if (Physics.BoxCast(_transform.position, new Vector3(0.6f, 0.5f, 0.6f), _transform.up, Quaternion.identity, 10.0f, _layerMask) ==false)
+            if (Physics.BoxCast(_transform.position, new Vector3(0.6f, 0.5f, 0.6f), _transform.up, Quaternion.identity, 10.0f, _layerMask) == false)
             {
-                Debug.Log("True");
                 _isCrouching = false;
                 GameManager.Instance.PlayerReference.ResetCollider();
                 _move.ResetSpeed();
             }
-            else { Debug.Log("false"); }
         }
         else
         {
