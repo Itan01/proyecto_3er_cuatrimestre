@@ -15,16 +15,19 @@ public class Gun_particles_Grabbing : MonoBehaviour,IObserverMegaphone
     }
     public void Grabbing(bool State)
     {
+        Debug.Log(State);
         if(!_isGrabbing && State)
         {
             _isGrabbing=true;
-            _effect.Play();
+            _effect.SendEvent("OnGrabPlay");
+            _effect.Play();     
         }
-        if (!State)
-        { _effect.Stop();
+        if (!State == _isGrabbing)
+        {
+            _effect.SendEvent("OnGrabStop");
             _isGrabbing = false;
+
         }
-          
     }
     public  void Aiming() { }
 }

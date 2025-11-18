@@ -10279,7 +10279,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &640857670560896926
 Transform:
   m_ObjectHideFlags: 0
@@ -10304,7 +10304,7 @@ VisualEffect:
   m_GameObject: {fileID: 6508146321689401077}
   m_Enabled: 1
   m_Asset: {fileID: 8926484042661614526, guid: 94df9bc4796954644ab25a7a0232e2c7, type: 3}
-  m_InitialEventName: OnPlay
+  m_InitialEventName: OnGrabPlay
   m_InitialEventNameOverriden: 0
   m_StartSeed: 0
   m_ResetSeedOnPlay: 1
@@ -10341,7 +10341,7 @@ VFXRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6508146321689401077}
-  m_Enabled: 0
+  m_Enabled: 1
   m_CastShadows: 0
   m_ReceiveShadows: 0
   m_DynamicOccludee: 1
@@ -10385,7 +10385,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6512627d56f08f647bdebca4dcfaa374, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _effect: {fileID: 0}
+  _effect: {fileID: 4323002578383811076}
   _isGrabbing: 0
 --- !u!1 &8651325797245693084
 GameObject:
@@ -15572,7 +15572,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: e5a3cedb217986c4c84cf7e29cd27782, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
