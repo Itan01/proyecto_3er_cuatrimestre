@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class FragileObject : AbstractObjects, ISoundInteractions
+public class FragileObject : AbstractObjects, ISoundInteractions, ISoundAim
 {
     [SerializeField] private float _sizeMultiplier;
     private bool _destroyed=false;
@@ -29,7 +29,16 @@ public class FragileObject : AbstractObjects, ISoundInteractions
         AudioStorage.Instance.GlassBrokenSound();
         DesactivateObject();
         _destroyed=true;
-    }   
+    }
 
+    public void Activate()
+    {
+        _mesh.material.SetFloat("_ShowInteractable",1.0f);
+    }
+     
+    public void Deactivate()
+    {
+        _mesh.material.SetFloat("_ShowInteractable", 0.0f);
+    }
 }
 

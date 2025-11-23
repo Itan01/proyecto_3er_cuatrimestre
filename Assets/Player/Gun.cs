@@ -8,20 +8,29 @@ public class Gun : Abstract_Weapon
     [SerializeField] private SO_Layers _data;
     private float _boxSizeValue = 5.0f;
     private Vector3 _boxSize=Vector3.zero;
+    private Vector3 _dirToShoot;
     private RaycastHit _hit;
+    private Camera _mainCamera;
+    private Transform _myTransform;
+    private ISoundAim _aimedObject=null;
     private void Awake()
     {
         GetComponentInParent<PlayerManager>().Weapon = this;
         LVLManager.Instance.Gun = this;
         _boxSize = new Vector3(_boxSizeValue, _boxSizeValue, 0.1f);
     }
-
+    private void Start()
+    {
+        _mainCamera = Camera.main;
+        _myTransform = transform;
+    }
     protected override void Update()
     {
         base.Update();
-        transform.forward = Camera.main.transform.forward;
+        _myTransform.forward = _mainCamera.transform.forward;
         if (_aiming)
         {
+            Aiming();
             if (!UseLeftClick) // Throw
             {
                 Shoot();
@@ -49,8 +58,6 @@ public class Gun : Abstract_Weapon
             if (UseLeftClick) // Aim
             {
                 SecondaryFire();
-
-
             }
  
         }
@@ -60,7 +67,7 @@ public class Gun : Abstract_Weapon
     private void PrimaryFire()
     {
         if (_aiming) return;
-        if (Physics.BoxCast(transform.position, _boxSize, transform.forward, out _hit, Quaternion.LookRotation(transform.forward), 10.0f, _data._sounds))
+        if (Physics.BoxCast(_myTransform.position, _boxSize, _myTransform.forward, out _hit, Quaternion.LookRotation(transform.forward), 10.0f, _data._sounds))
         {
             if(_hit.collider.gameObject.TryGetComponent<Abstract_Sound>(out Abstract_Sound Sound))
             {
@@ -69,7 +76,7 @@ public class Gun : Abstract_Weapon
                 {
                     Sound.CanCatch = true;
                     Sound.Atractted = true;
-                    Sound.ForceDirection(transform.position - Sound.transform.position);
+                    Sound.ForceDirection(_myTransform.position - Sound.transform.position);
                     Sound.Speed(25.0f);
                 }
             }
@@ -80,7 +87,7 @@ public class Gun : Abstract_Weapon
         if (!_hasBullet) return;
         if (!_aiming)
         {
-            Debug.Log("A");
+            
             _aiming = true;
             EventPlayer.Trigger(EPlayer.aim, true);
             if (_obs == null) return;
@@ -89,9 +96,7 @@ public class Gun : Abstract_Weapon
                 Obs.Grabbing(false);
             }
         }
-
-        Aiming();
-
+        Debug.Log("A");
     }
     private void Shoot()
     {
@@ -99,7 +104,7 @@ public class Gun : Abstract_Weapon
         _aiming = false;
         var x = Factory_CrashSound.Instance.Create();
         x.transform.position = transform.position + transform.forward * 1.25f;
-        x.ForceDirection(Camera.main.transform.forward);
+        x.ForceDirection(_mainCamera.transform.forward);
         x.Speed(10.0f);
         x.Size(1.0f);
         x.ShootByPlayer=true;   
@@ -110,7 +115,29 @@ public class Gun : Abstract_Weapon
     }
     private void Aiming()
     {
-
+        float maxDistance=200.0f;
+        float DistanceBetweenCamAndPlayer = (_myTransform.position - _mainCamera.transform.position).magnitude;
+        Vector3 StartPosition = _mainCamera.transform.position + _mainCamera.transform.forward * DistanceBetweenCamAndPlayer;
+        if (Physics.Raycast(StartPosition, _mainCamera.transform.forward, out RaycastHit Hits, maxDistance, _data._obstacles, QueryTriggerInteraction.Ignore))
+        {
+            if (Hits.collider.TryGetComponent<ISoundAim>(out var Script))
+            {
+                Debug.Log($"Got {Script.ToString()}");
+                if (_aimedObject != null)
+                    _aimedObject.Activate();
+                if (_aimedObject == Script) return;
+                Debug.Log($"ChangeObject{Script.ToString()}");
+                if (_aimedObject != null)
+                _aimedObject.Deactivate();
+                Script.Activate();
+                _aimedObject= Script;
+            }
+            else
+            {
+                if (_aimedObject != null)
+                    _aimedObject.Deactivate();
+            }
+        }
     }
     private void OnTriggerEnter(Collider other)
     {
@@ -129,7 +156,7 @@ public class Gun : Abstract_Weapon
             }
         }
     }
-    private void OnDrawGizmos()
+    private void OnDrawGizmosSelected()
     {
         Gizmos.color= Color.yellow;
         Gizmos.DrawLine(transform.position, _hit.point.magnitude *transform.forward);
