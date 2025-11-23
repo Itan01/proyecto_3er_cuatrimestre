@@ -4160,31 +4160,35 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 111536484857793741, guid: a391a6cdcb8ecb34d93b1bc523da9d25, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0
+      value: -0.17691804
       objectReference: {fileID: 0}
     - target: {fileID: 111536484857793741, guid: a391a6cdcb8ecb34d93b1bc523da9d25, type: 3}
       propertyPath: m_LocalPosition.y
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 111536484857793741, guid: a391a6cdcb8ecb34d93b1bc523da9d25, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -0.00004197657
+      objectReference: {fileID: 0}
+    - target: {fileID: 111536484857793741, guid: a391a6cdcb8ecb34d93b1bc523da9d25, type: 3}
       propertyPath: m_LocalRotation.w
-      value: 1
+      value: 0.0000005364418
       objectReference: {fileID: 0}
     - target: {fileID: 111536484857793741, guid: a391a6cdcb8ecb34d93b1bc523da9d25, type: 3}
       propertyPath: m_LocalRotation.x
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 111536484857793741, guid: a391a6cdcb8ecb34d93b1bc523da9d25, type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0
+      value: -1
       objectReference: {fileID: 0}
     - target: {fileID: 111536484857793741, guid: a391a6cdcb8ecb34d93b1bc523da9d25, type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 111536484857793741, guid: a391a6cdcb8ecb34d93b1bc523da9d25, type: 3}
       propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
+      value: -180
       objectReference: {fileID: 0}
     - target: {fileID: 581177974822054247, guid: a391a6cdcb8ecb34d93b1bc523da9d25, type: 3}
       propertyPath: m_Mesh
@@ -11920,7 +11924,7 @@ PrefabInstance:
       objectReference: {fileID: 297064942}
     - target: {fileID: 8228217365114239302, guid: a391a6cdcb8ecb34d93b1bc523da9d25, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -50.900715
+      value: -50.9
       objectReference: {fileID: 0}
     - target: {fileID: 8228217365114239302, guid: a391a6cdcb8ecb34d93b1bc523da9d25, type: 3}
       propertyPath: m_LocalPosition.y
@@ -11928,7 +11932,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8228217365114239302, guid: a391a6cdcb8ecb34d93b1bc523da9d25, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 90.161705
+      value: 90.035
       objectReference: {fileID: 0}
     - target: {fileID: 8228217365114239302, guid: a391a6cdcb8ecb34d93b1bc523da9d25, type: 3}
       propertyPath: m_LocalRotation.w
@@ -12482,6 +12486,244 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 5725000371507048362, guid: b2452a5c2cd649a4db9eebcd16f7b155, type: 3}
   m_PrefabInstance: {fileID: 309381745}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &309433986
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 309433989}
+  - component: {fileID: 309433988}
+  - component: {fileID: 309433987}
+  m_Layer: 0
+  m_Name: Rain
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!73398921 &309433987
+VFXRenderer:
+  serializedVersion: 1
+  m_ObjectHideFlags: 2
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 309433986}
+  m_Enabled: 1
+  m_CastShadows: 0
+  m_ReceiveShadows: 0
+  m_DynamicOccludee: 1
+  m_StaticShadowCaster: 0
+  m_MotionVectors: 0
+  m_LightProbeUsage: 0
+  m_ReflectionProbeUsage: 0
+  m_RayTracingMode: 0
+  m_RayTraceProcedural: 0
+  m_RenderingLayerMask: 1
+  m_RendererPriority: 0
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_StitchLightmapSeams: 1
+  m_SelectedEditorRenderState: 3
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 0
+--- !u!2083052967 &309433988
+VisualEffect:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 309433986}
+  m_Enabled: 1
+  m_Asset: {fileID: 8926484042661614526, guid: 6113462ad02fb4c44ad99c3bd6913124, type: 3}
+  m_InitialEventName: OnPlay
+  m_InitialEventNameOverriden: 0
+  m_StartSeed: 0
+  m_ResetSeedOnPlay: 1
+  m_AllowInstancing: 1
+  m_ResourceVersion: 1
+  m_PropertySheet:
+    m_Float:
+      m_Array:
+      - m_Value: 1
+        m_Name: Alpha
+        m_Overridden: 1
+      - m_Value: 0.05
+        m_Name: Size
+        m_Overridden: 1
+      - m_Value: 2000
+        m_Name: Particle Count
+        m_Overridden: 1
+      - m_Value: 6
+        m_Name: Splash Particle Count
+        m_Overridden: 1
+      - m_Value: 0.15
+        m_Name: Splash Size
+        m_Overridden: 1
+    m_Vector2f:
+      m_Array:
+      - m_Value: {x: 5, y: 5}
+        m_Name: LifetimeRange
+        m_Overridden: 1
+      - m_Value: {x: 0.3, y: 0.7}
+        m_Name: SplashLifetime
+        m_Overridden: 1
+    m_Vector3f:
+      m_Array:
+      - m_Value: {x: 35, y: 0, z: 32.5}
+        m_Name: BoxScale
+        m_Overridden: 1
+      - m_Value: {x: 1, y: 3, z: 1}
+        m_Name: RangeScale
+        m_Overridden: 1
+      - m_Value: {x: 3, y: -1, z: 0}
+        m_Name: RangeVelocity
+        m_Overridden: 1
+      - m_Value: {x: 3, y: -1, z: 0}
+        m_Name: RangeVelocityMin
+        m_Overridden: 1
+      - m_Value: {x: 5, y: -10, z: 0}
+        m_Name: RangeVelocityMax
+        m_Overridden: 1
+      - m_Value: {x: 108.70999, y: -5.6290913, z: 9.393049}
+        m_Name: ColPos
+        m_Overridden: 1
+      - m_Value: {x: 0, y: 0, z: 0}
+        m_Name: Splash Velocity
+        m_Overridden: 1
+      - m_Value: {x: 1, y: 1, z: 1}
+        m_Name: Splash Scale
+        m_Overridden: 1
+      - m_Value: {x: -1, y: 1, z: -1}
+        m_Name: Splash Velocity Min
+        m_Overridden: 1
+      - m_Value: {x: 1, y: 3, z: 1}
+        m_Name: Splash Velocity Max
+        m_Overridden: 1
+      - m_Value: {x: 0, y: -9.81, z: 0}
+        m_Name: RainGravity
+        m_Overridden: 1
+    m_Vector4f:
+      m_Array: []
+    m_Uint:
+      m_Array: []
+    m_Int:
+      m_Array: []
+    m_Matrix4x4f:
+      m_Array: []
+    m_AnimationCurve:
+      m_Array: []
+    m_Gradient:
+      m_Array:
+      - m_Value:
+          serializedVersion: 2
+          key0: {r: 0.15267888, g: 0.38833416, b: 0.6886792, a: 0}
+          key1: {r: 0.15267888, g: 0.38833416, b: 0.6886792, a: 0.39215687}
+          key2: {r: 0, g: 0, b: 0, a: 0.39215687}
+          key3: {r: 0, g: 0, b: 0, a: 0}
+          key4: {r: 0, g: 0, b: 0, a: 0}
+          key5: {r: 0, g: 0, b: 0, a: 0}
+          key6: {r: 0, g: 0, b: 0, a: 0}
+          key7: {r: 0, g: 0, b: 0, a: 0}
+          ctime0: 0
+          ctime1: 65535
+          ctime2: 0
+          ctime3: 0
+          ctime4: 0
+          ctime5: 0
+          ctime6: 0
+          ctime7: 0
+          atime0: 0
+          atime1: 9830
+          atime2: 55705
+          atime3: 65535
+          atime4: 65535
+          atime5: 0
+          atime6: 0
+          atime7: 0
+          m_Mode: 0
+          m_ColorSpace: 1
+          m_NumColorKeys: 2
+          m_NumAlphaKeys: 4
+        m_Name: RainColor
+        m_Overridden: 1
+      - m_Value:
+          serializedVersion: 2
+          key0: {r: 0.34420612, g: 0.5703139, b: 0.8584906, a: 1}
+          key1: {r: 0.34420612, g: 0.5703139, b: 0.8584906, a: 0}
+          key2: {r: 0, g: 0, b: 0, a: 0}
+          key3: {r: 0, g: 0, b: 0, a: 0}
+          key4: {r: 0, g: 0, b: 0, a: 0}
+          key5: {r: 0, g: 0, b: 0, a: 0}
+          key6: {r: 0, g: 0, b: 0, a: 0}
+          key7: {r: 0, g: 0, b: 0, a: 0}
+          ctime0: 0
+          ctime1: 65535
+          ctime2: 0
+          ctime3: 0
+          ctime4: 0
+          ctime5: 0
+          ctime6: 0
+          ctime7: 0
+          atime0: 0
+          atime1: 65535
+          atime2: 65535
+          atime3: 65535
+          atime4: 0
+          atime5: 0
+          atime6: 0
+          atime7: 0
+          m_Mode: 0
+          m_ColorSpace: 1
+          m_NumColorKeys: 2
+          m_NumAlphaKeys: 2
+        m_Name: SplashColorRange
+        m_Overridden: 1
+    m_NamedObject:
+      m_Array:
+      - m_Value: {fileID: 10906, guid: 0000000000000000f000000000000000, type: 0}
+        m_Name: Texture
+        m_Overridden: 1
+      - m_Value: {fileID: 2800000, guid: 3a175522f1f933049a827dfdb260e267, type: 3}
+        m_Name: SplashTexture
+        m_Overridden: 1
+    m_Bool:
+      m_Array:
+      - m_Value: 0
+        m_Name: IsUsingTexture
+        m_Overridden: 1
+--- !u!4 &309433989
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 309433986}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0.000000015454305, y: 0.70710707, z: 0.000000015454315, w: 0.70710653}
+  m_LocalPosition: {x: -16.28, y: 30, z: 6.83}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1534884597}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &310142523
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -30869,6 +31111,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 0.8372077}
   m_ConstrainProportionsScale: 0
   m_Children:
+  - {fileID: 309433989}
   - {fileID: 319705998}
   - {fileID: 442152755}
   - {fileID: 1968211130}
