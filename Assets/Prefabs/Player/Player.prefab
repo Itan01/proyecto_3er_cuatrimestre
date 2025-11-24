@@ -10288,13 +10288,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6508146321689401077}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.70477885, y: 0.05733066, z: 0.057330497, w: 0.7047789}
-  m_LocalPosition: {x: -0.08, y: 0.05, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalRotation: {x: 0.064955905, y: -0.6360938, z: -0.1388691, w: -0.7562279}
+  m_LocalPosition: {x: -0.354359, y: 0.11077593, z: 0.037155014}
+  m_LocalScale: {x: 1.5000007, y: 1.5000004, z: 1.4999992}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 2848386732600878679}
-  m_LocalEulerAnglesHint: {x: 99.300995, y: -90, z: -90}
+  m_Father: {fileID: 1303618274932827386}
+  m_LocalEulerAnglesHint: {x: 195.957, y: -100.93201, z: -172.386}
 --- !u!2083052967 &4323002578383811076
 VisualEffect:
   m_ObjectHideFlags: 0
@@ -10305,7 +10305,7 @@ VisualEffect:
   m_Enabled: 1
   m_Asset: {fileID: 8926484042661614526, guid: 94df9bc4796954644ab25a7a0232e2c7, type: 3}
   m_InitialEventName: OnGrabPlay
-  m_InitialEventNameOverriden: 0
+  m_InitialEventNameOverriden: 1
   m_StartSeed: 0
   m_ResetSeedOnPlay: 1
   m_AllowInstancing: 1
@@ -15384,6 +15384,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 1852576806548013000, guid: a6977cdea5bc1f44cb7d12ade33703f8, type: 3}
       insertIndex: -1
       addedObject: {fileID: 2848386732600878679}
+    - targetCorrespondingSourceObject: {fileID: 1852576806548013000, guid: a6977cdea5bc1f44cb7d12ade33703f8, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 640857670560896926}
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: a6977cdea5bc1f44cb7d12ade33703f8, type: 3}
       insertIndex: -1
@@ -15576,10 +15579,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
-    m_AddedGameObjects:
-    - targetCorrespondingSourceObject: {fileID: -8679921383154817045, guid: e5a3cedb217986c4c84cf7e29cd27782, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 640857670560896926}
+    m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e5a3cedb217986c4c84cf7e29cd27782, type: 3}
 --- !u!4 &2848386732600878679 stripped
