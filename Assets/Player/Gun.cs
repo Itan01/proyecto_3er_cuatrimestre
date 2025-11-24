@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Rendering.Universal;
 
 public class Gun : Abstract_Weapon
 {
@@ -14,10 +15,15 @@ public class Gun : Abstract_Weapon
     private Transform _myTransform;
     private ISoundAim _aimedObject=null;
     [SerializeField] private MeshRenderer _render;
+    private float _wave = Shader.PropertyToID("_WaveSize");
+    [SerializeField] private ScriptableRendererFeature _renderFullScreen;
+    [SerializeField] private Material _materialFullScreen;
+
     private void Awake()
     {
         GetComponentInParent<PlayerManager>().Weapon = this;
         LVLManager.Instance.Gun = this;
+        _renderFullScreen.SetActive(false);
         _boxSize = new Vector3(_boxSizeValue, _boxSizeValue, 0.1f);
     }
     private void Start()
@@ -109,6 +115,7 @@ public class Gun : Abstract_Weapon
         x.Speed(10.0f);
         x.Size(1.0f);
         x.ShootByPlayer=true;
+        StartCoroutine(Explosion());
         if (_render != null)
             _render.material.SetFloat("_HasASound", 0.0f);
         foreach (var Obs in _obs)
@@ -166,5 +173,19 @@ public class Gun : Abstract_Weapon
         Gizmos.color= Color.yellow;
         Gizmos.DrawLine(transform.position, _hit.point.magnitude *transform.forward);
         Gizmos.DrawWireCube(_hit.point,_boxSize);
+    }
+    private IEnumerator Explosion()
+    {
+        _renderFullScreen.SetActive(true);
+        float size = -0.1f;
+        while(size < 1.0f)
+        {
+            size += Time.deltaTime;
+            _materialFullScreen.SetFloat("_WaveSize",size);
+            yield return null;
+        }
+        _renderFullScreen.SetActive(false);
+        yield return null;
+
     }
 }
