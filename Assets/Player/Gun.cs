@@ -1,5 +1,5 @@
 using System.Collections;
-using System.Collections.Generic;
+
 using UnityEngine;
 using UnityEngine.Rendering.Universal;
 
@@ -7,6 +7,7 @@ public class Gun : Abstract_Weapon
 {
     [SerializeField] private bool _aiming=false;
     [SerializeField] private SO_Layers _data;
+    private bool _enableGrabbing=true;
     private float _boxSizeValue = 5.0f;
     private Vector3 _boxSize=Vector3.zero;
     private Vector3 _dirToShoot;
@@ -15,7 +16,7 @@ public class Gun : Abstract_Weapon
     private Transform _myTransform;
     private ISoundAim _aimedObject=null;
     [SerializeField] private MeshRenderer _render;
-    private float _wave = Shader.PropertyToID("_WaveSize");
+    [SerializeField] private AudioClip _shootClip;
     [SerializeField] private ScriptableRendererFeature _renderFullScreen;
     [SerializeField] private Material _materialFullScreen;
 
@@ -46,11 +47,12 @@ public class Gun : Abstract_Weapon
             if (UseRightClick) // Cancel
             {
                 _aiming=false;
+                _enableGrabbing = false;
                 EventPlayer.Trigger(EPlayer.aim, false);
             }
             return;
         }
-        else
+        else if(_enableGrabbing == true)
         {
             if (_obs == null) return;
             foreach (var Obs in _obs)
@@ -67,6 +69,11 @@ public class Gun : Abstract_Weapon
                 SecondaryFire();
             }
  
+        }
+        else
+        {
+        if (!UseRightClick) // Grabbing Sound
+                _enableGrabbing = true;
         }
 
 
@@ -103,18 +110,18 @@ public class Gun : Abstract_Weapon
                 Obs.Grabbing(false);
             }
         }
-        Debug.Log("A");
     }
     private void Shoot()
     {
         _hasBullet = false;
         _aiming = false;
         var x = Factory_CrashSound.Instance.Create();
-        x.transform.position = transform.position + transform.forward * 1.25f;
-        x.ForceDirection(_mainCamera.transform.forward);
-        x.Speed(10.0f);
+        x.transform.position = transform.position + transform.forward * 2.0f;
+        x.ForceDirection(_dirToShoot);
+        x.Speed(20.0f);
         x.Size(1.0f);
         x.ShootByPlayer=true;
+        AudioManager.Instance.PlaySFX(_shootClip,1.0f);
         StartCoroutine(Explosion());
         if (_render != null)
             _render.material.SetFloat("_HasASound", 0.0f);
@@ -130,6 +137,7 @@ public class Gun : Abstract_Weapon
         Vector3 StartPosition = _mainCamera.transform.position + _mainCamera.transform.forward * DistanceBetweenCamAndPlayer;
         if (Physics.Raycast(StartPosition, _mainCamera.transform.forward, out RaycastHit Hits, maxDistance, _data._obstacles, QueryTriggerInteraction.Ignore))
         {
+            _dirToShoot = (Hits.point - _myTransform.position).normalized;
             if (Hits.collider.TryGetComponent<ISoundAim>(out var Script))
             {
                 Debug.Log($"Got {Script.ToString()}");
