@@ -13,6 +13,7 @@ public class Gun : Abstract_Weapon
     private Camera _mainCamera;
     private Transform _myTransform;
     private ISoundAim _aimedObject=null;
+    [SerializeField] private MeshRenderer _render;
     private void Awake()
     {
         GetComponentInParent<PlayerManager>().Weapon = this;
@@ -107,7 +108,9 @@ public class Gun : Abstract_Weapon
         x.ForceDirection(_mainCamera.transform.forward);
         x.Speed(10.0f);
         x.Size(1.0f);
-        x.ShootByPlayer=true;   
+        x.ShootByPlayer=true;
+        if (_render != null)
+            _render.material.SetFloat("_HasASound", 0.0f);
         foreach (var Obs in _obs)
         {
             Obs.SetSound(ESounds.none);
@@ -145,6 +148,8 @@ public class Gun : Abstract_Weapon
         {
             if(Sound.Atractted && Sound.CanCatch)
             {
+                if (_render != null)
+                    _render.material.SetFloat("_HasASound",1.0f);
                 foreach (var Obs in _obs)
                 {
                     Obs.SetSound(Sound.IndexRef);

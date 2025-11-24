@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6d613f08f173d4dd895bb07b3230baa9, type: 3}
   m_Name: Outline
   m_EditorClassIdentifier: 
-  m_Active: 0
+  m_Active: 1
   passMaterial: {fileID: 2100000, guid: be6fcf19b4bc0864ba4442ccf36ce075, type: 2}
   injectionPoint: 600
   requirements: 6
@@ -29,10 +29,27 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6d613f08f173d4dd895bb07b3230baa9, type: 3}
   m_Name: FullScreenPassRendererFeature
   m_EditorClassIdentifier: 
-  m_Active: 0
+  m_Active: 1
   passMaterial: {fileID: 2100000, guid: 10699b01cfb185b4a89aa842f2084bcc, type: 2}
   injectionPoint: 550
   requirements: -11
+  passIndex: 0
+--- !u!114 &-1388306654292313843
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6d613f08f173d4dd895bb07b3230baa9, type: 3}
+  m_Name: FullScreenPassRendererFeature
+  m_EditorClassIdentifier: 
+  m_Active: 1
+  passMaterial: {fileID: -876546973899608171, guid: 21f7bd2ad6f27574d86a976a90e819ba, type: 3}
+  injectionPoint: 600
+  requirements: 4
   passIndex: 0
 --- !u!114 &11400000
 MonoBehaviour:
@@ -53,7 +70,8 @@ MonoBehaviour:
   - {fileID: 6374982014851949784}
   - {fileID: -5873682968192714245}
   - {fileID: -3716071789000514705}
-  m_RendererFeatureMap: d824c1cc5d7c7858fb799ce5757c7cae6f23c68065dc6dcc
+  - {fileID: -1388306654292313843}
+  m_RendererFeatureMap: d824c1cc5d7c7858fb799ce5757c7cae6f23c68065dc6dcc0d79981774bebbec
   m_UseNativeRenderPass: 0
   postProcessData: {fileID: 11400000, guid: 41439944d30ece34e96484bdb6645b55, type: 2}
   xrSystemData: {fileID: 11400000, guid: 60e1133243b97e347b653163a8c01b64, type: 2}
@@ -108,8 +126,4 @@ MonoBehaviour:
   passMaterial: {fileID: -876546973899608171, guid: 46c56784b4b324c4ba5cc134b3d526b8, type: 3}
   injectionPoint: 600
   requirements: -12
-  m_Active: 0
-  passMaterial: {fileID: 2100000, guid: d5ad4e556437d40479699604f1eee35d, type: 2}
-  injectionPoint: 450
-  requirements: 4
   passIndex: 0
