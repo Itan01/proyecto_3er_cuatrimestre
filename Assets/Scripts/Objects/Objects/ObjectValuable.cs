@@ -39,7 +39,7 @@ public class ObjectValuable : AbstractObjects, IInteractableObject
         Debug.Log("A");
         if (other.TryGetComponent(out PlayerManager script))
         {
-            DeactivateShader();
+            ActivateShader();
         }
     }
 
@@ -47,7 +47,7 @@ public class ObjectValuable : AbstractObjects, IInteractableObject
     {
         if (other.TryGetComponent(out PlayerManager script))
         {
-            ActivateShader();
+            DeactivateShader();
         }
     }
 
@@ -67,11 +67,11 @@ public class ObjectValuable : AbstractObjects, IInteractableObject
 
     public void ActivateShader()
     {
-        _mesh.material.SetFloat("_ShowInteractable", 1.0f);
+        _mesh.material.SetFloat("_IsPlayerNear", 1.0f);
     }
 
     public void DeactivateShader()
     {
-        _mesh.material.SetFloat("_ShowInteractable", 0.0f);
+        _mesh.material.SetFloat("_IsPlayerNear", 0.0f);
     }
 }

@@ -21,7 +21,7 @@ Material:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: Suitcase
-  m_Shader: {fileID: -6465566751694194690, guid: a2e7ff517dcce1e4bbe9846e2d138604, type: 3}
+  m_Shader: {fileID: -6465566751694194690, guid: c234f626fc644f0409c249a614f66b9a, type: 3}
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
   m_ValidKeywords: []
@@ -32,7 +32,6 @@ Material:
   m_CustomRenderQueue: -1
   stringTagMap:
     IgnoreProjection: False
-    RenderType: Opaque
   disabledShaderPasses: []
   m_LockedProperties: 
   m_SavedProperties:
@@ -154,6 +153,14 @@ Material:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
+    - _Metallic_Smoothness:
+        m_Texture: {fileID: 2800000, guid: 994db36e4b5de1341a073030bc7a2642, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _Normal:
+        m_Texture: {fileID: 2800000, guid: 9fb6ed770c1dd934489be0604ffc56e9, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
     - _NormalMap:
         m_Texture: {fileID: 2800000, guid: 33997d432be36374bac1c5fbda2402ed, type: 3}
         m_Scale: {x: 1, y: 1}
@@ -226,6 +233,10 @@ Material:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
+    - _Texture2D:
+        m_Texture: {fileID: 2800000, guid: 2a524b4ed04ac6d41a99726fb51a6fce, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
     - _ThicknessMap:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
@@ -290,6 +301,7 @@ Material:
     - _BlendModePreserveSpecular: 1
     - _BlurLevelMatcap: 0
     - _BlurLevelSGM: 0
+    - _BorderStrength: 3.05
     - _Brightness: 0.2
     - _BumpScale: 1
     - _BumpScaleMatcap: 1
@@ -308,6 +320,7 @@ Material:
     - _CullModeForward: 2
     - _Cutoff: 0.5
     - _CycleTime: 2
+    - _Delay: 0.66
     - _DepthOffsetEnable: 0
     - _Detail: 0.3
     - _DetailAlbedoMapScale: 1
@@ -369,6 +382,8 @@ Material:
     - _HighColor_Power: 0
     - _HighlightOverridden: 0
     - _HighlightVisible: 1
+    - _Intensity: 1
+    - _Interval: 2.5
     - _InvTilingScale: 1
     - _Inverse_Clipping: 0
     - _Inverse_MatcapMask: 0
@@ -377,6 +392,7 @@ Material:
     - _IridescenceMask: 1
     - _IridescenceThickness: 1
     - _IsBaseMapAlphaAsClippingMask: 0
+    - _IsPlayerNear: 0
     - _Is_BLD: 0
     - _Is_BakedNormal: 0
     - _Is_BlendAddToHiColor: 0
@@ -456,6 +472,7 @@ Material:
     - _SecondShadeVisible: 1
     - _Set_SystemShadowsToBase: 1
     - _ShadeColor_Step: 0
+    - _Shine_Speed: 1
     - _ShowInteractable: 1
     - _Smoothness: 0.5
     - _SmoothnessRemapMax: 1
@@ -547,9 +564,11 @@ Material:
     - _BaseColor: {r: 0.8584906, g: 0.85241634, b: 0.7086597, a: 1}
     - _BaseColorMap_MipInfo: {r: 0, g: 0, b: 0, a: 0}
     - _BaseColorMaskColor: {r: 1, g: 1, b: 1, a: 1}
-    - _Color: {r: 0.8584906, g: 0.85241634, b: 0.7086597, a: 1}
+    - _Color: {r: 0, g: 0, b: 0, a: 1}
     - _ColorShift: {r: 0, g: 0, b: 0, a: 1}
+    - _ColorTint: {r: 0.6944641, g: 0.7075471, b: 0.21693656, a: 0}
     - _DiffusionProfileAsset: {r: 0, g: 0, b: 0, a: 0}
+    - _Direction: {r: 1, g: 0, b: -1, a: 0}
     - _DoubleSidedConstants: {r: 1, g: 1, b: -1, a: 0}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
     - _EmissiveColor: {r: 0, g: 0, b: 0, a: 1}
@@ -570,6 +589,7 @@ Material:
     - _RimLightMaskColor: {r: 1, g: 0, b: 1, a: 1}
     - _SecondShadeMaskColor: {r: 0, g: 0, b: 1, a: 1}
     - _ShadowColor: {r: 0.41509432, g: 0.40491885, b: 0.17426129, a: 1}
+    - _ShineColor: {r: 0.8490566, g: 0.8135498, b: 0.7088822, a: 0}
     - _SpecColor: {r: 0.19999996, g: 0.19999996, b: 0.19999996, a: 1}
     - _SpecularColor: {r: 1, g: 1, b: 1, a: 1}
     - _ThicknessRemap: {r: 0, g: 1, b: 0, a: 0}
