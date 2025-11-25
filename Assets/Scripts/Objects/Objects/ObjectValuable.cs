@@ -33,6 +33,23 @@ public class ObjectValuable : AbstractObjects, IInteractableObject
         DesactivateObject();
 
     }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.TryGetComponent(out PlayerManager script))
+        {
+            DeactivateShader();
+        }
+    }
+
+    private void OnTriggerExit(Collider other)
+    {
+        if (other.TryGetComponent(out PlayerManager script))
+        {
+            ActivateShader();
+        }
+    }
+
     protected override void SetFeedback(bool State)
     {
         if (State)
@@ -45,5 +62,15 @@ public class ObjectValuable : AbstractObjects, IInteractableObject
     {
         _collider.enabled = false;
         gameObject.SetActive(false);
+    }
+
+    public void ActivateShader()
+    {
+        _mesh.material.SetFloat("_IsPlayerNear", 1.0f);
+    }
+
+    public void DeactivateShader()
+    {
+        _mesh.material.SetFloat("_IsPlayerNear", 0.0f);
     }
 }
