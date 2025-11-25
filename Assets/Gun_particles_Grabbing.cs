@@ -15,7 +15,6 @@ public class Gun_particles_Grabbing : MonoBehaviour,IObserverMegaphone
     }
     public void Grabbing(bool State)
     {
-        Debug.Log(State);
         if(!_isGrabbing && State)
         {
             _isGrabbing=true;
