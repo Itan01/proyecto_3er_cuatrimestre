@@ -1,6 +1,8 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.VFX;
 
 public class Sound_Crash_Radius : MonoBehaviour
 {
@@ -16,7 +18,7 @@ public class Sound_Crash_Radius : MonoBehaviour
     public void Initialize(ObjectPool<Sound_Crash_Radius> Pool)
     {
         _pool = Pool;
-       
+
     }
     private void Refresh()
     {
