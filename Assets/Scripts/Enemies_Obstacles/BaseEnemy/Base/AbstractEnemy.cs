@@ -39,7 +39,7 @@ public abstract class AbstractEnemy : EntityMonobehaviour, ISoundInteractions
         base.Start();
         GetScriptCompo();
         _vision = GetComponentInChildren<EnemyVision>();
-
+        _audiosource = GetComponent<AudioSource>();
     }
 
     // Update is called once per frame

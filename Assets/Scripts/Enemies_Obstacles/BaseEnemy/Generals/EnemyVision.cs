@@ -23,7 +23,7 @@ public class EnemyVision : MonoBehaviour
     private bool _seePlayer = false;
 
     private Mesh visionMesh;
-    private SO_Layers _layer;
+    [SerializeField] private SO_Layers _layer;
     private MeshFilter meshFilter;
     private MeshRenderer meshRenderer;
     private Transform _headReference;

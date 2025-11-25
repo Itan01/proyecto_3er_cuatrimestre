@@ -185,5 +185,6 @@ public class AudioStorage : MonoBehaviour
 
         _ui.Add(EAudios.Timer, _timer);
         _objects.Add(EAudios.GrabObject, _grabObj);
+        _objects.Add(EAudios.FuseBox,_fuseBoxGeneratesSounds);
     } 
 }
