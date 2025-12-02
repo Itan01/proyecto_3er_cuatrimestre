@@ -11,7 +11,6 @@ public abstract class AbstractEnemy : EntityMonobehaviour, ISoundInteractions
     protected float _baseSpeed = 3.5f, _runSpeed = 10.0f, _shortDistance = 0.5f;
     [SerializeField] protected float _timer = 0.0f, _resetTimer = 0.0f;
     [SerializeField] protected int _mode = 0;
-    [SerializeField] protected Transform _facingStartPosition;
     protected Vector3 _nextPosition,_startPosition;
     [SerializeField] protected float _confusedDuration;
     protected float _confusedDurationRef = 5.0f; // Este es el tiempo de confusión donde cree haber visto al player
@@ -41,6 +40,7 @@ public abstract class AbstractEnemy : EntityMonobehaviour, ISoundInteractions
         _vision = GetComponentInChildren<EnemyVision>();
         _audiosource = GetComponent<AudioSource>();
         EventManager.Subscribe(EEvents.DetectPlayer,SetPlayerPosition);
+        EventManager.Subscribe(EEvents.ReStart,SetBaseBehaviour);
     }
 
     // Update is called once per frame
@@ -88,6 +88,10 @@ public abstract class AbstractEnemy : EntityMonobehaviour, ISoundInteractions
         _gamemode = MovFollowPosition;
 
         _gamemode();
+    }
+    protected void SetBaseBehaviour(params object[] parameters)
+    {
+        MoveResetPath();
     }
     protected virtual void GetScriptCompo()
     {

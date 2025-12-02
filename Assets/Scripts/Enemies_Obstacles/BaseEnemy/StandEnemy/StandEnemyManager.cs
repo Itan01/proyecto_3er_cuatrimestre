@@ -18,7 +18,7 @@ public class StandEnemyManager : AbstractEnemy
     {
         base.Update();
         if (_mode == -1)
-            transform.LookAt(_facingStartPosition);
+            transform.LookAt(_nextPosition);
     }
     protected override void FixedUpdate()
     {
@@ -45,7 +45,7 @@ public class StandEnemyManager : AbstractEnemy
         _agent.speed = 0.0f;
         _nextPosition = _startPosition;
         _timer = -1f;
-        transform.LookAt(_facingStartPosition);
+        transform.LookAt(_nextPosition);
     }
 }
 
