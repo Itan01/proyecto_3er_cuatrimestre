@@ -120,4 +120,8 @@ public class RoombaEnemy : MonoBehaviour
         EventManager.Subscribe(EEvents.DetectPlayer, DetectPlayer);
         gameObject.SetActive(true);
     }
+    private void OnDestroy()
+    {
+        EventManager.Unsubscribe(EEvents.DetectPlayer, DetectPlayer);
+    }
 }

@@ -22,6 +22,7 @@ public class Camera_ResetPosition : Cons_CameraObstacle
     }
     public override void Enter()
     {
+        EventManager.Trigger(EEvents.ResetDectection);
         _camera.SetColor(_color, 500f);
         _x = _camTransform.localEulerAngles.x;
         _y = _camTransform.localEulerAngles.y;

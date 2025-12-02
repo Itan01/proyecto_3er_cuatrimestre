@@ -29,6 +29,11 @@ public class PlayerManager : AbstractPlayer
         _view = new View_Player(this);
         _model = new Model_Player(this);
         _controller = new PL_Control(_model, _view);
+        EventManager.Subscribe(EEvents.DetectPlayer,SetCapturedTrue);
+        EventManager.Subscribe(EEvents.Reset,Death);
+        EventManager.Subscribe(EEvents.StartLVL, SetCapturedFalse);
+        EventManager.Subscribe(EEvents.ReStart, ResetPosition);
+        EventManager.Subscribe(EEvents.ResetDectection  , SetCapturedFalse);
     }
 
     protected override void Update()
@@ -68,8 +73,6 @@ public class PlayerManager : AbstractPlayer
     public bool IsCaptured
     {
         get { return _onCaptured; }
-        set { _onCaptured = value; }
-        
     }
     public bool GetInvisible()
     {
@@ -91,6 +94,24 @@ public class PlayerManager : AbstractPlayer
             item.GetComponent<SkinnedMeshRenderer>().material = _JoinColorMaterial[1];
         }
         _invisible = true;  
+    }
+    private void SetCapturedTrue(params object[] Parameters)
+    {
+        _onCaptured = true;
+    }
+    private void SetCapturedFalse(params object[] Parameters)
+    {
+        _onCaptured = false;
+    }
+    private void ResetPosition(params object[] Parameters)
+    {
+        transform.position = LVLManager.Instance.Respawn;
+        _animator.SetBool("isDeath", false);
+    }
+    private void Death(params object[] Parameters)
+    {
+        _animator.SetBool("isDeath", true);
+        _speed = 0.0f;
     }
 
 }

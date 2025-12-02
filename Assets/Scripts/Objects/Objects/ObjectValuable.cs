@@ -36,7 +36,6 @@ public class ObjectValuable : AbstractObjects, IInteractableObject
 
     private void OnTriggerEnter(Collider other)
     {
-        Debug.Log("A");
         if (other.TryGetComponent(out PlayerManager script))
         {
             ActivateShader();

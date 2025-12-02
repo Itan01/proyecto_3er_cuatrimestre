@@ -40,6 +40,7 @@ public abstract class AbstractEnemy : EntityMonobehaviour, ISoundInteractions
         GetScriptCompo();
         _vision = GetComponentInChildren<EnemyVision>();
         _audiosource = GetComponent<AudioSource>();
+        EventManager.Subscribe(EEvents.DetectPlayer,SetPlayerPosition);
     }
 
     // Update is called once per frame
@@ -77,6 +78,14 @@ public abstract class AbstractEnemy : EntityMonobehaviour, ISoundInteractions
     {
         if (NewMovement == null) return;
         _gamemode = NewMovement;
+
+        _gamemode();
+    }
+    protected void SetPlayerPosition( params object[] parameters)
+    {
+        if (!_activate) return;
+        _nextPosition = GameManager.Instance.PlayerReference.transform.position;
+        _gamemode = MovFollowPosition;
 
         _gamemode();
     }
