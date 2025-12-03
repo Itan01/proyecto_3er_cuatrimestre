@@ -34,7 +34,7 @@ public class LaserManager : MonoBehaviour , ISoundInteractions
                 {
                     _touchPlayer = true;
                     AudioStorage.Instance.LaserAlarmSound();
-                    EventManager.Trigger(EEvents.DetectPlayer);
+                    EventManager.Trigger(EEvents.DetectPlayer,GameManager.Instance.PlayerReference.transform);
                 }
                 //GetComponentInParent<RoomManager>().DetectPlayer();
             }

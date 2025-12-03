@@ -18,12 +18,12 @@ public class Cons_Raycast
         {
             if (_hits.collider.GetComponent<T>())
             {
-               // Debug.Log("Verdadero");
+               Debug.Log("Verdadero");
                 return true;
             }
 
         }
-
+        Debug.Log("Falso");
         return false;
     }
     public bool Checker(Vector3 StartPosition, Vector3 Direction)

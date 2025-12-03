@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UIElements;
 
 [RequireComponent(typeof(MeshFilter), typeof(MeshRenderer))]
 public class EnemyVision : MonoBehaviour
@@ -10,7 +11,6 @@ public class EnemyVision : MonoBehaviour
     [SerializeField] private float viewRadius = 10f;
     [SerializeField] private int horizontalRayCount = 100;
     [SerializeField] private int verticalRayCount = 30;
-    [SerializeField] private LayerMask _mask;
 
     [Header("References")]
     private AbstractEnemy _scriptManager;
@@ -44,7 +44,7 @@ public class EnemyVision : MonoBehaviour
     private void LateUpdate()
     {
         DrawFieldOfView();
-        //transform.forward = _headReference.forward;
+        transform.forward = _headReference.forward;
     }
 
     private void Update()
@@ -84,7 +84,7 @@ public class EnemyVision : MonoBehaviour
                 Quaternion rot = Quaternion.Euler(pitch, yaw, 0);
                 Vector3 dir = _headReference.rotation * (rot * Vector3.forward);
 
-                if (Physics.Raycast(origin, dir, out RaycastHit hit, viewRadius, _mask, QueryTriggerInteraction.Ignore))
+                if (Physics.Raycast(origin, dir, out RaycastHit hit, viewRadius, _layer._everything, QueryTriggerInteraction.Ignore))
                 {
                     debugPoints.Add((hit.point, true));
                 }
@@ -125,13 +125,14 @@ public class EnemyVision : MonoBehaviour
 
     private void CheckIfHasVIsion()
     {
+        if (!OnAngle(GameManager.Instance.PlayerReference.transform.position)) return;
         _seePlayer = false;
-        Vector3 PlayerHead = (_player.GetHeadPosition().position - _headReference.position).normalized;
-        Vector3 PlayerHips = (_player.GetHipsPosition().position - _headReference.position).normalized;
-        Vector3 PlayerPosition = (_player.transform.position - _headReference.position).normalized;
-        if (_raycast.CheckerComponent<PlayerManager>(_headReference.position, PlayerHead) ||
-            _raycast.CheckerComponent<PlayerManager>(_headReference.position, PlayerHips) ||
-            _raycast.CheckerComponent<PlayerManager>(_headReference.position, PlayerPosition))
+        Vector3 PlayerHead = _player.GetHeadPosition().position;
+        Vector3 PlayerHips = _player.GetHipsPosition().position;
+        Vector3 PlayerPosition = _player.transform.position;
+        if (!Physics.Linecast(_headReference.position,PlayerHead,_layer._obstacles) ||
+            !Physics.Linecast(_headReference.position, PlayerHips, _layer._obstacles) ||
+           !Physics.Linecast(_headReference.position, PlayerPosition, _layer._obstacles))
         {
             _seePlayer = true;
             Debug.Log("Estoy Viendo Al Jugador");
@@ -141,13 +142,17 @@ public class EnemyVision : MonoBehaviour
         _scriptManager.WatchingPlayer(_seePlayer);
     }
 
-    //    void OnDrawGizmos()
-    //    {
-
-    //    }
+    private bool OnAngle(Vector3 Position)
+    {
+        var Angle = Vector3.Angle(_headReference.forward, Position - _headReference.position);
+        bool State = Angle < viewAngle * 0.5f;
+        return State;
+    }
     private void OnDrawGizmosSelected()
     {
+
         if (!drawGizmos) return;
+
 
         Gizmos.color = visionColor;
         Gizmos.DrawWireSphere(transform.position, viewRadius);
@@ -186,7 +191,7 @@ public class EnemyVision : MonoBehaviour
 
         if (Vector3.Angle(transform.forward, dirToPlayer) < viewAngle / 2 && dstToPlayer < viewRadius)
         {
-            if (!Physics.Raycast(transform.position, dirToPlayer, dstToPlayer, _mask))
+            if (!Physics.Raycast(transform.position, dirToPlayer, dstToPlayer, _layer._everything,QueryTriggerInteraction.Ignore))
             {
                 return true;
             }
