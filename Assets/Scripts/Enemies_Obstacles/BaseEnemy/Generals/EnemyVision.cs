@@ -10,11 +10,11 @@ public class EnemyVision : MonoBehaviour
     [SerializeField] private float viewRadius = 10f;
     [SerializeField] private int horizontalRayCount = 100;
     [SerializeField] private int verticalRayCount = 30;
+    [SerializeField] private LayerMask _mask;
 
     [Header("References")]
     private AbstractEnemy _scriptManager;
     private PlayerManager _player;
-    private bool _playerDeath = false;
     [Header("Debug")]
     public bool drawGizmos = true;
     public Color visionColor = new(1, 1, 0, 0.3f);
@@ -43,14 +43,12 @@ public class EnemyVision : MonoBehaviour
 
     private void LateUpdate()
     {
-        _playerDeath = _player.IsDeath();
         DrawFieldOfView();
-        transform.forward = _headReference.forward;
+        //transform.forward = _headReference.forward;
     }
 
     private void Update()
     {
-            DrawFieldOfView();
         if (_player.IsDeath() || _player.GetInvisible()) return;
             CheckIfHasVIsion();
     }
@@ -86,7 +84,7 @@ public class EnemyVision : MonoBehaviour
                 Quaternion rot = Quaternion.Euler(pitch, yaw, 0);
                 Vector3 dir = _headReference.rotation * (rot * Vector3.forward);
 
-                if (Physics.Raycast(origin, dir, out RaycastHit hit, viewRadius, _layer._obstacles, QueryTriggerInteraction.Ignore))
+                if (Physics.Raycast(origin, dir, out RaycastHit hit, viewRadius, _mask, QueryTriggerInteraction.Ignore))
                 {
                     debugPoints.Add((hit.point, true));
                 }
@@ -143,29 +141,34 @@ public class EnemyVision : MonoBehaviour
         _scriptManager.WatchingPlayer(_seePlayer);
     }
 
-//    void OnDrawGizmos()
-//    {
-//        if (!drawGizmos) return;
+    //    void OnDrawGizmos()
+    //    {
 
-//        Gizmos.color = visionColor;
-//        Gizmos.DrawWireSphere(transform.position, viewRadius);
+    //    }
+    private void OnDrawGizmosSelected()
+    {
+        if (!drawGizmos) return;
 
-//        Vector3 left = DirFromAngle(-viewAngle / 2, false);
-//        Vector3 right = DirFromAngle(viewAngle / 2, false);
+        Gizmos.color = visionColor;
+        Gizmos.DrawWireSphere(transform.position, viewRadius);
 
-//        Gizmos.DrawLine(transform.position, transform.position + left * viewRadius);
-//        Gizmos.DrawLine(transform.position, transform.position + right * viewRadius);
+        Vector3 left = DirFromAngle(-viewAngle / 2, false);
+        Vector3 right = DirFromAngle(viewAngle / 2, false);
 
-//#if UNITY_EDITOR
-//        foreach (var (point, hit) in debugPoints)
-//        {
-//            Gizmos.color = hit ? Color.red : Color.green;
-//            Gizmos.DrawSphere(point, 0.05f);
-//        }
-//#endif
-//    }
+        Gizmos.DrawLine(transform.position, transform.position + left * viewRadius);
+        Gizmos.DrawLine(transform.position, transform.position + right * viewRadius);
 
-Vector3 DirFromAngle(float angleDegrees, bool global)
+#if UNITY_EDITOR
+        foreach (var (point, hit) in debugPoints)
+        {
+            Gizmos.color = hit ? Color.red : Color.green;
+            Gizmos.DrawSphere(point, 0.05f);
+        }
+#endif
+    }
+
+
+    Vector3 DirFromAngle(float angleDegrees, bool global)
     {
         if (!global)
             angleDegrees += transform.eulerAngles.y;
@@ -183,7 +186,7 @@ Vector3 DirFromAngle(float angleDegrees, bool global)
 
         if (Vector3.Angle(transform.forward, dirToPlayer) < viewAngle / 2 && dstToPlayer < viewRadius)
         {
-            if (!Physics.Raycast(transform.position, dirToPlayer, dstToPlayer, _layer._obstacles, QueryTriggerInteraction.Ignore))
+            if (!Physics.Raycast(transform.position, dirToPlayer, dstToPlayer, _mask))
             {
                 return true;
             }

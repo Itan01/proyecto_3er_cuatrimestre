@@ -207,6 +207,7 @@ public abstract class AbstractEnemy : EntityMonobehaviour, ISoundInteractions
         _mode = 3;
         _resetTimer = _resetTimerRef;
         _timer = _confusedDuration;
+        if(PreMovement == null) PreMovement = MovPatrol;
         transform.LookAt(GameManager.Instance.PlayerReference.transform.position);
         Debug.Log("Acabo de ver al Jugador");
 

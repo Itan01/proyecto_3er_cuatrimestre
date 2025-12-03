@@ -40,11 +40,14 @@ public class Model_Move : Abstract_Model
     }
     public override void Execute()
     {
-        float x = Input.GetAxis("Horizontal");
-        float z = Input.GetAxis("Vertical");
-        _steer = (_dir.forward * z + _dir.right * x).normalized;
-        _steer.y = 0.0f;
-        var Orientation = Vector3.Slerp(_modelTransform.forward, _steer, Time.fixedDeltaTime * _rotSpeed);
+        float x = Input.GetAxisRaw("Horizontal");
+        float z = Input.GetAxisRaw("Vertical");
+        Vector3 ViewDir = _transform.position - new Vector3(_dir.position.x,_transform.position.y,_dir.transform.position.z);
+        Transform Dir = _transform;
+        Dir.forward = ViewDir;
+        _steer = (Dir.forward * z + Dir.right * x).normalized;
+        if (_steer == Vector3.zero) return;
+        Vector3 Orientation = Vector3.Slerp(_modelTransform.forward, _steer, Time.fixedDeltaTime * 10.0f);
         _orientation.Set(Orientation);
         _rb.MovePosition(_transform.position + (_speed * Time.fixedDeltaTime * _steer));
 

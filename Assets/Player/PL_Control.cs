@@ -38,4 +38,12 @@ public class PL_Control: IMVC
     {
         CheckInput -= Input;
     }
+    public void FixedAddAction(Action Input)
+    {
+        CheckFixedInput += Input;
+    }
+    public void FixedRemoveAction(Action Input)
+    {
+        CheckFixedInput -= Input;
+    }
 }
