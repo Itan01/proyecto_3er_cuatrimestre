@@ -49,7 +49,7 @@ public abstract class AbstractEnemy : EntityMonobehaviour, ISoundInteractions
     {
         if (!_activate) return;
         base.Update();
-        Condition();
+        Condition?.Invoke();
     }
     protected override void FixedUpdate()
     {
@@ -118,6 +118,7 @@ public abstract class AbstractEnemy : EntityMonobehaviour, ISoundInteractions
     public void Activation()
     {
         _vision.gameObject.SetActive(true);
+        SetNewMode(MovPatrol);
         _activate = true;
     }
     public void DesActivation()
@@ -145,7 +146,6 @@ public abstract class AbstractEnemy : EntityMonobehaviour, ISoundInteractions
         _qMIndex = QMSprite;
         _agent.speed = speed;
         Condition = NewCondition;
-
         ApplyBehaviourValues();
     }
     public void ApplyBehaviourValues()
