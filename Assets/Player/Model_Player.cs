@@ -16,7 +16,7 @@ public class Model_Player
         _dash= (Model_Dash)new Model_Dash().RB(Player.GetRb()).ModelTransform(Player.ModelTransform()).Transform(Player.transform);
         _dash = _dash.Force(10.0f);
         _crouch = (Model_Crouch)new Model_Crouch().Collider(Player.Collider()).Speed(3.5f).Transform(Player.transform);
-        _crouch = _crouch.Move(_move).Speed(3.5f).Layer(Player.Layers()._everything);
+        _crouch = _crouch.Move(_move).Speed(3.5f);
 
     }
 
@@ -37,17 +37,13 @@ public class Model_Player
     {
         _dash.Execute();
     }
-    public void Crouch()
+    public void Crouch(bool NewState)
     {
-        _crouch.Execute();
+        _crouch.Crouch(NewState);
     }
     public bool GetIsMoving()
     {
         return _move.IsMoving;
-    }
-    public bool GetIsCrouching()
-    {
-        return _crouch.GetIsCrouching();
     }
 }
 

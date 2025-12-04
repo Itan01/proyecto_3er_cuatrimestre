@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class View_Crouch : Abstract_View
 {
-    private bool _isCrouching = false;
     private LayerMask _layerMask;
     private Transform _transform;
     public View_Crouch()
@@ -21,17 +20,8 @@ public class View_Crouch : Abstract_View
         _transform=Transform;
         return this;
     }
-    public void Execute()
+    public void Execute(bool NewState)
     {
-        if (_isCrouching)
-        {
-            if (!Physics.BoxCast(_transform.position, new Vector3(0.6f, 0.5f, 0.6f), _transform.up, Quaternion.identity, 10.0f, _layerMask))
-            {
-                _isCrouching = false;
-            }
-        }
-        else
-            _isCrouching = true;
-        _animator.SetBool("isCrouching", _isCrouching);
+        _animator.SetBool("isCrouching", NewState);
     }
 }

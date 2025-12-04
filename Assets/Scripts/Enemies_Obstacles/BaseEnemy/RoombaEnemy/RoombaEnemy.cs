@@ -14,6 +14,7 @@ public class RoombaEnemy : MonoBehaviour
     [SerializeField] private float _soundForce = 5f;
     [SerializeField] private float _spread = 1.5f;
     private bool _isActivate=false;
+    [SerializeField] private bool _isRunnning=false;
     Action Momevent;
     private NavMeshAgent _agent;
 
@@ -21,8 +22,10 @@ public class RoombaEnemy : MonoBehaviour
     {
         Momevent = null;
         _animator = GetComponentInChildren<Animator>();
-        _agent=GetComponent<NavMeshAgent>();
-        EventManager.Subscribe(EEvents.DetectPlayer, DetectPlayer);
+        GetComponentInParent<RoomManager>().ActRoom += Activation;
+        GetComponentInParent<RoomManager>().DesActRoom += Desactivation;
+        _agent =GetComponent<NavMeshAgent>();
+        EventManager.Subscribe(EEvents.DetectPlayer, Detect);
         _animator.SetBool("Open_Anim", false);  
         _animator.SetBool("Walk_Anim", false);
         _agent.isStopped = true;
@@ -33,10 +36,10 @@ public class RoombaEnemy : MonoBehaviour
         if (!_isActivate) return;
         Momevent?.Invoke();
     }
-    private void DetectPlayer(params object[] Parameters)
+    private void Detect(params object[] Parameters)
     {
-        if (!_isActivate) return;
-        EventManager.Unsubscribe(EEvents.DetectPlayer, DetectPlayer);
+        if (!_isRunnning) return;
+        EventManager.Unsubscribe(EEvents.DetectPlayer, Detect);
         Transform Pos= (Transform)Parameters[0];
         _agent.destination = Pos.position;
 
@@ -111,17 +114,19 @@ public class RoombaEnemy : MonoBehaviour
 
     public void Desactivation() 
     {
-        EventManager.Unsubscribe(EEvents.DetectPlayer, DetectPlayer);
+        EventManager.Unsubscribe(EEvents.DetectPlayer, Detect);
         gameObject.SetActive(false);
+        _isRunnning = false;
     }
     public void Activation()
     {
         if (_isActivate) return;
-        EventManager.Subscribe(EEvents.DetectPlayer, DetectPlayer);
+        _isRunnning = true;
+        EventManager.Subscribe(EEvents.DetectPlayer, Detect);
         gameObject.SetActive(true);
     }
     private void OnDestroy()
     {
-        EventManager.Unsubscribe(EEvents.DetectPlayer, DetectPlayer);
+        EventManager.Unsubscribe(EEvents.DetectPlayer, Detect);
     }
 }

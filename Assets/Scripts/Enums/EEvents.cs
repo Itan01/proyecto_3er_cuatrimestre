@@ -6,6 +6,7 @@ public enum EEvents
     ReStart,
     Pause,
     DetectPlayer,
+    DetectSound,
     AlertPlayer,
     ResetDectection
 }

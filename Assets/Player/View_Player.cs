@@ -32,9 +32,9 @@ public class View_Player
     {
         _dash.Execute();
     }
-    public void Crouch()
+    public void Crouch(bool NewState)
     {
-        _crouch.Execute();
+        _crouch.Execute(NewState);
     }
     public void GunPrimary(bool State)
     {

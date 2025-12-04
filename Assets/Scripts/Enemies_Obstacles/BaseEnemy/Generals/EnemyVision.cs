@@ -150,44 +150,44 @@ public class EnemyVision : MonoBehaviour
     }
     private void OnDrawGizmosSelected()
     {
-        Vector3 PlayerHead = _player.GetHeadPosition().position;
-        Vector3 PlayerHips = _player.GetHipsPosition().position;
-        Vector3 PlayerPosition = _player.transform.position;
-        if (!Physics.Linecast(_headReference.position, PlayerHead, _layer._obstacles,QueryTriggerInteraction.Ignore))
-            Gizmos.color = Color.green;
-        else
-            Gizmos.color = Color.red;
-        Gizmos.DrawLine(_headReference.position, PlayerHead);
-        if (!Physics.Linecast(_headReference.position, PlayerHips, _layer._obstacles, QueryTriggerInteraction.Ignore))
-            Gizmos.color = Color.green;
-        else
-            Gizmos.color = Color.red;
-        Gizmos.DrawLine(_headReference.position, PlayerHips);
-        if (!Physics.Linecast(_headReference.position, PlayerPosition, _layer._obstacles, QueryTriggerInteraction.Ignore))
-            Gizmos.color = Color.green;
-        else
-            Gizmos.color = Color.red;
-        Gizmos.DrawLine(_headReference.position, PlayerPosition);
+//        Vector3 PlayerHead = _player.GetHeadPosition().position;
+//        Vector3 PlayerHips = _player.GetHipsPosition().position;
+//        Vector3 PlayerPosition = _player.transform.position;
+//        if (!Physics.Linecast(_headReference.position, PlayerHead, _layer._obstacles,QueryTriggerInteraction.Ignore))
+//            Gizmos.color = Color.green;
+//        else
+//            Gizmos.color = Color.red;
+//        Gizmos.DrawLine(_headReference.position, PlayerHead);
+//        if (!Physics.Linecast(_headReference.position, PlayerHips, _layer._obstacles, QueryTriggerInteraction.Ignore))
+//            Gizmos.color = Color.green;
+//        else
+//            Gizmos.color = Color.red;
+//        Gizmos.DrawLine(_headReference.position, PlayerHips);
+//        if (!Physics.Linecast(_headReference.position, PlayerPosition, _layer._obstacles, QueryTriggerInteraction.Ignore))
+//            Gizmos.color = Color.green;
+//        else
+//            Gizmos.color = Color.red;
+//        Gizmos.DrawLine(_headReference.position, PlayerPosition);
 
-        if (!drawGizmos) return;
+//        if (!drawGizmos) return;
 
 
-        Gizmos.color = visionColor;
-        Gizmos.DrawWireSphere(transform.position, viewRadius);
+//        Gizmos.color = visionColor;
+//        Gizmos.DrawWireSphere(transform.position, viewRadius);
 
-        Vector3 left = DirFromAngle(-viewAngle / 2, false);
-        Vector3 right = DirFromAngle(viewAngle / 2, false);
+//        Vector3 left = DirFromAngle(-viewAngle / 2, false);
+//        Vector3 right = DirFromAngle(viewAngle / 2, false);
 
-        Gizmos.DrawLine(transform.position, transform.position + left * viewRadius);
-        Gizmos.DrawLine(transform.position, transform.position + right * viewRadius);
+//        Gizmos.DrawLine(transform.position, transform.position + left * viewRadius);
+//        Gizmos.DrawLine(transform.position, transform.position + right * viewRadius);
 
-#if UNITY_EDITOR
-        foreach (var (point, hit) in debugPoints)
-        {
-            Gizmos.color = hit ? Color.red : Color.green;
-            Gizmos.DrawSphere(point, 0.05f);
-        }
-#endif
+//#if UNITY_EDITOR
+//        foreach (var (point, hit) in debugPoints)
+//        {
+//            Gizmos.color = hit ? Color.red : Color.green;
+//            Gizmos.DrawSphere(point, 0.05f);
+//        }
+//#endif
     }
 
 

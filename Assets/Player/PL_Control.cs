@@ -10,7 +10,7 @@ public class PL_Control: IMVC
     private Control_Gun _gun;
 
     private event Action CheckInput, CheckFixedInput;
-    public PL_Control(Model_Player Model, View_Player View)
+    public PL_Control(PlayerManager Player,Model_Player Model, View_Player View)
     {
         _gun = (Control_Gun)new Control_Gun(this).View(View).Key(KeyCode.Mouse1);
         _gun=_gun.Gun(GameManager.Instance.PlayerReference.Weapon).ShootKey(KeyCode.Mouse0);
@@ -19,6 +19,7 @@ public class PL_Control: IMVC
         _movement = (Control_Mov)new Control_Mov(this).Model(Model).View(View);
         _dash = (Control_Dash)new Control_Dash(this).Model(Model).View(View).Key(KeyCode.LeftShift);
         _crouch = (Control_Crouch)new Control_Crouch(this).Model(Model).View(View).Key(KeyCode.LeftControl).AltKey(KeyCode.C);
+        _crouch = _crouch.Transform(Player.GetTransform()).LayerMask(Player.Layers()._obstacles);
         CheckInput += Model.Gun;
     }
 
@@ -45,5 +46,9 @@ public class PL_Control: IMVC
     public void FixedRemoveAction(Action Input)
     {
         CheckFixedInput -= Input;
+    }
+    public bool IsCrouching()
+    {
+        return _crouch.GetState();   
     }
 }

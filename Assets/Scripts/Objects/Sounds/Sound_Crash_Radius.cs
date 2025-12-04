@@ -30,7 +30,7 @@ public class Sound_Crash_Radius : MonoBehaviour
     }
     public void Alert()
     {
-        EventManager.Trigger(EEvents.DetectPlayer, transform);
+        EventManager.Trigger(EEvents.DetectSound, transform);
 
     }
     //protected void OnTriggerEnter(Collider Entity)

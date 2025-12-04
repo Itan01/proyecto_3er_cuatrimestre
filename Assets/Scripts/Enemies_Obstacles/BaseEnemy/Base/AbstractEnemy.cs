@@ -40,6 +40,7 @@ public abstract class AbstractEnemy : EntityMonobehaviour, ISoundInteractions
         _vision = GetComponentInChildren<EnemyVision>();
         _audiosource = GetComponent<AudioSource>();
         EventManager.Subscribe(EEvents.DetectPlayer,SetNextPosition);
+        EventManager.Subscribe(EEvents.DetectSound,SetNextPosition);
         EventManager.Subscribe(EEvents.ReStart,SetBaseBehaviour);
     }
 

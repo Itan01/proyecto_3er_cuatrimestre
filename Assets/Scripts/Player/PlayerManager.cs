@@ -28,7 +28,7 @@ public class PlayerManager : AbstractPlayer
         base.Start();
         _view = new View_Player(this);
         _model = new Model_Player(this);
-        _controller = new PL_Control(_model, _view);
+        _controller = new PL_Control(this,_model, _view);
         EventManager.Subscribe(EEvents.DetectPlayer,SetCapturedTrue);
         EventManager.Subscribe(EEvents.Reset,Death);
         EventManager.Subscribe(EEvents.StartLVL, SetCapturedFalse);
@@ -68,7 +68,7 @@ public class PlayerManager : AbstractPlayer
             }
         }
         _isMoving = _model.GetIsMoving();
-        _isCrouching =_model.GetIsCrouching();
+        _isCrouching =_controller.IsCrouching();
     }
     public bool IsCaptured
     {
