@@ -20,6 +20,7 @@ public class Factory_Explosion_Crash_Sound : Factory<Sound_Crash_Radius>
     public override Sound_Crash_Radius Create()
     {
         var x = _pool.Get();
+        x.Alert();
         x.Initialize(_pool);
         return x;
     }

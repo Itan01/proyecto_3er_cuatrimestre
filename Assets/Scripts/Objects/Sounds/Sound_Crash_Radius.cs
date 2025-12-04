@@ -18,6 +18,7 @@ public class Sound_Crash_Radius : MonoBehaviour
     public void Initialize(ObjectPool<Sound_Crash_Radius> Pool)
     {
         _pool = Pool;
+       
 
     }
     private void Refresh()
@@ -26,6 +27,11 @@ public class Sound_Crash_Radius : MonoBehaviour
         _size = 1.0f;
         _timer = 0.0f;
         _pool.Release(this);
+    }
+    public void Alert()
+    {
+        EventManager.Trigger(EEvents.DetectPlayer, transform);
+
     }
     //protected void OnTriggerEnter(Collider Entity)
     //{

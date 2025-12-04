@@ -37,7 +37,7 @@ public class EnemyVision : MonoBehaviour
         visionMesh = new Mesh { name = "Vision Mesh" };
         meshFilter.mesh = visionMesh;
         _scriptManager = GetComponentInParent<AbstractEnemy>();
-        _headReference = _scriptManager.transform;
+        _headReference =transform;
         _player = GameManager.Instance.PlayerReference;
     }
 
@@ -130,9 +130,9 @@ public class EnemyVision : MonoBehaviour
         Vector3 PlayerHead = _player.GetHeadPosition().position;
         Vector3 PlayerHips = _player.GetHipsPosition().position;
         Vector3 PlayerPosition = _player.transform.position;
-        if (!Physics.Linecast(_headReference.position,PlayerHead,_layer._obstacles) ||
-            !Physics.Linecast(_headReference.position, PlayerHips, _layer._obstacles) ||
-           !Physics.Linecast(_headReference.position, PlayerPosition, _layer._obstacles))
+        if (!Physics.Linecast(_headReference.position,PlayerHead,_layer._obstacles, QueryTriggerInteraction.Ignore) ||
+            !Physics.Linecast(_headReference.position, PlayerHips, _layer._obstacles, QueryTriggerInteraction.Ignore) ||
+           !Physics.Linecast(_headReference.position, PlayerPosition, _layer._obstacles, QueryTriggerInteraction.Ignore))
         {
             _seePlayer = true;
             Debug.Log("Estoy Viendo Al Jugador");
@@ -150,6 +150,24 @@ public class EnemyVision : MonoBehaviour
     }
     private void OnDrawGizmosSelected()
     {
+        Vector3 PlayerHead = _player.GetHeadPosition().position;
+        Vector3 PlayerHips = _player.GetHipsPosition().position;
+        Vector3 PlayerPosition = _player.transform.position;
+        if (!Physics.Linecast(_headReference.position, PlayerHead, _layer._obstacles,QueryTriggerInteraction.Ignore))
+            Gizmos.color = Color.green;
+        else
+            Gizmos.color = Color.red;
+        Gizmos.DrawLine(_headReference.position, PlayerHead);
+        if (!Physics.Linecast(_headReference.position, PlayerHips, _layer._obstacles, QueryTriggerInteraction.Ignore))
+            Gizmos.color = Color.green;
+        else
+            Gizmos.color = Color.red;
+        Gizmos.DrawLine(_headReference.position, PlayerHips);
+        if (!Physics.Linecast(_headReference.position, PlayerPosition, _layer._obstacles, QueryTriggerInteraction.Ignore))
+            Gizmos.color = Color.green;
+        else
+            Gizmos.color = Color.red;
+        Gizmos.DrawLine(_headReference.position, PlayerPosition);
 
         if (!drawGizmos) return;
 

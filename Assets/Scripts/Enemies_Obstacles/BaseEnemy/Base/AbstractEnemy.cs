@@ -39,7 +39,7 @@ public abstract class AbstractEnemy : EntityMonobehaviour, ISoundInteractions
         GetScriptCompo();
         _vision = GetComponentInChildren<EnemyVision>();
         _audiosource = GetComponent<AudioSource>();
-        EventManager.Subscribe(EEvents.DetectPlayer,SetPlayerPosition);
+        EventManager.Subscribe(EEvents.DetectPlayer,SetNextPosition);
         EventManager.Subscribe(EEvents.ReStart,SetBaseBehaviour);
     }
 
@@ -81,11 +81,15 @@ public abstract class AbstractEnemy : EntityMonobehaviour, ISoundInteractions
 
         _gamemode();
     }
-    protected void SetPlayerPosition( params object[] parameters)
+    protected void SetNextPosition( params object[] parameters)
     {
         if (!_activate) return;
-        _nextPosition = GameManager.Instance.PlayerReference.transform.position;
+        Transform Pos = (Transform)parameters[0];
+        _nextPosition = Pos.position;
+        if(Pos.gameObject.GetComponent<PlayerManager>())
         _gamemode = MovFollowPosition;
+        else 
+            _gamemode=MoveStartHearing;
 
         _gamemode();
     }

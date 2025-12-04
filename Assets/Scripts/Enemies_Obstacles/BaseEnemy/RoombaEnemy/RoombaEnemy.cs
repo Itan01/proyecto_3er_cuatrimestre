@@ -35,7 +35,7 @@ public class RoombaEnemy : MonoBehaviour
     }
     private void DetectPlayer(params object[] Parameters)
     {
-
+        if (!_isActivate) return;
         EventManager.Unsubscribe(EEvents.DetectPlayer, DetectPlayer);
         Transform Pos= (Transform)Parameters[0];
         _agent.destination = Pos.position;
