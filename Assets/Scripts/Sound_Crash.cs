@@ -43,6 +43,7 @@ public class Sound_Crash : Abstract_Sound
         {
             var x = Factory_Explosion_Crash_Sound.Instance.Create();
             x.transform.position = transform.position;
+            x.Alert();
 
         }
         Refresh();

@@ -82,16 +82,13 @@ public abstract class AbstractEnemy : EntityMonobehaviour, ISoundInteractions
 
         _gamemode();
     }
-    protected void SetNextPosition( params object[] parameters)
+    protected void SetNextPosition(params object[] parameters)
     {
         if (!_activate) return;
         Transform Pos = (Transform)parameters[0];
+        Debug.Log($"I will go to{Pos.position}");
         _nextPosition = Pos.position;
-        if(Pos.gameObject.GetComponent<PlayerManager>())
         _gamemode = MovFollowPosition;
-        else 
-            _gamemode=MoveStartHearing;
-
         _gamemode();
     }
     protected void SetBaseBehaviour(params object[] parameters)
