@@ -7,10 +7,10 @@ public class ResetGameplay : MonoBehaviour
     private bool _playOnce;
     private void Start()
     {
-        EventManager.Subscribe(EEvents.Reset, Reset);
+        EventManager.Subscribe(EEvents.Reset, ResetGame);
 
     }
-    private void Reset(params object[] Pararmeters)
+    private void ResetGame(params object[] Pararmeters)
     {
         StartCoroutine(Resseting());
     }

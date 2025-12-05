@@ -283,10 +283,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _camTransform: {fileID: 4266583859298035331}
+  _seeTarget: 0
+  _isRunning: 0
   _baseColor: {r: 1, g: 1, b: 0, a: 1}
   _detectorColor: {r: 1, g: 0, b: 0, a: 1}
   _cameraLight: {fileID: 2705164630077255773}
   _layer: {fileID: 11400000, guid: 31cee878b4c24c347932895be40074bc, type: 2}
+  _clipDetectPlayer: {fileID: 8300000, guid: 15d60cf03cf615b4ebaf951c3098ca34, type: 3}
+  _clipResetting: {fileID: 8300000, guid: 8f215783f544c5b47bc71043f7cc659c, type: 3}
 --- !u!1001 &6396984843668586186
 PrefabInstance:
   m_ObjectHideFlags: 0

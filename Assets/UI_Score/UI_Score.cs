@@ -36,4 +36,8 @@ public class UI_Score : MonoBehaviour, IObservableScore
             _obs.Remove(Obj);
         }
     }
+    public int GetScore()
+    {
+        return (int)_value;
+    }
 }

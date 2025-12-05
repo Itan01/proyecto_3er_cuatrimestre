@@ -1,6 +1,5 @@
 using System.Collections;
 using System.Collections.Generic;
-using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -17,7 +16,6 @@ public class UIManager : MonoBehaviour
 
     #endregion
     private PlayerManager _player;
-    [SerializeField] private Image _cooldownCircleBar;
 
     private CountdownTimer _timer;
     public CountdownTimer Timer
@@ -62,21 +60,6 @@ public class UIManager : MonoBehaviour
     {
         get { return _scriptTransition; }
         set { _scriptTransition = value; }
-    }
-
-    private UI_Sound _soundUI;
-    public UI_Sound UISound
-    {
-        get { return _soundUI; }
-        set { _soundUI = value; }
-    }
-
-    private UI_Aim _aimUI;
-
-    public UI_Aim AimUI
-    {
-        get { return _aimUI; }
-        set { _aimUI = value; }
     }
 
 

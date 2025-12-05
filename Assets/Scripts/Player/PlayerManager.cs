@@ -81,6 +81,7 @@ public class PlayerManager : AbstractPlayer
     public void SetIfPlayerCanMove(bool state)
     {
         _canControl = state;
+        if (!state) _animator.SetBool("isMoving",false);
     }
     public void SetInvisiblePowerUp(float duration)
     {

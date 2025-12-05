@@ -7,9 +7,13 @@ public class Camera_ResetPosition : Cons_CameraObstacle
     private float _speed;
     private float _x,_y,_z;
     private bool _isResetted;
+    private AudioClip _clip;
+    private AudioSource _source;
     public Camera_ResetPosition(Fsm_Camera Fsm) : base(Fsm)
     {
         _camera = null;
+        _clip = null;
+        _source = null;
         _speed = 0.0f;
         _x= 0.0f;   
         _y= 0.0f;
@@ -20,9 +24,20 @@ public class Camera_ResetPosition : Cons_CameraObstacle
         _speed = Speed;
         return this;
     }
+    public Camera_ResetPosition Clip(AudioClip Clip)
+    {
+        _clip = Clip;
+        return this;
+    }
+    public Camera_ResetPosition AudioSource(AudioSource Source)
+    {
+        _source = Source;
+        return this;
+    }
     public override void Enter()
     {
         EventManager.Trigger(EEvents.ResetDectection);
+        _source.PlayOneShot(_clip);
         _camera.SetColor(_color, 500f);
         _x = _camTransform.localEulerAngles.x;
         _y = _camTransform.localEulerAngles.y;

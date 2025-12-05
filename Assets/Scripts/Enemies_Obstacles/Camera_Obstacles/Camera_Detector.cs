@@ -36,8 +36,12 @@ public class Camera_Detector : MonoBehaviour
     }
     private void CheckView()
     {
-        if (GameManager.Instance.PlayerReference.GetInvisible()) return;
         bool SeePlayer = false;
+        if (GameManager.Instance.PlayerReference.GetInvisible()) 
+        {
+            _camera.SetTarget = SeePlayer;
+            return;
+        }
         Transform HipPosition = GameManager.Instance.PlayerReference.GetHipsPosition();
         Transform HeadPosition = GameManager.Instance.PlayerReference.GetHeadPosition();
         Transform FeetPosition = GameManager.Instance.PlayerReference.transform;

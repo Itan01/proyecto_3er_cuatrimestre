@@ -93,6 +93,7 @@ public abstract class AbstractEnemy : EntityMonobehaviour, ISoundInteractions
     protected void SetBaseBehaviour(params object[] parameters)
     {
         MoveResetPath();
+        transform.position =_nextPosition;
     }
     protected virtual void GetScriptCompo()
     {
@@ -113,12 +114,16 @@ public abstract class AbstractEnemy : EntityMonobehaviour, ISoundInteractions
 
     public void Activation()
     {
+        _animator.SetBool("isMoving", true);
+        _animator.SetBool("isRunning", false);
         _vision.gameObject.SetActive(true);
         SetNewMode(MovPatrol);
         _activate = true;
     }
     public void DesActivation()
     {
+        _animator.SetBool("isMoving", false);
+        _animator.SetBool("isRunning", false);
         _vision.gameObject.SetActive(false);
         _activate = false;
     }

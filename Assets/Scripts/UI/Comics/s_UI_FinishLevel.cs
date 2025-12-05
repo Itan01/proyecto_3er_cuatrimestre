@@ -8,6 +8,7 @@ public class s_UI_FinishLevel : MonoBehaviour
     private Animator _animator;
     private bool _isTransitioning=false;
     private AudioClip _clipAlert;
+    [SerializeField]private UI_Score _score;
     private void Start()
     {
         _clipAlert = AudioStorage.Instance.StandardEnemySound(EAudios.EnemyAlert);
@@ -29,6 +30,7 @@ public class s_UI_FinishLevel : MonoBehaviour
     private IEnumerator TransitionsToPoints()
     {
       AsyncOperation async =  SceneManager.LoadSceneAsync("Victory");
+        SetValuesToGameManager();
         async.allowSceneActivation = false;
         while (async.progress <0.9f)
         {
@@ -45,7 +47,7 @@ public class s_UI_FinishLevel : MonoBehaviour
     }
     private void SetValuesToGameManager()
     {
-        GameManager.Instance.FinalScore = UIManager.Instance.GetScore();
+        GameManager.Instance.FinalScore = _score.GetScore();
         //Veces caputarada ya estan en el mismo GameManager
         UIManager.Instance.Timer.StopTimerUI();
     }

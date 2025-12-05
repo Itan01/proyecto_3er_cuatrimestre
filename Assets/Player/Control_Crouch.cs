@@ -27,7 +27,7 @@ public class Control_Crouch : Abstract_Control
         {
             if (_isCrouching)
             {
-                bool State = Physics.BoxCast(_myTransform.position, new Vector3(0.6f, 0.5f, 0.6f), _myTransform.up, Quaternion.identity, 10.0f, _mask, QueryTriggerInteraction.Ignore);
+                bool State = Physics.BoxCast(_myTransform.position, new Vector3(0.6f, 0.5f, 0.6f), _myTransform.up, Quaternion.identity, 2.0f, _mask, QueryTriggerInteraction.Ignore);
                 _isCrouching = State;
             }    
             else _isCrouching = true;

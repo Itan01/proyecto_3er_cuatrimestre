@@ -8,6 +8,7 @@ public class Camera_Obstacle : MonoBehaviour
     private Camera_WatchingEntity _watching;
     private Camera_ResetPosition _reset;
     private RoomManager _room;
+    private AudioSource _source;
     [SerializeField] private Transform _camTransform;
     [SerializeField] private bool _seeTarget;
     [SerializeField] private bool _isRunning=false;
@@ -16,19 +17,22 @@ public class Camera_Obstacle : MonoBehaviour
     [SerializeField] private Color _detectorColor;
     [SerializeField] private Renderer _cameraLight;
     [SerializeField] private SO_Layers _layer;
+    [SerializeField] private AudioClip _clipDetectPlayer;
+    [SerializeField] private AudioClip _clipResetting;
     private void Start()
     {
         _room=GetComponentInParent<RoomManager>();
         _room.ActRoom += Activate;
         _room.DesActRoom += DesActivate;
         _light =GetComponentInChildren<Light>();
+        _source= GetComponent<AudioSource>();
         _fsm = new Fsm_Camera();
         _base = (Camera_BaseMovement)new Camera_BaseMovement(_fsm).Camera(this).CamTransform(_camTransform).Color(_baseColor);
         _base = _base.Speed(10.0f).Rotation(35.0f);
         _watching= (Camera_WatchingEntity)new Camera_WatchingEntity(_fsm).Camera(this).CamTransform(_camTransform).Color(_detectorColor);
-        _watching = _watching.Target(GameManager.Instance.PlayerReference.transform);
+        _watching = _watching.Target(GameManager.Instance.PlayerReference.transform).AudioSource(_source).Clip(_clipDetectPlayer);
         _reset = (Camera_ResetPosition)new Camera_ResetPosition(_fsm).Camera(this).CamTransform(_camTransform).Color(_baseColor);
-        _reset = _reset.Speed(12.5f);
+        _reset = _reset.Speed(12.5f).AudioSource(_source).Clip(_clipResetting);
         _base.AddBehaviour(ECameraBehaviours.watchingEntity, _watching);
         _watching.AddBehaviour(ECameraBehaviours.Reset, _reset);
         _reset.AddBehaviour(ECameraBehaviours.Base,_base);

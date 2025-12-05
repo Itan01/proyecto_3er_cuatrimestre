@@ -8,6 +8,7 @@ public class Sound_Crash_Radius : MonoBehaviour
 {
     private float _size=1, _multiplier=5, _timer;
     private ObjectPool<Sound_Crash_Radius> _pool;
+    [SerializeField] private AudioClip _explosion;
     private void Update()
     {
         if (_timer > 1) Refresh();
@@ -30,6 +31,7 @@ public class Sound_Crash_Radius : MonoBehaviour
     }
     public void Alert()
     {
+        AudioManager.Instance.PlaySFX(_explosion,1.0f);
         EventManager.Trigger(EEvents.DetectSound, transform);
 
     }

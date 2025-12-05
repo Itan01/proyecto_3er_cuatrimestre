@@ -26,6 +26,7 @@ public class StandardEnemy : AbstractEnemy
     protected override void MoveResetPath() // patron normal (Esta en distintos scripts "StandEnemy""StandardEnemy")
     {
         _indexPosition = 0;
+        if (!_activate) return;
         SetNewMode(MovPatrol);
     }
     protected override void MovPatrol() // patron normal (Esta en distintos scripts "StandEnemy""StandardEnemy")

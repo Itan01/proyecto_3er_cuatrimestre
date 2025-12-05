@@ -7,7 +7,8 @@ public class Gun_particles_Grabbing : MonoBehaviour,IObserverMegaphone
 {
    [SerializeField] private VisualEffect _effect;
    [SerializeField] private Transform _megaphone;
-    [SerializeField] private bool _isGrabbing=false;
+    private bool _isGrabbing=false;
+    [SerializeField] private AudioClip _clipGrabbing;
     private Transform _myTransform, _cameraTransform;
     private void Start()
     {
@@ -29,13 +30,23 @@ public class Gun_particles_Grabbing : MonoBehaviour,IObserverMegaphone
         {
             _isGrabbing=true;
             _effect.SendEvent("OnGrabPlay");
-            _effect.Play();     
+            _effect.Play();
+            StartCoroutine(PlayAudioOnLoop());
+            
         }
         if (!State == _isGrabbing)
         {
             _effect.SendEvent("OnGrabStop");
             _isGrabbing = false;
 
+        }
+    }
+    private IEnumerator PlayAudioOnLoop()
+    {
+        while (_isGrabbing)
+        {
+            AudioManager.Instance.PlaySFX(_clipGrabbing, 1.0f);
+            yield return new WaitForSeconds(3.5f);
         }
     }
     public  void Aiming() { }

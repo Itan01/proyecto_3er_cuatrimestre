@@ -152,8 +152,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ffd072a3578a5cb4ba73576bcf8d3cb5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _atractted: 0
+  _playerShooted: 0
+  _canCatch: 0
+  _indexRef: 1
   _speed: 1
   _size: 1
+  _velocity: {x: 0, y: 0, z: 0}
+  _rb: {fileID: 7890012671904219508}
 --- !u!54 &7890012671904219508
 Rigidbody:
   m_ObjectHideFlags: 0

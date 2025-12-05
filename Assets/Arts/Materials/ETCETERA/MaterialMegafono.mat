@@ -21,7 +21,7 @@ Material:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: MaterialMegafono
-  m_Shader: {fileID: -6465566751694194690, guid: 1767de065a342f34fba130f3443259f9, type: 3}
+  m_Shader: {fileID: -6465566751694194690, guid: 6300ff2aed100b643acc7fa0cffd6baf, type: 3}
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
   m_ValidKeywords: []
@@ -108,15 +108,18 @@ Material:
     - _ClearCoatSmoothness: 0
     - _Cull: 2
     - _Cutoff: 0.5
+    - _Damaged: 10
     - _Detail: 0.3
     - _DetailAlbedoMapScale: 1
     - _DetailNormalMapScale: 1
+    - _Distorsion: 0.5
     - _DstBlend: 0
     - _DstBlendAlpha: 0
     - _EnvironmentReflections: 1
     - _GlossMapScale: 1
     - _Glossiness: 0.5
     - _GlossyReflections: 1
+    - _HasASound: 0
     - _MaxBrightness: 1
     - _Metallic: 0
     - _MinBrightness: 0
@@ -131,6 +134,7 @@ Material:
     - _Smoothness: 0.5
     - _SmoothnessTextureChannel: 0
     - _SpecularHighlights: 1
+    - _Speed: 1
     - _SrcBlend: 1
     - _SrcBlendAlpha: 1
     - _Strength: 0.8
@@ -141,7 +145,8 @@ Material:
     - _ZWrite: 1
     m_Colors:
     - _BaseColor: {r: 1, g: 1, b: 1, a: 1}
-    - _Color: {r: 0.5754717, g: 0.5754717, b: 0.5754717, a: 1}
+    - _Color: {r: 1, g: 1, b: 1, a: 1}
+    - _CrashSoundColor: {r: 0.25364897, g: 0.9433962, b: 0.4759009, a: 0}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
     - _OutlineColor: {r: 0, g: 0, b: 0, a: 1}
     - _ShadowColor: {r: 0.09999997, g: 0.09999997, b: 0.19999996, a: 1}

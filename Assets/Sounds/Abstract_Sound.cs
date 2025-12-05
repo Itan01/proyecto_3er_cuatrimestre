@@ -6,8 +6,8 @@ public abstract class Abstract_Sound: MonoBehaviour , ICanCatch
     [SerializeField] protected bool _atractted = false, _playerShooted=false, _canCatch=false;
     [SerializeField] protected ESounds _indexRef=ESounds.none;
     [SerializeField] protected float _speed = 1.0f, _size = 1.0f;
-    protected Vector3 _velocity;
-    protected Rigidbody _rb;
+    [SerializeField] protected Vector3 _velocity;
+    [SerializeField] protected Rigidbody _rb;
     protected Cons_LockOnTarget _lock;
     protected virtual void Start()
     {
@@ -21,7 +21,7 @@ public abstract class Abstract_Sound: MonoBehaviour , ICanCatch
     }
     protected virtual void FixedUpdate()
     {
-        transform.position += _speed * Time.fixedDeltaTime * _velocity.normalized;
+       //_rb.MovePosition(_speed * Time.fixedDeltaTime * _velocity.normalized);
     }
     protected virtual void LateUpdate()
     {
@@ -32,11 +32,13 @@ public abstract class Abstract_Sound: MonoBehaviour , ICanCatch
     }
     public void ForceDirection(Vector3 Orientation)
     {
+        _rb.velocity = Orientation * _speed;
         _velocity = Orientation;
     }
 
     public void Speed(float speed)
     {
+        _rb.velocity = _velocity * speed;
         _speed = speed;
     }
     public void Size(float Size)
