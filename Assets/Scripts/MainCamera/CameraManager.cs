@@ -220,4 +220,8 @@ public class CameraManager : MonoBehaviour
     {
         _frezeeCam = state;
     }
+    private void OnDestroy()
+    {
+        EventPlayer.Unsubscribe(EPlayer.aim, SetCamDistance);
+    }
 }

@@ -347,6 +347,11 @@ public abstract class AbstractEnemy : EntityMonobehaviour, ISoundInteractions
         _agent.SetDestination(_nextPosition);
     }
     #endregion
-
+    private void OnDestroy()
+    {
+        EventManager.Unsubscribe(EEvents.DetectPlayer, SetNextPosition);
+        EventManager.Unsubscribe(EEvents.DetectSound, SetNextPosition);
+        EventManager.Unsubscribe(EEvents.ReStart, SetBaseBehaviour);
+    }
 
 }

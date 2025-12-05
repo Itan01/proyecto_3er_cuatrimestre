@@ -32,7 +32,6 @@ public class PlayerAvatar : MonoBehaviour
     }
     private void PlayWalkAudio()
     {
-        _audio.pitch= Random.Range(0.9f,2.1f);
         _audio.PlayOneShot(_audio_walk,0.1f);
     }
     public void SetGravityTrue()

@@ -112,9 +112,8 @@ public class RoombaEnemy : MonoBehaviour
         Destroy(gameObject);
     }
 
-    public void Desactivation() 
+    public void Desactivation()
     {
-        EventManager.Unsubscribe(EEvents.DetectPlayer, Detect);
         gameObject.SetActive(false);
         _isRunnning = false;
     }
@@ -122,7 +121,6 @@ public class RoombaEnemy : MonoBehaviour
     {
         if (_isActivate) return;
         _isRunnning = true;
-        EventManager.Subscribe(EEvents.DetectPlayer, Detect);
         gameObject.SetActive(true);
     }
     private void OnDestroy()

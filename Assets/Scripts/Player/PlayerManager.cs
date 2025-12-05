@@ -84,7 +84,7 @@ public class PlayerManager : AbstractPlayer
     public void SetIfPlayerCanMove(bool state)
     {
         _canControl = state;
-        if (!state) _animator.SetBool("isMoving",false);
+        if (!state && _animator !=null) _animator.SetBool("isMoving",false);
     }
     public void SetInvisiblePowerUp(float duration)
     {
@@ -117,6 +117,14 @@ public class PlayerManager : AbstractPlayer
         _source.PlayOneShot(_deathClip);
         _animator.SetBool("isDeath", true);
         _speed = 0.0f;
+    }
+    private void OnDestroy()
+    {
+        EventManager.Unsubscribe(EEvents.DetectPlayer, SetCapturedTrue);
+        EventManager.Unsubscribe(EEvents.Reset, Death);
+        EventManager.Unsubscribe(EEvents.StartLVL, SetCapturedFalse);
+        EventManager.Unsubscribe(EEvents.ReStart, ResetPosition);
+        EventManager.Unsubscribe(EEvents.ResetDectection, SetCapturedFalse);
     }
 
 }

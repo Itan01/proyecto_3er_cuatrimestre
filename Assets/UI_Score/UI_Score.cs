@@ -40,4 +40,8 @@ public class UI_Score : MonoBehaviour, IObservableScore
     {
         return (int)_value;
     }
+    private void OnDestroy()
+    {
+        EventPlayer.Unsubscribe(EPlayer.steal, UpdateValue);
+    }
 }

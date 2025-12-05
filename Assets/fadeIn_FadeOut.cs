@@ -19,4 +19,9 @@ public class FadeIn_FadeOut : MonoBehaviour
     {
         _animator.SetBool("ShowUp", false);
     }
+    private void OnDestroy()
+    {
+        EventManager.Unsubscribe(EEvents.Reset, ShowUp);
+        EventManager.Unsubscribe(EEvents.ReStart, FadeOut);
+    }
 }

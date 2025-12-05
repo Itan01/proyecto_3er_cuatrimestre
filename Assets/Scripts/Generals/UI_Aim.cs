@@ -16,4 +16,8 @@ public class UI_Aim: MonoBehaviour
         _state = (bool)parameters[0];
         _animator.SetBool("Aiming", _state);
     }
+    private void OnDestroy()
+    {
+        EventPlayer.Unsubscribe(EPlayer.aim, UITrigger);
+    }
 }

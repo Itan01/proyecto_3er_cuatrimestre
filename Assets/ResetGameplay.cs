@@ -19,4 +19,8 @@ public class ResetGameplay : MonoBehaviour
         yield return new WaitForSeconds(1.5f);
         EventManager.Trigger(EEvents.ReStart);
     }
+    private void OnDestroy()
+    {
+        EventManager.Unsubscribe(EEvents.Reset, ResetGame);
+    }
 }

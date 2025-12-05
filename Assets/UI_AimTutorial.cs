@@ -20,4 +20,8 @@ public class UI_AimTutorial : MonoBehaviour
         }
         _animator.SetBool("Aiming", _state);
     }
+    private void OnDestroy()
+    {
+        EventPlayer.Unsubscribe(EPlayer.aim, UITrigger);
+    }
 }

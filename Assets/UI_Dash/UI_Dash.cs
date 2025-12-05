@@ -33,4 +33,8 @@ public class UI_Dash : MonoBehaviour, IObservableDash
             _obs.Remove(Obj);
         }
     }
+    private void OnDestroy()
+    {
+        EventPlayer.Unsubscribe(EPlayer.dash, Subscription);
+    }
 }
