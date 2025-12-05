@@ -5,7 +5,6 @@ using UnityEngine;
 
 public class GlassNavMesh : AbstractObjects, ISoundInteractions
 {
-    [SerializeField] private GameObject _sound;
     private NavMeshLink _link;
     [SerializeField] private float _sizeMultiplier;
     protected override void Start()
@@ -30,11 +29,11 @@ public class GlassNavMesh : AbstractObjects, ISoundInteractions
     }
     public void IIteraction(bool PlayerShootIt)
     {
-        var Sound = Instantiate(_sound, transform.position, Quaternion.identity);
-        Sound.GetComponent<Sound_Crash_Radius>().SetMultiplier(GetSize());
+        var x = Factory_CrashSound.Instance.Create();
+        x.transform.position = transform.position;
+        x.ForceDirection(new Vector3(Random.Range(-1,1), Random.Range(-1, 1), Random.Range(-1, 1)));
         AudioStorage.Instance.GlassBrokenSound();
         DesactivateObject();
-
         _link.gameObject.SetActive(true);
     }
 

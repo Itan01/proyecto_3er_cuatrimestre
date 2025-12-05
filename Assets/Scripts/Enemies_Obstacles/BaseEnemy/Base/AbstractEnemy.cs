@@ -86,7 +86,6 @@ public abstract class AbstractEnemy : EntityMonobehaviour, ISoundInteractions
     {
         if (!_activate) return;
         Transform Pos = (Transform)parameters[0];
-        Debug.Log($"I will go to{Pos.position}");
         _nextPosition = Pos.position;
         _gamemode = MovFollowPosition;
         _gamemode();
