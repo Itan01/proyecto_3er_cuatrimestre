@@ -17,6 +17,8 @@ public class PlayerManager : AbstractPlayer
     [SerializeField] private GameObject[] _clothesModel;
     [SerializeField] private Material[] _baseColorMaterial;
    [SerializeField] private Material[] _JoinColorMaterial;
+    [SerializeField] private AudioClip _deathClip; 
+    [SerializeField] private AudioSource _source; 
     protected override void Awake()
     {
         GameManager.Instance.PlayerReference = this;
@@ -26,6 +28,7 @@ public class PlayerManager : AbstractPlayer
     protected override void Start()
     {
         base.Start();
+        _source=GetComponent<AudioSource>();
         _view = new View_Player(this);
         _model = new Model_Player(this);
         _controller = new PL_Control(this,_model, _view);
@@ -111,6 +114,7 @@ public class PlayerManager : AbstractPlayer
     }
     private void Death(params object[] Parameters)
     {
+        _source.PlayOneShot(_deathClip);
         _animator.SetBool("isDeath", true);
         _speed = 0.0f;
     }
