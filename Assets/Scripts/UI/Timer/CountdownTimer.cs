@@ -10,39 +10,51 @@ public class CountdownTimer : MonoBehaviour
     private TextMeshProUGUI _timerText;
     private AudioClip _timerEffect;
     private float _timerWait;
-    private bool _isRunning = true;
-
+    [SerializeField] private bool _isRunning = false;
+   public delegate void BehaviourTimer();
+    public BehaviourTimer TimerUpdate;
     private void Awake()
     {
         UIManager.Instance.Timer = this;
     }
     private void Start()
     {
-        _timerText=GetComponentInChildren<TextMeshProUGUI>();
+        if(!GameManager.Instance.FirstTimePlay) _isRunning = true;
+        _timerText =GetComponentInChildren<TextMeshProUGUI>();
         _timerEffect = AudioStorage.Instance.UiSound(EAudios.Timer);
         UIManager.Instance.Timer = this;
+        TimerUpdate = TimerSubstract;
         // AudioManager.Instance.PlaySFX(_timerEffect, 1f);
     }
     void Update()
     {
         if (!_isRunning) return;
+        TimerUpdate?.Invoke();
 
+
+    }
+    private void TimerSubstract()
+    {
+        if (_timer < 0)
+            TimerUpdate = TimerOff;
         _timer -= Time.deltaTime;
-        _timerWait -= Time.deltaTime;
         if (_timerWait > 1000)
         {
             AudioManager.Instance.PlaySFX(_timerEffect, 1f);
             _timerWait = 0f;
         }
         UpdateTimerUI(_timer);
-
     }
-
+    private void TimerOff()
+    {
+        _timerText.color = Color.red;
+        _timerText.text = $"-- : --";
+        TimerUpdate = null;
+    }
     private void UpdateTimerUI(float time)
     {
         int minutes = Mathf.FloorToInt(time / 60f);
         int seconds = Mathf.FloorToInt(time % 60f);
-        //int milliseconds = Mathf.FloorToInt((time * 1000f) % 1000f);
         _timerText.text = $"{minutes:00}:{seconds:00}";
     }
     public void StopTimerUI() 

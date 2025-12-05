@@ -41,6 +41,5 @@ public class s_FirstComicIntroduction : MonoBehaviour
     private void DesActivate()
     {
         GameManager.Instance.PlayerReference.SetIfPlayerCanMove(false);
-        UIManager.Instance.Timer.IsRunning(false);
     }
 }
