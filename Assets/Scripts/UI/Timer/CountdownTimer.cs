@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+using UnityEngine.SceneManagement;
 
 public class CountdownTimer : MonoBehaviour
 { 
@@ -10,6 +11,7 @@ public class CountdownTimer : MonoBehaviour
     private TextMeshProUGUI _timerText;
     private AudioClip _timerEffect;
     private float _timerWait;
+    private bool _noTime = false;
     [SerializeField] private bool _isRunning = false;
    public delegate void BehaviourTimer();
     public BehaviourTimer TimerUpdate;
@@ -24,6 +26,7 @@ public class CountdownTimer : MonoBehaviour
         _timerEffect = AudioStorage.Instance.UiSound(EAudios.Timer);
         UIManager.Instance.Timer = this;
         TimerUpdate = TimerSubstract;
+        EventManager.Subscribe(EEvents.Reset, TimerOfF);
         // AudioManager.Instance.PlaySFX(_timerEffect, 1f);
     }
     void Update()
@@ -47,6 +50,8 @@ public class CountdownTimer : MonoBehaviour
     }
     private void TimerOff()
     {
+        _noTime = true;
+        EventManager.Trigger(EEvents.DetectPlayer,GameManager.Instance.PlayerReference.transform);
         _timerText.color = Color.red;
         _timerText.text = $"-- : --";
         TimerUpdate = null;
@@ -67,6 +72,29 @@ public class CountdownTimer : MonoBehaviour
     public void IsRunning(bool state)
     {
         _isRunning = state;
+    }
+    public void TimerOfF(params object[] Parameters)
+    {
+        if (!_noTime) return;
+        StartCoroutine(LoadScene());
+        
+    }
+    private IEnumerator LoadScene() 
+    {
+        AsyncOperation loadingScene = SceneManager.LoadSceneAsync("MainMenu");
+        loadingScene.allowSceneActivation = false;
+        float timeRef = 1.0f;
+        while (loadingScene.progress < 0.9f || timeRef <1.0f)
+        {
+            timeRef += Time.deltaTime;
+            yield return null;
+        }
+        loadingScene.allowSceneActivation = true;
+        yield return null;
+    }
+    private void OnDestroy()
+    {
+        EventManager.Unsubscribe(EEvents.Reset, TimerOfF);
     }
 
 }

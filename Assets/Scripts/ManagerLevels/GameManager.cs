@@ -44,12 +44,6 @@ public class GameManager : MonoBehaviour
         get { return _camera; }
         set { _camera = value; }
     }
-    private bool _noTime =false;
-    public bool NoTime
-    {
-        get { return _noTime; }
-        set { _noTime = value; }
-    }
 
     private TuriorialFirstTime _textFirstTime;
 
@@ -58,22 +52,6 @@ public class GameManager : MonoBehaviour
         get { return _textFirstTime; }
         set { _textFirstTime = value; }
     }
-    //private IEnumerator ResetTImer()
-    //{
-    //    PlayerReference.SetDeath(true);
-    //    UIManager.Instance.Transition.ShowBlackScreen();
-    //    yield return new WaitForSeconds(1.0f);
-    //    foreach (var room in _actualsRoom)
-    //    {
-    //        room.ResetRoom();
-    //    }
-    //    _timeCaptured++;
-    //    PlayerReference.ResetHeldSound();
-    //    PlayerReference.SetCaptured(false);
-    //    PlayerReference.SetDeath(false);
-    //    UIManager.Instance.Transition.FadeOut();
-    //    PlayerReference.transform.position = Respawn;
-    //}
     [SerializeField] private int _time;
 
     public int FinalTimeOnLVL
