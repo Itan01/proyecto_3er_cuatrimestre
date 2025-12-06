@@ -31,6 +31,7 @@ public abstract class AbstractEnemy : EntityMonobehaviour, ISoundInteractions
     }
     protected override void Start()
     {
+        _startPosition = transform.position;
         _room = GetComponentInParent<RoomManager>();
         _room.DestroyRoom += Destroy;
         _room.DesActRoom += DesActivation;
@@ -71,7 +72,7 @@ public abstract class AbstractEnemy : EntityMonobehaviour, ISoundInteractions
     public void Respawn()
     {
         // Debug.Log("Respawn");
-        _agent.Warp(_startPosition);
+        transform.position = _startPosition;
         SetNewMode(MovPatrol);
     }
     #region InternalFunctions

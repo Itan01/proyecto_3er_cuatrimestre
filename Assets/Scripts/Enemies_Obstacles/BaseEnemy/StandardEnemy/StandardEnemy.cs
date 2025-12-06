@@ -14,8 +14,6 @@ public class StandardEnemy : AbstractEnemy
             _positions[i] += transform.position;
         }
         _positions[0] = transform.position;
-        _startPosition = _positions[0];
-
     }
     protected override void Update()
     {

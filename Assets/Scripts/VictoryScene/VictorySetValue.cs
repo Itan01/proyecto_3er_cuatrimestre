@@ -6,7 +6,6 @@ using UnityEngine;
 public class VictorySetValue : MonoBehaviour
 {
     private TextMeshProUGUI _text;
-    private bool _playOnce = false;
     [SerializeField] private int _value = 0, _maxValue = 0;
     [SerializeField] private string _showText = "Money Stole : $";
     [SerializeField] private int _index;
@@ -29,23 +28,17 @@ public class VictorySetValue : MonoBehaviour
             _maxValue = GameManager.Instance.TimesCaptured;
             _menu.SetTries(_maxValue);
         }
+        StartCoroutine(UpdateValue());
     }
-    private void Update()
+    private IEnumerator UpdateValue()
     {
-        if (_value < _maxValue)
+        while (_value < _maxValue)
         {
-            _value++;
+            _value += (int)(Time.deltaTime * _maxValue);
             _text.text = $"{_showText} {_value}";
 
         }
-        else
-        {
-            if (!_playOnce)
-            {
-                _playOnce = true;
-                _audioSource.PlayOneShot(_audioClip);
-            }
-
-        }
+        _audioSource.PlayOneShot(_audioClip);
+        yield return null;
     }
 }
