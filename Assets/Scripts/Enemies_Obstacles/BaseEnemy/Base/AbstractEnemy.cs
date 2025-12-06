@@ -11,8 +11,9 @@ public abstract class AbstractEnemy : EntityMonobehaviour, ISoundInteractions
     protected float _baseSpeed = 3.5f, _runSpeed = 10.0f, _shortDistance = 0.5f;
     [SerializeField] protected float _timer = 0.0f, _resetTimer = 0.0f;
     [SerializeField] protected int _mode = 0;
-    protected Vector3 _nextPosition,_startPosition;
-    [SerializeField] protected float _confusedDuration;
+    protected Vector3 _nextPosition;
+    [SerializeField] protected Vector3 _startPosition; 
+[SerializeField] protected float _confusedDuration;
     protected float _confusedDurationRef = 5.0f; // Este es el tiempo de confusión donde cree haber visto al player
     protected float _searchDuration = 20.0f; // El tiempo que busca al player luego de que este salga del RadiusToHear
     protected float _resetTimerRef = 1.0f;
@@ -31,7 +32,6 @@ public abstract class AbstractEnemy : EntityMonobehaviour, ISoundInteractions
     }
     protected override void Start()
     {
-        _startPosition = transform.position;
         _room = GetComponentInParent<RoomManager>();
         _room.DestroyRoom += Destroy;
         _room.DesActRoom += DesActivation;
@@ -61,7 +61,6 @@ public abstract class AbstractEnemy : EntityMonobehaviour, ISoundInteractions
         if (Entity.gameObject.GetComponent<PlayerManager>())
         {
             EventManager.Trigger(EEvents.Reset);
-            _nextPosition = _startPosition;
         }
     }
 
@@ -99,6 +98,7 @@ public abstract class AbstractEnemy : EntityMonobehaviour, ISoundInteractions
     }
     protected void SetBaseBehaviour(params object[] parameters)
     {
+        if (!_activate) return;
         MoveResetPath();
         transform.position =_nextPosition;
     }
