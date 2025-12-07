@@ -56,7 +56,7 @@ public class VictoryMenu : MonoBehaviour
 
     private void SetLetter()
     {
-        int value =( _money + ((_time/60) * 100)-_tries * 100);
+        int value =( _money -_tries * 100);
         Debug.Log(value);
         _setRank.SetRank(value);
     }

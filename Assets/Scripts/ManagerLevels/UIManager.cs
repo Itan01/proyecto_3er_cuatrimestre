@@ -10,14 +10,17 @@ public class UIManager : MonoBehaviour
 
     private void Awake()
     {
-        Instance = this;
-       _menuPause= FindAnyObjectByType<s_pauseMenu>();
+        if (!Instance)
+        {
+            Instance = this;
+        }
+
     }       
 
     #endregion
     private PlayerManager _player;
 
-    private CountdownTimer _timer;
+    [SerializeField]private CountdownTimer _timer;
     public CountdownTimer Timer
     {
         get { return _timer; }

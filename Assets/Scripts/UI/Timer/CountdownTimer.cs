@@ -15,10 +15,6 @@ public class CountdownTimer : MonoBehaviour
     [SerializeField] private bool _isRunning = false;
    public delegate void BehaviourTimer();
     public BehaviourTimer TimerUpdate;
-    private void Awake()
-    {
-        UIManager.Instance.Timer = this;
-    }
     private void Start()
     {
         if(!GameManager.Instance.FirstTimePlay) _isRunning = true;
@@ -26,7 +22,7 @@ public class CountdownTimer : MonoBehaviour
         _timerEffect = AudioStorage.Instance.UiSound(EAudios.Timer);
         UIManager.Instance.Timer = this;
         TimerUpdate = TimerSubstract;
-        EventManager.Subscribe(EEvents.StartLVL, TimerOff);
+        EventManager.Subscribe(EEvents.ReStart, TimerOff);
     }
     void Update()
     {
@@ -50,11 +46,10 @@ public class CountdownTimer : MonoBehaviour
     private void TimerOff()
     {
         _noTime = true;
-        _timer = 120;
         EventManager.Trigger(EEvents.AlertPlayer,GameManager.Instance.PlayerReference.transform);
-        _timerText.color = Color.red;
-        _timerText.text = $"-- : --";
-        TimerUpdate = TimerSubstract;
+        _timerText.color = Color.red;   
+        _timerText.text = $"00:00";
+        TimerUpdate = null;
     }
     private void UpdateTimerUI(float time)
     {
@@ -81,18 +76,20 @@ public class CountdownTimer : MonoBehaviour
     }
     private IEnumerator LoadScene() 
     {
-        AsyncOperation loadingScene = SceneManager.LoadSceneAsync("MainMenu");
+        AsyncOperation loadingScene = SceneManager.LoadSceneAsync("Game_Over");
         loadingScene.allowSceneActivation = false;
         while (loadingScene.progress < 0.9f)
         {
             yield return null;
         }
+        Cursor.lockState = CursorLockMode.None;
+        Cursor.visible = true;
         loadingScene.allowSceneActivation = true;
         yield return null;
     }
     private void OnDestroy()
     {
-        EventManager.Unsubscribe(EEvents.Reset, TimerOff);
+        EventManager.Unsubscribe(EEvents.ReStart, TimerOff);
     }
 
 }

@@ -4,11 +4,9 @@ using UnityEngine;
 
 public class ResetGameplay : MonoBehaviour
 {
-    private bool _playOnce;
     private void Start()
     {
         EventManager.Subscribe(EEvents.Reset, ResetGame);
-
     }
     private void ResetGame(params object[] Pararmeters)
     {
