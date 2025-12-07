@@ -41,6 +41,7 @@ public abstract class AbstractEnemy : EntityMonobehaviour, ISoundInteractions
         _vision = GetComponentInChildren<EnemyVision>();
         _audiosource = GetComponent<AudioSource>();
         EventManager.Subscribe(EEvents.DetectPlayer,SetNextPosition);
+        EventManager.Subscribe(EEvents.AlertPlayer,SetNoTimer);
         EventManager.Subscribe(EEvents.DetectSound,SetNextPosition);
         EventManager.Subscribe(EEvents.ReStart,SetBaseBehaviour);
     }
@@ -101,6 +102,11 @@ public abstract class AbstractEnemy : EntityMonobehaviour, ISoundInteractions
         if (!_activate) return;
         MoveResetPath();
         transform.position =_nextPosition;
+    }
+    protected void SetNoTimer(params object[] parameters)
+    {
+        if (!_activate) return;
+        MovChaseTarget();
     }
     protected virtual void GetScriptCompo()
     {
@@ -353,6 +359,7 @@ public abstract class AbstractEnemy : EntityMonobehaviour, ISoundInteractions
         EventManager.Unsubscribe(EEvents.DetectPlayer, SetNextPosition);
         EventManager.Unsubscribe(EEvents.DetectSound, SetNextPosition);
         EventManager.Unsubscribe(EEvents.ReStart, SetBaseBehaviour);
+        EventManager.Unsubscribe(EEvents.AlertPlayer, SetNoTimer);
     }
 
 }

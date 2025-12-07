@@ -26,8 +26,7 @@ public class CountdownTimer : MonoBehaviour
         _timerEffect = AudioStorage.Instance.UiSound(EAudios.Timer);
         UIManager.Instance.Timer = this;
         TimerUpdate = TimerSubstract;
-        EventManager.Subscribe(EEvents.Reset, TimerOfF);
-        // AudioManager.Instance.PlaySFX(_timerEffect, 1f);
+        EventManager.Subscribe(EEvents.StartLVL, TimerOff);
     }
     void Update()
     {
@@ -51,10 +50,11 @@ public class CountdownTimer : MonoBehaviour
     private void TimerOff()
     {
         _noTime = true;
-        EventManager.Trigger(EEvents.DetectPlayer,GameManager.Instance.PlayerReference.transform);
+        _timer = 120;
+        EventManager.Trigger(EEvents.AlertPlayer,GameManager.Instance.PlayerReference.transform);
         _timerText.color = Color.red;
         _timerText.text = $"-- : --";
-        TimerUpdate = null;
+        TimerUpdate = TimerSubstract;
     }
     private void UpdateTimerUI(float time)
     {
@@ -73,7 +73,7 @@ public class CountdownTimer : MonoBehaviour
     {
         _isRunning = state;
     }
-    public void TimerOfF(params object[] Parameters)
+    public void TimerOff(params object[] Parameters)
     {
         if (!_noTime) return;
         StartCoroutine(LoadScene());
@@ -83,10 +83,8 @@ public class CountdownTimer : MonoBehaviour
     {
         AsyncOperation loadingScene = SceneManager.LoadSceneAsync("MainMenu");
         loadingScene.allowSceneActivation = false;
-        float timeRef = 0.0f;
-        while (loadingScene.progress < 0.9f || timeRef <0.75f)
+        while (loadingScene.progress < 0.9f)
         {
-            timeRef += Time.deltaTime;
             yield return null;
         }
         loadingScene.allowSceneActivation = true;
@@ -94,7 +92,7 @@ public class CountdownTimer : MonoBehaviour
     }
     private void OnDestroy()
     {
-        EventManager.Unsubscribe(EEvents.Reset, TimerOfF);
+        EventManager.Unsubscribe(EEvents.Reset, TimerOff);
     }
 
 }

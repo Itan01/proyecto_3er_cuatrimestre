@@ -123,13 +123,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 442869479642895917}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 3, z: 0}
+  m_LocalRotation: {x: -0, y: -0.9914446, z: -0, w: 0.13052866}
+  m_LocalPosition: {x: 0, y: 4.34, z: 0}
   m_LocalScale: {x: 0.05, y: 0.05, z: 0.05}
   m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 8673125701619779254}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: -165, z: 0}
 --- !u!212 &2869679526492367794
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -176,7 +176,7 @@ SpriteRenderer:
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 1, y: 1}
+  m_Size: {x: 20, y: 20}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 0
@@ -500,8 +500,8 @@ MonoBehaviour:
   viewAngle: 90
   verticalFOV: 60
   viewRadius: 50
-  horizontalRayCount: 20
-  verticalRayCount: 20
+  horizontalRayCount: 50
+  verticalRayCount: 2
   drawGizmos: 1
   visionColor: {r: 1, g: 1, b: 0, a: 0.3}
   _seePlayer: 0
@@ -631,7 +631,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 1.4, y: 1.4, z: 1.4}
   m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 1531464492388801345}
@@ -2185,7 +2185,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: 0.7933558, z: -0, w: -0.60875815}
   m_LocalPosition: {x: -36.841965, y: -7.5628757, z: 100.231544}
-  m_LocalScale: {x: 1.4, y: 1.4, z: 1.4}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1515226207294110357}
@@ -2201,7 +2201,7 @@ Rigidbody:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7544491536246817630}
   serializedVersion: 4
-  m_Mass: 2
+  m_Mass: 100
   m_Drag: 0
   m_AngularDrag: 0
   m_CenterOfMass: {x: 0, y: 0, z: 0}
@@ -2260,6 +2260,7 @@ MonoBehaviour:
   _timer: 0
   _resetTimer: 0
   _mode: 0
+  _startPosition: {x: 0, y: 0, z: 0}
   _confusedDuration: 0
   _watchingPlayer: 0
   _positions:
@@ -2388,8 +2389,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 0.5, y: 2, z: 0.5}
-  m_Center: {x: 0, y: 1, z: 0}
+  m_Size: {x: 1, y: 3.3, z: 1}
+  m_Center: {x: 0, y: 1.8, z: 0}
 --- !u!136 &7781855232168317100
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -2409,10 +2410,10 @@ CapsuleCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 0.5
-  m_Height: 2
+  m_Radius: 1
+  m_Height: 4
   m_Direction: 1
-  m_Center: {x: 0, y: 1, z: 0}
+  m_Center: {x: 0, y: 2, z: 0}
 --- !u!1 &7553358020032669949
 GameObject:
   m_ObjectHideFlags: 0
