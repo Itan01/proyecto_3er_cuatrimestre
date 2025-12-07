@@ -83,8 +83,8 @@ public class CountdownTimer : MonoBehaviour
     {
         AsyncOperation loadingScene = SceneManager.LoadSceneAsync("MainMenu");
         loadingScene.allowSceneActivation = false;
-        float timeRef = 1.0f;
-        while (loadingScene.progress < 0.9f || timeRef <1.0f)
+        float timeRef = 0.0f;
+        while (loadingScene.progress < 0.9f || timeRef <0.75f)
         {
             timeRef += Time.deltaTime;
             yield return null;

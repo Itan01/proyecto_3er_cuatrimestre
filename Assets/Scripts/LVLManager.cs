@@ -21,7 +21,7 @@ public class LVLManager : MonoBehaviour
 
     }
     #endregion
-    private Vector3 _checkPoint;
+    [SerializeField] private Vector3 _checkPoint;
     public Vector3 Respawn
     {
         get { return _checkPoint; }
