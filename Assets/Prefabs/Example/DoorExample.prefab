@@ -15137,7 +15137,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _listParticles: []
-  _animating: 0
 --- !u!1 &7302222560634543658
 GameObject:
   m_ObjectHideFlags: 0
@@ -15188,6 +15187,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _maxValue: 0
+  _mesh: {fileID: 1187292521898175714}
   _scriptText:
   - {fileID: 6614696006397585772}
   _buttonSound: {fileID: 8300000, guid: 1703a88ad72e2ba41805a3197303245f, type: 3}
@@ -15260,7 +15260,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _listParticles: []
-  _animating: 0
 --- !u!1 &8189994089422932115
 GameObject:
   m_ObjectHideFlags: 0
@@ -20170,6 +20169,7 @@ GameObject:
   - component: {fileID: 7861059723174434377}
   - component: {fileID: 7325604768080098834}
   - component: {fileID: 7180680315789817744}
+  - component: {fileID: 280418724343920870}
   m_Layer: 26
   m_Name: model_door
   m_TagString: Untagged
@@ -20293,4 +20293,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _listParticles: []
-  _animating: 0
+--- !u!114 &280418724343920870
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9156954802271763803}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 343ddf256610d5642a0a96c52761835f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _mesh: {fileID: 0}

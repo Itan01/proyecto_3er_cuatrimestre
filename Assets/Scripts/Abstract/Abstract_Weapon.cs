@@ -4,11 +4,11 @@ using UnityEngine;
 
 public abstract class Abstract_Weapon : MonoBehaviour, IObservableMegaphone
 {
-    [SerializeField]protected bool _useLeftClick=false;
-    [SerializeField] protected bool _useRightClick=false;
+    protected bool _useLeftClick=false;
+     protected bool _useRightClick=false;
     protected bool _usingGun;
-    [SerializeField] protected bool _hasBullet;
-    [SerializeField] protected List<IObserverMegaphone> _obs = new List<IObserverMegaphone>();
+     protected bool _hasBullet;
+   protected List<IObserverMegaphone> _obs = new List<IObserverMegaphone>();
 
     protected virtual void Update()
     {

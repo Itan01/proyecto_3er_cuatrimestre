@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class AbstracDoors : MonoBehaviour, ISoundInteractions, ISoundAim
+public class AbstracDoors : MonoBehaviour, ISoundInteractions
 {
     [SerializeField] protected int _maxValue;
     protected int _indexToDestroy;
@@ -89,18 +89,5 @@ public class AbstracDoors : MonoBehaviour, ISoundInteractions, ISoundAim
         Material.SetFloat("_Destroyed", 0.0f);
         yield return null;
 
-    }
-
-    public void Activate()
-    {
-        Debug.Log("Hola");
-        Material Material = _mesh.material;
-        Material.SetFloat("_Aiming", 1.0f);
-    }
-
-    public void Deactivate()
-    {
-        Material Material = _mesh.material;
-        Material.SetFloat("_Aiming", 0.0f);
     }
 }
