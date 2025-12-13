@@ -35,6 +35,7 @@ public class MainDoorManagerExample : AbstracDoors, ISoundInteractions
     }
     public void IIteraction(bool PlayerShootIt)
     {
+        _mesh.material.SetFloat("_Aiming", 0.0f);
         if (PlayerShootIt)
         {
             _uiExample.SetActive(false);

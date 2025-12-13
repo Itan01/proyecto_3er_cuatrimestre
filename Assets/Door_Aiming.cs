@@ -4,14 +4,13 @@ using UnityEngine;
 
 public class Door_Aiming : MonoBehaviour, ISoundAim
 {
-   [SerializeField] private MeshRenderer _mesh;
+    [SerializeField] private MeshRenderer _mesh;
     private void Start()
     {
-       if(_mesh==null) _mesh = GetComponent<MeshRenderer>();
+        if (_mesh == null) _mesh = GetComponent<MeshRenderer>();
     }
     public void Activate()
     {
-        Debug.Log("Hola");
         Material Material = _mesh.material;
         Material.SetFloat("_Aiming", 1.0f);
     }
