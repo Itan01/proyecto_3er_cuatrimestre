@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class MainDoorManager : AbstracDoors, ISoundInteractions
+public class MainDoorManager : AbstracDoors, ISoundInteractions, ISoundAim
 {
     [SerializeField] private AudioClip _buttonSound;
     private ParticlesManager _particles;
@@ -27,6 +27,7 @@ public class MainDoorManager : AbstracDoors, ISoundInteractions
         {
             _particles.PlayOnce();
             CheckStatus();
+            
             AudioSource.PlayClipAtPoint(_buttonSound, transform.position, _soundVolume);
         }
     }

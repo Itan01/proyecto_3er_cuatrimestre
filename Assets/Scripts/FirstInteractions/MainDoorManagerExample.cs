@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class MainDoorManagerExample : AbstracDoors, ISoundInteractions
+public class MainDoorManagerExample : AbstracDoors, ISoundInteractions, ISoundAim
 {
     [SerializeField] private AudioClip _buttonSound;
     [SerializeField] private GameObject _uiExample;
