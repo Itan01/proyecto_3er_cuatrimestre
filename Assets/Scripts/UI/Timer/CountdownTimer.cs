@@ -1,7 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
-using UnityEngine;
 using TMPro;
+using UnityEngine;
+using UnityEngine.Rendering.Universal;
 using UnityEngine.SceneManagement;
 
 public class CountdownTimer : MonoBehaviour
@@ -12,12 +13,16 @@ public class CountdownTimer : MonoBehaviour
     private AudioClip _timerEffect;
     private float _timerWait;
     private bool _noTime = false;
-    [SerializeField] private bool _isRunning = false;
+    private bool _isRunning = false;
    public delegate void BehaviourTimer();
     public BehaviourTimer TimerUpdate;
+    [SerializeField] private ScriptableRendererFeature _renderFullScreen;
+    [SerializeField] private Material _materialFullScreen;
+
     private void Start()
     {
-        if(!GameManager.Instance.FirstTimePlay) _isRunning = true;
+        _renderFullScreen.SetActive(false);
+        if (!GameManager.Instance.FirstTimePlay) _isRunning = true;
         _timerText =GetComponentInChildren<TextMeshProUGUI>();
         _timerEffect = AudioStorage.Instance.UiSound(EAudios.Timer);
         UIManager.Instance.Timer = this;
@@ -50,6 +55,7 @@ public class CountdownTimer : MonoBehaviour
         _timerText.color = Color.red;   
         _timerText.text = $"00:00";
         TimerUpdate = null;
+        StartCoroutine(Set_FS());
     }
     private void UpdateTimerUI(float time)
     {
@@ -90,6 +96,20 @@ public class CountdownTimer : MonoBehaviour
     private void OnDestroy()
     {
         EventManager.Unsubscribe(EEvents.ReStart, TimerOff);
+    }
+    private IEnumerator Set_FS()
+    {
+        _renderFullScreen.SetActive(true);
+        float size =0.0f;
+        _materialFullScreen.SetFloat("_Show_FS", size);
+        while (size < 1.0f)
+        {
+            size += Time.deltaTime;
+            _materialFullScreen.SetFloat("_Show_FS", size);
+            yield return null;
+        }
+        yield return null;
+
     }
 
 }
