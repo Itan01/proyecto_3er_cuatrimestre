@@ -463,7 +463,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: bb0c9ffde78420747972ce5149aae6c3, type: 2}
+  - {fileID: 2100000, guid: 08b1509ff9ac1e64ba636daa48429432, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -503,7 +503,6 @@ MonoBehaviour:
   horizontalRayCount: 50
   verticalRayCount: 2
   drawGizmos: 1
-  visionColor: {r: 1, g: 1, b: 0, a: 0.3}
   _seePlayer: 0
   _layer: {fileID: 11400000, guid: 31cee878b4c24c347932895be40074bc, type: 2}
 --- !u!1 &1671590738247710046
@@ -2201,9 +2200,9 @@ Rigidbody:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7544491536246817630}
   serializedVersion: 4
-  m_Mass: 100
+  m_Mass: 1000
   m_Drag: 0
-  m_AngularDrag: 0
+  m_AngularDrag: 0.05
   m_CenterOfMass: {x: 0, y: 0, z: 0}
   m_InertiaTensor: {x: 1, y: 1, z: 1}
   m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}

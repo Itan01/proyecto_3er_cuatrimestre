@@ -1,6 +1,6 @@
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UIElements;
 
 [RequireComponent(typeof(MeshFilter), typeof(MeshRenderer))]
 public class EnemyVision : MonoBehaviour
@@ -17,23 +17,20 @@ public class EnemyVision : MonoBehaviour
     private PlayerManager _player;
     [Header("Debug")]
     public bool drawGizmos = true;
-    public Color visionColor = new(1, 1, 0, 0.3f);
     [SerializeField] private bool _seePlayer = false;
 
     private Mesh visionMesh;
     [SerializeField] private SO_Layers _layer;
     private MeshFilter meshFilter;
-    private MeshRenderer meshRenderer;
+    private MeshRenderer _meshRenderer;
     private Transform _headReference;
-    private Cons_Raycast _raycast;
 
     private List<(Vector3 point, bool hitObstacle)> debugPoints = new();
 
     private void Start()
     {
-        _raycast = new Cons_Raycast(500f, _layer._everything);
         meshFilter = GetComponent<MeshFilter>();
-        meshRenderer = GetComponent<MeshRenderer>();
+        _meshRenderer = GetComponent<MeshRenderer>();
         visionMesh = new Mesh { name = "Vision Mesh" };
         meshFilter.mesh = visionMesh;
         _scriptManager = GetComponentInParent<AbstractEnemy>();
@@ -54,18 +51,20 @@ public class EnemyVision : MonoBehaviour
     }
     private void DrawFieldOfView()
     {
-        if (meshRenderer != null)
+        if (_meshRenderer != null)
         {
             switch (_scriptManager.GetMode())
             {
+
                 case -1:
-                case 0: visionColor = new Color(0, 1, 0, 0.1f); break;
+                case 0: _meshRenderer.material.SetColor("_Main_Color",Color.green); break;
                 case 2:
-                case 3: visionColor = new Color(1, 1, 0, 0.1f); break;
-                case 1: visionColor = new Color(1, 0, 0, 0.1f); break;
+                case 3: _meshRenderer.material.SetColor("_Main_Color", Color.yellow); break;
+                case 1: _meshRenderer.material.SetColor("_Main_Color", Color.red); break;
+                default: _meshRenderer.material.SetColor("_Main_Color", Color.green); break;
             }
 
-            meshRenderer.material.color = visionColor;
+           
         }
 
         debugPoints.Clear();
@@ -142,8 +141,12 @@ public class EnemyVision : MonoBehaviour
             _seePlayer = true;
             Debug.Log("Estoy Viendo Al Jugador");
             if (_scriptManager.GetMode() != 3 && _scriptManager.GetMode() != 1 && _scriptManager.GetMode() != 6)
+            {
                 _scriptManager.SetModeByIndex(3);
+
+            }
         }
+        SetAlphaValue();
         _scriptManager.WatchingPlayer(_seePlayer);
     }
 
@@ -152,6 +155,17 @@ public class EnemyVision : MonoBehaviour
         var Angle = Vector3.Angle(_headReference.forward, Position - _headReference.position);
         bool State = Angle < viewAngle * 0.5f;
         return State;
+    }
+    private void SetAlphaValue()
+    {
+        float Value = 1.0f;
+        Material Material = _meshRenderer.material;
+            Value = Material.GetFloat("_Alpha_Values");
+        if (_seePlayer)
+            Material.SetFloat("_Alpha_Values", Value - (Time.deltaTime* 0.2f));
+        else
+            Material.SetFloat("_Alpha_Values", 1.0f);
+
     }
     private void OnDrawGizmosSelected()
     {
