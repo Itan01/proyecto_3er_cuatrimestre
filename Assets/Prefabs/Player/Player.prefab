@@ -272,6 +272,8 @@ MonoBehaviour:
   _JoinColorMaterial:
   - {fileID: 2100000, guid: ef71c172f8a6d54418e0c8c677f0e827, type: 2}
   - {fileID: 2100000, guid: d85112e1a48c78e448f599a52d51180a, type: 2}
+  _deathClip: {fileID: 0}
+  _source: {fileID: 0}
 --- !u!65 &7747024848938081973
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -15360,6 +15362,10 @@ PrefabInstance:
       propertyPath: m_ConstrainProportionsScale
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -5257593416943893651, guid: a6977cdea5bc1f44cb7d12ade33703f8, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 6645ca821846e0d478e84207072c5bd1, type: 2}
     - target: {fileID: 919132149155446097, guid: a6977cdea5bc1f44cb7d12ade33703f8, type: 3}
       propertyPath: m_Name
       value: Model
