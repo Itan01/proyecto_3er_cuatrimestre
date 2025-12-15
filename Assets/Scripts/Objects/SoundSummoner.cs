@@ -14,6 +14,7 @@ public class SoundSummoner : MonoBehaviour
      private float _distance=1.5f;
     [SerializeField] private Transform _dir;
     private ParticlesManager _particlesManager;
+    [SerializeField] private MeshRenderer _mesh;
     private void Start()
     {
         _room = GetComponentInParent<RoomManager>();
@@ -40,6 +41,7 @@ public class SoundSummoner : MonoBehaviour
         script.ForceDirection(NewDir);
         script.Speed(5.0f);
         _particlesManager.PlayOnce();
+        StartCoroutine(PlayTexture());
         //AudioStorage.Instance.ZapSound();
     }
 
@@ -74,6 +76,13 @@ public class SoundSummoner : MonoBehaviour
     {
         _room.ActRoom -= Activate;
         _room.DesActRoom -= DesActivate;
+    }
+    private IEnumerator PlayTexture()
+    {
+        Material Material= _mesh.material;
+        Material.SetFloat("_State", 1.0f);
+        yield return new WaitForSeconds(0.5f);
+        Material.SetFloat("_State", 0.0f);
     }
 }
 

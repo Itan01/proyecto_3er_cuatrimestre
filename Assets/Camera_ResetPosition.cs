@@ -51,7 +51,6 @@ public class Camera_ResetPosition : Cons_CameraObstacle
         }
         Vector3 Pos = (_startPos - _camTransform.localEulerAngles).normalized * Time.deltaTime * _speed;
         _camTransform.localEulerAngles += Pos;
-        Debug.Log(Vector3.Distance(_startPos,_camTransform.localEulerAngles));
         if (Vector3.Distance(_camTransform.localEulerAngles, _startPos) < 2.0f)
         {
             _camTransform.localEulerAngles = _startPos;
