@@ -37,7 +37,7 @@ public class Camera_Obstacle : MonoBehaviour
         _watching= (Camera_WatchingEntity)new Camera_WatchingEntity(_fsm).Camera(this).CamTransform(_camTransform).Color(_detectorColor);
         _watching = _watching.Target(GameManager.Instance.PlayerReference.transform).AudioSource(_source).Clip(_clipDetectPlayer);
         _reset = (Camera_ResetPosition)new Camera_ResetPosition(_fsm).Camera(this).CamTransform(_camTransform).Color(_baseColor);
-        _reset = _reset.Speed(50.0f).AudioSource(_source).Clip(_clipResetting).StartRotation(_camTransform.localEulerAngles);
+        _reset = _reset.Speed(12.5f).AudioSource(_source).Clip(_clipResetting);
         _base.AddBehaviour(ECameraBehaviours.watchingEntity, _watching);
         _watching.AddBehaviour(ECameraBehaviours.Reset, _reset);
         _reset.AddBehaviour(ECameraBehaviours.Base,_base);

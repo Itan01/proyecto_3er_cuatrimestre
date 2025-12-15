@@ -15,6 +15,7 @@ public class PlayerManager : AbstractPlayer
     private bool _invisible = false;
     [SerializeField] private GameObject[] _skinModel;
     [SerializeField] private GameObject[] _clothesModel;
+    [SerializeField] private Material _clothesBreathing;
     [SerializeField] private Material[] _baseColorMaterial;
    [SerializeField] private Material[] _JoinColorMaterial;
     [SerializeField] private AudioClip _deathClip; 
@@ -68,6 +69,7 @@ public class PlayerManager : AbstractPlayer
                 {
                     item.GetComponent<SkinnedMeshRenderer>().material = _JoinColorMaterial[0];
                 }
+                _clothesModel[1].GetComponent<SkinnedMeshRenderer>().material = _clothesBreathing;
             }
         }
         _isMoving = _model.GetIsMoving();
