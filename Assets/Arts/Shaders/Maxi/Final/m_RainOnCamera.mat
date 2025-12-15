@@ -31,6 +31,14 @@ Material:
         m_Texture: {fileID: 2800000, guid: 624c1a311a476cb49b855540ac2cf501, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
+    - _SampleTexture2D_b2140f683c504d149ca02e2493130051_Texture_1_Texture2D:
+        m_Texture: {fileID: 2800000, guid: 5828da6c23f99eb4290523eeb96ad682, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _SampleTexture2D_d86e0d85293a4257a1e1bf37990e98cb_Texture_1_Texture2D:
+        m_Texture: {fileID: 2800000, guid: 5358ba4aa2170984ea3e5e27f32b958b, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
     - unity_Lightmaps:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
@@ -45,8 +53,11 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
-    - _Distortion: 0
+    - _Distortion: 0.03
+    - _DripSpeed: 0.33
     - _Fullscreen_DepthWrite: 0
     - _NormalStrength: 0
+    - _Rain: 1
+    - _RainSpeed: 0.25
     m_Colors: []
   m_BuildTextureStacks: []
