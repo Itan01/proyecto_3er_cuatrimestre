@@ -2,12 +2,16 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.VFX;
 
 public class BaseDoor : MonoBehaviour
 {
     private Animator _animator;
     [SerializeField] private bool _doorOpen=true;
     [SerializeField] private int _entities = 0;
+
+
+
     void Start()
     {
         _animator = GetComponentInChildren<Animator>();
@@ -27,6 +31,7 @@ public class BaseDoor : MonoBehaviour
             AudioStorage.Instance.OpenDoorSound();
         }
     }
+    
     private void OnTriggerExit(Collider Entity)
     {
         if (Entity.GetComponent<EntityMonobehaviour>())
@@ -39,6 +44,7 @@ public class BaseDoor : MonoBehaviour
                 _doorOpen = false;
                 _animator.SetBool("isOpen", _doorOpen);
                 AudioStorage.Instance.CloseDoorSound();
+                
             }
         }
     }
