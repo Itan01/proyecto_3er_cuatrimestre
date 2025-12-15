@@ -1,14 +1,18 @@
 using System;
 using System.Collections;
 using UnityEngine;
+using UnityEngine.VFX;
 
 public class StandardEnemy : AbstractEnemy
 {
     [SerializeField] protected Vector3[] _positions;
     [SerializeField] protected int _indexPosition;
+    //protected S_EemyDetected _vfxEnemy;
+
     protected override void Start()
     {
         base.Start();
+        //_vfxEnemy = _vfxEnemyDetected;
         for (int i = 0; i < _positions.Length; i++)
         {
             _positions[i] += transform.position;
@@ -36,6 +40,7 @@ public class StandardEnemy : AbstractEnemy
         _agent.destination = _nextPosition;
         PreMovement = MovPatrol;
         NextMovement = MovPatrol;
+        _vfxEnemyDetected.VFXOff();
         Debug.Log("Patrullando");
     }
 

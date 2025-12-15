@@ -13,7 +13,6 @@ public class S_CrashAlpha : MonoBehaviour
     {
         material = GetComponent<Renderer>().material;
 
-        // IMPORTANTE: usar BaseColor
         baseColor = material.GetColor("_BaseColor");
 
         StartCoroutine(FadeOut());
@@ -34,7 +33,6 @@ public class S_CrashAlpha : MonoBehaviour
             yield return null;
         }
 
-        // asegurar alpha 0
         baseColor.a = 0f;
         material.SetColor("_BaseColor", baseColor);
     }

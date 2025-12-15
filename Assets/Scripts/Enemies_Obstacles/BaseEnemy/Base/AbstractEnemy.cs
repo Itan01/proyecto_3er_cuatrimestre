@@ -17,6 +17,7 @@ public abstract class AbstractEnemy : EntityMonobehaviour, ISoundInteractions
     protected float _confusedDurationRef = 5.0f; // Este es el tiempo de confusión donde cree haber visto al player
     protected float _searchDuration = 20.0f; // El tiempo que busca al player luego de que este salga del RadiusToHear
     protected float _resetTimerRef = 1.0f;
+    protected S_EemyDetected _vfxEnemyDetected; //script del vfx
     [SerializeField] protected bool _watchingPlayer = false;
     protected bool _isRunning = false, _qMBool;
     protected int _qMIndex;
@@ -181,6 +182,7 @@ public abstract class AbstractEnemy : EntityMonobehaviour, ISoundInteractions
         Condition = CondChaseTarget;
         NextMovement = MovChaseTarget;
         _agent.SetDestination(_nextPosition);
+        _vfxEnemyDetected.VFXOn();
         Debug.Log("Mirando Al Jugador");
     }
     protected virtual void MoveTimerTarget() // Persigue al Jugador

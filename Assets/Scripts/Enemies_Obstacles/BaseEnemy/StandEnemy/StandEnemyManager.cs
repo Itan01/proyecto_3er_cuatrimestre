@@ -24,6 +24,7 @@ public class StandEnemyManager : AbstractEnemy
     {
     }
 
+    
     protected override void MovPatrol() // patron normal (Esta en distintos scripts "StandEnemy""StandardEnemy")
     {
         _mode = 0;

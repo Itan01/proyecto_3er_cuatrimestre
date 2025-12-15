@@ -16416,6 +16416,7 @@ Transform:
   - {fileID: 1011815594}
   - {fileID: 726249261}
   - {fileID: 1957209665}
+  - {fileID: 1997954357}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &679921429
@@ -43167,8 +43168,9 @@ GameObject:
   - component: {fileID: 1997954357}
   - component: {fileID: 1997954359}
   - component: {fileID: 1997954358}
+  - component: {fileID: 1997954360}
   m_Layer: 3
-  m_Name: EnemyDetected
+  m_Name: VFXEnemyDetected
   m_TagString: VFXEnemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -43187,7 +43189,7 @@ Transform:
   m_LocalScale: {x: 428.37036, y: 428.37036, z: 428.37036}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 0}
+  m_Father: {fileID: 674559535}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!73398921 &1997954358
 VFXRenderer:
@@ -43267,6 +43269,20 @@ VisualEffect:
       m_Array: []
     m_Bool:
       m_Array: []
+--- !u!114 &1997954360
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1997954356}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7c2cd4f99c25d894f830806c1a5aa0fe, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _activationTime: 0.5
+  detectionVFX: {fileID: 0}
 --- !u!114 &2009539151
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -45767,7 +45783,7 @@ PrefabInstance:
       objectReference: {fileID: 253129439}
     - target: {fileID: 3144370110316485827, guid: de67a798a138cd74e820773d7bcb22e5, type: 3}
       propertyPath: m_VersionIndex
-      value: 19836
+      value: 19842
       objectReference: {fileID: 0}
     - target: {fileID: 3147228520990260793, guid: de67a798a138cd74e820773d7bcb22e5, type: 3}
       propertyPath: m_LocalPosition.x
@@ -46875,7 +46891,7 @@ PrefabInstance:
       objectReference: {fileID: 1675089794}
     - target: {fileID: 6066584623694799218, guid: de67a798a138cd74e820773d7bcb22e5, type: 3}
       propertyPath: m_VersionIndex
-      value: 13271
+      value: 13277
       objectReference: {fileID: 0}
     - target: {fileID: 6082504141932851851, guid: de67a798a138cd74e820773d7bcb22e5, type: 3}
       propertyPath: m_Layer
@@ -48529,7 +48545,7 @@ PrefabInstance:
       objectReference: {fileID: 37422028}
     - target: {fileID: 2613299162041572341, guid: 67bf10f657f54bf4fa412c77782f26c2, type: 3}
       propertyPath: m_VersionIndex
-      value: 21880
+      value: 21886
       objectReference: {fileID: 0}
     - target: {fileID: 2902868341619577007, guid: 67bf10f657f54bf4fa412c77782f26c2, type: 3}
       propertyPath: m_LocalPosition.y
@@ -48585,7 +48601,7 @@ PrefabInstance:
       objectReference: {fileID: 1297388385}
     - target: {fileID: 6813588857179762787, guid: 67bf10f657f54bf4fa412c77782f26c2, type: 3}
       propertyPath: m_VersionIndex
-      value: 15508
+      value: 15514
       objectReference: {fileID: 0}
     - target: {fileID: 6864093642447393538, guid: 67bf10f657f54bf4fa412c77782f26c2, type: 3}
       propertyPath: m_StoppingDistance
@@ -50530,7 +50546,7 @@ PrefabInstance:
       objectReference: {fileID: 753618087}
     - target: {fileID: 4129271117876626496, guid: e00d66330b884fe47aad26098ce24c81, type: 3}
       propertyPath: m_VersionIndex
-      value: 21719
+      value: 21725
       objectReference: {fileID: 0}
     - target: {fileID: 4403870130865506466, guid: e00d66330b884fe47aad26098ce24c81, type: 3}
       propertyPath: m_Name
@@ -50546,7 +50562,7 @@ PrefabInstance:
       objectReference: {fileID: 1747875243}
     - target: {fileID: 5736872827452189900, guid: e00d66330b884fe47aad26098ce24c81, type: 3}
       propertyPath: m_VersionIndex
-      value: 18940
+      value: 18946
       objectReference: {fileID: 0}
     - target: {fileID: 6421696330732635014, guid: e00d66330b884fe47aad26098ce24c81, type: 3}
       propertyPath: m_LocalPosition.x
@@ -54519,5 +54535,4 @@ SceneRoots:
   - {fileID: 2882621767033592745}
   - {fileID: 1415827218}
   - {fileID: 780368329399185260}
-  - {fileID: 1997954357}
   - {fileID: 169454203}
