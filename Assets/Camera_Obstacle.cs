@@ -1,6 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Rendering.Universal;
+using UnityEngine.VFX;
 public class Camera_Obstacle : MonoBehaviour
 {
     private Fsm_Camera _fsm;
@@ -19,6 +21,9 @@ public class Camera_Obstacle : MonoBehaviour
     [SerializeField] private SO_Layers _layer;
     [SerializeField] private AudioClip _clipDetectPlayer;
     [SerializeField] private AudioClip _clipResetting;
+    [SerializeField] private ScriptableRendererFeature _renderFullScreen;
+    [SerializeField] private Material _materialFullScreen;
+    [SerializeField] private VisualEffect[] _states;
     private void Start()
     {
         _room=GetComponentInParent<RoomManager>();
@@ -32,11 +37,12 @@ public class Camera_Obstacle : MonoBehaviour
         _watching= (Camera_WatchingEntity)new Camera_WatchingEntity(_fsm).Camera(this).CamTransform(_camTransform).Color(_detectorColor);
         _watching = _watching.Target(GameManager.Instance.PlayerReference.transform).AudioSource(_source).Clip(_clipDetectPlayer);
         _reset = (Camera_ResetPosition)new Camera_ResetPosition(_fsm).Camera(this).CamTransform(_camTransform).Color(_baseColor);
-        _reset = _reset.Speed(12.5f).AudioSource(_source).Clip(_clipResetting);
+        _reset = _reset.Speed(50.0f).AudioSource(_source).Clip(_clipResetting).StartRotation(_camTransform.localEulerAngles);
         _base.AddBehaviour(ECameraBehaviours.watchingEntity, _watching);
         _watching.AddBehaviour(ECameraBehaviours.Reset, _reset);
         _reset.AddBehaviour(ECameraBehaviours.Base,_base);
         _reset.AddBehaviour(ECameraBehaviours.watchingEntity, _watching);
+        DetectPlayer(false);
 
     }
     private void Update()
@@ -70,6 +76,20 @@ public class Camera_Obstacle : MonoBehaviour
         _cameraLight.material.SetColor("_EmissionColor", color);
         _light.color = color;
         _light.intensity = intensity;
+    }
+    public void DetectPlayer(bool State)
+    {
+        if (State)
+        {
+            _states[1].gameObject.SetActive(true);
+            _states[0].gameObject.SetActive(false);
+        }
+        else
+        {
+            _states[1].gameObject.SetActive(false);
+            _states[0].gameObject.SetActive(true);
+        }
+        _renderFullScreen.SetActive(State);
     }
     private void OnDestroy()
     {

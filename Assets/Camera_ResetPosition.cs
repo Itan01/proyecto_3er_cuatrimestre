@@ -5,19 +5,16 @@ using UnityEngine;
 public class Camera_ResetPosition : Cons_CameraObstacle
 {
     private float _speed;
-    private float _x,_y,_z;
-    private bool _isResetted;
     private AudioClip _clip;
     private AudioSource _source;
+    private Vector3 _startPos;
     public Camera_ResetPosition(Fsm_Camera Fsm) : base(Fsm)
     {
         _camera = null;
         _clip = null;
         _source = null;
         _speed = 0.0f;
-        _x= 0.0f;   
-        _y= 0.0f;
-        _z = 0.0f;
+        _startPos= Vector3.zero;
     }
     public Camera_ResetPosition Speed(float Speed)
     {
@@ -34,14 +31,17 @@ public class Camera_ResetPosition : Cons_CameraObstacle
         _source = Source;
         return this;
     }
+    public Camera_ResetPosition StartRotation(Vector3 Pos)
+    {
+        _startPos= Pos;
+        return this;
+    }
     public override void Enter()
     {
+        _camera.DetectPlayer(false);
         EventManager.Trigger(EEvents.ResetDectection);
         _source.PlayOneShot(_clip);
         _camera.SetColor(_color, 500f);
-        _x = _camTransform.localEulerAngles.x;
-        _y = _camTransform.localEulerAngles.y;
-        _z = _camTransform.localEulerAngles.z;
     }
     public override void Execute()
     {
@@ -49,42 +49,13 @@ public class Camera_ResetPosition : Cons_CameraObstacle
         {
             _fsm.SetNewBehaviour(ECameraBehaviours.watchingEntity);
         }
-        ResetRotation();
-        if (_isResetted)
+        Vector3 Pos = (_startPos - _camTransform.localEulerAngles).normalized * Time.deltaTime * _speed;
+        _camTransform.localEulerAngles += Pos;
+        Debug.Log(Vector3.Distance(_startPos,_camTransform.localEulerAngles));
+        if (Vector3.Distance(_camTransform.localEulerAngles, _startPos) < 2.0f)
         {
+            _camTransform.localEulerAngles = _startPos;
             _fsm.SetNewBehaviour(ECameraBehaviours.Base);
-            
         }
-        _camTransform.localEulerAngles = new Vector3(_x, _y, _z);
-    }
-    private void ResetRotation()
-    {
-        _isResetted = true;
-        _x = SetValueToZero(_x);
-        _y = SetValueToZero(_y);
-        _z = SetValueToZero(_z);
-    }
-    private float SetValueToZero(float number)
-    {
-        if (number< -359.75f || number < 0.25f)
-        {
-            number = 0.0f;
-            return number;
-
-        }
-        
-
-        if (number >0 && number <180)
-        {
-            number -= _speed * Time.deltaTime;
-            _isResetted = false;
-        }
-        else if(number > 180 && number < 360)
-        {
-            number += _speed * Time.deltaTime; 
-            _isResetted = false;
-
-        }
-        return number;
     }
 }

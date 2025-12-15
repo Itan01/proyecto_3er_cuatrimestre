@@ -26,10 +26,10 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1453458912681413307}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0.9396926, z: 0.34202015, w: 0}
-  m_LocalPosition: {x: 129.9135, y: 5.6551523, z: 36.311714}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
+  m_LocalRotation: {x: -0.6691307, y: 0, z: 0, w: 0.7431448}
+  m_LocalPosition: {x: 0, y: 0, z: 1.3}
+  m_LocalScale: {x: 0.13, y: 0.13, z: 0.13}
+  m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 2821441198348161401}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -404,6 +404,11 @@ MonoBehaviour:
   _layer: {fileID: 11400000, guid: 31cee878b4c24c347932895be40074bc, type: 2}
   _clipDetectPlayer: {fileID: 8300000, guid: 15d60cf03cf615b4ebaf951c3098ca34, type: 3}
   _clipResetting: {fileID: 8300000, guid: 8f215783f544c5b47bc71043f7cc659c, type: 3}
+  _renderFullScreen: {fileID: 2351847048303757354, guid: f1416abf029af0e4cac4436c807f4d2a, type: 2}
+  _materialFullScreen: {fileID: 2100000, guid: 4e06f24241bbb7d4fa707c890e72dac4, type: 2}
+  _states:
+  - {fileID: 5635700903916590835}
+  - {fileID: 8787493701323202022}
 --- !u!1 &9209795918091353355
 GameObject:
   m_ObjectHideFlags: 0
@@ -430,9 +435,9 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 9209795918091353355}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0.9396926, z: 0.34202015, w: 0}
-  m_LocalPosition: {x: 129.9135, y: 5.6551523, z: 36.311714}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalRotation: {x: -0.6691307, y: 0, z: 0, w: 0.7431448}
+  m_LocalPosition: {x: 0, y: 5.6551523, z: 1.3}
+  m_LocalScale: {x: 0.13, y: 0.13, z: 0.13}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 2821441198348161401}

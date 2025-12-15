@@ -54,7 +54,8 @@ public class Camera_BaseMovement : Cons_CameraObstacle
                 _rotateToMax = true;
             }
         }
-        _camTransform.localEulerAngles = new Vector3(0.0f, _rotate, 0.0f);
+        CamRotation.y= _rotate;
+        _camTransform.localEulerAngles = CamRotation;
     }
     public override void FixedExecute()
     {
