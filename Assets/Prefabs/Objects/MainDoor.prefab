@@ -91,6 +91,7 @@ GameObject:
   - component: {fileID: 8047364270112435962}
   - component: {fileID: 8107294644800970781}
   - component: {fileID: 2975783538308449165}
+  - component: {fileID: 4490602067970839393}
   m_Layer: 26
   m_Name: model_door
   m_TagString: Untagged
@@ -234,6 +235,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _mesh: {fileID: 8632655126153581973}
+--- !u!114 &4490602067970839393
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4583702539540147082}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cf7b032310233184b8fcec4cdb1b2a51, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _slamEffect: {fileID: 0}
 --- !u!1 &5720705826512811766
 GameObject:
   m_ObjectHideFlags: 0

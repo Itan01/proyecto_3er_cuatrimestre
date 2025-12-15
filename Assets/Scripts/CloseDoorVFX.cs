@@ -21,6 +21,9 @@ public class CloseDoorVFX : MonoBehaviour
 
     public void PlaySlam()
     {
+        if(_slamEffect != null)
+        {
         _slamEffect.Play();
+        }
     }
 }
