@@ -1,18 +1,18 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.VFX;
 
 public class MainDoorManager : AbstracDoors, ISoundInteractions
 {
     [SerializeField] private AudioClip _buttonSound;
-    private ParticlesManager _particles;
+    [SerializeField] private VisualEffect _effects;
     private float _soundVolume = 1.0f;
     protected Animator _animator;
     protected override void Start()
     {
         base.Start();
         _animator = GetComponentInChildren<Animator>();
-        _particles=GetComponentInChildren<ParticlesManager>();
     }
     protected override void OpenDoor()
     {
@@ -25,10 +25,15 @@ public class MainDoorManager : AbstracDoors, ISoundInteractions
     {
         if (PlayerShootIt)
         {
-            _particles.PlayOnce();
+            StartCoroutine(PlayParticles());
             CheckStatus();
-            
             AudioSource.PlayClipAtPoint(_buttonSound, transform.position, _soundVolume);
         }
+    }
+    private IEnumerator PlayParticles()
+    {
+        _effects.SendEvent("OnPlayMainDoor");
+        yield return new WaitForSeconds(1);
+        _effects.SendEvent("OnStopMainDoor");
     }
 }
