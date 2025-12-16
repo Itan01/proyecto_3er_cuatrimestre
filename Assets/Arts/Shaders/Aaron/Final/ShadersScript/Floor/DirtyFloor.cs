@@ -12,18 +12,14 @@ public class DirtyFloor : MonoBehaviour
 
     void Start()
     {
-        // Clonamos el material para no modificar el original
         materialInstance = floorRenderer.material;
         materialInstance.SetFloat("_DirtAmount", dirtAmount);
     }
 
     void Update()
     {
-
-        // Aumenta la suciedad con el tiempo
         dirtAmount += Time.deltaTime * dirtSpeed;
-        dirtAmount = Mathf.Clamp01(dirtAmount);
-
+        dirtAmount = Mathf.Clamp(dirtAmount, 0f, 0.65f);
 
         materialInstance.SetFloat("_DirtAmount", dirtAmount);
     }
