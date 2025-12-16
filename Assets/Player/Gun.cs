@@ -136,7 +136,6 @@ public class Gun : Abstract_Weapon
         float maxDistance=200.0f;
         float DistanceBetweenCamAndPlayer = (_myTransform.position - _mainCamera.transform.position).magnitude;
         Vector3 StartPosition = _mainCamera.transform.position + _mainCamera.transform.forward * DistanceBetweenCamAndPlayer;
-        Debug.Log("Checking");
         if (Physics.Raycast(StartPosition, _mainCamera.transform.forward, out RaycastHit Hits, maxDistance, _data._obstacles, QueryTriggerInteraction.Ignore))
         {
             _dirToShoot = (Hits.point - _myTransform.position).normalized;

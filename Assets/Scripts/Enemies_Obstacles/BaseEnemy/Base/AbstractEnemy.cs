@@ -17,7 +17,7 @@ public abstract class AbstractEnemy : EntityMonobehaviour, ISoundInteractions
     protected float _confusedDurationRef = 5.0f; // Este es el tiempo de confusión donde cree haber visto al player
     protected float _searchDuration = 20.0f; // El tiempo que busca al player luego de que este salga del RadiusToHear
     protected float _resetTimerRef = 1.0f;
-    protected S_EemyDetected _vfxEnemyDetected; //script del vfx
+    [SerializeField] protected S_EemyDetected _vfxEnemyDetected; //script del vfx
     [SerializeField] protected bool _watchingPlayer = false;
     protected bool _isRunning = false, _qMBool;
     protected int _qMIndex;
@@ -45,6 +45,7 @@ public abstract class AbstractEnemy : EntityMonobehaviour, ISoundInteractions
         EventManager.Subscribe(EEvents.AlertPlayer,SetNoTimer);
         EventManager.Subscribe(EEvents.DetectSound,SetNextPosition);
         EventManager.Subscribe(EEvents.ReStart,SetBaseBehaviour);
+        _vfxEnemyDetected = S_EemyDetected.Instance;
     }
 
     // Update is called once per frame

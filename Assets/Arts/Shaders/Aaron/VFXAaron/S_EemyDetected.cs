@@ -7,7 +7,12 @@ public class S_EemyDetected : MonoBehaviour
 {
     [Header("Behaviour")]
     public float _activationTime = 0.5f;
-
+    public static S_EemyDetected Instance;
+    private void Awake()
+    {
+        if(Instance == null)
+            Instance = this;
+    }
     public VisualEffect detectionVFX;
 
     private bool isAnimating = false;
