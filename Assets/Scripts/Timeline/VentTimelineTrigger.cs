@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Playables;
+using UnityEngine.Rendering.Universal;
 
 public class VentTimelineTrigger : MonoBehaviour
 {
@@ -10,6 +11,9 @@ public class VentTimelineTrigger : MonoBehaviour
 
     [Header("Visual Actor")]
     [SerializeField] private GameObject timelinePlayer;
+
+    [Header("Environment")]
+    [SerializeField] private ScriptableRendererFeature rainDripFeature;
 
     private PlayerManager player;
     private CameraManager camManager;
@@ -67,6 +71,9 @@ public class VentTimelineTrigger : MonoBehaviour
 
         if (camManager != null)
             camManager.FreezeCam(true);
+
+        if (rainDripFeature != null)
+            rainDripFeature.SetActive(false);
 
         timelinePlayer.transform.SetPositionAndRotation(
             player.transform.position,
