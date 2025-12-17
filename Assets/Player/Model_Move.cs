@@ -58,5 +58,12 @@ public class Model_Move : Abstract_Model
         get {return _isMoving; }
         set { _isMoving = value; }
     }
+    public void ResetPhysics()
+    {
+        if (_rb == null) return;
+
+        _rb.velocity = Vector3.zero;
+        _rb.angularVelocity = Vector3.zero;
+    }
 
 }

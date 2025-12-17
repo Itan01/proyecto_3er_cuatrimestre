@@ -51,4 +51,10 @@ public class PL_Control: IMVC
     {
         return _crouch.GetState();   
     }
+    public void ForceCrouch(bool state)
+    {
+        if (_crouch == null) return;
+
+        _crouch.ForceState(state);
+    }
 }

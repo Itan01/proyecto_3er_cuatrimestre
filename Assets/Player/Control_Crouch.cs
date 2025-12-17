@@ -39,4 +39,12 @@ public class Control_Crouch : Abstract_Control
     {
         return _isCrouching;
     }
+    public void ForceState(bool crouch)
+    {
+        _isCrouching = crouch;
+
+        _model.Crouch(_isCrouching);
+        _view.Crouch(_isCrouching);
+    }
+
 }

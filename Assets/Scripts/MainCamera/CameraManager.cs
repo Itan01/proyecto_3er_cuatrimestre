@@ -11,6 +11,9 @@ public class CameraManager : MonoBehaviour
     [SerializeField] private CursorLockMode _lockState = CursorLockMode.Locked;
     [SerializeField] private bool _isCursorVisible = false;
 
+    [Header("Camera (BASE)")]
+    [SerializeField] private Camera _cam;
+
     [Header("Physics")]
     [Range(0.05f, 1.0f)][SerializeField] private float _detectionRadius = 0.1f;
     [SerializeField] private float _hitOffset = 0.25f;
@@ -34,7 +37,6 @@ public class CameraManager : MonoBehaviour
     private float _mouseX = 0.0f, _mouseY = 0.0f, _maxTopDistance = 2.0f;
     private Vector3 _dir = new(), _dirTest = new(), _camPos = new(), _camLookAt = new(), _camDir = new();
 
-    private Camera _cam;
     private Ray _camRay;
     private RaycastHit _camHit;
 
@@ -224,4 +226,5 @@ public class CameraManager : MonoBehaviour
     {
         EventPlayer.Unsubscribe(EPlayer.aim, SetCamDistance);
     }
+
 }

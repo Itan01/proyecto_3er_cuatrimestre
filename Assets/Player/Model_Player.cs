@@ -45,5 +45,9 @@ public class Model_Player
     {
         return _move.IsMoving;
     }
+    public void ResetPhysics()
+    {
+        _move.ResetPhysics();
+    }
 }
 

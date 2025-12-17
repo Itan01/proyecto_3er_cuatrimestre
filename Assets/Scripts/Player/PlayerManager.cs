@@ -120,6 +120,15 @@ public class PlayerManager : AbstractPlayer
         _animator.SetBool("isDeath", true);
         _speed = 0.0f;
     }
+    public void ForceCrouch(bool state)
+    {
+        if (_controller != null)
+            _controller.ForceCrouch(state);
+    }
+    public void ResetPhysicsState()
+    {
+        _model.ResetPhysics();
+    }
     private void OnDestroy()
     {
         EventManager.Unsubscribe(EEvents.DetectPlayer, SetCapturedTrue);
