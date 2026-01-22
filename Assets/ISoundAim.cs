@@ -4,6 +4,6 @@ using UnityEngine;
 
 public interface ISoundAim 
 {
-    public void Activate();
-    public void Deactivate();
+    public void Aim_Activate();
+    public void Aim_Deactivate();
 }

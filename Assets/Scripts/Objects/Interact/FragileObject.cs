@@ -31,12 +31,12 @@ public class FragileObject : AbstractObjects, ISoundInteractions, ISoundAim
         _destroyed=true;
     }
 
-    public void Activate()
+    public void Aim_Activate()
     {
         _mesh.material.SetFloat("_ShowInteractable",1.0f);
     }
      
-    public void Deactivate()
+    public void Aim_Deactivate()
     {
         _mesh.material.SetFloat("_ShowInteractable", 0.0f);
     }

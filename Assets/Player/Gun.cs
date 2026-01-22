@@ -143,17 +143,17 @@ public class Gun : Abstract_Weapon
             if (Hits.collider.TryGetComponent<ISoundAim>(out var Script))
             {
                 if (_aimedObject != null)
-                    _aimedObject.Activate();
+                    _aimedObject.Aim_Activate();
                 if (_aimedObject == Script) return;
                 if (_aimedObject != null)
-                _aimedObject.Deactivate();
-                Script.Activate();
+                _aimedObject.Aim_Deactivate();
+                Script.Aim_Activate();
                 _aimedObject= Script;
             }
             else
             {
                 if (_aimedObject != null)
-                    _aimedObject.Deactivate();
+                    _aimedObject.Aim_Deactivate();
             }
         }
     }

@@ -9,13 +9,13 @@ public class Door_Aiming : MonoBehaviour, ISoundAim
     {
         if (_mesh == null) _mesh = GetComponent<MeshRenderer>();
     }
-    public void Activate()
+    public void Aim_Activate()
     {
         Material Material = _mesh.material;
         Material.SetFloat("_Aiming", 1.0f);
     }
 
-    public void Deactivate()
+    public void Aim_Deactivate()
     {
         Material Material = _mesh.material;
         Material.SetFloat("_Aiming", 0.0f);
