@@ -409,6 +409,7 @@ MonoBehaviour:
   _states:
   - {fileID: 5635700903916590835}
   - {fileID: 8787493701323202022}
+  _mesh: {fileID: 0}
 --- !u!1 &9209795918091353355
 GameObject:
   m_ObjectHideFlags: 0
@@ -600,6 +601,10 @@ PrefabInstance:
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: 509ffc047a96df54ebcfef300d037012, type: 2}
+    - target: {fileID: 8941948583382513278, guid: 59f85ed73fd90be4c91ff3c760bcc655, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 9b1f7b97e43ad064290eabe285fc5be0, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects:
