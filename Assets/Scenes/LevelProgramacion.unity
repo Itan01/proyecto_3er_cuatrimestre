@@ -42048,6 +42048,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1010547876}
     m_Modifications:
+    - target: {fileID: 888156773209846131, guid: d97c59d3cc84d8d4ea479152511e6b85, type: 3}
+      propertyPath: _value
+      value: 50
+      objectReference: {fileID: 0}
     - target: {fileID: 934756807536609378, guid: d97c59d3cc84d8d4ea479152511e6b85, type: 3}
       propertyPath: SizeModule.enabled
       value: 1
@@ -51029,6 +51033,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a03c2ca3a0e2f454187a5cd153711b5a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _clipMilestone: {fileID: 0}
+  _milestoneValue: 5
+  _nextColors:
+  - {r: 0.8254717, g: 1, b: 0.9061165, a: 1}
+  - {r: 0.082035035, g: 0.46226418, b: 0.006541462, a: 1}
+  - {r: 0.45762095, g: 0.4627451, b: 0.007843149, a: 1}
+  - {r: 0.6320754, g: 0.4275313, b: 0.21168566, a: 1}
+  - {r: 0.5566038, g: 0.17229818, b: 0.16015485, a: 1}
+  - {r: 0.4940436, g: 0.5568628, b: 0.16078429, a: 1}
 --- !u!1001 &1084020408810222889
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -52038,10 +52051,10 @@ MonoBehaviour:
   m_enableVertexGradient: 1
   m_colorMode: 2
   m_fontColorGradient:
-    topLeft: {r: 0.107293, g: 0.33962262, b: 0.017621929, a: 1}
-    topRight: {r: 0.107293, g: 0.33962262, b: 0.017621929, a: 1}
-    bottomLeft: {r: 0.7921569, g: 0.9529412, b: 0.73333335, a: 1}
-    bottomRight: {r: 0.7921569, g: 0.9529412, b: 0.73333335, a: 1}
+    topLeft: {r: 0.4433962, g: 0.4433962, b: 0.4433962, a: 1}
+    topRight: {r: 0.4433962, g: 0.4433962, b: 0.4433962, a: 1}
+    bottomLeft: {r: 0.8207547, g: 0.8207547, b: 0.8207547, a: 1}
+    bottomRight: {r: 0.8207547, g: 0.8207547, b: 0.8207547, a: 1}
   m_fontColorGradientPreset: {fileID: 0}
   m_spriteAsset: {fileID: 0}
   m_tintAllSprites: 0
