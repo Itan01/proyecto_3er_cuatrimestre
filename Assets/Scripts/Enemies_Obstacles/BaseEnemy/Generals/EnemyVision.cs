@@ -13,11 +13,9 @@ public class EnemyVision : MonoBehaviour
     [SerializeField] private int verticalRayCount = 30;
 
     [Header("References")]
-    private AbstractEnemy _scriptManager;
     private PlayerManager _player;
     [Header("Debug")]
     public bool drawGizmos = true;
-    [SerializeField] private bool _seePlayer = false;
 
     private Mesh visionMesh;
     [SerializeField] private SO_Layers _layer;
@@ -33,7 +31,6 @@ public class EnemyVision : MonoBehaviour
         _meshRenderer = GetComponent<MeshRenderer>();
         visionMesh = new Mesh { name = "Vision Mesh" };
         meshFilter.mesh = visionMesh;
-        _scriptManager = GetComponentInParent<AbstractEnemy>();
         _headReference =transform;
         _player = GameManager.Instance.PlayerReference;
     }
@@ -51,22 +48,6 @@ public class EnemyVision : MonoBehaviour
     }
     private void DrawFieldOfView()
     {
-        if (_meshRenderer != null)
-        {
-            switch (_scriptManager.GetMode())
-            {
-
-                case -1:
-                case 0: _meshRenderer.material.SetColor("_Main_Color",Color.green); break;
-                case 2:
-                case 3: _meshRenderer.material.SetColor("_Main_Color", Color.yellow); break;
-                case 1: _meshRenderer.material.SetColor("_Main_Color", Color.red); break;
-                default: _meshRenderer.material.SetColor("_Main_Color", Color.green); break;
-            }
-
-           
-        }
-
         debugPoints.Clear();
         Vector3 origin = _headReference ? _headReference.position : transform.position;
 
@@ -122,13 +103,12 @@ public class EnemyVision : MonoBehaviour
         visionMesh.RecalculateNormals();
     }
 
-    private void CheckIfHasVIsion()
+    public bool CheckIfHasVIsion()
     {
-        _seePlayer = false;
+        bool SeePlayer = false;
         if (!OnAngle(GameManager.Instance.PlayerReference.transform.position))
         {
-            _scriptManager.WatchingPlayer(false);
-            return;
+            return SeePlayer;
         }
             
         Vector3 PlayerHead = _player.GetHeadPosition().position;
@@ -138,16 +118,10 @@ public class EnemyVision : MonoBehaviour
             !Physics.Linecast(_headReference.position, PlayerHips, _layer._obstacles, QueryTriggerInteraction.Ignore) ||
            !Physics.Linecast(_headReference.position, PlayerPosition, _layer._obstacles, QueryTriggerInteraction.Ignore))
         {
-            _seePlayer = true;
+            SeePlayer = true;
             Debug.Log("Estoy Viendo Al Jugador");
-            if (_scriptManager.GetMode() != 3 && _scriptManager.GetMode() != 1 && _scriptManager.GetMode() != 6)
-            {
-                _scriptManager.SetModeByIndex(3);
-
-            }
         }
-        SetAlphaValue();
-        _scriptManager.WatchingPlayer(_seePlayer);
+        return SeePlayer;
     }
 
     private bool OnAngle(Vector3 Position)
@@ -156,16 +130,9 @@ public class EnemyVision : MonoBehaviour
         bool State = Angle < viewAngle * 0.5f;
         return State;
     }
-    private void SetAlphaValue()
+    public void SetColorVision(Color Color)
     {
-        float Value = 1.0f;
-        Material Material = _meshRenderer.material;
-            Value = Material.GetFloat("_Alpha_Values");
-        if (_seePlayer)
-            Material.SetFloat("_Alpha_Values", Value - (Time.deltaTime* 0.2f));
-        else
-            Material.SetFloat("_Alpha_Values", 1.0f);
-
+        _meshRenderer.material.SetColor("_Main_Color", Color);
     }
     private void OnDrawGizmosSelected()
     {

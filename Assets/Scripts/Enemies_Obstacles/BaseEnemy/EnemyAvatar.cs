@@ -1,31 +1,20 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.AI;
 
 public class EnemyAvatar : MonoBehaviour
 {
-    private AbstractEnemy _enemyScript;
+
+    [SerializeField]private AudioClip _walking;
+    private AudioSource _source;
 
     private void Start()
     {
-        _enemyScript = GetComponentInParent<AbstractEnemy>();
-    }
-
-    public void ResettingPath()
-    {
-        _enemyScript.SetModeByIndex(0);
-    }
-    public void SearchSound()
-    {
-        _enemyScript.SetModeByIndex(2);
-    }
-    public void FollowTarget()
-    {
-        _enemyScript.SetModeByIndex(1);
+        if(_source==null) _source = GetComponentInParent<AudioSource>();
     }
     public void PlayAudioWalk()
     {
-        _enemyScript.PlayAudioWalk();
+       _source.pitch= Random.Range(0.95f, 1.05f);
+       if(_walking !=null) _source.PlayOneShot(_walking,0.1f);
     }
 }
