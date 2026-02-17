@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -21,6 +22,7 @@ public class S_StandardEnemy : MonoBehaviour, ISoundInteractions
     private Vector3 _desirePosition;
     [SerializeField] private EStandardEnemyBehaviours _state;
     [SerializeField] private EStandardEnemyBehaviours _previousState;
+    [SerializeField] private bool _activate=false;
 
     [Header("<color=red>Setter</color>")]
     [SerializeField] private EnemyVision _vision;
@@ -37,14 +39,17 @@ public class S_StandardEnemy : MonoBehaviour, ISoundInteractions
     private Fsm_StandardEnemy _fsm;
     private Dictionary<EMarkEnemyState, Sprite> _spritesMark = new();
 
-    private bool _isRunning=true;
-
     private void Start()
     {
         if (_agent == null) _agent = GetComponent<NavMeshAgent>();
         _agent.speed = Data.Speed;
         if(_animator == null) _animator = GetComponentInChildren<Animator>();
         if(_audioSource==null) _audioSource = GetComponent<AudioSource>();
+        RoomManager Room = GetComponentInParent<RoomManager>();
+        Room.DestroyRoom += Destroy;
+        Room.DesActRoom += DesActivation;
+        Room.ActRoom += Activation;
+
         _fsm = new Fsm_StandardEnemy();
         _patrol = (S_StandardEnemy_Patrol)new S_StandardEnemy_Patrol(_fsm).Agent(_agent).Entity(this).Animator(_animator).DATA(DataState[0]);
         _patrol = _patrol.Positions(Data.Positions);
@@ -83,7 +88,6 @@ public class S_StandardEnemy : MonoBehaviour, ISoundInteractions
 
         _stunned.AddBehaviour(EStandardEnemyBehaviours.Search, _search);
 
-        _fsm.SetStartBehaviour(_patrol);
 
         SetMarkDictionary();
 
@@ -94,12 +98,12 @@ public class S_StandardEnemy : MonoBehaviour, ISoundInteractions
     }
     private void Update()
     {
-        if (!_isRunning) return;
+        if (!_activate) return;
         _fsm.VirtualUpdate();
     }
     private void FixedUpdate()
     {
-        if (!_isRunning) return;
+        if (!_activate) return;
         _fsm.VirtualFixedUpdate();
     }
 
@@ -192,6 +196,7 @@ public class S_StandardEnemy : MonoBehaviour, ISoundInteractions
     }
     private void Restart(params object[] Parameters)
     {
+        if (!_activate) return;
         _fsm.SetNewBehaviour(EStandardEnemyBehaviours.Patrol);
         _patrol.SetWaypoint(0);
         transform.position = Data.Positions[0].position;
@@ -199,14 +204,42 @@ public class S_StandardEnemy : MonoBehaviour, ISoundInteractions
     }
     public void SetDesirePosition(params object[] Parameters)
     {
+        if(!_activate) return;
         Transform Transform = (Transform)Parameters[0];
         DesirePos = Transform.position;
         _fsm.SetNewBehaviour(EStandardEnemyBehaviours.Hear);
     }
     public void SetNoTimer(params object[] Parameters)
     {
+        if (!_activate) return;
         _fsm.SetNewBehaviour(EStandardEnemyBehaviours.Chase);
     }
+
+    private void Destroy()
+    {
+        RoomManager Room = GetComponentInParent<RoomManager>();
+        Room.DestroyRoom -= Destroy;
+        Room.DesActRoom -= DesActivation;
+        Room.ActRoom -= Activation;
+        _activate = false;
+        gameObject.SetActive(false);
+    }
+    private void DesActivation()
+    {
+        _animator.SetBool("isMoving", false);
+        _animator.SetBool("isRunning", false);
+        _vision.gameObject.SetActive(false);
+        _activate = false;
+    }
+
+    private void Activation()
+    {
+        _vision.gameObject.SetActive(true);
+        _fsm.SetStartBehaviour(_patrol);
+        _activate = true;
+    }
+
+
     private void OnDestroy()
     {
         EventManager.Unsubscribe(EEvents.ReStart, Restart);
