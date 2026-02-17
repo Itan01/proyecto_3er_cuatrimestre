@@ -15,6 +15,7 @@ public class S_StandardEnemy_Chasing : Cons_StandardEnemy
         _animator.SetBool("isRunning",true);
         _entity.State = EStandardEnemyBehaviours.Chase;
         _agent.speed = _entity.Speed() * _multiplier;
+        _entity.ShowMark(true, EMarkEnemyState.AlertMark);
     }
     public override void Execute()
     {
@@ -24,6 +25,7 @@ public class S_StandardEnemy_Chasing : Cons_StandardEnemy
     {
         _animator.SetBool("isRunning", false);
         _agent.speed= _entity.Speed();
+        _entity.ShowMark(false, EMarkEnemyState.AlertMark);
     }
     #region Questions
     #endregion

@@ -158,6 +158,7 @@ public class S_StandardEnemy : MonoBehaviour, ISoundInteractions
         _addReferencer.position = transform.position;
         _patrol.AddPosition(_addReferencer);
     }
+
     #endregion
 
     #region VISION

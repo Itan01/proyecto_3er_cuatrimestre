@@ -30,6 +30,7 @@ public class S_StandardEnemy_Watching : Cons_StandardEnemy
         _animator.SetBool("isMoving", false);
         _entity.State = EStandardEnemyBehaviours.Watching;
         _agent.isStopped = true;
+        _entity.ShowMark(true, EMarkEnemyState.QuestionMark);
     }
     public override void Execute()
     {
@@ -41,6 +42,7 @@ public class S_StandardEnemy_Watching : Cons_StandardEnemy
         _agent.isStopped = false;
         _timerOff = _timerOffRef;
         _timer = _timerRef;
+        _entity.ShowMark(false, EMarkEnemyState.QuestionMark);
     }
     #region Questions
 

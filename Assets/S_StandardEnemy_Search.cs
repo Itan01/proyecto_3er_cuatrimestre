@@ -14,6 +14,7 @@ public class S_StandardEnemy_Search : Cons_StandardEnemy
         _animator.SetBool("isMoving",false);
         _agent.isStopped = true;
         _entity.State = EStandardEnemyBehaviours.Search;
+        _entity.ShowMark(true, EMarkEnemyState.QuestionMark);
     }
     public override void Execute()
     {
@@ -25,5 +26,6 @@ public class S_StandardEnemy_Search : Cons_StandardEnemy
     {
         _timer = _timerRef;
         _agent.isStopped = false;
+        _entity.ShowMark(false, EMarkEnemyState.AlertMark);
     }
 }
