@@ -229,13 +229,13 @@ public class S_StandardEnemy : MonoBehaviour, ISoundInteractions
     {
         _animator.SetBool("isMoving", false);
         _animator.SetBool("isRunning", false);
-        _vision.gameObject.SetActive(false);
+        _vision.Deactivate();
         _activate = false;
     }
 
     private void Activation()
     {
-        _vision.gameObject.SetActive(true);
+        _vision.Activate();
         _fsm.SetStartBehaviour(_patrol);
         _activate = true;
     }

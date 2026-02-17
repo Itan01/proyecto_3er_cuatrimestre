@@ -52,7 +52,7 @@ public class S_StandardEnemy_MoveToPosition : Cons_StandardEnemy
     }
     private void ArriveToWaypoint()
     {
-        if (Vector3.SqrMagnitude(_desirePosition - _myTransform.position) > 0.25f) return;
+        if (Vector3.SqrMagnitude(_desirePosition - _myTransform.position) > 5.0625f) return;
         _fsm.SetNewBehaviour(EStandardEnemyBehaviours.Search);
     }
     #endregion

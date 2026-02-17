@@ -202,4 +202,12 @@ public class EnemyVision : MonoBehaviour
         }
         return false;
     }
+    public void Activate()
+    {
+        _meshRenderer.enabled= true;
+    }
+    public void Deactivate() 
+    {
+        _meshRenderer.enabled = false;
+    }
 }
