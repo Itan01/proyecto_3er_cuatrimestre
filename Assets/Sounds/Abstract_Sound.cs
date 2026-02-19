@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 public abstract class Abstract_Sound: MonoBehaviour , ICanCatch
 {
-    [SerializeField] protected bool _atractted = false, _playerShooted=false, _canCatch=false;
+    [SerializeField] protected bool _atractted = false, _playerShooted=false, _canCatch=false, _bounce;
     [SerializeField] protected ESounds _indexRef=ESounds.none;
     [SerializeField] protected float _speed = 1.0f, _size = 1.0f;
     [SerializeField] protected Vector3 _velocity;
@@ -55,6 +55,11 @@ public abstract class Abstract_Sound: MonoBehaviour , ICanCatch
         get { return _canCatch; }
         set { _canCatch = value; }
     }
+    public bool Bounce
+    {
+        get { return _bounce; }
+        set { _bounce = value; }
+    }
     public bool ShootByPlayer
     {
         get { return _playerShooted; }
@@ -75,5 +80,19 @@ public abstract class Abstract_Sound: MonoBehaviour , ICanCatch
             script.IIteraction(_playerShooted);
         }
     }
-
+    public void SetBounce()
+    {
+        _bounce = true;
+        StartCoroutine(BounceTimer());
+    }
+    private IEnumerator BounceTimer()
+    {
+        float Timer = 2.0f;
+        while(Timer >0)
+        {
+            Timer -= Time.deltaTime; 
+            yield return null;
+        }
+        _bounce = false;
+    }
 }

@@ -8,6 +8,7 @@ public abstract class Abstract_Weapon : MonoBehaviour, IObservableMegaphone
      protected bool _useRightClick=false;
     protected bool _usingGun;
      protected bool _hasBullet;
+    protected int _ammo,_ammoCapacityRef;
    protected List<IObserverMegaphone> _obs = new List<IObserverMegaphone>();
 
     protected virtual void Update()

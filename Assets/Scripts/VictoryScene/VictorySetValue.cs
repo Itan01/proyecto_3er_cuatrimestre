@@ -21,6 +21,8 @@ public class VictorySetValue : MonoBehaviour
         {
             _maxValue = GameManager.Instance.FinalScore;
             _menu.SetMoney(_maxValue);
+            Save_Progress_Json.Instance.Data.Money += _maxValue;
+            Save_Progress_Json.Instance.SaveData();
         }
 
         if (_index == 1)
@@ -34,7 +36,7 @@ public class VictorySetValue : MonoBehaviour
     {
         while (_value < _maxValue)
         {
-            _value += (int)(Time.deltaTime * _maxValue);
+            _value += (int)(Time.deltaTime * _maxValue * 0.5f);
             _text.text = $"{_showText} {_value}";
 
         }

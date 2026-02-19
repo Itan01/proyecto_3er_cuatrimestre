@@ -27,6 +27,7 @@ public class Gun : Abstract_Weapon
         LVLManager.Instance.Gun = this;
         _renderFullScreen.SetActive(false);
         _boxSize = new Vector3(_boxSizeValue, _boxSizeValue, 0.1f);
+        _ammo = 0;
     }
     private void Start()
     {
@@ -86,6 +87,7 @@ public class Gun : Abstract_Weapon
         {
             if(_hit.collider.gameObject.TryGetComponent<Abstract_Sound>(out Abstract_Sound Sound))
             {
+                if (Sound.Bounce) return;
                 Cons_Raycast ray = new Cons_Raycast(500.0f, _data._everything);
                 if (ray.CheckerComponent<Abstract_Sound>(transform.position, Sound.transform.position - transform.position))
                 {
@@ -116,10 +118,11 @@ public class Gun : Abstract_Weapon
     {
         _hasBullet = false;
         _aiming = false;
+        _ammo--;
         var x = Factory_CrashSound.Instance.Create();
         x.transform.position = transform.position + transform.forward * 2.0f;
         x.ForceDirection(_dirToShoot);
-        x.Speed(20.0f);
+        x.Speed(20.0f * Save_Progress_Json.Instance.Data.GunPowerMultiplier);
         x.Size(1.0f);
         x.ShootByPlayer=true;
         AudioManager.Instance.PlaySFX(_shootClip,1.0f);
@@ -161,20 +164,29 @@ public class Gun : Abstract_Weapon
     {
         if(other.TryGetComponent<Abstract_Sound>(out Abstract_Sound Sound))
         {
-            if(Sound.Atractted && Sound.CanCatch)
+            if (!Sound.Atractted || !Sound.CanCatch) return;
+            if (Save_Progress_Json.Instance.Data.Ammo > _ammo)
             {
                 if (_render != null)
-                    _render.material.SetFloat("_HasASound",1.0f);
+                    _render.material.SetFloat("_HasASound", 1.0f);
                 foreach (var Obs in _obs)
                 {
                     Obs.SetSound(Sound.IndexRef);
                 }
+                _ammo++;
                 _hasBullet = true;
-                Sound.Atractted = false;
-                Sound.CanCatch=false;
                 Sound.Refresh();
-                AudioManager.Instance.PlaySFX(_grabClip,1.0f);
+                AudioManager.Instance.PlaySFX(_grabClip, 1.0f);
             }
+            else
+            {
+                //Transform Aux = transform;
+                //Vector3 Dir = Vector3.Reflect(transform.position - Sound.transform.position, Aux.forward) * -1.25f;
+                Vector3 Dir = (transform.position - Sound.transform.position) * -1.25f;
+                Sound.SetBounce();
+                Sound.ForceDirection(Dir);
+            }
+
         }
     }
     private void OnDrawGizmosSelected()

@@ -49,7 +49,7 @@ public class Model_Move : Abstract_Model
         if (_steer == Vector3.zero) return;
         Vector3 Orientation = Vector3.Slerp(_modelTransform.forward, _steer, Time.fixedDeltaTime * _rotSpeed);
         _orientation.Set(Orientation);
-        _rb.MovePosition(_transform.position + (_speed * Time.fixedDeltaTime * _steer));
+        _rb.MovePosition(_transform.position + (_speed * Time.fixedDeltaTime * _steer * Save_Progress_Json.Instance.Data.MovementMultiplier));
 
 
     }

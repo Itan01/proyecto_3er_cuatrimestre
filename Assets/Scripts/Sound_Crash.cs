@@ -22,6 +22,9 @@ public class Sound_Crash : Abstract_Sound
 
     public override void Refresh()
     {
+        Atractted = false;
+        CanCatch = false;
+        Bounce = false;
         _playerShooted = false;
         _pool.Release(this);
     }
