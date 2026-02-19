@@ -119,6 +119,7 @@ public class Gun : Abstract_Weapon
         _hasBullet = false;
         _aiming = false;
         _ammo--;
+
         var x = Factory_CrashSound.Instance.Create();
         x.transform.position = transform.position + transform.forward * 2.0f;
         x.ForceDirection(_dirToShoot);
@@ -127,11 +128,15 @@ public class Gun : Abstract_Weapon
         x.ShootByPlayer=true;
         AudioManager.Instance.PlaySFX(_shootClip,1.0f);
         StartCoroutine(Explosion());
-        if (_render != null)
-            _render.material.SetFloat("_HasASound", 0.0f);
-        foreach (var Obs in _obs)
+        if (_ammo <= 0)
         {
-            Obs.SetSound(ESounds.none);
+            _ammo = 0;
+            foreach (var Obs in _obs)
+            {
+                Obs.SetSound(ESounds.none);
+            }
+            if (_render != null)
+                _render.material.SetFloat("_HasASound", 0.0f);
         }
     }
     private void Aiming()

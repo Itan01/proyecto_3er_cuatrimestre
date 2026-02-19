@@ -12,10 +12,12 @@ public class VictoryMenu : MonoBehaviour
     [SerializeField] private GameObject _scoreScene;
     [SerializeField] private GameObject _CongratulationScene;
     [SerializeField] private GameObject _rank;
+    [SerializeField] private AudioSource _music;
     Action NextBehaviour;
     private void Start()
     {
         NextBehaviour = DoMaths;
+        GameManager.Instance.LastScreen=EScreenName.VictoryMenu;
         _animator=GetComponent<Animator>();
     }
     private void Update()
@@ -29,6 +31,7 @@ public class VictoryMenu : MonoBehaviour
     private void ShowCongratulations()
     {
         _CongratulationScene.SetActive(true);
+        _music.Play();
         _scoreScene.SetActive(false);
     }
 

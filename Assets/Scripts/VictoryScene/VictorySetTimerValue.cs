@@ -10,7 +10,6 @@ public class VictorySetTimerValue : MonoBehaviour
     [SerializeField]private int _value = 0, _maxValue = 0;
     private int _hour, _minute, _second;
     [SerializeField] private string _showText = "Time: ";
-    [SerializeField] private AudioSource _audioSource;
     [SerializeField] private AudioClip _audioClip;
     [SerializeField] private VictoryMenu _menu;
     private string _textSec, _textMin, _textHour;
@@ -44,7 +43,7 @@ public class VictorySetTimerValue : MonoBehaviour
             if (!_playOnce)
             {
                 _playOnce = true;
-                _audioSource.PlayOneShot(_audioClip);
+                AudioManager.Instance.PlaySFX(_audioClip, 1.0f);
 
             }
         }

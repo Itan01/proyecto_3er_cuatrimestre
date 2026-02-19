@@ -9,7 +9,6 @@ public class VictorySetValue : MonoBehaviour
     [SerializeField] private int _value = 0, _maxValue = 0;
     [SerializeField] private string _showText = "Money Stole : $";
     [SerializeField] private int _index;
-    [SerializeField] private AudioSource _audioSource;
     [SerializeField] private AudioClip _audioClip;
     private VictoryMenu _menu;
 
@@ -40,7 +39,7 @@ public class VictorySetValue : MonoBehaviour
             _text.text = $"{_showText} {_value}";
 
         }
-        _audioSource.PlayOneShot(_audioClip);
+        AudioManager.Instance.PlaySFX(_audioClip,1.0f);
         yield return null;
     }
 }

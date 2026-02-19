@@ -7,7 +7,6 @@ public class VictorySetRank : MonoBehaviour
 {
     private int _value;
     private TextMeshProUGUI _text;
-    [SerializeField] private AudioSource _audioSource;
     [SerializeField] private AudioClip[] _ranks;
     private void Start()
     {
@@ -19,27 +18,27 @@ public class VictorySetRank : MonoBehaviour
         if (_value <= 50)
         {
             _text.text = $"D";
-            _audioSource.PlayOneShot(_ranks[0],7.0f);
+            AudioManager.Instance.PlaySFX(_ranks[0],7.0f);
         }
         if (_value > 50)
         {
             _text.text = $"C";
-            _audioSource.PlayOneShot(_ranks[1], 7.0f);
+            AudioManager.Instance.PlaySFX(_ranks[1], 7.0f);
         }
         if (_value > 250)
         {
             _text.text = $"B";
-            _audioSource.PlayOneShot(_ranks[2], 7.0f);
+            AudioManager.Instance.PlaySFX(_ranks[2], 7.0f);
         }
         if (_value > 500)
         {
             _text.text = $"A";
-            _audioSource.PlayOneShot(_ranks[3], 7.0f);
+            AudioManager.Instance.PlaySFX(_ranks[3], 7.0f);
         }
         if (_value > 1000)
         {
             _text.text = $"S";
-            _audioSource.PlayOneShot(_ranks[4], 5.0f);
+            AudioManager.Instance.PlaySFX(_ranks[4], 5.0f);
         }
     }
 }

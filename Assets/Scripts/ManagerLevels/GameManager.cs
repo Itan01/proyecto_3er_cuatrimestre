@@ -75,5 +75,10 @@ public class GameManager : MonoBehaviour
         get { return _timeCaptured; }
         set { _timeCaptured = value; }
     }
-
+    [SerializeField] private EScreenName _screenName;
+    public EScreenName LastScreen
+    {
+        get { return _screenName; }
+        set { _screenName = value; }
+    } 
 }
