@@ -8,7 +8,7 @@ public class UI_Score_Value : MonoBehaviour, IObserverScore
     private TextMeshProUGUI _text;
     private float _score;
     private float _finalScore;
-    private int _index = 0;
+    private int _index = 1;
     [SerializeField] private AudioClip _clipMilestone;
     [SerializeField] private int _milestoneValue = 1000;
     [SerializeField] private Color[] _nextColors;

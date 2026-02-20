@@ -40,12 +40,6 @@ public class EnemyVision : MonoBehaviour
         DrawFieldOfView();
         transform.forward = _headReference.forward;
     }
-
-    private void Update()
-    {
-        if (_player.IsDeath() || _player.GetInvisible()) return;
-            CheckIfHasVIsion();
-    }
     private void DrawFieldOfView()
     {
         debugPoints.Clear();
@@ -119,7 +113,7 @@ public class EnemyVision : MonoBehaviour
            !Physics.Linecast(_headReference.position, PlayerPosition, _layer._obstacles, QueryTriggerInteraction.Ignore))
         {
             SeePlayer = true;
-            Debug.Log("Estoy Viendo Al Jugador");
+           // Debug.Log("Estoy Viendo Al Jugador");
         }
         return SeePlayer;
     }

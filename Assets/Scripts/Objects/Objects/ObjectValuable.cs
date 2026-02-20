@@ -49,22 +49,13 @@ public class ObjectValuable : AbstractObjects, IInteractableObject
             DeactivateShader();
         }
     }
-
-    protected override void SetFeedback(bool State)
-    {
-        if (State)
-            _particlesManager.StartLoop();
-        else
-            _particlesManager.StopLoop();
-        _animator.SetBool("Shine", _animated);
-    }
     protected override void DesactivateObject()
     {
         _collider.enabled = false;
         gameObject.SetActive(false);
     }
 
-    public void ActivateShader()
+    public void ActivateShader() 
     {
         _mesh.material.SetFloat("_IsPlayerNear", 1.0f);
     }

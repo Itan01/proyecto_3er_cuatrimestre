@@ -95,6 +95,7 @@ public class S_StandardEnemy : MonoBehaviour, ISoundInteractions
        EventManager.Subscribe(EEvents.AlertPlayer, SetNoTimer);
        EventManager.Subscribe(EEvents.DetectSound, SetDesirePosition);
        EventManager.Subscribe(EEvents.ReStart, Restart);
+        DesActivation();
     }
     private void Update()
     {

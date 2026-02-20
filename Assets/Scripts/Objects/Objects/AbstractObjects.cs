@@ -29,7 +29,7 @@ public abstract class AbstractObjects : MonoBehaviour
             _animated = true;
         else
             _animated = false;
-        SetFeedback(_animated);
+        //SetFeedback(_animated);
     }
 
     protected virtual void SetFeedback(bool State)

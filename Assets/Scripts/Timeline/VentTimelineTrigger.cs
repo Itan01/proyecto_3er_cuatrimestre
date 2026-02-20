@@ -23,10 +23,13 @@ public class VentTimelineTrigger : MonoBehaviour
 
     private void Awake()
     {
-        camManager = GameManager.Instance.CameraReference
-            .GetComponent<CameraManager>();
+       
     }
 
+    private void Start()
+    {
+        camManager = GameManager.Instance.CameraReference.GetComponent<CameraManager>();
+    }
     private void OnTriggerEnter(Collider other)
     {
         if (other.TryGetComponent(out PlayerManager pm))
