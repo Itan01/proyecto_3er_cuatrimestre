@@ -116,7 +116,6 @@ public class Gun : Abstract_Weapon
     }
     private void Shoot()
     {
-        _hasBullet = false;
         _aiming = false;
         _ammo--;
 
@@ -131,6 +130,7 @@ public class Gun : Abstract_Weapon
         if (_ammo <= 0)
         {
             _ammo = 0;
+            _hasBullet = false;
             foreach (var Obs in _obs)
             {
                 Obs.SetSound(ESounds.none);
