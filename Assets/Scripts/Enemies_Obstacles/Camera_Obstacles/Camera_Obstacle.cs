@@ -22,6 +22,7 @@ public class Camera_Obstacle : MonoBehaviour, ISoundAim, ISoundInteractions
     [SerializeField] private SO_Layers _layer;
     [SerializeField] private AudioClip _clipDetectPlayer;
     [SerializeField] private AudioClip _clipResetting;
+    [SerializeField] private AudioClip _clipStunned;
     [SerializeField] private ScriptableRendererFeature _renderFullScreen;
     [SerializeField] private Material _materialFullScreen;
     [SerializeField] private VisualEffect[] _states;
@@ -131,6 +132,7 @@ public class Camera_Obstacle : MonoBehaviour, ISoundAim, ISoundInteractions
         _states[1].gameObject.SetActive(false);
         _states[0].gameObject.SetActive(false);
         _fsm.SetNewBehaviour(ECameraBehaviours.Disable);
+        _source.PlayOneShot(_clipStunned,1.0f);
     }
 }
 

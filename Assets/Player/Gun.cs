@@ -18,6 +18,7 @@ public class Gun : Abstract_Weapon
     [SerializeField] private MeshRenderer _render;
     [SerializeField] private AudioClip _shootClip;
     [SerializeField] private AudioClip _grabClip;
+    [SerializeField] private AudioClip _bounceClip;
     [SerializeField] private ScriptableRendererFeature _renderFullScreen;
     [SerializeField] private Material _materialFullScreen;
 
@@ -188,6 +189,7 @@ public class Gun : Abstract_Weapon
                 //Transform Aux = transform;
                 //Vector3 Dir = Vector3.Reflect(transform.position - Sound.transform.position, Aux.forward) * -1.25f;
                 Vector3 Dir = (transform.position - Sound.transform.position) * -1.25f;
+                AudioManager.Instance.PlaySFX(_bounceClip, 1.0f);
                 Sound.SetBounce();
                 Sound.ForceDirection(Dir);
             }

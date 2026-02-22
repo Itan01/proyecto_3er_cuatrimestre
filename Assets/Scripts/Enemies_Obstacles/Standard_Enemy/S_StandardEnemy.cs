@@ -209,6 +209,7 @@ public class S_StandardEnemy : MonoBehaviour, ISoundInteractions
         if(!_activate) return;
         Transform Transform = (Transform)Parameters[0];
         DesirePos = Transform.position;
+        _desirePosition.y= transform.position.y;
         _fsm.SetNewBehaviour(EStandardEnemyBehaviours.Hear);
     }
     public void SetNoTimer(params object[] Parameters)
