@@ -145,12 +145,14 @@ public class Gun : Abstract_Weapon
         float maxDistance=200.0f;
         float DistanceBetweenCamAndPlayer = (_myTransform.position - _mainCamera.transform.position).magnitude;
         Vector3 StartPosition = _mainCamera.transform.position + _mainCamera.transform.forward * DistanceBetweenCamAndPlayer;
-        if (Physics.Raycast(StartPosition, _mainCamera.transform.forward, out RaycastHit Hits, maxDistance, _data._obstacles, QueryTriggerInteraction.Ignore))
+        if (Physics.Raycast(StartPosition, _mainCamera.transform.forward, out RaycastHit Hits, maxDistance, _data._everything, QueryTriggerInteraction.Ignore))
         {
+            Debug.Log(Hits.collider.name);
             _dirToShoot = (Hits.point - _myTransform.position).normalized;
             _hitDistance = Hits.distance;
             if (Hits.collider.TryGetComponent<ISoundAim>(out var Script))
             {
+
                 if (_aimedObject != null)
                     _aimedObject.Aim_Activate();
                 if (_aimedObject == Script) return;
@@ -158,6 +160,7 @@ public class Gun : Abstract_Weapon
                 _aimedObject.Aim_Deactivate();
                 Script.Aim_Activate();
                 _aimedObject= Script;
+
             }
             else
             {

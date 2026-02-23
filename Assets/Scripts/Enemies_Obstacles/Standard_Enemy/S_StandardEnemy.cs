@@ -3,8 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
-
-public class S_StandardEnemy : MonoBehaviour, ISoundInteractions
+public class S_StandardEnemy : MonoBehaviour, ISoundInteractions, ISoundAim
 {
 
     private S_StandardEnemy_Patrol _patrol;
@@ -28,6 +27,7 @@ public class S_StandardEnemy : MonoBehaviour, ISoundInteractions
     [SerializeField] private EnemyVision _vision;
     [SerializeField] private MarkStateManager _markState;
     [SerializeField] private Transform _addReferencer;
+    [SerializeField] private SkinnedMeshRenderer[] _mesh;
 
     [Header("<color=Blue>DATA</color>")]
     [SerializeField] private DATA_MARKSTATE[] Marks;
@@ -159,7 +159,17 @@ public class S_StandardEnemy : MonoBehaviour, ISoundInteractions
         _addReferencer.position = transform.position;
         _patrol.AddPosition(_addReferencer);
     }
-
+    public void SetMeshState(string Name, float Value)
+    {
+        if (_mesh.Length == 0) return;
+        Debug.Log(Name);
+        for (int i = 0; i < _mesh.Length; i++)
+        {
+            Material Material = _mesh[i].material;
+            Debug.Log(_mesh[i].name);
+            Material.SetFloat(Name, Value);
+        }
+    }
     #endregion
 
     #region VISION
@@ -250,5 +260,15 @@ public class S_StandardEnemy : MonoBehaviour, ISoundInteractions
         EventManager.Unsubscribe(EEvents.AlertPlayer, SetNoTimer);
         EventManager.Unsubscribe(EEvents.DetectPlayer, SetDesirePosition);
     }
+    public void Aim_Activate()
+    {
+        SetMeshState("_aimed",1.0f);
+    }
+
+    public void Aim_Deactivate()
+    {
+        SetMeshState("_aimed", 0.0f);
+    }
+
     #endregion
 }

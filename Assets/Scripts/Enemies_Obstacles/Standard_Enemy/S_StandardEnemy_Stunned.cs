@@ -17,12 +17,14 @@ public class S_StandardEnemy_Stunned : Cons_StandardEnemy
         _entity.State = EStandardEnemyBehaviours.Stunned;
         _agent.speed = Mathf.Clamp(_agent.speed + 0.1f,1.0f,5.0f);
         _entity.AddNewPos();
+        _entity.SetMeshState("_StunnedCondition", 1.0f);
     }
     public override void Execute()
     {
         _timer -= Time.deltaTime;
         if (_timer > 0) return;
         _fsm.SetNewBehaviour(EStandardEnemyBehaviours.Search);
+        _entity.SetMeshState("_StunnedCondition", 0.0f);
     }
     public override void Exit()
     {
