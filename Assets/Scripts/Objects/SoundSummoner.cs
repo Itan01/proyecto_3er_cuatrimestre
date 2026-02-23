@@ -32,7 +32,6 @@ public class SoundSummoner : MonoBehaviour
     }
     private void SummonSound()
     {
-        //_spawnPosition.rotation= Quaternion.Euler(UnityEngine.Random.Range(-45.0f, 45.0f + 1), _startRotationY+ UnityEngine.Random.Range(45.0f, 135.0f + 1), 0);
         var Sound = Factory_CrashSound.Instance.Create();
         Sound.transform.position = transform.position + (_dir.position- transform.position).normalized * _distance;
         var script = Sound.GetComponent<Abstract_Sound>();
@@ -59,18 +58,13 @@ public class SoundSummoner : MonoBehaviour
     {
         _timer -= Time.deltaTime;
 
-        if (_timer < 0)
-        {
-            _amount--;
-            SummonSound();
-            _timer = 0.5f;
-            if (_amount <= 0)
-            {
-                _timer = _timerRef;
-                _amount = _amountRef;
-            }
-
-        }
+        if (_timer > 0) return;
+        _amount--;
+        SummonSound();
+        _timer = 0.5f;
+        if (_amount > 0) return;
+        _timer = _timerRef;
+        _amount = _amountRef;
     }
     private void OnDestroy()
     {
