@@ -204,6 +204,7 @@ public class S_StandardEnemy : MonoBehaviour, ISoundInteractions, ISoundAim
     #region EVENTS 
     public void IIteraction(bool PlayerShootIt)
     {
+        if (!PlayerShootIt) return;
         _fsm.SetNewBehaviour(EStandardEnemyBehaviours.Stunned);
     }
     private void Restart(params object[] Parameters)
