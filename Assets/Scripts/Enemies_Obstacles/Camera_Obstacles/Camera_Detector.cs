@@ -7,6 +7,7 @@ public class Camera_Detector : MonoBehaviour
     private Camera_Obstacle _camera;
     private Cons_Raycast _rayCast;
     [SerializeField]private SO_Layers _layers;
+    [SerializeField] private bool _seePlayer;
     Action VirtualUpdate;
     private void Start()
     {
@@ -49,6 +50,7 @@ public class Camera_Detector : MonoBehaviour
            _rayCast.CheckerComponent<PlayerManager>(transform.position, (HeadPosition.position - transform.position)) ||
            _rayCast.CheckerComponent<PlayerManager>(transform.position, (FeetPosition.position - transform.position)))
             SeePlayer = true;
+
         _camera.SetTarget = SeePlayer;
     }
 }

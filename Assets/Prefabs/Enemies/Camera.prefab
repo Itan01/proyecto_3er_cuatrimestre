@@ -243,7 +243,7 @@ GameObject:
   - component: {fileID: 691256755585815982}
   - component: {fileID: 3922756849366758987}
   - component: {fileID: 6554233739513982723}
-  m_Layer: 0
+  m_Layer: 17
   m_Name: Camera
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -404,12 +404,13 @@ MonoBehaviour:
   _layer: {fileID: 11400000, guid: 31cee878b4c24c347932895be40074bc, type: 2}
   _clipDetectPlayer: {fileID: 8300000, guid: 15d60cf03cf615b4ebaf951c3098ca34, type: 3}
   _clipResetting: {fileID: 8300000, guid: 8f215783f544c5b47bc71043f7cc659c, type: 3}
+  _clipStunned: {fileID: 8300000, guid: 41960df84562523408a946a2a18e0d14, type: 3}
   _renderFullScreen: {fileID: 2351847048303757354, guid: f1416abf029af0e4cac4436c807f4d2a, type: 2}
   _materialFullScreen: {fileID: 2100000, guid: 4e06f24241bbb7d4fa707c890e72dac4, type: 2}
   _states:
   - {fileID: 5635700903916590835}
   - {fileID: 8787493701323202022}
-  _mesh: {fileID: 0}
+  _mesh: {fileID: 2656711526240356532}
 --- !u!1 &9209795918091353355
 GameObject:
   m_ObjectHideFlags: 0
@@ -619,6 +620,11 @@ PrefabInstance:
       insertIndex: -1
       addedObject: {fileID: 5983514647275473828}
   m_SourcePrefab: {fileID: 100100000, guid: 59f85ed73fd90be4c91ff3c760bcc655, type: 3}
+--- !u!23 &2656711526240356532 stripped
+MeshRenderer:
+  m_CorrespondingSourceObject: {fileID: 8941948583382513278, guid: 59f85ed73fd90be4c91ff3c760bcc655, type: 3}
+  m_PrefabInstance: {fileID: 6396984843668586186}
+  m_PrefabAsset: {fileID: 0}
 --- !u!23 &2705164630077255773 stripped
 MeshRenderer:
   m_CorrespondingSourceObject: {fileID: -194768363319669097, guid: 59f85ed73fd90be4c91ff3c760bcc655, type: 3}
