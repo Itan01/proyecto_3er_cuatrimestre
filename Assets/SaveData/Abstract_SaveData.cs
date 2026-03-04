@@ -9,6 +9,8 @@ public abstract class Abstract_SaveData : MonoBehaviour
     protected string _path;
     public abstract void SaveData();
     public abstract void LoadData();
+
+[ContextMenu("Erase")]
     public void Erase()
     {
         if (Directory.Exists(_basePath) && File.Exists(_path))
